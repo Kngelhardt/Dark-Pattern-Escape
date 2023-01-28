@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        #logo1{
+            text-shadow: 2px 2px 2px purple;
+        }
+        #logo2{
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+        <h1><b id="logo1">Dark Pattern</b><br><span id="logo2">Escape Room</span></h1>
+    {% endblock %}
+</body>
+</html>
