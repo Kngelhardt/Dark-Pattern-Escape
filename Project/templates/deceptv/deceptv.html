@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.P. Escape</title>
+</head>
+<body>
+    {% extends 'layout_level1.html' %}
+
+    {% block content %}
+    <div class="content_level1">
+        <div class="showcase">
+            <img class="img-fluid rounded" src="{{url_for('static', filename='showcase.jpg')}}" alt="">
+        </div>
+        <div class="carousel_container">
+
+                <!-- Aufbau des Inhalts in Reihen mit klickbaren Karusellen, die Atrappen von Filmthumbnails enthalten -->
+                <!-- Erste Reihe -->
+                <div class="row">
+                    <h3>DecepTV Premium Productions</h3>
+                    <!-- Carousel_1_Indicator als ID für die 'Next' und 'Prev' Buttons und die Indicatoren-ANzeige, welche Karusell-Element aktiv ist-->
+                    <div id="carousel_1_Indicators" class="carousel slide">
+                        <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carousel_1_Indicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carousel_1_Indicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carousel_1_Indicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <!-- Erstes Karusell-Element - Alle Element beinhalten wiederrum Film-Thumbnail-Attrappen -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- bestimmt die größe und border-radius der bilder in base durch .carousel-item img{} bestimmt-->
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_1_Indicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_1_Indicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <h3>Blockpuster</h3>
+                <!-- Zweite Reihe - bis auf die Thumbnails identisch zur ersten -->
+                <div class="row"> 
+                    <div id="carousel_2_Indicators" class="carousel slide">
+                        <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carousel_2_Indicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carousel_2_Indicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carousel_2_Indicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_2_Indicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_2_Indicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Dritte Reihe - bis auf die Thumbnails identisch zur ersten -->
+                <div class="row">
+                    <h3>Beliebt</h3>
+                    <div id="carousel_3_Indicators" class="carousel slide">
+                        <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                 <!-- Dritte Reihe - bis auf die Thumbnails identisch zur ersten -->
+                <div class="row">
+                    <h3>Beliebt</h3>
+                    <div id="carousel_3_Indicatorslevel1" class="carousel slide">
+                        <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='beach_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <img src="{{url_for('static', filename='hammock_CC0.jpg')}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_3_Indicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    
+    {% endblock %}
+</body>
+</html>

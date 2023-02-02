@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+   <!--  <link rel="stylesheet" type="css" href="{{url_for('static', filename='main.css')}}"> -->
+    <title>{% block title %} {% endblock %} Dark Pattern Escape</title>
+    <style>
+    /*-----------------------------------------------------------------------------------------------------------------------  */
+    /* CSS für alle Seiten */
+    body{
+        text-align: justify
+    }
+    .content{
+        margin-bottom: 25px;
+    }
+    .fussleiste{
+        position: sticky;
+        bottom: 0;
+    }
+    .mainbackground{
+        background-color: rgb(19, 11, 26);
+    }
+    .maincolor{
+        color: white;
+    }
+    /*-----------------------------------------------------------------------------------------------------------------------  */
+    /* CSS für die Landingpage */
+    .nav_landing{
+        text-shadow: 1px 1px 1px rgb(0, 0, 255)
+    }
+    .nav_item_landing{
+        color: white;
+    }
+    .nav_item_landing a:hover{
+        box-shadow: 0 0 5px rgb(255, 0, 0);
+        border-radius: 5px;
+    }
+    .navbar-brand{
+        padding: 5px 10px;
+    }
+    #logo1{
+        text-shadow: 0px 0px 3px rgb(255, 0, 0);
+        font-size: 40px;
+    }
+    #logo2{
+        font-weight: 300;
+        font-size: 30px;
+        text-align: right;
+        line-height: 0px;
+        text-shadow: 0px 0px 3px rgb(255, 0, 0)
+    }
+    .bild-intro{
+        max-height: 350px;
+    }
+    /*-----------------------------------------------------------------------------------------------------------------------  */
+    /* CSS für Level 1: Streamingdienst kündigen */
+    /* Navigationsleiste */
+    .nav_level1{
+        background-color:rgb(32, 39, 53);
+    }
+    .nav_item_level1{
+        color: white;
+    }
+    .nav_item_level1 a:hover{
+        box-shadow: 0 0 5px rgb(0, 174, 255);
+        border-radius: 5px;
+    }
+    .account_menu{
+        margin: 0px 5px;
+        padding-left: 0px;
+    }
+    .account_menu_options{
+        line-height: 50px;
+        list-style-type: none; 
+        padding: 0; 
+        margin: 0; 
+    }
+    .account_menu_options a{
+        text-decoration: none;
+        color: white;
+    }
+    .account_menu_options a:hover{
+        text-decoration: none;
+        text-shadow: 0 0 2px rgb(0, 174, 255);;
+    }
+    /* Kontent */
+/*     .content_level1{
+        background-color: rgb(32, 39, 53);
+        color: white;
+        text-shadow: 0px 0px 50px black;
+    } */
+    .carousel_container{
+        margin: 5px 20px 20px 20px;
+    }
+    .showcase{
+        border-radius: 5px;
+        margin: 0px 20px;
+    }
+    .carousel-item img{
+        border-radius: 5px;
+        max-height: 200px;
+        margin: 5px 0px;
+    }
+    .carousel-item img:hover{
+        cursor: pointer;
+    }
+    
+
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<!--Include Popper and our JS separately. If you don’t plan to use dropdowns, popovers, or tooltips, save some kilobytes by not including Popper.  
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+ -->
+    <div class="navigation">
+        {% block navigation %} 
+        
+        {% endblock %}
+    </div>
+
+    <div class="content">
+        {% block content %} 
+        
+        {% endblock %}
+    </div>
+
+    <!-- Fußzeile mit den Werten der jeweiligen Session -->
+    <div class="fussleiste mainbackground maincolor" >
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    Zeit
+                </div>
+                <div class="col">
+                    Daten
+                </div>
+                <div class="col">
+                    Geld
+                </div>
+                <div class="col">
+                    DP-Score
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
