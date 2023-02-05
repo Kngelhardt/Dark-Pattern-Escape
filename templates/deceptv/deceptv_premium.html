@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.P. Escape</title>
+</head>
+<body>
+    {% extends 'layout_level1.html' %}
+
+    {% block content %}
+        <div class="container deceptv_premium_container">
+            <br>
+            <h1>Deine <b>Decep</b>TV Premium Mitgliedshaft </h1>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    Benutzerbild
+                </div>
+                <div class="col">
+                    <h3>Mitgliedschaft</h3>
+                    <div class="d-flex justify-content-center">
+                        <p class="d-2"> Manage</p>
+                        <button type="button" class="d-2 btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end"> <!-- lg-end um das menü links auszurichten -->
+                            <li><a class="dropdown-item" href="#">Jahres Abo - für 5,99€/Monat</a> </li>
+                            <li class="dropdown-item">Spare 3 Euro pro Monat!</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">3-Monats Abo - für 7,99/Monat</a></li>
+                            <li class="dropdown-item">Spare 1 Euro pro Monat!</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Monats Abo - für 8,99€/Monat</a></li>
+                            <li class="dropdown-item">Ausgewählt</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{url_for('beenden1')}}">Mein Abo</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>Zahlungsperiode</h3>
+                    <div class="d-flex justify-content-center">
+                        <p class="d-2">Bald fällig!</p>
+                        <button type="button" class="d-2 btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><a class="dropdown-item" href="#">Monatsanfang</a> </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Monatsende</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">3-Monatsperiode </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Jährlich</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>Zahlungsmittel</h3>
+                    <div class="d-flex justify-content-center">
+                        <p class="d-2">Kreditkarte</p>
+                        <button type="button" class="d-2 btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><a class="dropdown-item" href="#">Kontoeinzug</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Paypal</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Rechnung</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Kreditkarte</a></li>
+                            <li class="dropdown-item">Ausgewählt</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- Flex element, um Inhalt zu zentrieren -->
+            <div id="vorteile_banner" class="d-flex flex-column justify-content-center maincolor_level1">
+                    <p>Deine Vorteile</p>
+            </div>
+            <div id="vorteile">
+                <div class="row">
+                    <div class="col">
+                        <h3>Unbegrenztes streaming!</h3>
+                    </div>
+                    <div class="col">
+                        <h3>Exklusive <b>Decep</b>TV Inhalte!</h3>
+                    </div>
+                    <div class="col">
+                        <h3>Social Watch - Mit Familie oder Freund*innen</h3>
+                    </div>
+                    <div class="col">
+                        <h3>Passende Vorschläge nur für dich</h3>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</body>
+</html>
