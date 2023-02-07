@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.P. Escape</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    {% extends 'layout_home.html' %}
+
+    {% block content %}
+    <div id="body" class="container">
+        <hr>
+            <div class="row" >
+                <div class="col">
+                    <p> Dein Urlaub steht bevor, das wird Toll!
+                        Du träumst schon vom Strand, der Sonne und dem Geräusch der Wellen. <br>
+                        Bevor es losgeht, musst du allerdings noch ein paar Dinge im Internet erledigen: <br>
+                    </p>
+                    <ul>
+                        <li> Du musst dein Streaming-Abo beenden, da du es während des Urlaubs nicht brauchst und es zu teuer ist es weiter laufen zu lassen.</li>
+                        <li> Zusätzlich ist dir aufgefallen, dass für den Urlaub noch Sonnencreme gebraucht wird, die du Online einkaufen willst.</li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <img class="img-fluid float-end rounded bild-intro" src="{{url_for('static', filename='images/hammock_CC0.jpg')}}" alt="Strand am Meer, mit leichten Wellen und blauem Himmel">
+                </div>
+            </div>
+            <hr>
+            <div id="anleitung" class="container">
+                <div class="row">
+                    <div id="todo" class="col-4">
+                        <h3>Deine Aufgabe</h3>
+                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/Clipboard.png')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
+                    </div>
+                    <div class="col">
+                        <p> Hier auf dem Clipboard siehst du die Aufgaben, die du in diesem Spiel erledigen musst. Zunächst klingen die Aufgaben ein Streaming-Abo zu beenden
+                             und einfach Sonnencreme zu bestellen simpel und alltäglich. Aber <b>Achtung!</b> diese Websites sind voll mit Dark Patterns, 
+                             die dich dazu bringen wollen, das Abo doch nicht zu beenden oder mehr Geld als geplant auszugeben. <br>
+                        </p>
+                        <hr>
+                        <p>
+                             Dein Ziel ist es den <b>Dark Patterns</b> so gut es geht <b>auszuweichen</b> ohne das <b>Zeitlimit</b> zu überschreiten 
+                             -Bis zu Urlaub ist es nicht mehr viel Zeit!
+                        </p>
+                        <a href="{{url_for('deceptv')}}"><button class="btn btn-success">Weiter zu Level 1: Streaming Abo</button></a>
+                    </div>
+                </div>
+            </div>
+        <hr>
+    </div>
+    {% endblock %}
+</body>
+</html>

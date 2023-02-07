@@ -1,10 +1,16 @@
 from flask import Flask, render_template
+import os
 
 app = Flask(__name__)
 
+""" Mainpage """
 @app.route('/')
 def home():
     return render_template('home/home.html')
+
+@app.route('/home/intro')
+def home_intro():
+    return render_template('home/intro.html')
 
 @app.route('/home/kontakt/')
 def kontakt():
@@ -22,7 +28,15 @@ def hintergrund():
 #Startseite
 @app.route('/deceptv/')
 def deceptv():
-    return render_template('deceptv/deceptv.html')
+    # bildverzeichnis mit BIldern für die Carrousels der Streamingseite
+    image_dir = os.listdir('static/images/deceptv')
+    # Die Namen der Bilder als string inkliusive path seichern um sie einfach laden zu können
+    deceptv_images = ['/static/images/deceptv/' +file for file in image_dir]
+    # Da mit list.pop() gearbeitet wird, muss eine gewisse Länge gewärleistet sein um Fehlermeldungen zu vermeiden
+    while len(deceptv_images) <= 5*15:
+        deceptv_images = deceptv_images + deceptv_images
+
+    return render_template('deceptv/deceptv.html', deceptv_images = deceptv_images) 
 
 @app.route('/deceptv/account/')
 def deceptv_account():
