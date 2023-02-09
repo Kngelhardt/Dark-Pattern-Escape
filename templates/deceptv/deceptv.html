@@ -10,7 +10,7 @@
     {% extends 'layout_level1.html' %}
 
     {% block content %}
-    <div class="content_level1">
+    <div class="content_level1 ">
         <div class="showcase">
             <img class="img-fluid rounded" src="{{url_for('static', filename='images/showcase.jpg')}}" alt="">
         </div>
@@ -43,6 +43,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <!-- bestimmt die größe und border-radius der bilder in base durch .carousel-item img{} bestimmt-->
+                                        <!-- Alt-texte optional noch hinzufügen -->
                                         <img src="{{deceptv_images.pop()}}" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="col">

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{url_for('static', filename='main.js')}}"></script>
     <style>
 
     </style>
@@ -18,7 +19,7 @@
             <nav class="navbar navbar-expand-md sticky-top navbar p-2 w-100" data-bs-theme="dark">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{{ url_for('deceptv')}}">
-                        <span id="logo" class="maincolor"><b>Decept</b>TV</span>
+                        <span id="logo" class="maincolor"><b>Decep</b>TV</span>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
                             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +28,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav white">
                             <li class="nav-item nav_item_level1">
-                                <a class="nav-link" href="#">Premium</a>
+                                <a class="nav-link" href="{{url_for('deceptv_premium')}}">Premium</a>
                             </li>
                             <li class="nav-item nav_item_level1 ">
                                 <a class="nav-link " href="#">Filme</a>
@@ -48,7 +49,7 @@
             </nav>
             <!-- align-self-center: button zentrieren| ms-auto: auf dei rechte seite schieben |p-2: flex element -->
             <div class="p-2 ms-auto align-self-center account_menu">
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Menü</button>
+                <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Menü</button>
                     <div class="offcanvas offcanvas-end " data-bs-backdrop="false" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" data-bs-theme="dark">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="offcanvasRightLabel">DecepTV Menü</h5>

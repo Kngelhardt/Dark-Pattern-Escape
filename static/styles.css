@@ -1,17 +1,32 @@
-/*-----------------------------------------------------------------------------------------------------------------------  */
+    /*-----------------------------------------------------------------------------------------------------------------------  */
     /* CSS für alle Seiten */
     body{
-        text-align: justify
+        text-align: justify;
+        
     }
     .content{
         margin-bottom: 25px;
+        min-height: 90vh; /* Damit der footer unabhängig von der Kontentgröße unten bleibt */
     }
     .fussleiste{
         position: sticky;
         bottom: 0;
+        padding-top: 30px;
+        /* height: 70px; */
+    }
+    .fussleiste_brand{
+        float: left;
+        margin: 0px 20px 30px 20px;
+        color: white;
+        text-shadow: 1px 1px 1px rgb(0, 110, 255);
+        text-decoration: none;
+    }
+    .fussleiste a:hover{
+        box-shadow: 0 0 5px rgb(255, 0, 0);
+        border-radius: 5px;
     }
     .mainbackground{
-        background-color: rgb(19, 11, 26);
+        background-color: black;
     }
     .maincolor{
         color: white;
@@ -19,12 +34,12 @@
     /*-----------------------------------------------------------------------------------------------------------------------  */
     /* CSS für die Landingpage */
     .nav_landing{
-        text-shadow: 1px 1px 1px rgb(0, 0, 255)
+        text-shadow: 1px 1px 1px rgb(0, 110, 255)
     }
     .nav_item_landing{
         color: white;
     }
-    .nav_item_landing a:hover{
+    .navbar a:hover{
         box-shadow: 0 0 5px rgb(255, 0, 0);
         border-radius: 5px;
     }
@@ -48,8 +63,9 @@
     /*-----------------------------------------------------------------------------------------------------------------------  */
     /* CSS für Level 1: Streamingdienst kündigen */
     /* Navigationsleiste */
-    .nav_level1{
+    .maincolor_level1{
         background-color:rgb(32, 39, 53);
+        color: white;
     }
     .nav_item_level1{
         color: white;
@@ -61,6 +77,10 @@
     .account_menu{
         margin: 0px 5px;
         padding-left: 0px;
+    }
+    /* Style fü das Offcanvas Menü */
+    .offcanvas-body{
+        background-color:rgb(32, 39, 53);
     }
     .account_menu_options{
         line-height: 50px;
@@ -76,26 +96,33 @@
         text-decoration: none;
         text-shadow: 0 0 2px rgb(0, 174, 255);;
     }
-    /* Kontent */
+    /* Kontent für Streaming-startseite */
     .content_level1{
-        background-color: rgb(32, 39, 53);
+        /*  alternatives Farbschema */
+        /* background-color: rgb(32, 39, 53);
         color: white;
-        text-shadow: 0px 0px 50px black;
-    }
-    .carousel_container{
-        margin: 20px 20px;
-    }
-    .showcase{
-        width: 100%;
-        margin-bottom: 5px;
-        border-radius: 5px;
+        text-shadow: 0px 0px 50px black;   */
+        margin: 0px 20px;
     }
     .carousel-item img{
         border-radius: 5px;
-        max-height: 200px;
         margin: 5px 0px;
     }
     .carousel-item img:hover{
         cursor: pointer;
+        box-shadow: 0px 0px 10px black;
     }
-    
+    /* Kontent für Deceptv_premium */
+    #vorteile_banner{
+        font-size:xx-large;
+        height: 30vh;
+    }
+    #vorteile{
+        margin: 20px 0px;
+    }
+    .deceptv_premium_container{
+        text-align: center ;
+    }
+    .dropdown-item{
+        font-weight: bolder;
+    }

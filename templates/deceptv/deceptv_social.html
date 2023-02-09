@@ -10,7 +10,67 @@
     {% extends 'layout_level1.html' %}
 
     {% block content %}
+        <div class="container deceptv_premium_container">
+            <br>
+            <h1>Deine <b>Decep</b>TV Premium Social Network </h1>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    Benutzerbild
+                </div>
+                <div class="col">
+                    <h3>Freund*innen</h3> <br>
+                    <div class="justify-content-center">
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">Freund*innen finden</button>
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end"> <!-- lg-end um das menü links auszurichten -->
+                            <li><a class="dropdown-item" href="#">Kennst du?</a> </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-item">Alexa Poppel</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Jens Kitt</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Oury Färber</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Amira Lillith</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>Teile deine Lieblingsfilme</h3> <br>
+                    <a class="" href="#"><button type="button" class="btn btn-primary "><b>Teilen</b></button></a>
+                </div>
+            </div>   
+            <hr>
+            <!-- Flex element, um Inhalt zu zentrieren -->
+            <div id="vorteile_banner" class="d-flex flex-column justify-content-center maincolor_level1">
+                <a href="#">
+                    <p>Erlebe Gemeinsame Abenteuer mit <br>
+                    <b>Social Watch</b></p>
+                </a>
+            </div>
+            <div id="vorteile">
+                <div class="row">
+                    <div class="col">
+                        <h3>Unbegrenztes streaming!</h3>
+                    </div>
+                    <div class="col">
+                        <h3>Exklusive <b>Decep</b>TV Inhalte!</h3>
+                    </div>
+                    <div class="col">
+                        <h3>Social Watch - Mit Familie oder Freund*innen</h3>
+                    </div>
+                    <div class="col">
+                        <h3>Passende Vorschläge nur für dich</h3>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
 
     {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -90,6 +90,15 @@ def deceptv_social():
 def deceptv_vorschlaege():
     return render_template('deceptv/deceptv_vorschlaege.html')
 
+@app.route('/deceptv/rückerstattung')
+def deceptv_nicht():
+    return render_template('deceptv/deceptv_nicht.html')
+
+@app.route('/deceptv/wie-kuendigen')
+def deceptv_wie_kuendigen():
+    return render_template('deceptv/deceptv_wie_kuendigen.html')
+
+
 #Mitgliedschaft beenden
 @app.route('/deceptv/premium/mein-abo')
 def beenden1():

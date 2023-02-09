@@ -14,6 +14,8 @@
 
     {% block content %}
     <div id="body" class="container">
+        <br>
+        <hr>
         <b id="logo1">Dark Pattern</b><br><span id="logo2">Escape Room</span>
         <div id="beschreibung">
             <p> Dark Pattern ist ein Begriff, der manipulatives Oberflächendesign auf Websites, Apps oder Spielen beschreibt.
@@ -22,7 +24,8 @@
                 Das <b>Dark Pattern Escape Room</b> Spiel ist ein Brwoserspiel, bei dem der Spieler*innen die Problemlage und bestimmte Mechanismen hinter Dark Patterns bewusst gemacht werden soll. <br>
             </p>
             <h5>Schaffst du es nicht manipuliert zu werden und de Dark Patterns zu entkommen?</h4>
-            <a href="{{url_for('home_intro')}}"><button type="button" class="btn btn-success" id="btn_intro_toggle" data-bs-target="#beschreibung #intro"> Ja klar, los gehts</button></a>
+            <a href="{{url_for('home_intro')}}"><button type="button" class="btn btn-danger" id="btn_intro_toggle" data-bs-target="#beschreibung #intro"> Ja klar, los gehts</button></a>
+            <br>
         </div>
         <hr>
     </div>

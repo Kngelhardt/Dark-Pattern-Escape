@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- base.js laden für scoring, verschwinden und erscheinen von elementen -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D.P. Escape</title>
 </head>
@@ -10,7 +11,77 @@
     {% extends 'layout_level1.html' %}
 
     {% block content %}
-
+        <div class="container deceptv_premium_container">
+            <br>
+            <h1>Deine <b>Decep</b>TV Premium Hilfezentrum </h1>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    Benutzerbild
+                </div>
+                <div class="col">
+                    <h3>FAQ</h3> <br>
+                    <div class="justify-content-center">
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">Häufig gestellte Fragen</button>
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu"> 
+                            <li><a class="dropdown-item" href="#">Wie funktioniert Social Watch?</a> </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Wieso kann ich bei DecepTV nicht Avatar 3 gucken</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Wann kommt Star Wars 16 endlich raus?</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Wie stellt ihr die Auswahl an Filmen zusammen?</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{url_for('deceptv_nicht')}}">Ich hasse DecepTV!! Wie bekomme ich mein Geld zurück?!</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{url_for('deceptv_wie_kuendigen')}}">Wie kündige ich mein DecepTV Premium Abo?</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Wie stellt ihr die Auswahl an Serien zusammen?</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>Hilfezentrum</h3> <br>
+                    <div class="justify-content-center">
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">Häufige Probleme</button>
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu"> 
+                            <li><a class="dropdown-item" href="#">Die Wiedergabe von Filmen funktioniert nicht</a> </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Social Watch ist nicht synchron</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Die wiedergabequalität ist schlecht</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Ich bekomme keine 4k Auflösung trotz Premium Gold Abo</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <!-- "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden -->
+                            <li><a class="dropdown-item" style="cursor: pointer" onclick="show__hide_div('container_kündigung')">Ich finde die Optionen zum Verwalten oder Aufheben meiner Mitgliedschaft nicht</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>   
+            <hr>
+            <h5>Bei weiteren, oder bestehenden offenen Fragen, wenden sie sich an unseren E-Mail-Service unter: deceptv@service.com</h5>           
+            <div id="container_kündigung">
+                <hr>
+                <h3>Verwaltung und Kündigung ihres DecepTV Abonnement</h3>
+                <p> Wollen sie ihr Abonnement verwalten? Hier finden sie alle Abonnement-Optionen:
+                <!-- "Misdirection" Dark Pattern: Option ist gut ist prominent plaziert und eingefärbt und zusätzlich verheißungsvoll benannt.
+                    Dadurch sollen Spieler*innen vom relevanten Link abgelenkt werden -->
+                    <a href="{{url_for('deceptv_angebote')}}" class="btn btn-success">Abonnement-Verwaltungsmenü</a>
+                </p>
+                <!-- Hier ist der eigentlich relevante Link -->
+                <p> Um ihr Abonnement zu kündigen drücken sie hier: <a  href="{{url_for('beenden1')}}">Kündigen</a></p>
+                <hr>
+            </div>
+        </div>
+        <script>
+            // Element verstecken. "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden
+            document.getElementById("container_kündigung").style.display = "none";
+        </script>
     {% endblock %}
 </body>
 </html>
