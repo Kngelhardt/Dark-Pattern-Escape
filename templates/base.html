@@ -1,20 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" type="css" href="{{url_for('static', filename='main.css')}}"> -->
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+    <link rel="stylesheet" type="css" href="{{url_for('static', filename='styles.css')}}">
     <title>{% block title %}Dark Pattern Escape {% endblock %} </title>
     <style>
-    /*-----------------------------------------------------------------------------------------------------------------------  */
+           /*-----------------------------------------------------------------------------------------------------------------------  */
     /* CSS für alle Seiten */
     #noscript{
         min-height: 100vh;
     }
     body{
         text-align: justify;
+        background-color: rgb(221, 221, 221);
     }
     .content{
         min-height: 90vh; /* Damit der footer unabhängig von der Kontentgröße unten bleibt */
@@ -96,9 +97,9 @@
     }
     .account_menu_options{
         line-height: 50px;
-        list-style-type: none; 
-        padding: 0; 
-        margin: 0; 
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
     }
     .account_menu_options a{
         text-decoration: none;
@@ -106,23 +107,32 @@
     }
     .account_menu_options a:hover{
         text-decoration: none;
-        text-shadow: 0 0 2px rgb(0, 174, 255);;
+        text-shadow: 0 0 2px rgb(28, 134, 255);
     }
-    /* Kontent für Streaming-startseite */
+    /* Kontent für Streaming-startseite */  
+
     .content_level1{
         /*  alternatives Farbschema */
-/*         background-color: rgb(32, 39, 53);
+        background-color: rgb(4, 8, 17);
         color: white;
-        text-shadow: 0px 0px 50px black;   */
+        text-shadow: 0px 0px 5px black;
         padding: 0px 20px;
+    }
+    .atrappe:hover{ /* Für Elemente, die als klickbare Objekte bzw. Links erscheinen sollen */
+        cursor: pointer;
+        box-shadow: 0px 0px 10px rgb(28, 134, 255);
     }
     .carousel-item img{
         border-radius: 5px;
         margin: 5px 0px;
     }
-    .carousel-item img:hover{
-        cursor: pointer;
-        box-shadow: 0px 0px 10px black;
+    .carousel-control-prev{ /* position und Größe der Crrouselbuttons anpassen. Wichtig um zu verhindern, dass sie den Hauptmenü-Button in der Fußleiste überdecken */
+        width: min-content;
+        margin-left: 10px;
+    }
+    .carousel-control-next{
+        width: min-content;
+        margin-right: 10px;
     }
     /* Kontent für Deceptv_premium, _Angebote, _Shop, _Service, _Social */
     #vorteile_banner{
@@ -138,22 +148,20 @@
     .dropdown-item{
         font-weight: bolder;
     }
-
+    #service_kündigen{
+        text-decoration: none;
+    }
     </style>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-<!--Include Popper and our JS separately. If you don’t plan to use dropdowns, popovers, or tooltips, save some kilobytes by not including Popper.  
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
- -->
     <noscript>
         <div class="container" id="noscript">
             <h1>  Aktivieren Sie JavaScript, um und diese Seite voll nutzen zu können.</h1>
         </div>
     </noscript>
     <div class="navigation">
-        {% block navigation %} 
+        {% block navigation %}
         
         {% endblock %}
     </div>
@@ -166,41 +174,40 @@
 
     <!-- Fußzeile mit den Werten der jeweiligen Session -->
     <div class="fussleiste mainbackground maincolor" >
-            <div class="row text-center">
-                <div class="col">
-                    <div class="">
+        <div class="row text-center">
+            <div class="col">
+                <div class="">
                         <!-- Link zur "Home" Seite um das spiel zu unterbrechen oder Anleitungen noch einmal durch zu gehen -->
                         <!-- Flex element, da es zusammen mit der Zeit-Bar in die col untergebracht werden muss -->
-                        <a class="btn btn-outline-danger fussleiste_brand" href="{{url_for('home')}}">
-                           <b>Hauptmenü</b>
-                        </a>
+                    <a class="btn btn-outline-danger fussleiste_brand" href="{{url_for('home')}}">
+                        <b>Hauptmenü</b>
+                    </a>
                         <!-- Größe der Bar wird an den "Hauptmenü" Button angepasst -->
-                        <div class="d-2 progress" style="height: 36px;">
-                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                            <h3>Zeit</h3></div>
-                        </div>
+                    <div class="d-2 progress" style="height: 36px;">
+                        <div id="zeit_bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <h3>Zeit</h3></div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="progress">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h3>Daten</h3>
-                </div>
-                <div class="col">
-                    <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h3>Geld</h3>
-                </div>
-                <div class="col">
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h3>DP-Score</h3>
                 </div>
             </div>
+            <div class="col">
+                <div class="progress">
+                    <div id="data_bar" class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h3>Daten</h3>
+            </div>
+            <div class="col">
+                <div class="progress">
+                    <div id="geld_bar" class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h3>Geld</h3>
+            </div>
+            <div class="col">
+                <div class="progress">
+                    <div id="dp_score_bar" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                 </div>
+                <h3>DP-Score</h3>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>

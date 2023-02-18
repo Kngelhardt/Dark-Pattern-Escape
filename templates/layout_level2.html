@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    <div class="navigation"> 
+    {% block navigation %}
+        <!-- Flex container, since offcanvas for the user menu does not werk inside navbar -->
+        <div class="d-flex maincolor_level1">
+            <!-- ERstes Flex element soll die gesamte fläche außer den benutzer-button einnehmen daher w-100 -->
+            <nav class="navbar navbar-expand-md sticky-top navbar p-2 w-100" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{{ url_for('deceptdive')}}">
+                        <span id="logo" class="maincolor"><b>Decep</b>Dive</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav white">
+                            <li class="nav-item nav_item_level2 ">
+                                <a class="nav-link " href="#">Angebote</a>
+                            </li>
+                            <li class="nav-item nav_item_level2">
+                                <a class="nav-link" href="#">Kategorien</a>
+                            </li>
+                            <li class="nav-item nav_item_level2 ">
+                                <a class="nav-link " href="#">Nachhaltigkeit</a>
+                            </li>
+                            <li class="nav-item nav_item_level2">
+                                <a class="nav-link" href="#">Unternehmensphilosophie</a>
+                            </li>
+                            <li class="nav-item nav_item_level2">
+                                <a class="nav-link" href="#">Kontakt</a>
+                            </li>
+                            <li class="nav-item nav_item_level2">
+                                <a class="nav-link" href="#">Kund_innen-Service</a>
+                            </li>
+                        </ul>
+                        <!-- Suchleiste -->
+                        <form class="d-flex ms-auto p-2" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </nav>
+            <!-- align-self-center: button zentrieren| ms-auto: auf dei rechte seite schieben |p-2: flex element -->
+            <div class="p-2 ms-auto align-self-center account_menu">
+                <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Warenkorb</button>
+                    <div class="offcanvas offcanvas-end " data-bs-backdrop="false" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" data-bs-theme="dark">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasRightLabel">Dein Warenkorb</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="account_menu_options">
+                                <li>
+                                    <p>item 1</p>
+                                </li>
+                                <li>
+                                    <p>item 2 ...</p>
+                                </li>
+                                <!-- <li>
+                                    <a class="btn btn primary" href="{{url_for('decepdive_checkout')}}">Jetzt bezahlen</a>
+                                </li> -->
+                            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    </div>
+    
+
+    <div class="content">
+        {% block content %} 
+        
+        {% endblock %}
+    </div>
+
+</body>
+</html>

@@ -1,9 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
 
 app = Flask(__name__)
-
+##########################################################################################################################################
 """ Mainpage """
+
 @app.route('/')
 def home():
     return render_template('home/home.html')
@@ -24,15 +25,24 @@ def anleitung():
 def hintergrund():
     return render_template('home/hintergrund.html')
 
+##########################################################################################################################################
 """ Level 1: Streming Abo beenden """
+
+""" Funktion: Bilder aus dem static/images/deceptv Verzeichnis laden
+    return: liste mit strings der Files inkl. Path """
+def get_streaming_images():
+    # bildverzeichnis mit BIldern für die Streamingseite
+    image_dir = os.listdir('static/images/deceptv')
+    # Return: Die Namen der Bilder als string inkliusive path, um sie einfach laden zu können
+    return ['/static/images/deceptv/' +file for file in image_dir]
+
 #Startseite
 @app.route('/deceptv/')
 def deceptv():
-    # bildverzeichnis mit BIldern für die Carrousels der Streamingseite
-    image_dir = os.listdir('static/images/deceptv')
-    # Die Namen der Bilder als string inkliusive path seichern um sie einfach laden zu können
-    deceptv_images = ['/static/images/deceptv/' +file for file in image_dir]
-    # Da mit list.pop() gearbeitet wird, muss eine gewisse Länge gewärleistet sein um Fehlermeldungen zu vermeiden
+    # lade 
+    deceptv_images = get_streaming_images()
+    # Da mit list.pop() gearbeitet wird, muss eine Länge der Liste von 5*15 gewärleistet sein um Fehlermeldungen zu vermeiden
+    
     while len(deceptv_images) <= 5*15:
         deceptv_images = deceptv_images + deceptv_images
 
@@ -98,16 +108,17 @@ def deceptv_nicht():
 def deceptv_wie_kuendigen():
     return render_template('deceptv/deceptv_wie_kuendigen.html')
 
-
 #Mitgliedschaft beenden
 @app.route('/deceptv/premium/mein-abo')
 def beenden1():
-    return render_template('deceptv/end/beenden1.html')
+    deceptv_images = get_streaming_images()
+    return render_template('deceptv/end/beenden1.html', deceptv_images = deceptv_images)
+
+###############################################################################################
+# Level 2: Shopping
+@app.route('/decepdive')
+def decepdive():
+    return render_template('decepdive/decepdive.html')
     
-
-
-
-
-
 if __name__ == "__Main__":
     app.run(debug=True)

@@ -1,12 +1,27 @@
-    /*-----------------------------------------------------------------------------------------------------------------------  */
+   /*-----------------------------------------------------------------------------------------------------------------------  */
     /* CSS für alle Seiten */
+    #noscript{
+        min-height: 100vh;
+    }
     body{
         text-align: justify;
-        
+        background-color: rgb(221, 221, 221);
     }
     .content{
-        margin-bottom: 25px;
         min-height: 90vh; /* Damit der footer unabhängig von der Kontentgröße unten bleibt */
+    }
+    .nav_landing{
+        text-shadow: 1px 1px 1px rgb(0, 110, 255)
+    }
+    .nav_item_landing{
+        color: white;
+    }
+    .navbar a:hover{
+        box-shadow: 0 0 5px rgb(255, 0, 0);
+        border-radius: 5px;
+    }
+    .navbar-brand{
+        padding: 5px 10px;
     }
     .fussleiste{
         position: sticky;
@@ -21,7 +36,7 @@
         text-shadow: 1px 1px 1px rgb(0, 110, 255);
         text-decoration: none;
     }
-    .fussleiste a:hover{
+    .fussleiste a{
         box-shadow: 0 0 5px rgb(255, 0, 0);
         border-radius: 5px;
     }
@@ -33,19 +48,6 @@
     }
     /*-----------------------------------------------------------------------------------------------------------------------  */
     /* CSS für die Landingpage */
-    .nav_landing{
-        text-shadow: 1px 1px 1px rgb(0, 110, 255)
-    }
-    .nav_item_landing{
-        color: white;
-    }
-    .navbar a:hover{
-        box-shadow: 0 0 5px rgb(255, 0, 0);
-        border-radius: 5px;
-    }
-    .navbar-brand{
-        padding: 5px 10px;
-    }
     #logo1{
         text-shadow: 0px 0px 3px rgb(255, 0, 0);
         font-size: 40px;
@@ -59,6 +61,7 @@
     }
     .bild-intro{
         max-height: 350px;
+        box-shadow: 3px 3px 5px black;
     }
     /*-----------------------------------------------------------------------------------------------------------------------  */
     /* CSS für Level 1: Streamingdienst kündigen */
@@ -78,15 +81,15 @@
         margin: 0px 5px;
         padding-left: 0px;
     }
-    /* Style fü das Offcanvas Menü */
+    /* Styles füf das Offcanvas Menü und dessen Knopf*/
     .offcanvas-body{
         background-color:rgb(32, 39, 53);
     }
     .account_menu_options{
         line-height: 50px;
-        list-style-type: none; 
-        padding: 0; 
-        margin: 0; 
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
     }
     .account_menu_options a{
         text-decoration: none;
@@ -99,10 +102,10 @@
     /* Kontent für Streaming-startseite */
     .content_level1{
         /*  alternatives Farbschema */
-        /* background-color: rgb(32, 39, 53);
+/*         background-color: rgb(32, 39, 53);
         color: white;
         text-shadow: 0px 0px 50px black;   */
-        margin: 0px 20px;
+        padding: 0px 20px;
     }
     .carousel-item img{
         border-radius: 5px;
@@ -112,7 +115,15 @@
         cursor: pointer;
         box-shadow: 0px 0px 10px black;
     }
-    /* Kontent für Deceptv_premium */
+    .carousel-control-prev{ /* position und Größe der Crrouselbuttons anpassen. Wichtig um zu verhindern, dass sie den Hauptmenü-Button in der Fußleiste überdecken */
+        width: min-content;
+        margin-left: 10px;
+    }
+    .carousel-control-next{
+        width: min-content;
+        margin-right: 10px;
+    }
+    /* Kontent für Deceptv_premium, _Angebote, _Shop, _Service, _Social */
     #vorteile_banner{
         font-size:xx-large;
         height: 30vh;
