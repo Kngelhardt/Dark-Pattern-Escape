@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.P. Escape</title>
+</head>
+<body>
+{% extends 'layout_level2.html' %}
+
+{% block content %}
+<div class=" content_level2">
+    <div class="container py-5">
+        <div>
+            <h3> Warenkorb | Konto | <b class="text-primary">Daten</b> | Übersicht | Zahlung</h3>
+        </div>
+        <div class="border border-dark-subtle rounded py-5 px-5" >
+            <h3>Bitte gebe deine Daten an</h3>
+            <p>Vorname, Nachname:</p>
+            <input type="text" name="name" class="form-control-sm" placeholder="Maxi">
+            <input type="text" name="nachname" class="form-control-sm" placeholder="Mustermensch">
+            <p>Adresse:</p>
+            <input type="text" class="form-control-sm" placeholder="Ein Straßename">
+            <input type="text" class="form-control-sm" placeholder="Eine hausnummer"> 
+            <input type="text" class="form-control-sm" placeholder="99999">
+            <input type="text" class="form-control-sm" placeholder="Musterstadt"> 
+            <p>Telefonnummer, E-Mail:</p>
+            <input type="text" class="form-control-sm" placeholder="123456789876543">
+            <input type="text" class="form-control-sm" placeholder="E-Mail@email.com"> 
+            <a class="btn btn-success" href="{{url_for('decepdive_warenkorb4')}}">Weiter</a>
+        </div>
+        <div class="platzfülller" style="height: 100px;">
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

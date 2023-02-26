@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.P. Escape</title>
+</head>
+<body>
+{% extends 'layout_level2.html' %}
+
+{% block content %}
+<div class=" content_level2">
+    <!-- bis auf die Preis- und Mengenangabe, dem Bild und dem Namen identisch zu decepdive_prudukt 1-8 -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-3 ">
+                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream1.jpg')}}" alt="Sonnencreme">
+            </div>
+            <div class="col ">
+                <h2> Sonnencreme LSF 50</h2>
+                <p class="produktbeschreibung"><b class="text-warning">★★★★☆</b> (534) </p>
+                <hr>
+                <p class="produktbeschreibung">
+                    Preis: <b>9,95€</b><br> <br>
+                    <b class="text-success">Lieferbar bis: Übermorgen</b> <br>
+                    <b class="text-danger"> Sei schnell!! nur noch: 3 auf Lager!!</b></p>
+                <hr>
+                <h3>Produktbeschreibung</h3>
+                <p> Super Sun Protect 50 schützt sie hervorragend for Sonnenbränden.<br>
+                    - Selbst bei praller Sonne können sie außerhalb des schattens entspannen<br>
+                    - Pflegt die Haut, mit unserer ganz speziellen Formel für feuchtigkeitsspende<br>
+                    - Sehr ergiebig <br>
+                    - Verpackung mit recyceltem plastik*<br>
+                    - Auch für Kinder geeignet<br>
+                    - Schon 5 Minuten nach dem Auftragen wasserfest<br>
+                    - Riffschonende Formel, um die Aquaflora zu schützen<br>
+                    <small>*Der Anteil an recyceltem PET liegt bei 10 %</small>
+                </p>
+                <hr>
+                <h3>Infos über das Produkt</h3>
+                <p>
+                    Inhalt: 500ml <br>
+                    Farbe der Creme: Weiß <br>
+                </p>
+            </div>
+            <div class="col-3">
+                <form action="#" method="GET">
+                    <div class="border border-dark-subtle rounded px-2">
+                        <input type="radio" name="bestellung_einzel" value="bestellung_einzel">
+                        <p>Einzelbestellung</p>
+                    </div>
+                    <div class="border border-dark-subtle rounded px-2">
+                        <input type="radio" name="bestellung_monatl" value="bestellung_monatl">
+                        <p>Monatliche bestellung</p>
+{#                        <input class="btn btn-success" type="submit" name="submit" value="Zum Warenkorb hinzufügen">#}
+                        <a href="{{url_for('decepdive_warenkorb')}}" class="btn btn-success">Zum Warenkorb hinzufügen</a>
+                    </div>
+                </form>
+                <p>Formtest: {{session['dp_score']}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

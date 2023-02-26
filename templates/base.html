@@ -20,13 +20,10 @@
     .content{
         min-height: 90vh; /* Damit der footer unabhängig von der Kontentgröße unten bleibt */
     }
-    .nav_landing{
-        text-shadow: 1px 1px 1px rgb(0, 110, 255)
-    }
     .nav_item_landing{
         color: white;
     }
-    .navbar a:hover{
+    .nav_item_landing a:hover{
         box-shadow: 0 0 5px rgb(255, 0, 0);
         border-radius: 5px;
     }
@@ -43,12 +40,8 @@
         float: left;
         margin: 0px 20px 30px 20px;
         color: white;
-        text-shadow: 1px 1px 1px rgb(0, 110, 255);
-        text-decoration: none;
-    }
-    .fussleiste a{
         box-shadow: 0 0 5px rgb(255, 0, 0);
-        border-radius: 5px;
+        text-decoration: none;
     }
     .mainbackground{
         background-color: black;
@@ -92,7 +85,7 @@
         padding-left: 0px;
     }
     /* Styles füf das Offcanvas Menü und dessen Knopf*/
-    .offcanvas-body{
+    .offcanvas_level1{
         background-color:rgb(32, 39, 53);
     }
     .account_menu_options{
@@ -151,6 +144,50 @@
     #service_kündigen{
         text-decoration: none;
     }
+    /* ------------------------------------------------------------------------------------------------ */
+    /* CSS Level2: Shoppingseite */
+    /* Farbpalette inspiriert von https://www.shutterstock.com/de/blog/farbpaletten-ideen-website */
+    .maincolor_level2{
+        background-color: #8cBDB9;
+        color: rgb(10, 10, 10);
+    }
+    .nav_item_level2 a:hover{
+        background-color: #bae0dd;
+        border-radius: 5px;
+        color: rgb(10, 10, 10);
+        box-shadow: 0 0 10px #bae0dd;
+    }
+    .offcanvas_level2{
+        background-color: #8cBDB9;
+        color: rgb(10, 10, 10);
+    }
+    .content_level2{
+        background-color: #f4fffe;
+    }
+    .content_level2 img{
+        box-shadow: 1px 1px 5px black;
+    }
+    .content_level2 a{
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .platzfülller{ /* Unsichbares element um platz zu füllen*/
+        visibility: hidden;  
+    }
+    .produkt{
+        border-radius: 5px;
+        box-shadow: 0 0 1px #8cBDB9;
+        padding-top: 10px;
+    }
+    /* Produktpages */
+    .produktbeschreibung{ 
+        font-size: 24px;
+    }
+    /* Warenkorb und checkout */
+    #container_konto{
+        height: 70vh;
+        padding: 20% 30%;
+    }
     </style>
 </head>
 <body>
@@ -160,6 +197,7 @@
             <h1>  Aktivieren Sie JavaScript, um und diese Seite voll nutzen zu können.</h1>
         </div>
     </noscript>
+    
     <div class="navigation">
         {% block navigation %}
         
@@ -179,7 +217,7 @@
                 <div class="">
                         <!-- Link zur "Home" Seite um das spiel zu unterbrechen oder Anleitungen noch einmal durch zu gehen -->
                         <!-- Flex element, da es zusammen mit der Zeit-Bar in die col untergebracht werden muss -->
-                    <a class="btn btn-outline-danger fussleiste_brand" href="{{url_for('home')}}">
+                    <a class="btn btn-outline-danger fussleiste_brand" href="{{url_for('home_intro')}}">
                         <b>Hauptmenü</b>
                     </a>
                         <!-- Größe der Bar wird an den "Hauptmenü" Button angepasst -->
@@ -191,19 +229,19 @@
             </div>
             <div class="col">
                 <div class="progress">
-                    <div id="data_bar" class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div id="data_bar" class="progress-bar bg-info" role="progressbar" style="width: {{session['data_score']}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <h3>Daten</h3>
             </div>
             <div class="col">
                 <div class="progress">
-                    <div id="geld_bar" class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div id="geld_bar" class="progress-bar bg-warning" role="progressbar" style="width: {{ session['geld_score' ]}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <h3>Geld</h3>
             </div>
-            <div class="col">
+            <div class="col me-3"><!-- padding-right:2 da durch überlänge die seite nach recht verlängert würde -->
                 <div class="progress">
-                    <div id="dp_score_bar" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div id="dp_score_bar" class="progress-bar bg-success" role="progressbar" style="width: {{ session['dp_score'] }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                  </div>
                 <h3>DP-Score</h3>
             </div>

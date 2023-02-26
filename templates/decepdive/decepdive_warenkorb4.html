@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.P. Escape</title>
+</head>
+<body>
+{% extends 'layout_level2.html' %}
+
+{% block content %}
+<div class=" content_level2">
+    <div class="container py-5">
+        <div>
+            <h3> Warenkorb | Konto | Daten | <b class="text-primary">Übersicht</b> | Zahlung</h3>
+        </div>
+        <div class="border border-dark-subtle rounded py-5 px-5" >
+            <table class="table ">
+                <thead>
+                  <tr>
+                    <th scope="col">Warenkorb</th>
+                    <th scope="col">Inhalt</th>
+                    <th scope="col">Stück</th>
+                    <th scope="col">Preis</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Sonnencreme LSF50 500ml</td>
+                    <td>1</td>
+                    <td>9.95€</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Aftersun Probe 30ml</td>
+                    <td>1</td>
+                    <td>0.99€</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Versand</td>
+                    <td>1</td>
+                    <td>4.99€</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Monatslieferungs-Rabatt</td>
+                    <td>10%</td>
+                    <td>-0.99€</td>
+                  </tr>
+                  <tfoot>
+                    <th scope="row "><b>Total</b></th>
+                    <td></td>
+                    <td></td>
+                    <td>14.94€</td>
+                  </tfoot>
+                </tbody>
+            </table>
+            <a class="btn btn-success" href="{{url_for('home_intro')}}">
+                Jetzt Zahlen <br>
+                <small>mit Spende</small>
+            </a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

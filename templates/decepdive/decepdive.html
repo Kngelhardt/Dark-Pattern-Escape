@@ -10,7 +10,85 @@
     {% extends 'layout_level2.html' %}
 
     {% block content %}
-    <div class="content_level2 ">
+    <div class="content_level2">
+        <div class="px-5 py-5">
+            <div class="row">
+                <div class="col-2">
+                    <div class="platzfülller">
+                        <h2>Füller</h2>
+                    </div>
+                    <div id="filter">
+                        <h5>Sucheinstellungen</h5>
+                        <p><b>Preis</b><br>
+                            Von .. bis ... <br>
+                        </p>
+                        <p><b>Versand</b><br>
+                            Von .. bis ... <br>
+                        </p>
+                        <p><b>Lieferstandort</b><br>
+                            Europa<br>
+                        </p>
+                        <p><b>Marke</b><br>
+                            Super Sun<br>
+                            Mega Sun <br>
+                        </p>
+                    </div>
+                </div>
+                <div id="Suchergebnisse" class="col">
+                    <h2>Ergebnisse für "Sonnencreme"</h2>
+                    <div class="row text-center">
+                        <div class="col produkt "> <!-- margin: 1 1 1 0 -->
+                            <a href="{{ url_for('decepdive_produkt1') }}">
+                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream1.jpg')}}" alt="Sonnencreme in comicstyle">
+                                <p>Super Sun LSF 50, 500 milliliter</p>
+                            </a>
+                        </div>
+                        <div class="col produkt ">
+                            <a href="{{ url_for('decepdive_produkt1') }}" >
+                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream2.jpg')}}" alt="Sonnencreme in comicstyle">
+                                <p>Mega Sun LSF 50, 5 deziliter</p>
+                            </a>
+                        </div>
+                        <div class="col produkt ">
+                            <a href="{{ url_for('decepdive_produkt1') }}">
+                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream3.jpg')}}" alt="Sonnencreme in comicstyle">
+                                <p>Super Sun LSF 50, 10 deziliter</p>
+                            </a>
+                        </div>
+                        <div class="col produkt  "> 
+                            <a href="{{ url_for('decepdive_produkt1') }}">
+                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream4.jpg')}}" alt="Sonnencreme in comicstyle">
+                                <p>Super Sun LSF 30, 800 milliliter</p>
+                            </a>
+                        </div>
+                        <div class="col produkt  ">
+                            <a href="">
+                                <img class="rounded mx-auto" src="{{url_for('static', filename='images/decepdive/suncream5.jpg')}}" alt="Sonnencreme in comicstyle">
+                                <p>Super Sun LSF 30, 0.004 hektoliter</p>
+                            </a>
+                        </div>
+                        <div class="col produkt ">
+                            <a href="">
+                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream6.jpg')}}" alt="Sonnencreme in comicstyle">
+                                <p>Super Sun LSF 70, 50 zentiliter</p>
+                            </a>
+                        </div>
+                        <div class="col produkt ">
+                            <a href="">
+                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream7.jpg')}}" alt="Sonnencreme in comicstyle">
+                                <p>Super Sun LSF 70, 25 zentiliter</p>
+                            </a>    
+                        </div>
+                        <div class="col produkt ">
+                            <a href="">
+                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream8.jpg')}}" alt="Sonnencreme in comicstyle">
+                                <p>Mega Sun LSF 30, 0.01 hektoliter</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     {% endblock %}
 

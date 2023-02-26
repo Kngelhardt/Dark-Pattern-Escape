@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+    <title>D.P. Escape</title>
+</head>
+<body>
+    {% extends 'layout_level1.html' %}
+
+    {% block content %}
+        <div class="container deceptv_premium_container">
+                <!-- d-grid und gap um knöpfe untereinander darzustellen, w-50 für die breite der knöpfe -->
+                <div class="py-5 px-5">
+                        <!--Ideen
+                        Sind sie sich sicher, dass sie sich von ihrer  abmelden möcheten
+                        Hier können sie sich anmelden zum abmelden Ihres Abos
+                        Gehen sie nicht, hier sparen sie 5% wenn sie bleiben-->
+                        <h1> Um zu Kündigen, rufen sie uns einfach an</h1>
+                        <p> Unsere Kundenservice-nr. 123454657898765433 <br>
+                            Sie erreichen uns Mo.-Fr. von 14    :00 bis 16:00 Uhr. <br>
+                        </p>
+                        <div id="uhr_container">
+                            <p>Uhrzeit: <span id="uhr"></span> </p>
+                        </div>
+                        <a type="button" class="btn btn-success" onclick="starte_uhr();" href="#">Schau auf die Uhr</a>
+                        <!-- "Roach Motel" Dark Pattern: Kündigung quälend scwer machen, indem nur zu bestimmten zeiten telefonisich gekündigt werden kann-->
+                        <a class="btn btn-primary " href="{{url_for('home_intro')}}" onclick="progress_add('data_bar', '{{session['data_score']}}');">Anrufen</a> 
+                </div>
+        </div>
+<!--         <script>
+            // Element verstecken. "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden
+            document.getElementById("uhr_container").style.display = "none";
+        </script>   -->
+    {% endblock %} 
+
+</body>
+</html>

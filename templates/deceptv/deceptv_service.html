@@ -73,8 +73,11 @@
                     Dadurch sollen Spieler*innen vom relevanten Link abgelenkt werden -->
                     <a href="{{url_for('deceptv_angebote')}}" class="btn btn-success">Abonnement-Verwaltungsmenü</a>
                 </p>
+                <hr class="mt-1">
                 <!-- Hier ist der eigentlich relevante Link, klein geschreiben, ohne farben mit abstand und durch horizontale Liene als Teil eines anderen Inhalts getarnt-->
-                <p> <br> <hr> <small> Zum Beenden drücken sie hier: <a id="service_kündigen" class="text-body" href="{{url_for('beenden1')}}">Kündigen</a></small></p>
+                <p> <small> Zum Beenden drücken sie hier: 
+                    <a id="service_kündigen" class="text-body" href="{{url_for('level1_beenden')}}">Kündigen</a>
+                </small></p>
             </div>
         </div>
         <script>

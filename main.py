@@ -1,17 +1,36 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, session
 import os
 
 app = Flask(__name__)
-##########################################################################################################################################
-""" Mainpage """
 
+if __name__ == "__main__":
+    #app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.run(debug=True)
+    # relevant, falls ich mit liste arbeite in sessions
+    #session.modified = True
+    
+
+# Set the secret key to some random bytes.
+app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
+
+###################################################################################
+""" Mainpage """
 @app.route('/')
 def home():
+    #initialisierung der Werte für eine Session beim ersten Aufruf der Seite
+    if "data_score" not in session:
+        session['data_score'] = 100
+        session['geld_score'] = 20
+        session['countdown'] = 5
+        session['dp_score'] = 0
+        # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
+        session['level_fortschritt'] = 1 
+        session['warenkorb'] = [1, 2, 3]
     return render_template('home/home.html')
 
 @app.route('/home/intro')
 def home_intro():
-    return render_template('home/intro.html')
+    return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
 
 @app.route('/home/kontakt/')
 def kontakt():
@@ -25,7 +44,7 @@ def anleitung():
 def hintergrund():
     return render_template('home/hintergrund.html')
 
-##########################################################################################################################################
+###################################################################################
 """ Level 1: Streming Abo beenden """
 
 """ Funktion: Bilder aus dem static/images/deceptv Verzeichnis laden
@@ -41,7 +60,8 @@ def get_streaming_images():
 def deceptv():
     # lade 
     deceptv_images = get_streaming_images()
-    # Da mit list.pop() gearbeitet wird, muss eine Länge der Liste von 5*15 gewärleistet sein um Fehlermeldungen zu vermeiden
+    # Da mit list.pop() gearbeitet wird, muss eine Länge der Liste von 5*15 gewärleistet
+    # sein um Fehlermeldungen zu vermeiden
     
     while len(deceptv_images) <= 5*15:
         deceptv_images = deceptv_images + deceptv_images
@@ -109,16 +129,64 @@ def deceptv_wie_kuendigen():
     return render_template('deceptv/deceptv_wie_kuendigen.html')
 
 #Mitgliedschaft beenden
-@app.route('/deceptv/premium/mein-abo')
-def beenden1():
+@app.route('/deceptv/premium/mitgliedschaft')
+def level1_beenden():
+    session['dp_score'] = session['dp_score']+2
     deceptv_images = get_streaming_images()
-    return render_template('deceptv/end/beenden1.html', deceptv_images = deceptv_images)
+    return render_template('deceptv/end/level1_beenden.html', deceptv_images = deceptv_images)
 
-###############################################################################################
+@app.route('/deceptv/premium/mitgliedschaft-beenden')
+def level1_beenden2():
+    session['dp_score'] = session['dp_score']+2
+    return render_template('deceptv/end/level1_beenden2.html')
+
+
+###########################################################################################
 # Level 2: Shopping
-@app.route('/decepdive')
+@app.route('/decepdive') 
 def decepdive():
     return render_template('decepdive/decepdive.html')
-    
-if __name__ == "__Main__":
-    app.run(debug=True)
+
+@app.route('/decepdive_produkt1', methods=['POST', 'GET'])
+def decepdive_produkt1():
+    # if len(request.form) > 0:
+    #     session['dp_score'] += 2
+    #     if request.form['bestellung'] in request.args:
+    #         session['dp_score'] -= 1
+    #     if request.form['bestellung'] in request.args:
+    #         session['dp_score'] += 1
+    return render_template('decepdive/decepdive_produkt1.html')
+
+@app.route('/decepdive_produkt2')
+def decepdive_produkt2():
+    return render_template('decepdive/decepdive_produkt2.html')
+
+@app.route('/decepdive_produkt3')
+def decepdive_produkt3():
+    return render_template('decepdive/decepdive_produkt3.html')
+
+@app.route('/decepdive_produkt4')
+def decepdive_produkt4():
+    return render_template('decepdive/decepdive_produkt4.html')
+
+@app.route('/decepdive_produkt5')
+def decepdive_produkt5():
+    return render_template('decepdive/decepdive_produkt5.html')
+
+@app.route('/decepdive/warenkorb')
+def decepdive_warenkorb():
+    return render_template('decepdive/decepdive_warenkorb.html')
+
+@app.route('/decepdive/warenkorb/konto')
+def decepdive_warenkorb2():
+    return render_template('decepdive/decepdive_warenkorb2.html')
+
+@app.route('/decepdive/warenkorb/Daten')
+def decepdive_warenkorb3():
+    return render_template('decepdive/decepdive_warenkorb3.html')
+
+@app.route('/decepdive/warenkorb/Übersicht')
+def decepdive_warenkorb4():
+    return render_template('decepdive/decepdive_warenkorb4.html')
+
+

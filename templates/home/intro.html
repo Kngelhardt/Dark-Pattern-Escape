@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="{{url_for('static', filename='main.js')}}"></script>
     <title>D.P. Escape</title>
     <style>
 
@@ -14,100 +13,89 @@
     {% extends 'layout_home.html' %}
 
     {% block content %}
-    <div id="body" class="container">
-            <div id="story" class="row my-5" >
-                <div class="col">
-                    <p> Dein Urlaub steht bevor, das wird Toll!
-                        Du träumst schon vom Strand, der Sonne und dem Geräusch der Wellen. <br>
-                        Bevor es losgeht, musst du allerdings noch ein paar Dinge im Internet erledigen: <br>
-                    </p>
-                    <ul>
-                        <li> Du musst dein Streaming-Abo beenden, da du es während des Urlaubs nicht brauchst und es zu teuer ist es weiter laufen zu lassen.</li>
-                        <li> Zusätzlich ist dir aufgefallen, dass für den Urlaub noch Sonnencreme gebraucht wird, die du Online einkaufen willst.</li>
-                    </ul>
-                </div>
-                <div class="col-4">
-                    <img class="img-fluid float-end rounded bild-intro" src="{{url_for('static', filename='images/hammock_CC0.jpg')}}" alt="Strand am Meer, mit leichten Wellen und blauem Himmel">
-                </div>
-            </div>
+    <div id="body">
             <div class="container my-5">
-                <div class="row">
-                    <div id="todo" class="col-4">
-                        <h3>Deine Aufgaben</h3>
-                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/Clipboard.png')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
+                {% if level_fortschritt == 0 %}
+                <div id="anleitung" class="my-4 px-2 border border-dark-subtle rounded" > <!-- margin-top/bottom: 4 ;padding-left/right: 2  -->
+                    <h2>Anleitung</h2>
+                    <p> Unten in der Fußleiste der Seite, hast du verschiedenen Anzeigen, die dir zeigen, wie vielZeit, Daten, Geld und die höhe deines DP-Scores anzeigen. </p>
+                    <div class="mt-3">
+                        <p><b>Am Ende des Spiels</b> werden die Scores für Daten, Geld und Dark Patterns zu einem <b>Endscore</b> verrechnet.</p>
                     </div>
-                    <div id="aufgaben" class="col">
-                        <p> Hier auf dem Clipboard siehst du die Aufgaben, die du in diesem Spiel erledigen musst. Zunächst klingen die Aufgaben ein Streaming-Abo zu beenden
-                             und einfach Sonnencreme zu bestellen simpel und alltäglich. Aber <b>Achtung!</b> diese Websites sind voll mit Dark Patterns, 
-                             die dich dazu bringen wollen, das Abo doch nicht zu beenden oder mehr Geld als geplant auszugeben. <br>
+                    <hr>
+                    <div class="row">
+                        <h4>Zeit-Anzeige</h4>
+                        <div class="col-3 ms-2 progress">
+                            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="col">
+                            <p> Pro level hast du <b>5 Mintuten</b> Zeit um die Hauptaufgabe zu lösen.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4>Daten-Anzeige</h4>
+                        <div class="col-3 ms-2 progress">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="col">
+                            <p>Am anfang startest du mit 100 Daten-Punkten. Pro Aktion, bei denen du daten verlierst, bekommst du 5 Punkte abgezogen</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4>Geld-Anzeige</h4>
+                        <div class="col-3 ms-2 progress">
+                                <div class="progress-bar bg-warning"  role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="col">
+                            <p> Am anfang startest du mit 20 Euro. Wenn du es nicht schaffst, das Streaming Abo zu beenden, verlierst du 10 Euro. In Level 2 kannst du hier gut abschneiden,w enn du wenig Geld beim Shoppen ausgibst </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4>DP-Score Anzeige</h4>
+                        <div class="col-3 ms-2 progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="col">
+                            <p> Pro Dark Pattern, dass du richtig überwindest bekommst du DP-Score-Punkte</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <button class="p-2 btn btn-dark fussleiste_brand">
+                            <b>Hauptmenü</b>
+                        </button>
+                        <p class="p-2">
+                            Wenn du nochmal deine Aufgaben und die Bedeutungen der Leisten anschauen willst, klicke einfach auf den "Hauptmenü" Knopf unten rechts.
                         </p>
-                        <p>
-                             Dein Ziel ist es den <b>Dark Patterns</b> so gut es geht <b>auszuweichen</b> ohne das <b>Zeitlimit</b> zu überschreiten 
-                             -Bis zu Urlaub ist es nicht mehr viel Zeit!
-                        </p>
-                        <!-- knöpfe untereinander darstellen mx-auto: margin -> auto zum zentrieren der knöpfe -->
-                        <div class="d-grid gap-2 w-75 my-5 mx-auto">
-                            <!-- onclick="show__hide_div('name') Story und Aufgabenskizzierung verschwindet und Speilanleitung erscheint -->
-                            <button class="btn btn-danger" onclick="show__hide_div('story'); show__hide_div('aufgaben'); show__hide_div('anleitung'); show__hide_div('start');  ">Weiter zu Level 1: Streaming Abo</button>
-                            <button class="btn btn-secondary">Nicht Freigeschaltet. Level 2: Shopping</button>
-                        </div>
-                    </div>
-                    <div id="anleitung" class="col">
-                        <p> Unten in der Fußleiste der Seite, hast du verschiedenen Anzeigen, die dir zeigen, wie viel
-                            Zeit, Daten, Geld und die höhe deines DP-Scores anzeigen. </p>
-                        <div class="row">
-                            <h4>Zeit-Anzeige</h4>
-                            <div class="col-3 progress">
-                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="col">
-                                <p> Pro level hast du <b>5 Mintuten</b> Zeit um die Hauptaufgabe zu lösen.</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Daten-Anzeige</h4>
-                            <div class="col-3 progress">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="col">
-                                <p>Am anfang startest du mit 100 Daten-Punkten. Pro Aktion, bei denen du daten verlierst, bekommst du 5 Punkte abgezogen</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Geld-Anzeige</h4>
-                            <div class="col-3 progress">
-                                    <div class="progress-bar bg-warning"  role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="col">
-                                <p> Am anfang startest du mit 20 Euro. Wenn du es nicht schaffst, das Streaming Abo zu beenden, verlierst du 10 Euro. </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>DP-Score Anzeige</h4>
-                            <div class="col-3 progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="col">
-                                <p> Pro Dark Pattern, dass du richtig überwindest bekommst du DP-Score-Punkte</p>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <p>Am ende des Spiels werden die Scroes für Daten, Geld und Dark Patterns zu einem <b>Endscore</b> verrechnet.</p>
-                        </div>
-                    </div>
-                    <div id="start" class="my-5">
-                        <h3>Finde die Option zum Kündigen auf der Streamingseite <b>Decep</b>TV</h3>
-                        <a href="{{url_for('deceptv')}}" class="btn btn-danger">Starte Level 1: Streaming Abo beenden</a>
                     </div>
                 </div>
+                {% endif %}
+                {% if level_fortschritt == 1 %}
+                <p> Level 1 beendet</p>
+                {% endif %}
+                {% if level_fortschritt == 2 %}
+                <p> Level 2 beendet</p>
+                {% endif %}
+                    <div class="row">
+                        <div class="col-4">
+                            <h2>Deine Aufgaben</h2>
+                            <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_level1.jpg')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
+                        </div>
+                        <div class="col mt-5">
+                            <h2>Hauptaufgabe</h2>
+                            <p>DecepTV Abo in unter 5 Minuten kündigen. Wenn du es nicht schaffst, das Streaming Abo zu beenden, verlierst du etwas von deinem Startgeld.</p>
+                            <h3>Nebenaufgabe</h3>
+                            <p>Akzeptiere so wenig Cookies wie möglich. Für jede falsche Auswahl verlierst du Datenpunkte.</p>
+                            <div class="d-grid gap-2 w-75 my-5 mx-auto">
+                                <!-- onclick="show__hide_div('name') Story und Aufgabenskizzierung verschwindet und Speilanleitung erscheint -->
+                                <a href="{{url_for('deceptv')}}" class="btn btn-danger" >Starte Level1: Streaming-Abonnement kündigen</a>
+                                {% if level_fortschritt == 1 %}
+                                <a href="{{url_for('decepdive')}}" class="btn btn-danger" >Starte Level2: Sonnencreme einkaufen</a>
+                                {% endif %}
+                            </div>  
+                        </div>
+                    </div>
             </div>
     </div>
-    <script>
-        /*  Objekte die zunächst nicht sichtbar sind und durch knopfdrücken erscheinen  */
-        document.getElementById("anleitung").style.display = "none";
-        document.getElementById("start").style.display = "none";
-    </script>
-
     {% endblock %}
 
 </body>

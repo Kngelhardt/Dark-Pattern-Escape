@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.P. Escape</title>
+</head>
+<body>
+{% extends 'layout_level2.html' %}
+
+{% block content %}
+<div class=" content_level2">
+    <div class="container py-5">
+        <div>
+            <h3> Warenkorb | <b class="text-primary">Konto</b> | Daten | Übersicht | Zahlung</h3>
+        </div>
+        <div class="border border-dark-subtle rounded">
+            <!-- vertikal zentrieren mit flex-column und justify-content-center -->
+            <div id="container_konto" class="d-flex flex-column justify-content-center">
+                <!-- horizontal zentrieren -->
+                <div class="text-center">
+                    <div class="border border-dark-subtle rounded ">
+                        <h3>Anmelden</h3>
+                        <input type="text" class="form-control-sm" placeholder="Benutzername">
+                        <input type="text" class="form-control-sm" placeholder="Passwort"> 
+                        <p class="btn btn-primary">Anmelden</p>
+                        <div class="d-grid gap-2 w-75 my-5 mx-auto">
+                            <a href="{{ url_for('decepdive_warenkorb3') }}" class="btn btn-success">Google</a> <br>
+                            <a href="{{ url_for('decepdive_warenkorb3') }}" class="btn btn-success">Facebook</a> <br>
+                            <small><a href="{{ url_for('decepdive_warenkorb3') }}" 
+                                    class="text-secondary text-decoration-none">Weiter als Gast</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="platzfülller" style="height: 100px;">
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

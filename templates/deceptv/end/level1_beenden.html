@@ -22,7 +22,7 @@
                         <a class="btn btn-success" href="{{url_for('deceptv')}}">Ich will keine DecepTV Serien und Filme nicht mehr sehen</a>    
                     </div>
                     <div class="col">
-                        <a class="btn btn-success" onclick="show__hide_div('confirmshaming'); show__hide_div('trick_question'); progress_add('dp_score_bar',2);">Ich will DecepTV Serien und Filme nicht mehr sehen</a>
+                        <a class="btn btn-success" onclick="show__hide_div('confirmshaming'); show__hide_div('trick_question'); progress_add('data_bar','{{session['data_score']}}');">Ich will DecepTV Serien und Filme nicht mehr sehen</a>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                         Gehen sie nicht, hier sparen sie 5% wenn sie bleiben-->
                         <a class="btn btn-secondary " href="{{url_for('deceptv')}}"> Ich will es mir noch einmal überlegen, erinner mich 3 Tage vor Ablauf noch einmal</a> 
                     <!-- "Confirmshaming" Dark Pattern: Formulierung des knopfes soll Spieler*innen sich dumm, naiv oder herzlos dafür fühlen lassen die Option zu wählen-->
-                        <a class="btn btn-secondary " href="{{url_for('decepdive')}}" onclick="progress_add('dp_score_bar', 2);" href="#">Mir ist es egal, dass ich durch exklusive Angebote und Vorteile Geld sparen würde</a> 
+                        <a class="btn btn-secondary " href="{{url_for('level1_beenden2')}}" onclick="progress_add('data_bar', '{{session['data_score']}}');" href="#">Mir ist es egal, dass ich durch exklusive Angebote und Vorteile Geld sparen würde</a> 
                         <a class="btn btn-success " href="{{url_for('deceptv')}}">Ich will meine DecepTV Vorteile behalten und damit clever geld sparen</a>
                 </div>
             </div>

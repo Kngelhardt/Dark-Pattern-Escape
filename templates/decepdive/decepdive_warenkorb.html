@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.P. Escape</title>
+</head>
+<body>
+{% extends 'layout_level2.html' %}
+
+{% block content %}
+<div class=" content_level2">
+    <div class="container py-5">
+        <div>
+            <h3><b class="text-primary">Warenkorb</b> | Konto | Daten | Übersicht | Zahlung</h3>
+        </div>
+        <div class="border border-dark-subtle rounded py-5 px-5">
+            <table class="table ">
+                <thead>
+                  <tr>
+                    <th scope="col">Warenkorb</th>
+                    <th scope="col">Inhalt</th>
+                    <th scope="col">Stück</th>
+                    <th scope="col">Preis</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Sonnencreme LSF50 500ml</td>
+                    <td>1</td>
+                    <td>9.95€</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Aftersun Probe 30ml</td>
+                    <td>1</td>
+                    <td>0.99€</td>
+                  </tr>
+                  <tfoot>
+                    <th scope="row "><b>Total</b></th>
+                    <td></td>
+                    <td></td>
+                    <td>10.94€</td>
+                  </tfoot>
+                </tbody>
+            </table>
+            <h4>Gutscheincode</h4>
+            <form action="">
+                <input class="rounded" type="text" placeholder="Gibt deinen Code ein">
+                <div class="btn btn-primary"><b>Abschicken</b></div>
+            </form>
+                <div class="col text-r text-secondary position-relative">
+                    <form class="position position-absolute end-0" action="">
+                        <label for="agb">Ich Akzeptiere die AGB von DecepDive</label>
+                        <input type="checkbox" name="agb" value="Ich habe die AGB gelesen">
+                        <button type="button" class="d-2 btn dropdown-toggle dropdown-toggle-split text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end text-secondary">
+                            <li><label for="newsletter"> <b>Newsletter erhalten</b></label></li>
+                            <li><input type="checkbox" name="newsletter" value="akzeptiert" checked="true"> Ich will Neuhigkeiten <br>
+                                 und Angebote von DecepDive <br> und Partnerfirmen bekommen</li>
+                            
+                        </ul>
+                        <a class="btn btn-success" href="{{url_for('decepdive_warenkorb2')}}">Weiter</a>
+                    </form>
+                </div> 
+        </div>
+        <div class="platzfülller" style="height: 400px;">
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>
