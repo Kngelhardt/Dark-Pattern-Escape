@@ -1,7 +1,7 @@
 
 
 /* Funktion um Elemente verschwinden oder erscheinen zu lasssen */
-function show__hide_div(a){
+function show_hide_div(a){
     if(document.getElementById(a).style.display != "none"){
         document.getElementById(a).style.display = "none";
     }else{
@@ -30,7 +30,14 @@ function progress_add(bar, value){
     }
 }
 
+/* function applgrün_aufläuchten(aufleuchten_element) {
+    document.getElementsByClassName(aufleuchten_element).style.backgroundColor = 'red';
+    document.getElementById(aufleuchten_element).style.backgroundColor = "green";
+}
+ */
+
 function starte_uhr(){
+    /* var date = 0.. */
     var uhrzeit = setInterval(uhr_timer, 200);
 }
 

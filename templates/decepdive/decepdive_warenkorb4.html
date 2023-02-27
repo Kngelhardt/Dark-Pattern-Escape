@@ -9,64 +9,83 @@
 <body>
 {% extends 'layout_level2.html' %}
 
-{% block content %}
-<div class=" content_level2">
-    <div class="container py-5">
-        <div>
-            <h3> Warenkorb | Konto | Daten | <b class="text-primary">Übersicht</b> | Zahlung</h3>
-        </div>
-        <div class="border border-dark-subtle rounded py-5 px-5" >
-            <table class="table ">
-                <thead>
-                  <tr>
-                    <th scope="col">Warenkorb</th>
-                    <th scope="col">Inhalt</th>
-                    <th scope="col">Stück</th>
-                    <th scope="col">Preis</th>
-                  </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Sonnencreme LSF50 500ml</td>
-                    <td>1</td>
-                    <td>9.95€</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Aftersun Probe 30ml</td>
-                    <td>1</td>
-                    <td>0.99€</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Versand</td>
-                    <td>1</td>
-                    <td>4.99€</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Monatslieferungs-Rabatt</td>
-                    <td>10%</td>
-                    <td>-0.99€</td>
-                  </tr>
-                  <tfoot>
-                    <th scope="row "><b>Total</b></th>
-                    <td></td>
-                    <td></td>
-                    <td>14.94€</td>
-                  </tfoot>
-                </tbody>
-            </table>
-            <a class="btn btn-success" href="{{url_for('home_intro')}}">
-                Jetzt Zahlen <br>
-                <small>mit Spende</small>
-            </a>
-
+    {% block content %}
+    <div class=" content_level2">
+        <div class="container py-5">
+            <div id="misdirection">
+                <div>
+                    <h3> Warenkorb | Konto | Daten | <b class="text-primary">Übersicht</b> | Zahlung</h3>
+                </div>
+                <div class="border border-dark-subtle rounded py-5 px-5" >
+                    <table class="table ">
+                        <thead>
+                        <tr>
+                            <th scope="col">Warenkorb</th>
+                            <th scope="col">Inhalt</th>
+                            <th scope="col">Stück</th>
+                            <th scope="col">Preis</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Sonnencreme LSF50 500ml</td>
+                            <td>1</td>
+                            <td>9.95€</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Aftersun Probe 30ml</td>
+                            <td>1</td>
+                            <td>0.99€</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Versand</td>
+                            <td>1</td>
+                            <td>4.99€</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Monatslieferungs-Rabatt</td>
+                            <td>10%</td>
+                            <td>-0.99€</td>
+                        </tr>
+                        <tfoot>
+                            <th scope="row "><b>Total</b></th>
+                            <td></td>
+                            <td></td>
+                            <td>14.94€</td>
+                        </tfoot>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-10">
+                            <a class="btn btn-close-white" href="{{url_for('ende_lv2')}}">
+                                <p class="misdirection_text">Jetzt Zahlen <br> <small>mit Spende</small> </p>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-success" href="{{url_for('ende_lv2')}}" onclick="show_hide_div('misdirection'); show_hide_div('ende_lv2');">
+                                Jetzt Zahlen <br>
+                                <small class="misdirection_text">mit Spende</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ende_lv2">
+                <h1>Du hast es geschafft, die Sonnencreme ist eingekauft. Du hast BETRAG von maximal möglichem BETRAG eingespeichert</h1>
+                    <div class="d-flex">
+                        <a href="{{url_for('home_intro')}}" class="btn btn-success">Zurück zur Levelübersicht</a>
+                    </div>
+            </div> 
         </div>
     </div>
-</div>
-{% endblock %}
+    <script>
+        document.getElementById("ende_lv2").style.display = "none";
+    </script>  
+    {% endblock %}
 
 </body>
 </html>

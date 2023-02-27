@@ -14,6 +14,20 @@ if __name__ == "__main__":
 app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
 
 ###################################################################################
+""" Reset der Session auf die initialen werte """
+@app.route('/reset')
+def reset_session():
+    session['data_score'] = 100
+    session['geld_score'] = 100
+    # Countdown = 300 sekunden, also 5 minuten
+    session['countdown'] = 300
+    session['dp_score'] = 0
+     # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
+    session['level_fortschritt'] = 0 
+    session['warenkorb'] = [1, 2, 3]
+    return '', 204
+
+###################################################################################
 """ Mainpage """
 @app.route('/')
 def home():
@@ -21,10 +35,11 @@ def home():
     if "data_score" not in session:
         session['data_score'] = 100
         session['geld_score'] = 20
-        session['countdown'] = 5
+        # Countdown = 300 sekunden, also 5 minuten
+        session['countdown'] = 300
         session['dp_score'] = 0
         # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
-        session['level_fortschritt'] = 1 
+        session['level_fortschritt'] = 0 
         session['warenkorb'] = [1, 2, 3]
     return render_template('home/home.html')
 
@@ -140,6 +155,14 @@ def level1_beenden2():
     session['dp_score'] = session['dp_score']+2
     return render_template('deceptv/end/level1_beenden2.html')
 
+@app.route('/deceptv/mitgliedschaft-beenden')
+def ende_lv1():
+    if session['level_fortschritt'] == 2:
+        return '', 204
+    else:
+        session['level_fortschritt'] = 1 
+        return '', 204
+
 
 ###########################################################################################
 # Level 2: Shopping
@@ -149,12 +172,6 @@ def decepdive():
 
 @app.route('/decepdive_produkt1', methods=['POST', 'GET'])
 def decepdive_produkt1():
-    # if len(request.form) > 0:
-    #     session['dp_score'] += 2
-    #     if request.form['bestellung'] in request.args:
-    #         session['dp_score'] -= 1
-    #     if request.form['bestellung'] in request.args:
-    #         session['dp_score'] += 1
     return render_template('decepdive/decepdive_produkt1.html')
 
 @app.route('/decepdive_produkt2')
@@ -189,4 +206,14 @@ def decepdive_warenkorb3():
 def decepdive_warenkorb4():
     return render_template('decepdive/decepdive_warenkorb4.html')
 
+@app.route('/decepdive/beenden')
+def ende_lv2():
+    session['level_fortschritt'] = 2
+    return '', 204
 
+""" 
+ajax replace div/element
+flask 204 response
+flask 200 json response
+ersetzen des kontents
+ """
