@@ -83,6 +83,7 @@
         <script>
             // Element verstecken. "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden
             document.getElementById("container_kündigung").style.display = "none";
+            window.onload = level_countdown('{{session['countdown']}}');
         </script>
     {% endblock %}
 </body>

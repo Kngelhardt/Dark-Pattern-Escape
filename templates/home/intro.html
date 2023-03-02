@@ -86,11 +86,11 @@
                         </div>  
                     </div>
                 </div>
-            {% elif level_fortschritt == 1%}
+            {% elif level_fortschritt == 1 %}
                 <div class="row">
                     <div class="col-4">
                         <h2>Deine Aufgaben</h2>
-                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_level1.jpg')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
+                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_level2.jpg')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
                     </div>
                     <div class="col">
                         <h1>Level2</h1>
@@ -107,10 +107,45 @@
                 </div>
             {% elif level_fortschritt == 2 %}
                 <div class="row">
-                    <div class="d-grid gap-2 w-75 my-5 mx-auto">
-                        <button class="btn btn-success" type="button" disabled>Abgeschlossen: Level1 - Streaming-Abonnement kündigen</button>
-                        <button class="btn btn-success" type="button" disabled>Abgeschlossen: Level2 - Sonnencreme einkaufen</button>
+                    <div class="col-4">
+                        <h2>Deine Aufgaben</h2>
+                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_abgeschlossen.jpg')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
                     </div>
+                    <div class="col mt-1">
+                        <h1>Herzlichen Glückwunsch, Aufgaben beendet</h1>
+                        <div class="px-5 pt-5 mainbackground maincolor rounded">
+                            <h3 class="">So hast du abgeschnitten:</h3>
+                            <p > <span class="text-success"><b>Dark Patterns:</b> {{ session['dp_score'] }} </span>
+                                von <span class="text-success"> 100 </span> möglichen Dark-Pattern Punkten gesammelt <br>
+                                <span class="text-info"><b>Daten:</b> {{ 100 - session['data_score']  }}</span>
+                                von  <span class="text-info">100</span> möglichen Daten-Punkten behalten <br>
+                                <span class="text-warning"><b>Geld</b> {{ (100)/5 }}</span>
+                                von maximal möglichen  <span class="text-warning">20€</span> behalten
+                            </p>
+                            <h2>Gesamtscore</h2>
+                            <p>
+                                <span class="text-success fw-bold">{{ session['dp_score']*2 + session['data_score'] + session['geld_score'] }}*</span> 
+                                von maximal <span class="text-success fw-bold"> 400</span> Punkten
+                            </p>
+                            <p><small>
+                                *Der Score wird so errechnet: 2 x Dark-Pattern-Score + Daten-Score + 5 x Geld-Score. <br>
+                                 (5 x Geld-Score, um ihn mit einem Maximalwert von nur 20 genauso zu gewichten, wie den Daten-Score)
+                            </small></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5">
+                <h2>Fragebogen zur Anwendung </h2>
+                    <p class="text-body">Dieses Spiel ist Teil meiner Bachelorarbeit mit dem Titel 
+                        <b>"Dark Pattern Escape Room – Konzeption und Implementierung einer Online-Anwendung 
+                        zur Steigerung des Bewusstseins für manipulatives Webdesign"</b> an der Universität Osnabrück.
+                        Um die Anwendung in ihrer Bedienbarkeit und der Steigerung des Bewusstseins für manipulatives 
+                        Webdesign zu evaluieren, habe ich diesen Fragebogen entwickelt und freue mich über jede*n Spieler*in,
+                        die diesen ausfüllt.
+                    </p>
+                </div>
+                <div class="d-grid gap-2 w-50 my-5 mx-auto">
+                    <a href="{{ url_for('fragebogen')}}" class="btn btn-success" type="button" >Fragebogen starten</a>
                 </div>
             {% endif %}
         </div>

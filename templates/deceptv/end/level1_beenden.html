@@ -87,6 +87,7 @@
         </div>
         <script>
              document.getElementById("confirmshaming").style.display = "none";
+            window.onload = level_countdown('{{session['countdown']}}');
         </script>
     {% endblock %} 
 </body>

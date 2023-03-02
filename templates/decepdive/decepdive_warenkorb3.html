@@ -30,11 +30,13 @@
             <input type="text" class="form-control-sm" placeholder="E-Mail@email.com"> 
             <a class="btn btn-success" href="{{url_for('decepdive_warenkorb4')}}">Weiter</a>
         </div>
-        <div class="platzfülller" style="height: 100px;">
-
-        </div>
+        <div class="platzfülller" style="height: 100px;"></div>
+        <div class="platzfülller" style="height: 100px;"></div>
     </div>
 </div>
+<script>
+    window.onload = level_countdown('{{session['countdown']}}');
+</script>
 {% endblock %}
 
 </body>

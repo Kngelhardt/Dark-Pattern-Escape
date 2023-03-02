@@ -2,14 +2,8 @@ from flask import Flask, render_template, request, redirect, session
 import os
 
 app = Flask(__name__)
-
-if __name__ == "__main__":
-    #app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run(debug=True)
-    # relevant, falls ich mit liste arbeite in sessions
-    #session.modified = True
-    
-
+# Activate debugging
+app.run(debug = True)
 # Set the secret key to some random bytes.
 app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
 
@@ -27,11 +21,23 @@ def reset_session():
     session['warenkorb'] = [1, 2, 3]
     return '', 204
 
+""" Upadate des timers """
+@app.route('/update_timer', methods=['GET', 'POST'])
+def update_timer():
+    if request.method == "POST":
+        # lade den gesendeten zeitstand
+        zeit_state = request.get_json()
+        # speicher den Wert in session
+        session['countdown'] = zeit_state['object']
+        return '', 204
+    else:
+        return '', 204
+
 ###################################################################################
 """ Mainpage """
 @app.route('/')
 def home():
-    #initialisierung der Werte für eine Session beim ersten Aufruf der Seite
+    #initialisierung der Werte für eine Session, check if session is initialised
     if "data_score" not in session:
         session['data_score'] = 100
         session['geld_score'] = 20
@@ -58,6 +64,10 @@ def anleitung():
 @app.route('/home/hintergrund/')
 def hintergrund():
     return render_template('home/hintergrund.html')
+
+@app.route('/home/fragebogen/')
+def fragebogen():
+    return render_template('home/fragebogen.html')
 
 ###################################################################################
 """ Level 1: Streming Abo beenden """
@@ -155,12 +165,13 @@ def level1_beenden2():
     session['dp_score'] = session['dp_score']+2
     return render_template('deceptv/end/level1_beenden2.html')
 
-@app.route('/deceptv/mitgliedschaft-beenden')
+@app.route('/deceptv/ende_lv1')
 def ende_lv1():
-    if session['level_fortschritt'] == 2:
+    if session['level_fortschritt'] == 0:
+        session['level_fortschritt'] = 1
+        session['countdown'] = 300
         return '', 204
     else:
-        session['level_fortschritt'] = 1 
         return '', 204
 
 
@@ -170,7 +181,7 @@ def ende_lv1():
 def decepdive():
     return render_template('decepdive/decepdive.html')
 
-@app.route('/decepdive_produkt1', methods=['POST', 'GET'])
+@app.route('/decepdive_produkt1')
 def decepdive_produkt1():
     return render_template('decepdive/decepdive_produkt1.html')
 

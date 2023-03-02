@@ -28,8 +28,8 @@
                 </div>
                 <button type="button" class="btn btn-success" onclick="starte_uhr();" href="#">Schau auf die Uhr</button>
                 <!-- "Roach Motel" Dark Pattern: Kündigung quälend scwer machen, indem nur zu bestimmten zeiten telefonisich gekündigt werden kann-->
-                <a" id="beenden_knopf" class="btn btn-primary " href="{{url_for('ende_lv1')}}" 
-                    onclick=" show_hide_div('roach_motel'); show_hide_div('ende_lv1'); grün_aufläuchten('deceptv_premium_container');">
+                <a id="beenden_knopf" class="btn btn-primary " href="{{url_for('ende_lv1')}}"
+                    onclick=" show_hide_div('roach_motel'); show_hide_div('ende_lv1');">
                     <p>Anrufen</p>
                 </a> 
             </div>
@@ -44,6 +44,7 @@
         // Element verstecken. "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden
         document.getElementById("uhr_container").style.display = "none";
         document.getElementById("ende_lv1").style.display = "none";
+        window.onload = level_countdown('{{session['countdown']}}');
         </script>  
     {% endblock %} 
 

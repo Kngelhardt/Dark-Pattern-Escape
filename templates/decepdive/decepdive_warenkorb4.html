@@ -61,7 +61,7 @@
                     </table>
                     <div class="row">
                         <div class="col-10">
-                            <a class="btn btn-close-white" href="{{url_for('ende_lv2')}}">
+                            <a class="btn btn-close-white" href="{{url_for('ende_lv2')}}" onclick="show_hide_div('misdirection'); show_hide_div('ende_lv2');">
                                 <p class="misdirection_text">Jetzt Zahlen <br> <small>mit Spende</small> </p>
                             </a>
                         </div>
@@ -76,14 +76,17 @@
             </div>
             <div id="ende_lv2">
                 <h1>Du hast es geschafft, die Sonnencreme ist eingekauft. Du hast BETRAG von maximal möglichem BETRAG eingespeichert</h1>
-                    <div class="d-flex">
-                        <a href="{{url_for('home_intro')}}" class="btn btn-success">Zurück zur Levelübersicht</a>
-                    </div>
+                <div class="d-flex">
+                    <a href="{{url_for('home_intro')}}" class="btn btn-success">Zurück zur Levelübersicht</a>
+                </div>
+                <div class="platzfülller" style="height: 300px;"></div>
             </div> 
         </div>
+        <div class="platzfülller" style="height: 250px;"></div>
     </div>
     <script>
         document.getElementById("ende_lv2").style.display = "none";
+        window.onload = level_countdown('{{session['countdown']}}');
     </script>  
     {% endblock %}
 

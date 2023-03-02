@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>D.P. Escape</title>
     <style>
 
@@ -22,7 +23,9 @@
                 Das <b>Dark Pattern Escape Room</b> Spiel ist ein Brwoserspiel, bei dem der Spieler*innen die Problemlage und bestimmte Mechanismen hinter Dark Patterns bewusst gemacht werden soll. <br>
             </p>
             <h5>Schaffst du es nicht manipuliert zu werden und de Dark Patterns zu entkommen?</h4>
-            <button type="button" class="btn btn-danger" onclick="show_hide_div('story'); show_hide_div('aufgaben'); show_hide_div('beschreibung');"> Ja klar, los gehts</button>
+            <button type="button" class="btn btn-danger" onclick="show_hide_div('story'); show_hide_div('aufgaben'); show_hide_div('beschreibung');">
+                 Ja klar, los gehts
+            </button>
             <br>
         </div>
         <div id="story" >
@@ -38,7 +41,9 @@
                     </ul>
                 </div>
                 <div class="col-4">
-                    <img class="img-fluid float-end rounded bild-intro" src="{{url_for('static', filename='images/hammock_CC0.jpg')}}" alt="Strand am Meer, mit leichten Wellen und blauem Himmel">
+                    <img class="img-fluid float-end rounded bild-intro" 
+                         src="{{url_for('static', filename='images/hammock_CC0.jpg')}}" 
+                         alt="Strand am Meer, mit leichten Wellen und blauem Himmel">
                 </div>
             </div>
         </div>
@@ -46,7 +51,9 @@
             <div class="row my-5">
                 <div class="col-3">
                     <h3>Deine Aufgaben</h3>
-                    <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/Clipboard.png')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
+                    <img class="img-fluid rounded bild-intro" 
+                         src="{{url_for('static', filename='images/Clipboard.png')}}" 
+                         alt="Clipboard mit den zu erledigenden Aufgaben">
                 </div>
                 <div  class="col">
                     <p> Hier auf dem Clipboard siehst du die Aufgaben, die du in diesem Spiel erledigen musst. Zunächst klingen die Aufgaben ein Streaming-Abo zu beenden

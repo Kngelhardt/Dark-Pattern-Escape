@@ -10,7 +10,9 @@
     {% extends 'layout_level1.html' %}
 
     {% block content %}
-
+    <script>
+        window.onload = level_countdown('{{session['countdown']}}');
+    </script>
     {% endblock %}
 </body>
 </html>
