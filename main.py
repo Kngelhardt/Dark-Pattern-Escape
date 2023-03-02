@@ -9,8 +9,8 @@ app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598
 
 ###################################################################################
 """ Reset der Session auf die initialen werte """
-@app.route('/reset')
-def reset_session():
+@app.route('/initialise-session')
+def initialise_session():
     session['data_score'] = 100
     session['geld_score'] = 100
     # Countdown = 300 sekunden, also 5 minuten
@@ -18,8 +18,24 @@ def reset_session():
     session['dp_score'] = 0
      # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
     session['level_fortschritt'] = 0 
+    session['cookie_lv1_show'] = True
+    session['cookie_lv2_show'] = True
     session['warenkorb'] = [1, 2, 3]
     return '', 204
+
+@app.route('/set-session', methods=['GET', 'POST'])
+def set_session():
+    if request.method == "POST":
+        # lade json
+        session_data = request.json
+        # get session key
+        for session_key in session_data:
+            print(session_data)
+            session[session_key] = session_data[session_key]
+        return '', 204
+    else:
+        return '', 204
+    
 
 """ Upadate des timers """
 @app.route('/update_timer', methods=['GET', 'POST'])

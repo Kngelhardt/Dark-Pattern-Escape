@@ -7,258 +7,89 @@
     <script src="{{url_for('static', filename='main.js')}}"></script>
     <link rel="stylesheet" type="css" href="{{url_for('static', filename='styles.css')}}">
     <title>{% block title %}Dark Pattern Escape {% endblock %} </title>
-    <style>
-           /*-----------------------------------------------------------------------------------------------------------------------  */
-    /* CSS für alle Seiten */
-    #noscript{
-        min-height: 100vh;
-    }
-    body{
-        text-align: justify;
-        background-color: rgb(221, 221, 221);
-    }
-    .content{
-        min-height: 90vh; /* Damit der footer unabhängig von der Kontentgröße unten bleibt */
-    }
-    .nav_item_landing{
-        color: white;
-    }
-    .nav_item_landing a:hover{
-        box-shadow: 0 0 5px rgb(255, 0, 0);
-        border-radius: 5px;
-    }
-    .navbar-brand{
-        padding: 5px 10px;
-    }
-    .fussleiste{
-        position: sticky;
-        bottom: 0;
-        padding-top: 30px;
-        /* height: 70px; */
-    }
-    .fussleiste_brand{
-        float: left;
-        margin: 0px 20px 30px 20px;
-        color: white;
-        box-shadow: 0 0 5px rgb(255, 0, 0);
-        text-decoration: none;
-    }
-    .mainbackground{
-        background-color: black;
-    }
-    .maincolor{
-        color: white;
-    }
-    .misdirection_text{
-        color: gray;
-        font-weight: lighter;
-    }
-    /*-----------------------------------------------------------------------------------------------------------------------  */
-    /* CSS für die Landingpage */
-    #logo1{
-        text-shadow: 0px 0px 3px rgb(255, 0, 0);
-        font-size: 40px;
-    }
-    #logo2{
-        font-weight: 300;
-        font-size: 30px;
-        text-align: right;
-        line-height: 0px;
-        text-shadow: 0px 0px 3px rgb(255, 0, 0)
-    }
-    .bild-intro{
-        max-height: 350px;
-        box-shadow: 3px 3px 5px black;
-    }
-    /*-----------------------------------------------------------------------------------------------------------------------  */
-    /* CSS für Level 1: Streamingdienst kündigen */
-    /* Navigationsleiste */
-    .maincolor_level1{
-        background-color:rgb(32, 39, 53);
-        color: white;
-    }
-    .nav_item_level1{
-        color: white;
-    }
-    .nav_item_level1 a:hover{
-        box-shadow: 0 0 5px rgb(0, 174, 255);
-        border-radius: 5px;
-    }
-    .account_menu{
-        margin: 0px 5px;
-        padding-left: 0px;
-    }
-    /* Styles füf das Offcanvas Menü und dessen Knopf*/
-    .offcanvas_level1{
-        background-color:rgb(32, 39, 53);
-    }
-    .account_menu_options{
-        line-height: 50px;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-    .account_menu_options a{
-        text-decoration: none;
-        color: white;
-    }
-    .account_menu_options a:hover{
-        text-decoration: none;
-        text-shadow: 0 0 2px rgb(28, 134, 255);
-    }
-    /* Kontent für Streaming-startseite */  
-
-    .content_level1{
-        /*  alternatives Farbschema */
-        background-color: rgb(4, 8, 17);
-        color: white;
-        text-shadow: 0px 0px 5px black;
-        padding: 0px 20px;
-    }
-    .atrappe:hover{ /* Für Elemente, die als klickbare Objekte bzw. Links erscheinen sollen */
-        cursor: pointer;
-        box-shadow: 0px 0px 10px rgb(28, 134, 255);
-    }
-    .carousel-item img{
-        border-radius: 5px;
-        margin: 5px 0px;
-    }
-    .carousel-control-prev{ /* position und Größe der Crrouselbuttons anpassen. Wichtig um zu verhindern, dass sie den Hauptmenü-Button in der Fußleiste überdecken */
-        width: min-content;
-        margin-left: 10px;
-    }
-    .carousel-control-next{
-        width: min-content;
-        margin-right: 10px;
-    }
-    /* Kontent für Deceptv_premium, _Angebote, _Shop, _Service, _Social */
-    #vorteile_banner{
-        font-size:xx-large;
-        height: 30vh;
-    }
-    #vorteile{
-        margin: 20px 0px;
-    }
-    .deceptv_premium_container{
-        text-align: center ;
-    }
-    .dropdown-item{
-        font-weight: bolder;
-    }
-    #service_kündigen{
-        text-decoration: none;
-    }
-    /* ------------------------------------------------------------------------------------------------ */
-    /* CSS Level2: Shoppingseite */
-    /* Farbpalette inspiriert von https://www.shutterstock.com/de/blog/farbpaletten-ideen-website */
-    .maincolor_level2{
-        background-color: #8cBDB9;
-        color: rgb(10, 10, 10);
-    }
-    .nav_item_level2 a:hover{
-        background-color: #bae0dd;
-        border-radius: 5px;
-        color: rgb(10, 10, 10);
-        box-shadow: 0 0 10px #bae0dd;
-    }
-    .offcanvas_level2{
-        background-color: #8cBDB9;
-        color: rgb(10, 10, 10);
-    }
-    .content_level2{
-        background-color: #f4fffe;
-    }
-    .content_level2 img{
-        box-shadow: 1px 1px 5px black;
-    }
-    .content_level2 a{
-        text-decoration: none;
-        font-weight: bold;
-    }
-    .platzfülller{ /* Unsichbares element um platz zu füllen*/
-        visibility: hidden;  
-    }
-    .produkt{
-        border-radius: 5px;
-        box-shadow: 0 0 1px #8cBDB9;
-        padding-top: 10px;
-    }
-    /* Produktpages */
-    .produktbeschreibung{ 
-        font-size: 24px;
-    }
-    /* Warenkorb und checkout */
-    #container_konto{
-        height: 70vh;
-        padding: 20% 30%;
-    }
-    </style>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <noscript>
-        <div class="container" id="noscript">
-            <h1>  Aktivieren Sie JavaScript, um und diese Seite voll nutzen zu können.</h1>
-        </div>
-    </noscript>
-    
-    <div class="navigation">
-        {% block navigation %}
-        
-        {% endblock %}
-    </div>
+    {% extends 'main_css.html' %}
 
     <div class="content">
-        {% block content %} 
+    {% block body %}
+        <noscript>
+            <div class="container" id="noscript">
+                <h1>  Aktivieren Sie JavaScript, um und diese Seite voll nutzen zu können.</h1>
+            </div>
+        </noscript>
         
-        {% endblock %}
-    </div>
+        <div class="navigation">
+            {% block navigation %}
+            
+            {% endblock %}
+        </div>
 
-    <!-- Fußzeile mit den Werten der jeweiligen Session -->
-    <div class="fussleiste mainbackground maincolor" >
-        <div class="row text-center">
-            <div class="col-1">
-                <a href="{{url_for('reset_session')}}" class="btn btn-warning">Reset</a>
-            </div>
-            <div class="col">
-                <!-- Link zur "Home" Seite um das spiel zu unterbrechen oder Anleitungen noch einmal durch zu gehen -->
-                <!-- Flex element, da es zusammen mit der Zeit-Bar in die col untergebracht werden muss -->
-                <a class="btn btn-outline-danger fussleiste_brand" href="{{url_for('home_intro')}}">
-                    <b>Hauptmenü</b>
-                </a>
-                <!-- Größe der Bar wird an den "Hauptmenü" Button angepasst -->
-                <div id="container_zeit_bar" class="d-2 progress" style="height: 36px;">
-                    <div id="zeit_bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{session['countdown']}}%" 
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                        <h3 id="zeit_anzeige" class="text-dark">Zeit</h3>
+        <div class="content">
+            {% block content %} 
+            
+            {% endblock %}
+        </div>
+
+        <!-- Fußzeile mit den Werten der jeweiligen Session -->
+        <div class="fussleiste mainbackground maincolor" >
+            {% if session['cookie_lv1_show'] == True %}
+            <div class="maincolor_level1 pt-0">
+                <div class="d-flex">
+                    <div class="p-2">
+
+                    </div>
+                    <div class="p-2 justify-content-end">
+                        <div class="btn btn-primary" onclick="set_session_value('cookie_lv1_show', 0)">accept</div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="progress">
-                    <div id="data_bar" class="progress-bar bg-info" role="progressbar" style="width: {{session['data_score']}}%" 
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            {% endif %}
+            <div class="row text-center pt-3">
+                <div class="col-1">
+                    <a href="{{url_for('initialise_session')}}" class="btn btn-warning">Reset</a>
+                </div>
+                <div class="col">
+                    <!-- Link zur "Home" Seite um das spiel zu unterbrechen oder Anleitungen noch einmal durch zu gehen -->
+                    <!-- Flex element, da es zusammen mit der Zeit-Bar in die col untergebracht werden muss -->
+                    <a class="btn btn-outline-danger fussleiste_brand" href="{{url_for('home_intro')}}">
+                        <b>Hauptmenü</b>
+                    </a>
+                    <!-- Größe der Bar wird an den "Hauptmenü" Button angepasst -->
+                    <div id="container_zeit_bar" class="d-2 progress position-relative" style="height: 36px;">
+                        <h3 id="zeit_anzeige" class="text-dark position-absolute">Zeit</h3>
+                        <div id="zeit_bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{session['countdown']}}%" 
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        </div>
                     </div>
                 </div>
-                <h3>Daten</h3>
-            </div>
-            <div class="col">
-                <div class="progress">
-                    <div id="geld_bar" class="progress-bar bg-warning" role="progressbar" style="width: {{ session['geld_score' ]}}%" 
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="col">
+                    <div class="progress">
+                        <div id="data_bar" class="progress-bar bg-info" role="progressbar" style="width: {{session['data_score']}}%" 
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        </div>
                     </div>
+                    <h3>Daten</h3>
                 </div>
-                <h3>Geld</h3>
-            </div>
-            <div class="col me-3"><!-- padding-right:2 da durch überlänge die seite nach recht verlängert würde -->
-                <div class="progress">
-                    <div id="dp_score_bar" class="progress-bar bg-success" role="progressbar" style="width: {{ session['dp_score'] }}%" 
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="col">
+                    <div class="progress">
+                        <div id="geld_bar" class="progress-bar bg-warning" role="progressbar" style="width: {{ session['geld_score' ]}}%" 
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        </div>
                     </div>
-                 </div>
-                <h3>DP-Score</h3>
+                    <h3>Geld</h3>
+                </div>
+                <div class="col me-3"><!-- padding-right:2 da durch überlänge die seite nach recht verlängert würde -->
+                    <div class="progress">
+                        <div id="dp_score_bar" class="progress-bar bg-success" role="progressbar" style="width: {{ session['dp_score'] }}%" 
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    <h3>DP-Score</h3>
+                </div>
             </div>
         </div>
+    {% endblock %}
     </div>
 </body>
 </html>

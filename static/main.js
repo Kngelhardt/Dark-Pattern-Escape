@@ -10,10 +10,10 @@ function show_hide_div(a){
 /* ajax test (no status tests) */
 function ajax_request(method, url, post_object){
     const req= new XMLHttpRequest();
-
     if(method == 'GET'){
-        // konfiguration des requests
+        // konfiguration des Requests
         req.open(method, url);
+        // senden des Requests
         req.send();
         return 
     }else if(method =='POST'){
@@ -21,27 +21,43 @@ function ajax_request(method, url, post_object){
         req.setRequestHeader('Content-Type', 'application/json')
         req.send(JSON.stringify({ object: post_object}));
     }
-    // send request
 }
 
-/*  dp_score: Permanent steigend
+/* input:
+    session_key: Key der session die aufgerufen werden soll
+    session_value: neuer wert für den session key */
+function set_session_value(session_key, session_value){
+    const req= new XMLHttpRequest();
+    // konfiguration des Requests
+    req.open("POST", '/set-session', true);
+    req.setRequestHeader('Content-Type', 'application/json')
+    // senden des Requests mit key und value paar von input
+    req.send(JSON.stringify({ [session_key]: session_value}));
+}
+
+/*  Session-Keys:
+    dp_score: Permanent steigend
     geld_score: update nach levelende
-    data_score (unterteilt in zwei variable mit 50 % für die jeweiligen level): permanent sinkend. Kann im richtigen menü wieder zurückgesetzt werden  
-    bar: die Progress-Bar, die geändert werden soll
-    val: Wert, um den sich die Bar-ändern soll (relevant nur für geld?)*/
-function progress_add(bar, value){
+    data_score (unterteilt in zwei variable mit 50 % für die jeweiligen level): permanent sinkend. Kann im richtigen menü wieder zurückgesetzt werden
+    inputs:
+    bar: die id der Progress-Bar, die geändert werden soll
+    value_now: Aktueller Wert der Bar
+    value_add: Wert, um den sich die Bar-ändern soll*/
+function progress_add(bar, value_now, value_add){
     if(document.getElementById(bar) == document.getElementById("dp_score_bar")){
-        var  dp_score = value + 2;
-        document.getElementById(bar).style.width = dp_score + '%';
-        
+        var  value_after = value_now + value_add;
+        document.getElementById(bar).style.width = value_after + '%';
+        set_session_value('dp_score', value_after);
     }
-    if(document.getElementById(bar) == document.getElementById("geld_bar")){
-        var  geld_score = value + 2;
-        document.getElementById(bar).style.width = geld_score + '%';
+    else if(document.getElementById(bar) == document.getElementById("geld_bar")){
+        var  value_after = value_now + value_add;
+        document.getElementById(bar).style.width = value_after + '%';
+        set_session_value('geld_score', value_after);
     }
-    if(document.getElementById(bar) == document.getElementById("data_bar")){
-        var  data_score = value - 2;
-        document.getElementById(bar).style.width = data_score + '%';
+    else if(document.getElementById(bar) == document.getElementById("data_bar")){
+        var  value_after = value_now - value_add;
+        document.getElementById(bar).style.width = value_after + '%';
+        set_session_value('data_score', value_after);
     }
 }
 
