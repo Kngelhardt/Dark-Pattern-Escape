@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, redirect, session
 import os
 
 app = Flask(__name__)
-# Activate debugging
-app.run(debug = True)
+
+if __name__ == "__main__":
+    # Activate debugging
+    app.run(debug = True)
 # Set the secret key to some random bytes.
 app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
 
@@ -18,8 +20,8 @@ def initialise_session():
     session['dp_score'] = 0
      # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
     session['level_fortschritt'] = 0 
-    session['cookie_lv1_show'] = True
-    session['cookie_lv2_show'] = True
+    session['cookie_lv1_show'] = False
+    session['cookie_lv2_show'] = False
     session['warenkorb'] = [1, 2, 3]
     return '', 204
 
@@ -55,14 +57,7 @@ def update_timer():
 def home():
     #initialisierung der Werte für eine Session, check if session is initialised
     if "data_score" not in session:
-        session['data_score'] = 100
-        session['geld_score'] = 20
-        # Countdown = 300 sekunden, also 5 minuten
-        session['countdown'] = 300
-        session['dp_score'] = 0
-        # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
-        session['level_fortschritt'] = 0 
-        session['warenkorb'] = [1, 2, 3]
+        initialise_session()
     return render_template('home/home.html')
 
 @app.route('/home/intro')
@@ -233,7 +228,7 @@ def decepdive_warenkorb3():
 def decepdive_warenkorb4():
     return render_template('decepdive/decepdive_warenkorb4.html')
 
-@app.route('/decepdive/beenden')
+@app.route('/decepdive/ende_lv2')
 def ende_lv2():
     session['level_fortschritt'] = 2
     return '', 204

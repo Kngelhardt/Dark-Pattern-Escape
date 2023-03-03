@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D.P. Escape</title>
-</head>
-<body>
+
 {% extends 'layout_level2.html' %}
 
 {% block content %}
@@ -35,9 +27,7 @@
     </div>
 </div>
 <script>
-    window.onload = level_countdown('{{session['countdown']}}');
+        window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
 </script>
 {% endblock %}
 
-</body>
-</html>

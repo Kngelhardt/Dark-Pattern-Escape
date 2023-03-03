@@ -35,7 +35,8 @@ function set_session_value(session_key, session_value){
     req.send(JSON.stringify({ [session_key]: session_value}));
 }
 
-/*  Session-Keys:
+/*  Funktion um die Werte der Progressbars upzudaten und anschließend in der Session zu speihern
+    Session-Keys:
     dp_score: Permanent steigend
     geld_score: update nach levelende
     data_score (unterteilt in zwei variable mit 50 % für die jeweiligen level): permanent sinkend. Kann im richtigen menü wieder zurückgesetzt werden
@@ -67,7 +68,7 @@ function reset_timer(timer, intervall, funktion){
 }
 
 /* Countdown Timer. Nach ablauf wird weitergeleitet zur spielübersicht */
-function level_countdown(zeit_state){
+function level_countdown(zeit_state, level_fortschritt){
     // zeit_state ist der aktuelle stand der sekundens
     counter = zeit_state;
 
@@ -75,8 +76,12 @@ function level_countdown(zeit_state){
     countdown = setInterval( function(){
         // Wenn counter bei null sekunden
         if (counter < 1){
-            // Setze level_fortschritt auf 1, damit das richtige zwischenmenü angezeigt wird
-            ajax_request('GET', "/deceptv/ende_lv1", null);
+            // Setze level_fortschritt auf 1 oder 2, damit das richtige zwischenmenü angezeigt wird
+            if(level_fortschritt == 0){
+                ajax_request('GET', "/deceptv/ende_lv1", null);
+            }else if(level_fortschritt == 1){
+                ajax_request('GET', "/decepdive/ende_lv2", null);
+            }
             // Redirect zur Levelübersicht
             // 30ms puffer, damit der get request fertig ist, bevor der redirect startet
             puffer = setInterval( function(){
