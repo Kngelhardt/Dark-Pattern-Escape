@@ -13,8 +13,9 @@
                 <div class="col">
                     <h3>FAQ</h3> <br>
                     <div class="justify-content-center">
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">Häufig gestellte Fragen</button>
-                            <span class="visually-hidden">Toggle Dropdown</span>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" 
+                                aria-expanded="false">Häufig gestellte Fragen</button>
+                        s<span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu"> 
                             <li><a class="dropdown-item" href="#">Wie funktioniert Social Watch?</a> </li>
@@ -36,8 +37,10 @@
                 <div class="col">
                     <h3>Hilfezentrum</h3> <br>
                     <div class="justify-content-center">
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">Häufige Probleme</button>
-                            <span class="visually-hidden">Toggle Dropdown</span>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                                 aria-expanded="false">Häufige Probleme
+                        </button>
+                        <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu"> 
                             <li><a class="dropdown-item" href="#">Die Wiedergabe von Filmen funktioniert nicht</a> </li>
@@ -49,14 +52,19 @@
                             <li><a class="dropdown-item" href="#">Ich bekomme keine 4k Auflösung trotz Premium Gold Abo</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <!-- "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden -->
-                            <li><a class="dropdown-item" style="cursor: pointer" onclick="show_hide_div('container_kündigung'); progress_add('dp_score_bar');">Ich finde die Optionen zum Verwalten oder Aufheben meiner Mitgliedschaft nicht</a></li>
+                            <li>
+                                <a  class="dropdown-item" style="cursor: pointer" 
+                                    onclick="show_hide_div('container_kündigung'); progress_add('dp_score_bar',{{session['dp_score']}}, 2);">
+                                    Ich finde die Optionen zum Verwalten oder Aufheben meiner Mitgliedschaft nicht
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>   
             <hr>
             <h5>Bei weiteren, oder bestehenden offenen Fragen, wenden sie sich an unseren E-Mail-Service unter: deceptv@service.com</h5>           
-            <div id="container_kündigung">
+            <div id="container_kündigung" class="mt-5">
                 <hr>
                 <h3>Verwaltung und Kündigung ihres DecepTV Abonnement</h3>
                 <p> Wollen sie ihr Abonnement verwalten? Hier finden sie alle Abonnement-Optionen:
@@ -67,7 +75,8 @@
                 <hr class="mt-1">
                 <!-- Hier ist der eigentlich relevante Link, klein geschreiben, ohne farben mit abstand und durch horizontale Liene als Teil eines anderen Inhalts getarnt-->
                 <p> <small> Zum Beenden drücken sie hier: 
-                    <a id="service_kündigen" class="text-body" href="{{url_for('level1_beenden')}}">Kündigen</a>
+                    <a  id="service_kündigen" class="text-body" href="{{url_for('level1_beenden')}}"
+                        onclick="progress_add('dp_score_bar',{{session['dp_score']}}, 2);">Kündigen</a>
                 </small></p>
             </div>
         </div>

@@ -8,12 +8,20 @@
                 <h1>Willst du dein Abonnement wirklich Kündigen und damit alle Vorteile velieren?</h1>
                 <div class="row">
                     <div class="col">
-                        <!-- "Trick Question" Dark Pattern: Formulierung des knopfes soll Spieler*innen reinlegen die Option nicht zu Kündigen zu wählen,
-                            indem die vormulierung einen doppelte Verneinung enthält-->
-                        <a class="btn btn-success" href="{{url_for('deceptv')}}">Ich will keine DecepTV Serien und Filme nicht mehr sehen</a>    
+                        <!-- "Trick Question" Dark Pattern: Formulierung des knopfes soll Spieler*innen
+                            reinlegen die Option nicht zu Kündigen zu wählen, indem die vormulierung
+                             einen doppelte Verneinung enthält-->
+                        <a class="btn btn-success" href="{{url_for('deceptv')}}">
+                            Ich will keine DecepTV Serien und Filme nicht mehr sehen
+                        </a>    
                     </div>
                     <div class="col">
-                        <a class="btn btn-success" onclick="show_hide_div('confirmshaming'); show_hide_div('trick_question'); progress_add('data_bar','{{session['data_score']}}');">Ich will DecepTV Serien und Filme nicht mehr sehen</a>
+                        <a class="btn btn-success" 
+                            onclick="show_hide_div('confirmshaming'); 
+                                     show_hide_div('trick_question'); 
+                                     progress_add('dp_score_bar',{{session['dp_score']}}, 2);"
+                            >Ich will DecepTV Serien und Filme nicht mehr sehen
+                        </a>
                     </div>
                 </div>
             </div>
@@ -69,10 +77,18 @@
                         Sind sie sich sicher, dass sie sich von ihrer  abmelden möcheten
                         Hier können sie sich anmelden zum abmelden Ihres Abos
                         Gehen sie nicht, hier sparen sie 5% wenn sie bleiben-->
-                        <a class="btn btn-secondary " href="{{url_for('deceptv')}}"> Ich will es mir noch einmal überlegen, erinner mich 3 Tage vor Ablauf noch einmal</a> 
-                    <!-- "Confirmshaming" Dark Pattern: Formulierung des knopfes soll Spieler*innen sich dumm, naiv oder herzlos dafür fühlen lassen die Option zu wählen-->
-                        <a class="btn btn-secondary " href="{{url_for('level1_beenden2')}}" onclick="progress_add('data_bar', '{{session['data_score']}}');" href="#">Mir ist es egal, dass ich durch exklusive Angebote und Vorteile Geld sparen würde</a> 
-                        <a class="btn btn-success " href="{{url_for('deceptv')}}">Ich will meine DecepTV Vorteile behalten und damit clever geld sparen</a>
+                        <a class="btn btn-secondary " href="{{url_for('deceptv')}}">
+                             Ich will es mir noch einmal überlegen, erinner mich 3 Tage vor Ablauf noch einmal
+                        </a> 
+                    <!-- "Confirmshaming" Dark Pattern: Formulierung des knopfes soll Spieler*innen sich dumm,
+                         naiv oder herzlos dafür fühlen lassen die Option zu wählen-->
+                        <a class="btn btn-secondary " href="{{url_for('level1_beenden2')}}" 
+                            onclick="progress_add('dp_score_bar',{{session['dp_score']}}, 4);">
+                            Mir ist es egal, dass ich durch exklusive Angebote und Vorteile Geld sparen würde
+                        </a> 
+                        <a class="btn btn-success " href="{{url_for('deceptv')}}">
+                            Ich will meine DecepTV Vorteile behalten und damit clever geld sparen
+                        </a>
                 </div>
             </div>
         </div>

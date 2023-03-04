@@ -29,11 +29,12 @@ function ajax_request(method, url, post_object){
 function set_session_value(session_key, session_value){
     const req= new XMLHttpRequest();
     // konfiguration des Requests
-    req.open("POST", '/set-session', true);
+    req.open("POST", '/change-session', true);
     req.setRequestHeader('Content-Type', 'application/json')
     // senden des Requests mit key und value paar von input
     req.send(JSON.stringify({ [session_key]: session_value}));
 }
+
 
 /*  Funktion um die Werte der Progressbars upzudaten und anschließend in der Session zu speihern
     Session-Keys:
@@ -48,6 +49,7 @@ function progress_add(bar, value_now, value_add){
     if(document.getElementById(bar) == document.getElementById("dp_score_bar")){
         var  value_after = value_now + value_add;
         document.getElementById(bar).style.width = value_after + '%';
+        console.log(bar,value_now, value_add, value_after)
         set_session_value('dp_score', value_after);
     }
     else if(document.getElementById(bar) == document.getElementById("geld_bar")){
@@ -108,21 +110,6 @@ function level_countdown(zeit_state, level_fortschritt){
         }
     }, 1000); 
 }
-
-function bar_laenge(){
-    const a = Math.floor(
-        (document.getElementById('zeit_bar').clientWidth / document.getElementById('container_zeit_bar').clientWidth) * 300
-    );
-    // Die width der progressbars ist in dem format 'zahl%' angegeben, letzter index des Strings mit dem '%' wird entfernt
-    const b = parseInt(document.getElementById('zeit_bar').style.width.slice(0, document.getElementById('zeit_bar').style.width.length -1));
-    // string zu int casten und mal 3 nehmen um die 100% auf die
-    b = b*3;
-    console.log(a);
-    console.log(b);
-
-    return a;
-}
-
 /* Uhr Timer */
 function starte_uhr(){
     /* var date = 0.. */

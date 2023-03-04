@@ -6,15 +6,18 @@
             {% if level_fortschritt == 0 %}
                 <div id="anleitung" class="my-4 px-2 border border-dark-subtle rounded" > <!-- margin-top/bottom: 4 ;padding-left/right: 2  -->
                     <h2>Anleitung</h2>
-                    <p> Unten in der Fußleiste der Seite, hast du verschiedenen Anzeigen, die dir zeigen, wie vielZeit, Daten, Geld und die höhe deines DP-Scores anzeigen. </p>
+                    <p> Unten in der Fußleiste der Seite, hast du verschiedenen Anzeigen,
+                         die dir zeigen, wie vielZeit, Daten, Geld und die höhe deines DP-Scores anzeigen. </p>
                     <div class="mt-3">
-                        <p><b>Am Ende des Spiels</b> werden die Scores für Daten, Geld und Dark Patterns zu einem <b>Endscore</b> verrechnet.</p>
+                        <p><b>Am Ende des Spiels</b> werden die Scores für Daten,
+                             Geld und Dark Patterns zu einem <b>Endscore</b> verrechnet.</p>
                     </div>
                     <hr>
                     <div class="row">
                         <h4>Zeit-Anzeige</h4>
                         <div class="col-3 ms-2 progress">
-                            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" 
+                                 style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="col">
                             <p> Pro level hast du <b>5 Mintuten</b> Zeit um die Hauptaufgabe zu lösen.</p>
@@ -23,25 +26,30 @@
                     <div class="row">
                         <h4>Daten-Anzeige</h4>
                         <div class="col-3 ms-2 progress">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" 
+                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="col">
-                            <p>Am anfang startest du mit 100 Daten-Punkten. Pro Aktion, bei denen du daten verlierst, bekommst du 5 Punkte abgezogen</p>
+                            <p>Am anfang startest du mit 100 Daten-Punkten. 
+                                Pro Aktion, bei denen du daten verlierst, bekommst du 5 Punkte abgezogen</p>
                         </div>
                     </div>
                     <div class="row">
                         <h4>Geld-Anzeige</h4>
                         <div class="col-3 ms-2 progress">
-                            <div class="progress-bar bg-warning"  role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning"  role="progressbar" 
+                                 style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="col">
-                            <p> Am anfang startest du mit 20 Euro. Wenn du es nicht schaffst, das Streaming Abo zu beenden, verlierst du 10 Euro. In Level 2 kannst du hier gut abschneiden,w enn du wenig Geld beim Shoppen ausgibst </p>
+                            <p> Am anfang startest du mit 20 Euro. Wenn du es nicht schaffst, das Streaming Abo zu beenden, 
+                                verlierst du 10 Euro. In Level 2 kannst du hier gut abschneiden,w enn du wenig Geld beim Shoppen ausgibst </p>
                         </div>
                     </div>
                     <div class="row">
                         <h4>DP-Score Anzeige</h4>
                         <div class="col-3 ms-2 progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-success" role="progressbar" 
+                                 style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="col">
                             <p> Pro Dark Pattern, dass du richtig überwindest bekommst du DP-Score-Punkte</p>
@@ -52,24 +60,30 @@
                             <b>Hauptmenü</b>
                         </button>
                         <p class="p-2">
-                            Wenn du nochmal deine Aufgaben und die Bedeutungen der Leisten anschauen willst, klicke einfach auf den "Hauptmenü" Knopf unten rechts.
+                            Wenn du nochmal deine Aufgaben und die Bedeutungen der Leisten anschauen willst,
+                             klicke einfach auf den "Hauptmenü" Knopf unten rechts.
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
                         <h2>Deine Aufgaben</h2>
-                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_level1.jpg')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
+                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_level1.jpg')}}"
+                             alt="Clipboard mit den zu erledigenden Aufgaben">
                     </div>
                     <div class="col">
                         <h1>Level1 - Streaming Abo beenden</h1>
                         <h2>Hauptaufgabe</h2>
-                        <p>DecepTV Abo in unter 5 Minuten kündigen. Wenn du es nicht schaffst, das Streaming Abo zu beenden, verlierst du etwas von deinem Startgeld.</p>
+                        <p>DecepTV Abo in unter 5 Minuten kündigen. Wenn du es nicht schaffst,
+                             das Streaming Abo zu beenden, verlierst du etwas von deinem Startgeld.</p>
                         <h3>Nebenaufgabe</h3>
                         <p>Akzeptiere so wenig Cookies wie möglich. Für jede falsche Auswahl verlierst du Datenpunkte.</p>
                         <div class="d-grid gap-2 w-75 my-5 mx-auto">
-                            <!-- onclick="show__hide_div('name') Story und Aufgabenskizzierung verschwindet und Speilanleitung erscheint -->
-                            <a href="{{url_for('deceptv')}}" class="btn btn-danger" >Starte Level1 - Streaming-Abonnement kündigen</a>
+                            <!-- onclick=set_session_value: Session aktualieren, damit CookieBanner auf der nächsten Seite angezeigtwird-->
+                            <a href="{{url_for('deceptv')}}" class="btn btn-danger" 
+                               onclick="set_session_value('cookie_lv1_show', True)"> 
+                               Starte Level1 - Streaming-Abonnement kündigen
+                            </a>
                             <button class="btn btn-secondary" type="button" disabled >Nicht Freigeschaltet: Level2 - Sonnencreme einkaufen</button>
                         </div>  
                     </div>
@@ -78,18 +92,26 @@
                 <div class="row">
                     <div class="col-4">
                         <h2>Deine Aufgaben</h2>
-                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_level2.jpg')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
+                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_level2.jpg')}}"
+                             alt="Clipboard mit den zu erledigenden Aufgaben">
                     </div>
                     <div class="col">
                         <h1>Level2</h1>
                         <h2>Hauptaufgabe</h2>
-                        <p> Kaufe in unter 5 Minuten so Günstig wie es geht 500ml Sonnencreme. Das heißt du musst die Sonnencreme zum deinem Warenkorb 
-                            hinzufügen und in einem simulierten Bestellverfahren einkaufen. lass dir keine Kosten untermogeln ;)</p>
+                        <p> Kaufe in unter 5 Minuten so Günstig wie es geht 500ml Sonnencreme.
+                            Das heißt du musst die Sonnencreme zum deinem Warenkorb 
+                            hinzufügen und in einem simulierten Bestellverfahren einkaufen.
+                            lass dir keine Kosten untermogeln ;)</p>
                         <h3>Nebenaufgabe</h3>
                         <p>Akzeptiere so wenig Cookies wie möglich. Für jede falsche Auswahl verlierst du Datenpunkte.</p>
                         <div class="d-grid gap-2 w-75 my-5 mx-auto">
+                            <!-- Button disabled, um zu Zeigen, dass das LEvel beendet ist -->
                             <button class="btn btn-success" type="button" disabled>Beendet: Level1 - Streaming-Abonnement kündigen</button>
-                            <a href="{{url_for('decepdive')}}" class="btn btn-danger" >Starte Level2: Sonnencreme einkaufen</a>
+                            <!-- onclick=set_session_value: Session aktualieren, damit CookieBanner auf der nächsten Seite angezeigtwird-->
+                            <a href="{{url_for('decepdive')}}" class="btn btn-danger" 
+                                onclick="set_session_value('cookie_lv2_show', 1)" >
+                                Starte Level2: Sonnencreme einkaufen
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -97,7 +119,8 @@
                 <div class="row">
                     <div class="col-4">
                         <h2>Deine Aufgaben</h2>
-                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_abgeschlossen.jpg')}}" alt="Clipboard mit den zu erledigenden Aufgaben">
+                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_abgeschlossen.jpg')}}"
+                             alt="Clipboard mit den zu erledigenden Aufgaben">
                     </div>
                     <div class="col mt-1">
                         <h1>Herzlichen Glückwunsch, Aufgaben beendet</h1>
@@ -112,7 +135,9 @@
                             </p>
                             <h2>Gesamtscore</h2>
                             <p>
-                                <span class="text-success fw-bold">{{ session['dp_score']*2 + session['data_score'] + session['geld_score'] }}*</span> 
+                                <span class="text-success fw-bold">
+                                    {{ session['dp_score']*2 + session['data_score'] + session['geld_score'] }}*
+                                </span> 
                                 von maximal <span class="text-success fw-bold"> 400</span> Punkten
                             </p>
                             <p><small>

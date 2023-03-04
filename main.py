@@ -10,9 +10,9 @@ if __name__ == "__main__":
 app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
 
 ###################################################################################
-""" Reset der Session auf die initialen werte """
+"""  Reset der Session auf die initialen werte """
 @app.route('/initialise-session')
-def initialise_session():
+def set_session():
     session['data_score'] = 100
     session['geld_score'] = 100
     # Countdown = 300 sekunden, also 5 minuten
@@ -25,8 +25,8 @@ def initialise_session():
     session['warenkorb'] = [1, 2, 3]
     return '', 204
 
-@app.route('/set-session', methods=['GET', 'POST'])
-def set_session():
+@app.route('/change-session', methods=['GET', 'POST'])
+def set_get_session_value():
     if request.method == "POST":
         # lade json
         session_data = request.json
@@ -57,7 +57,7 @@ def update_timer():
 def home():
     #initialisierung der Werte für eine Session, check if session is initialised
     if "data_score" not in session:
-        initialise_session()
+        set_session()
     return render_template('home/home.html')
 
 @app.route('/home/intro')
@@ -94,6 +94,10 @@ def get_streaming_images():
 #Startseite
 @app.route('/deceptv/')
 def deceptv():
+    # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden können
+    # daher wird ein redirect zur levelübersicht vollführt
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     # lade 
     deceptv_images = get_streaming_images()
     # Da mit list.pop() gearbeitet wird, muss eine Länge der Liste von 5*15 gewärleistet
@@ -106,80 +110,117 @@ def deceptv():
 
 @app.route('/deceptv/account/')
 def deceptv_account():
+    # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden können
+    # daher wird ein redirect zur levelübersicht vollführt
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_account.html')
 
 @app.route('/deceptv/angebote/')
 def deceptv_angebote():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_angebote.html')
 
 @app.route('/deceptv/datenschutzmanager/')
 def deceptv_datenschutzmanager():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_datenschutzmanager.html')
 
 @app.route('/deceptv/datenschutrichtlinie/')
 def deceptv_datenschutzrichtlinie():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_datenschutzrichtlinie.html')
 
 @app.route('/deceptv/erkunden')
 def deceptv_erkunden():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_erkunden.html')
 
 @app.route('/deceptv/favoriten/')
 def deceptv_favoriten():
+
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_favoriten.html')
 
 @app.route('/deceptv/feedback/')
 def deceptv_feedback():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_feedback.html')
 
 @app.route('/deceptv/impressum/')
 def deceptv_impressum():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_impressum.html')
 
 @app.route('/deceptv/premium/')
 def deceptv_premium():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_premium.html')
 
 @app.route('/deceptv/service/')
 def deceptv_service():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_service.html')
 
 @app.route('/deceptv/shop/')
 def deceptv_shop():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_shop.html')
     
 @app.route('/deceptv/social/')
 def deceptv_social():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_social.html')
 
 @app.route('/deceptv/vorschlaege')
 def deceptv_vorschlaege():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_vorschlaege.html')
 
 @app.route('/deceptv/rückerstattung')
 def deceptv_nicht():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_nicht.html')
 
 @app.route('/deceptv/wie-kuendigen')
 def deceptv_wie_kuendigen():
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_wie_kuendigen.html')
 
 #Mitgliedschaft beenden
 @app.route('/deceptv/premium/mitgliedschaft')
 def level1_beenden():
-    session['dp_score'] = session['dp_score']+2
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     deceptv_images = get_streaming_images()
     return render_template('deceptv/end/level1_beenden.html', deceptv_images = deceptv_images)
 
 @app.route('/deceptv/premium/mitgliedschaft-beenden')
 def level1_beenden2():
-    session['dp_score'] = session['dp_score']+2
+    if session['level_fortschritt'] >= 1:
+        return redirect(url_for('home_intro'))
     return render_template('deceptv/end/level1_beenden2.html')
 
 @app.route('/deceptv/ende_lv1')
 def ende_lv1():
     if session['level_fortschritt'] == 0:
         session['level_fortschritt'] = 1
+        if session['countdown'] <= 0:
+            session['geld_score'] = 50
         session['countdown'] = 300
         return '', 204
     else:
@@ -190,47 +231,71 @@ def ende_lv1():
 # Level 2: Shopping
 @app.route('/decepdive') 
 def decepdive():
+    # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden können
+    # daher wird ein redirect zur levelübersicht vollführt
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive.html')
 
 @app.route('/decepdive_produkt1')
 def decepdive_produkt1():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_produkt1.html')
 
 @app.route('/decepdive_produkt2')
 def decepdive_produkt2():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_produkt2.html')
 
 @app.route('/decepdive_produkt3')
 def decepdive_produkt3():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_produkt3.html')
 
 @app.route('/decepdive_produkt4')
 def decepdive_produkt4():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_produkt4.html')
 
 @app.route('/decepdive_produkt5')
 def decepdive_produkt5():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_produkt5.html')
 
 @app.route('/decepdive/warenkorb')
 def decepdive_warenkorb():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_warenkorb.html')
 
 @app.route('/decepdive/warenkorb/konto')
 def decepdive_warenkorb2():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_warenkorb2.html')
 
 @app.route('/decepdive/warenkorb/Daten')
 def decepdive_warenkorb3():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_warenkorb3.html')
 
 @app.route('/decepdive/warenkorb/Übersicht')
 def decepdive_warenkorb4():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_warenkorb4.html')
 
 @app.route('/decepdive/ende_lv2')
 def ende_lv2():
     session['level_fortschritt'] = 2
+    if session['countdown'] <= 0:
+            session['geld_score'] = 0
     return '', 204
 
 """ 

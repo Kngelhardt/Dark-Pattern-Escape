@@ -47,15 +47,19 @@
                         <form class="position position-absolute end-0" action="">
                             <label for="agb">Ich Akzeptiere die AGB von DecepDive</label>
                             <input type="checkbox" name="agb" value="Ich habe die AGB gelesen">
-                            <button type="button" class="d-2 btn dropdown-toggle dropdown-toggle-split text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button type="button" class="d-2 btn dropdown-toggle dropdown-toggle-split text-secondary" 
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end text-secondary">
                                 <li><label for="newsletter"> <b>Newsletter erhalten</b></label></li>
-                                <li><input type="checkbox" name="newsletter" value="akzeptiert" checked="true"> Ich will Neuhigkeiten <br>
-                                    und Angebote von DecepDive <br> und Partnerfirmen bekommen</li>
-                                
+                                <li><input type="checkbox" name="newsletter" value="akzeptiert" checked="true">
+                                    Ich will Neuhigkeiten <br>
+                                    und Angebote von DecepDive <br> 
+                                    und Partnerfirmen bekommen
+                                </li>
                             </ul>
+                            <!-- hier sollte ien submit sein -->
                             <a class="btn btn-success" href="{{url_for('decepdive_warenkorb2')}}">Weiter</a>
                         </form>
                     </div> 
