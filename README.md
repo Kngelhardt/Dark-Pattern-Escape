@@ -1,1 +1,1 @@
-#Dark Pattern Escape Room – Konzeption und Implementierung einer Online-Anwendung zur Steigerung des Bewusstseins für manipulatives Webdesign
+Dark Pattern Escape Room – Online-Anwendung zur Steigerung des Bewusstseins für manipulatives Webdesign
