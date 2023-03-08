@@ -1,9 +1,19 @@
 /* Funktion um Elemente verschwinden oder erscheinen zu lasssen */
 function show_hide_div(a){
+    console.log(document.getElementById(a), a);
     if(document.getElementById(a).style.display != "none"){
         document.getElementById(a).style.display = "none";
     }else{
         document.getElementById(a).style.display = "inline";
+    }
+}
+
+function isJson(str) {
+    var objectConstructor = ({}).constructor;
+    if (str.constructor === objectConstructor) {
+        return true;
+    } else{
+        return false;
     }
 }
 
@@ -17,22 +27,25 @@ function ajax_request(method, url, post_object){
         req.send();
         return 
     }else if(method =='POST'){
-        req.open(method, url, true);
+        req.open(method, url, false);
         req.setRequestHeader('Content-Type', 'application/json')
-        req.send(JSON.stringify({ object: post_object}));
+        if (isJson(post_object)){
+            req.send(JSON.stringify(post_object));
+        }else{
+            req.send(JSON.stringify({ object: post_object}));
+        }
+        
     }
 }
 
-/* input:
-    session_key: Key der session die aufgerufen werden soll
-    session_value: neuer wert für den session key */
-function set_session_value(session_key, session_value){
-    const req= new XMLHttpRequest();
-    // konfiguration des Requests
-    req.open("POST", '/change-session', true);
-    req.setRequestHeader('Content-Type', 'application/json')
-    // senden des Requests mit key und value paar von input
-    req.send(JSON.stringify({ [session_key]: session_value}));
+/*  sended POST request and die Flask funktion 'change_session', 
+    dort werde Flask session-Werte mit den im json_obj enthaltenen key-value-Paaren geupdated
+    input:
+        json_obj: sollte zwei Werte enthalten:
+            session_key: Key der session die aufgerufen werden soll
+            session_value: neuer wert für den session key */
+function set_session_value(json_obj){
+    ajax_request('POST', '/change-session', json_obj);
 }
 
 
@@ -46,28 +59,25 @@ function set_session_value(session_key, session_value){
     value_now: Aktueller Wert der Bar
     value_add: Wert, um den sich die Bar-ändern soll*/
 function progress_add(bar, value_now, value_add){
+
+    var  value_after = value_now +   value_add;
+    console.log(bar, value_now, value_add, value_after)
+
     if(document.getElementById(bar) == document.getElementById("dp_score_bar")){
-        var  value_after = value_now + value_add;
         document.getElementById(bar).style.width = value_after + '%';
-        console.log(bar,value_now, value_add, value_after)
-        set_session_value('dp_score', value_after);
     }
     else if(document.getElementById(bar) == document.getElementById("geld_bar")){
-        var  value_after = value_now + value_add;
         document.getElementById(bar).style.width = value_after + '%';
-        set_session_value('geld_score', value_after);
     }
     else if(document.getElementById(bar) == document.getElementById("data_bar")){
-        var  value_after = value_now - value_add;
         document.getElementById(bar).style.width = value_after + '%';
-        set_session_value('data_score', value_after);
     }
 }
 
-/* Timer Funktionen --------------------------------------------------------------------------------------------------------------------------------------*/
+/*  Timer Funktionen --------------------------------------------------------------------------------------------------------------------------------------
 function reset_timer(timer, intervall, funktion){
     timer = setInterval(funktion, intervall);
-}
+} */
 
 /* Countdown Timer. Nach ablauf wird weitergeleitet zur spielübersicht */
 function level_countdown(zeit_state, level_fortschritt){
@@ -76,11 +86,11 @@ function level_countdown(zeit_state, level_fortschritt){
 
     // jede sekunde/1000ms wird counter herunter gesetzt
     countdown = setInterval( function(){
-        // Wenn counter bei null sekunden
+        // Wenn counter bei null sekunden 
         if (counter < 1){
             // Setze level_fortschritt auf 1 oder 2, damit das richtige zwischenmenü angezeigt wird
             if(level_fortschritt == 0){
-                ajax_request('GET', "/deceptv/ende_lv1", null);
+                window.location.href = '/ende_lv1';
             }else if(level_fortschritt == 1){
                 ajax_request('GET', "/decepdive/ende_lv2", null);
             }

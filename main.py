@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 import os
 
 app = Flask(__name__)
@@ -6,13 +6,33 @@ app = Flask(__name__)
 if __name__ == "__main__":
     # Activate debugging
     app.run(debug = True)
+    app.config.update(
+        SESSION_COOKIE_SECURE=True,
+        SESSION_COOKIE_HTTPONLY=True,
+        SESSION_COOKIE_SAMESITE='None',
+    )
+
 # Set the secret key to some random bytes.
 app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
 
 ###################################################################################
 """  Reset der Session auf die initialen werte """
-@app.route('/initialise-session')
-def set_session():
+@app.route('/initialize-session')
+def initialize_session():
+    #debugging##############################
+    if session.get("data_score") is not None:
+        print(
+        'data: ', session['data_score'],'\n'
+        'geld: ',session['geld_score'],'\n'
+        'countdown: ',session['countdown'],'\n'
+        'dp: ',session['dp_score'],'\n'
+        'success: ',session['level_fortschritt'],'\n'
+        'lv1_show: ',session['cookie_lv1_show'],'\n'
+        'lv1_fin: ', session['cookie_lv1_fertig'],'\n'
+        'lv2_show: ',session['cookie_lv2_show'],'\n'
+        'lv2_fin: ',session['cookie_lv1_fertig'],'\n'
+        'warenkorb: ',session['warenkorb'])
+
     session['data_score'] = 100
     session['geld_score'] = 100
     # Countdown = 300 sekunden, also 5 minuten
@@ -21,21 +41,34 @@ def set_session():
      # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
     session['level_fortschritt'] = 0 
     session['cookie_lv1_show'] = False
+    session['cookie_lv1_fertig']= False
     session['cookie_lv2_show'] = False
+    session['cookie_lv1_fertig']= False
     session['warenkorb'] = [1, 2, 3]
     return '', 204
 
 @app.route('/change-session', methods=['GET', 'POST'])
-def set_get_session_value():
+def set_session_value():
     if request.method == "POST":
+        print('test')
         # lade json
         session_data = request.json
         # get session key
+        print('test1.5')
         for session_key in session_data:
-            print(session_data)
-            session[session_key] = session_data[session_key]
+            # True und False werte werden als 1 und 0 
+            # geschickt und müssen wieder zu boolean geändert werden
+            if isinstance(session[session_key],bool):
+                session[session_key] = bool(session_data[session_key])
+                #debugging
+                print('test1',session_key, session[session_key])
+            else:
+                session[session_key] = session_data[session_key]
+                #debugging
+                print('test2', session_key, session[session_key])    
         return '', 204
     else:
+        print('test4')
         return '', 204
     
 
@@ -56,8 +89,8 @@ def update_timer():
 @app.route('/')
 def home():
     #initialisierung der Werte für eine Session, check if session is initialised
-    if "data_score" not in session:
-        set_session()
+    if session.get("data_score") is None:
+        initialize_session()
     return render_template('home/home.html')
 
 @app.route('/home/intro')
@@ -94,15 +127,18 @@ def get_streaming_images():
 #Startseite
 @app.route('/deceptv/')
 def deceptv():
-    # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden können
+    # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden 
     # daher wird ein redirect zur levelübersicht vollführt
     if session['level_fortschritt'] >= 1:
         return redirect(url_for('home_intro'))
-    # lade 
+    # Cookiebanner beim ersten aufrufen sichtbar machen, es wird nach dem beenden der 
+    # können Banner-Aufgabe wieder versteckt
+    if session["cookie_lv1_fertig"] == False:
+        session['cookie_lv1_show'] = True
+    # lade bilder aus dem static/images/deceptv ordner
     deceptv_images = get_streaming_images()
     # Da mit list.pop() gearbeitet wird, muss eine Länge der Liste von 5*15 gewärleistet
-    # sein um Fehlermeldungen zu vermeiden
-    
+    # sein um Fehlermeldungen zu vermeiden 
     while len(deceptv_images) <= 5*15:
         deceptv_images = deceptv_images + deceptv_images
 
@@ -110,8 +146,8 @@ def deceptv():
 
 @app.route('/deceptv/account/')
 def deceptv_account():
-    # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden können
-    # daher wird ein redirect zur levelübersicht vollführt
+    # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden 
+    # können daher wird ein redirect zur levelübersicht vollführt
     if session['level_fortschritt'] >= 1:
         return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_account.html')
@@ -142,7 +178,6 @@ def deceptv_erkunden():
 
 @app.route('/deceptv/favoriten/')
 def deceptv_favoriten():
-
     if session['level_fortschritt'] >= 1:
         return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_favoriten.html')
@@ -215,24 +250,38 @@ def level1_beenden2():
         return redirect(url_for('home_intro'))
     return render_template('deceptv/end/level1_beenden2.html')
 
-@app.route('/deceptv/ende_lv1')
-def ende_lv1():
+@app.route('/ende_lv1')
+def level1_beendet():
     if session['level_fortschritt'] == 0:
-        session['level_fortschritt'] = 1
-        if session['countdown'] <= 0:
-            session['geld_score'] = 50
+        # resert countdown für level 2
         session['countdown'] = 300
-        return '', 204
-    else:
-        return '', 204
+
+        session['level_fortschritt'] = 1
+
+        # Wenn der Countdown abläuft ohne, dass das Abo beendet wird, verlieren
+        # Spieler*innen das Geld für das Abo
+        if session['countdown'] <= 0:
+            session['geld_score'] = session['geld_score'] -50
+            
+        # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv1
+        # und stelle sicher das cokkie_banner_lv1 nicht angezeigt wird
+        if session['cookie_lv1_fertig'] is False:
+            session['data_score'] = session['data_score'] -40
+            session['cookie_lv1_show'] = False
+            session['cookie_lv1_fertig']= True
+            print('data', session['data_score'], '\n',
+                'show', session['cookie_lv1_show'],'\n',
+                'fertig',session['cookie_lv1_fertig'])
+            
+    return render_template('deceptv/end/level1_beendet.html')
 
 
 ###########################################################################################
 # Level 2: Shopping
 @app.route('/decepdive') 
 def decepdive():
-    # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden können
-    # daher wird ein redirect zur levelübersicht vollführt
+    # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden 
+    # können daher wird ein redirect zur levelübersicht vollführt
     if session['level_fortschritt'] >= 2:
         return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive.html')
@@ -293,14 +342,15 @@ def decepdive_warenkorb4():
 
 @app.route('/decepdive/ende_lv2')
 def ende_lv2():
+    # Setze levle_fortschritt auf null und leite damit den Abschluss des Spiels ein
     session['level_fortschritt'] = 2
+    # Wenn der Countdown abgelaufen ist, wird al Strafe das Geld runtergesetzt
     if session['countdown'] <= 0:
-            session['geld_score'] = 0
+        session['geld_score'] = session['geld_score'] - 50
+    # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv2
+    # und stelle sicher das cokkie_banner_lv2 nicht angezeigt wird
+    if session['cookie_lv2_fertig'] is False:
+        session['data_score'] = session['data_score'] -40
+        session['cookie_lv2_show'] = False
+        session['cookie_lv2_fertig']= True    
     return '', 204
-
-""" 
-ajax replace div/element
-flask 204 response
-flask 200 json response
-ersetzen des kontents
- """

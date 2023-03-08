@@ -95,6 +95,50 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="cookie_manager_lv1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookie_manager_lv1Label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="cookie_manager_lv1Label">Modal title</h1>
+                </div>
+                <div class="modal-body">
+                    <!-- idealo -->
+                    Genaue Standortdaten verwenden
+                    Geräteeigeschaften zu identifikation abfragen
+                    Informationen auf einem Gerät speidchern und abfragen
+                    Personalisierte Anzeigen und Inhalte 
+                    Messungen zu Zielgruppen und Produktentwickelung durchführen
+                    Funktionale Cookies
+                    Berechtigtes interesse
+                        Messungen zu Zielgruppen und Produktentwickelung durchführen
+                        Funktionale Cookies
+                        Informationen auf einem Gerät speidchern und abfragen
+
+                </div>
+                <div class="modal-footer">
+                    <!-- Misdirection/Trickquestion Dark Pattern  -->
+                    <div data-bs-dismiss="modal"
+                        onclick="// Backend update
+                                set_session_value({'dp_score': {{session['dp_score']+4 }} })
+                                // Frontend update
+                                progress_add('dp_score_bar',{{session['dp_score']}}, 4);">
+                        Auswahl bestätigen: 
+                    </div>
+                    <button 
+                        type="button" 
+                        class="btn btn-primary"
+                        data-bs-dismiss="modal"
+                        onclick="// Backend update
+                                set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score':  {{ session['data_score']-40 }}});
+                                //frontend update
+                                progress_add('data_bar',{{session['data_score']}}, -40); ">
+                        Alle bestätigen
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
     {% endblock %}
     </div>
 

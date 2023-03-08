@@ -19,22 +19,19 @@
                 </div>
                 <button type="button" class="btn btn-success" onclick="starte_uhr();" href="#">Schau auf die Uhr</button>
                 <!-- "Roach Motel" Dark Pattern: Kündigung quälend scwer machen, indem nur zu bestimmten zeiten telefonisich gekündigt werden kann-->
-                <a  id="beenden_knopf" class="btn btn-primary " href="{{url_for('ende_lv1')}}"
-                    onclick=" show_hide_div('roach_motel'); show_hide_div('ende_lv1'); progress_add('dp_score_bar',{{session['dp_score']}}, 2);">
+                <a  id="beenden_knopf" class="btn btn-primary " href="{{url_for('level1_beendet')}}"
+                    onclick="show_hide_div('roach_motel'); 
+                            // Backend update
+                            set_session_value({'dp_score': {{session['dp_score']+4 }} });
+                            // Frontend update
+                            progress_add('dp_score_bar',{{session['dp_score']}}, 4); ">
                     <p>Anrufen</p>
                 </a> 
-            </div>
-            <div id="ende_lv1" class="py-5 px-5">
-                <h1>Du hast es geschafft, DecepTV hat dich als würdig empfunden, dein Abo kekündigt zu bekommen!</h1>
-                <div class="d-flex">
-                    <a href="{{url_for('home_intro')}}" class="btn btn-success">Zurück zur Levelübersicht</a>
-                </div>
             </div>
         </div>
         <script>
         // Element verstecken. "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden
         document.getElementById("uhr_container").style.display = "none";
-        document.getElementById("ende_lv1").style.display = "none";
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
         </script>  
     {% endblock %} 

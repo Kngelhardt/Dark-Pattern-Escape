@@ -2,6 +2,7 @@
     {% extends 'layout_level1.html' %}
 
     {% block content %}
+    
     <script>
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
     </script>

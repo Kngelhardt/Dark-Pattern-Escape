@@ -54,7 +54,12 @@
                             <!-- "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden -->
                             <li>
                                 <a  class="dropdown-item" style="cursor: pointer" 
-                                    onclick="show_hide_div('container_kündigung'); progress_add('dp_score_bar',{{session['dp_score']}}, 2);">
+                                    onclick="//Backend update
+                                            set_session_value({'dp_score': {{session['dp_score']+ 4 }} });
+                                            // nächsten schritt zeigen
+                                            show_hide_div('container_kündigung');
+                                            //frontend update
+                                            progress_add('dp_score_bar',{{session['dp_score']}}, 4);">
                                     Ich finde die Optionen zum Verwalten oder Aufheben meiner Mitgliedschaft nicht
                                 </a>
                             </li>
@@ -76,7 +81,10 @@
                 <!-- Hier ist der eigentlich relevante Link, klein geschreiben, ohne farben mit abstand und durch horizontale Liene als Teil eines anderen Inhalts getarnt-->
                 <p> <small> Zum Beenden drücken sie hier: 
                     <a  id="service_kündigen" class="text-body" href="{{url_for('level1_beenden')}}"
-                        onclick="progress_add('dp_score_bar',{{session['dp_score']}}, 2);">Kündigen</a>
+                        onclick="// Backend update, Frontend nicht mehr sichtbar, das seitewechsel
+                        set_session_value({'dp_score': {{session['dp_score']+4 }} });">
+                        Kündigen
+                    </a>
                 </small></p>
             </div>
         </div>
