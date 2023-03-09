@@ -82,7 +82,74 @@
             </div>
         </div>
     </div>
+    <!-- Cookie Dialog -->
+    <!-- Button trigger modal -->
+    <button id="modal_button" type="button" class="btn btn-primary visually-hidden" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2" >
+        Launch static backdrop modal
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal modal-lg fade" id="cookiedialog_lv2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookiedialog_lv2Label">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="cookiedialog_lv2Label">Cookie Manager</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    body
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2">next</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-lg fade" id="cookiedialog_lv2_step2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookiedialog_lv2_step2Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="cookiedialog_lv2_step2Label">Cookie Manager</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    body
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3">next</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-lg fade" id="cookiedialog_lv2_step3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookiedialog_lv2_step3Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="cookiedialog_lv2_step3Label">Cookie Manager</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    body
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
     <script>
+        // Starte Level countdown bzw. setzte fort
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
+        // Wenn Das Cookiebanner noch nicht gelöst wurde drücke den unsichtbaren Knopf um das Cookie Modal zu öffnen
+        if( '{{session['cookie_lv2_fertig']}}' == 'False'){
+            delay = setInterval(function(){
+                document.getElementById('modal_button').click();
+                clearInterval(delay);
+            }, 1000);
+        }
     </script>
     {% endblock %}

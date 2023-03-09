@@ -20,11 +20,14 @@
                         <div class="d-grid gap-2 w-75 my-5 mx-auto">
                             <a href="{{ url_for('decepdive_warenkorb3') }}" class="btn btn-success">Google</a> <br>
                             <a href="{{ url_for('decepdive_warenkorb3') }}" class="btn btn-success">Facebook</a> <br>
-                            <small><a href="{{ url_for('decepdive_warenkorb3') }}" 
-                                    class="text-secondary text-decoration-none"
-                                    onclick="progress_add('dp_score_bar',{{session['dp_score']}}, 2);">
+                            <a href="{{ url_for('decepdive_warenkorb3') }}" 
+                                    class="text-secondary text-decoration-none small_text"
+                                    onclick="// Backend update
+                                            set_session_value({'dp_score': 4 });
+                                            // Frontend update
+                                            progress_add('dp_score_bar',{{session['dp_score']}}, 4); ">
                                     Weiter als Gast
-                            </a></small>
+                            </a>
                         </div>
                     </div>
                 </div>

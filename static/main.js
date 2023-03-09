@@ -1,3 +1,4 @@
+
 /* Funktion um Elemente verschwinden oder erscheinen zu lasssen */
 function show_hide_div(a){
     console.log(document.getElementById(a), a);
@@ -27,7 +28,7 @@ function ajax_request(method, url, post_object){
         req.send();
         return 
     }else if(method =='POST'){
-        req.open(method, url, false);
+        req.open(method, url, true);
         req.setRequestHeader('Content-Type', 'application/json')
         if (isJson(post_object)){
             req.send(JSON.stringify(post_object));
@@ -48,7 +49,6 @@ function set_session_value(json_obj){
     ajax_request('POST', '/change-session', json_obj);
 }
 
-
 /*  Funktion um die Werte der Progressbars upzudaten und anschließend in der Session zu speihern
     Session-Keys:
     dp_score: Permanent steigend
@@ -59,7 +59,6 @@ function set_session_value(json_obj){
     value_now: Aktueller Wert der Bar
     value_add: Wert, um den sich die Bar-ändern soll*/
 function progress_add(bar, value_now, value_add){
-
     var  value_after = value_now +   value_add;
     console.log(bar, value_now, value_add, value_after)
 
@@ -74,32 +73,20 @@ function progress_add(bar, value_now, value_add){
     }
 }
 
-/*  Timer Funktionen --------------------------------------------------------------------------------------------------------------------------------------
-function reset_timer(timer, intervall, funktion){
-    timer = setInterval(funktion, intervall);
-} */
-
 /* Countdown Timer. Nach ablauf wird weitergeleitet zur spielübersicht */
 function level_countdown(zeit_state, level_fortschritt){
     // zeit_state ist der aktuelle stand der sekundens
     counter = zeit_state;
-
     // jede sekunde/1000ms wird counter herunter gesetzt
     countdown = setInterval( function(){
         // Wenn counter bei null sekunden 
-        if (counter < 1){
+        if (counter < 0){
             // Setze level_fortschritt auf 1 oder 2, damit das richtige zwischenmenü angezeigt wird
             if(level_fortschritt == 0){
                 window.location.href = '/ende_lv1';
             }else if(level_fortschritt == 1){
                 ajax_request('GET', "/decepdive/ende_lv2", null);
             }
-            // Redirect zur Levelübersicht
-            // 30ms puffer, damit der get request fertig ist, bevor der redirect startet
-            puffer = setInterval( function(){
-                window.location.href = '/home/intro';
-                clearInterval(puffer);
-            },35);
         } else {
             // Sekunden runterzählen
             counter = counter -1;
@@ -118,24 +105,46 @@ function level_countdown(zeit_state, level_fortschritt){
                     ) 
             );
         }
-    }, 1000); 
+    }, 9999999999); 
 }
-/* Uhr Timer */
+
+/* Timer der dei Uhrzeit darstellt. 
+Zählt in 100ms-Schritten von null hoch und wenn 24 erricht ist, fängt er wieder bei 0 an */
 function starte_uhr(){
-    /* var date = 0.. */
-    var uhrzeit = setInterval(uhr_timer, 200);
+    var stunde = 0
+    // jede 300ms 
+    uhrzeit = setInterval(function(){
+        // Überschreibe den uhr text mit aktueller Stunde
+        document.getElementById('uhr').textContent = stunde;
+        // erhöhe stundenzahlt um 1 
+        stunde = stunde + 1
+        // Reset nach 24 Stunden
+        if(stunde >= 24){
+            stunde = 0
+        }
+    }, 150); 
 }
 
-function uhr_timer() {
-
-    var uhr = document.getElementById('uhr');
-    var d = new Date();
-    var m = Math.round(d.getMilliseconds() /10);
-    var s = d.getSeconds();
-    if (s >= 24){
-        reset_timer(uhrzeit, 500, uhr_timer )
+function ist_erreichbar(){
+    console.log('test')
+    // Button funktioniert nur, wenn der starte_uht timer zwischen 14 und 16 ist
+    if(parseInt(document.getElementById('uhr').textContent) >= 14 && parseInt(document.getElementById('uhr').textContent) <= 16){
+        console.log('test2')
+        // Backend update:
+        set_session_value({'dp_score': 4, 'dp_roachmotel2': true});
+        // Halte Uhr an
+        clearInterval(uhrzeit);
+        // "Anrufen" Knopf verschwinden lassen
+        show_hide_div('beenden_knopf');
+        // Zeige den Enddialog
+        show_hide_div('enddialog');
+        // Gib spieler*innen 4 Sekunden Zeit zum Lesen und leite dann weiter
+        var counter = 0;
+        ende_delay = setInterval(function(){
+            counter = counter +1;
+            window.location.href = '/ende_lv1';
+        }, 4000); 
     }
-    uhr.textContent = s+ ":" + m  
 }
 
 

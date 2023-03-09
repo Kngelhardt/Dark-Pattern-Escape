@@ -2,17 +2,17 @@
     {% extends 'layout_level1.html' %}
 
     {% block content %}
-        <div class="container deceptv_premium_container">
+        <div  class="container deceptv_premium_container">
             <div id="trick_question">
                 <br>
-                <h1>Willst du dein Abonnement wirklich Kündigen und damit alle Vorteile velieren?</h1>
+                <h1>Willst du dein Abonnement wirklich Kündigen und damit Zugriff auf alle unsere Filme und Serien velieren?</h1>
                 <div class="row">
                     <div class="col">
                         <!-- "Trick Question" Dark Pattern: Formulierung des knopfes soll Spieler*innen
                             reinlegen die Option nicht zu Kündigen zu wählen, indem die vormulierung
                              einen doppelte Verneinung enthält-->
-                        <a class="btn btn-success" href="{{url_for('deceptv')}}">
-                            Ich will keine DecepTV Serien und Filme nicht mehr sehen
+                        <a class="btn btn-danger" href="{{url_for('deceptv')}}">
+                            Ich verzichte darauf DecepTV Serien und Filme nicht mehr zu sehen
                         </a>    
                     </div>
                     <div class="col">
@@ -20,7 +20,7 @@
                             onclick="show_hide_div('confirmshaming'); 
                                     show_hide_div('trick_question'); 
                                     // Backend update
-                                    set_session_value({'dp_score': {{session['dp_score']+4 }} });
+                                    set_session_value({'dp_score': 4 });
                                     // Frontend update
                                     progress_add('dp_score_bar',{{session['dp_score']}}, 4); "
                             >Ich will DecepTV Serien und Filme nicht mehr sehen
@@ -74,6 +74,7 @@
                         </div>
                     </div>
                 </div>
+                <h1 class="mt-5">Wenn du bleibst bekommst du 5% Rabatt auf dein Abo für die enäcshten 3 Monate</b></h1>
                 <!-- d-grid und gap um knöpfe untereinander darzustellen, w-50 für die breite der knöpfe -->
                 <div class="d-grid gap-2 w-50 mx-auto mb-5">
                         <!--Ideen
@@ -87,13 +88,13 @@
                          naiv oder herzlos dafür fühlen lassen die Option zu wählen-->
                         <a class="btn btn-secondary " href="{{url_for('level1_beenden2')}}" 
                             onclick="// Backend update
-                                    set_session_value({'dp_score': {{session['dp_score']+4 }} });
+                                    set_session_value({'dp_score': 4 });
                                     // Frontend update
                                     progress_add('dp_score_bar',{{session['dp_score']}}, 4); ">
-                            Mir ist es egal, dass ich durch exklusive Angebote und Vorteile Geld sparen würde
+                            Ich stinke eh nach Geld, mir egal dass ich das 5% sparen würde
                         </a> 
                         <a class="btn btn-success " href="{{url_for('deceptv')}}">
-                            Ich will meine DecepTV Vorteile behalten und damit clever geld sparen
+                            Natürlich will ich das 5% sparen, ich bin doch nicht blöd.
                         </a>
                 </div>
             </div>

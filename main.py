@@ -40,37 +40,62 @@ def initialize_session():
     session['dp_score'] = 0
      # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
     session['level_fortschritt'] = 0 
+    # Definiert ob im jeweiligen Level das Cookiebanner gezegt wird
     session['cookie_lv1_show'] = False
-    session['cookie_lv1_fertig']= False
     session['cookie_lv2_show'] = False
+    # Definiert ob im jeweiligen Level das Cookiebanner abgeschlossen wurde
     session['cookie_lv1_fertig']= False
+    session['cookie_lv2_fertig']= False
     session['warenkorb'] = [1, 2, 3]
-    return '', 204
+    # Aufreigungen mit Cookiebannern und ob sie richtig gelöst wurden
+    # 3 Mögliche Werte: None(nicht abgeschlossen), True, False
+    # cookiebanner lv1: 
+    session['dp_cookiemanager_lv'] = None
+    session['dp_cookie_lv1'] = None
+    session['dp_berechtiges_interesse_lv1'] = None
+    session['dp_cookiedialog_lv1'] = None
+    # level1
+    session['dp_roachmotel1'] = None
+    session['dp_misdirect_kuendigen'] = None
+    session['dp_trickquestion1'] = None
+    session['dp_shaming_lv1'] = None
+    session['dp_roachmotel2'] = None
+    # level 2
+    session['dp_vergleich'] = None
+    session['dp_preticked'] = None
+    session['dp_sneakinbasket'] = None
+    session['dp_misdirect_login'] = None
+    session['dp_misdirect_spende'] = None
+    session['dp_hiddennewsletter'] = None
+    
+    return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
 
 @app.route('/change-session', methods=['GET', 'POST'])
 def set_session_value():
     if request.method == "POST":
-        print('test')
+
         # lade json
         session_data = request.json
+
         # get session key
-        print('test1.5')
         for session_key in session_data:
+            print('input', session_key, session_data[session_key])
             # True und False werte werden als 1 und 0 
             # geschickt und müssen wieder zu boolean geändert werden
             if isinstance(session[session_key],bool):
                 session[session_key] = bool(session_data[session_key])
                 #debugging
-                print('test1',session_key, session[session_key])
+                print('update bool',session_key, session[session_key])
+            elif isinstance(session[session_key],int):
+                session[session_key] = session[session_key] + session_data[session_key]
+                #debugging
+                print('update int', session_key, session[session_key])    
             else:
                 session[session_key] = session_data[session_key]
-                #debugging
-                print('test2', session_key, session[session_key])    
+                print('update', session_key, session[session_key])   
         return '', 204
     else:
-        print('test4')
         return '', 204
-    
 
 """ Upadate des timers """
 @app.route('/update_timer', methods=['GET', 'POST'])
@@ -123,6 +148,16 @@ def get_streaming_images():
     image_dir = os.listdir('static/images/deceptv')
     # Return: Die Namen der Bilder als string inkliusive path, um sie einfach laden zu können
     return ['/static/images/deceptv/' +file for file in image_dir]
+
+@app.route("/cookie-form-lv1", methods=['GET','POST'])
+def cookie_form_lv1():
+    if request.method == 'POST':
+        print('test')
+        print(request.form)
+        print(request.form.get("CookieStandort"))
+        print(request.form.get("CookieIdent"))
+
+    return render_template('deceptv/deceptv.html', deceptv_images = deceptv_images)
 
 #Startseite
 @app.route('/deceptv/')
@@ -269,10 +304,7 @@ def level1_beendet():
             session['data_score'] = session['data_score'] -40
             session['cookie_lv1_show'] = False
             session['cookie_lv1_fertig']= True
-            print('data', session['data_score'], '\n',
-                'show', session['cookie_lv1_show'],'\n',
-                'fertig',session['cookie_lv1_fertig'])
-            
+        
     return render_template('deceptv/end/level1_beendet.html')
 
 
@@ -280,6 +312,10 @@ def level1_beendet():
 # Level 2: Shopping
 @app.route('/decepdive') 
 def decepdive():
+    #Zeige Cookibanner
+    #if session["cookie_lv2_fertig"] is False:
+    #    session['cookie_lv2_show'] = True
+
     # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden 
     # können daher wird ein redirect zur levelübersicht vollführt
     if session['level_fortschritt'] >= 2:

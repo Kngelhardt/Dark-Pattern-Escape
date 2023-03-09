@@ -2,7 +2,7 @@
     {% extends 'layout_level1.html' %}
 
     {% block content %}
-        <div class="container deceptv_premium_container">
+        <div  class="container deceptv_premium_container">
             <!-- d-grid und gap um knöpfe untereinander darzustellen, w-50 für die breite der knöpfe -->
             <div id="roach_motel" class="py-5 px-5">
                 <!--Ideen
@@ -12,27 +12,30 @@
                 -->
                 <h1> Um zu Kündigen, rufen sie uns einfach an</h1>
                 <p> Unsere Kundenservice-nr. 123454657898765433 <br>
-                    Sie erreichen uns Mo.-Fr. von 14    :00 bis 16:00 Uhr. <br>
+                    Sie erreichen uns Mo.-Fr. von 14:00 bis 16:00 Uhr. <br>
                 </p>
                 <div id="uhr_container">
-                    <p>Uhrzeit: <span id="uhr"></span> </p>
+                    <p>Uhrzeit: <span id="uhr">0</span>:00 </p>
                 </div>
-                <button type="button" class="btn btn-success" onclick="starte_uhr();" href="#">Schau auf die Uhr</button>
+                <div id="enddialog">
+                    <h1>Was können wir für sie tun? <br>Ach Kündigen.. <br> Ja gar kein Problem, ist erledigt. TSCHÜÜSS</h1>
+                </div>
+                <button id="uhr_button" type="button" class="btn btn-warning" 
+                        onclick="starte_uhr();show_hide_div('uhr_container');show_hide_div('uhr_button');">
+                        <p>Schau auf die Uhr</p> 
+                </button>
+
                 <!-- "Roach Motel" Dark Pattern: Kündigung quälend scwer machen, indem nur zu bestimmten zeiten telefonisich gekündigt werden kann-->
-                <a  id="beenden_knopf" class="btn btn-primary " href="{{url_for('level1_beendet')}}"
-                    onclick="show_hide_div('roach_motel'); 
-                            // Backend update
-                            set_session_value({'dp_score': {{session['dp_score']+4 }} });
-                            // Frontend update
-                            progress_add('dp_score_bar',{{session['dp_score']}}, 4); ">
+                <div  id="beenden_knopf" class="btn btn-success" onclick="ist_erreichbar(); ">
                     <p>Anrufen</p>
-                </a> 
+                </div> 
             </div>
         </div>
         <script>
         // Element verstecken. "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden
-        document.getElementById("uhr_container").style.display = "none";
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
+        document.getElementById("uhr_container").style.display = "none";
+        document.getElementById("enddialog").style.display = "none";
         </script>  
     {% endblock %} 
 
