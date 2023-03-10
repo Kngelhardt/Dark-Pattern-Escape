@@ -93,15 +93,32 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="cookiedialog_lv2Label">Cookie Manager</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-2" id="cookiedialog_lv2Label">Cookie Manager</h1>
+                    <!-- Wenn der Cookie-Dialog im ersten Modal-Fenster geschlossen wird werden 40 Datenpunkte abgezogen und die Aufgabe ist unwiderruflich beendet -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                            onclick="set_session_value({'data_score': -40, 'cookie_lv2_fertig': 1});
+                                    progress_add('data_bar','data_text', -40);">
+                    </button>
                 </div>
                 <div class="modal-body">
-                    body
+                    <p>
+                        Auf dieser Website benutzen wir Cookies um für dich unsere Produkte zu verbessern und die passende Angebote zu zeigen. <br>
+                        Hier im Cookie Manager kannst du ganz einfach bestimmen wie wir Cookies verwenden sollen.
+                    </p>
+                    <hr>
+                    <h4>Zugeschnittene Inhalte und Anzeigen:</h4>
+                    <small>Willst du, dass wir Cookies nicht benutzen dir für dich interessante Inhalte zu zeigen?</small>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2">next</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2"
+                            onclick="set_session_value({'data_score': -10});
+                                    progress_add('data_bar','data_text', -10);">Nein
+                    </button>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2"
+                            onclick="set_session_value({'dp_score': 4});
+                            progress_add('dp_score_bar','dp_score_text', 4);">
+                            Ja
+                    </button>
                 </div>
             </div>
         </div>
@@ -110,15 +127,29 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="cookiedialog_lv2_step2Label">Cookie Manager</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-2" id="cookiedialog_lv2_step2Label">Cookie Manager</h1>
+                    <!-- Wenn der Cookie-Dialog im zweite Modal-Fenster geschlossen wird werden 30 Datenpunkte abgezogen (Eine Art von Cookies wurde schon abgelehnt)
+                         und die Aufgabe ist unwiderruflich beendet -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="set_session_value({'data_score': -30, 'cookie_lv2_fertig': 1});
+                                    progress_add('data_bar','data_text', -30);">
+                    </button>
                 </div>
                 <div class="modal-body">
-                    body
+                    <h4>Website Performance und Produkte verbessern:</h4>
+                    <small> Wenn du nicht willst, dass wir keine Cookies nutzen sollen um unsere Produkte zu verbessern, klicke „Nein“.</small>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3">next</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
+                            onclick="set_session_value({'data_score': -10, 'cookie_lv2_fertig': 1});
+                                    progress_add('data_bar','data_text', -10);">
+                            Nein
+                    </button>
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
+                            onclick="set_session_value({'dp_score': 4 }); 
+                                    progress_add('dp_score_bar','dp_score_text', 4);" >
+                            Ja
+                    </button>
                 </div>
             </div>
         </div>
@@ -127,20 +158,64 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="cookiedialog_lv2_step3Label">Cookie Manager</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-2" id="cookiedialog_lv2_step3Label">Cookie Manager</h1>
+                    <!-- Wenn der Cookie-Dialog im zweite Modal-Fenster geschlossen wird werden 20 Datenpunkte abgezogen (Zwei Arten von Cookies wurde schon abgelehnt)
+                         und die Aufgabe ist unwiderruflich beendet -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="set_session_value({'data_score': -20, 'cookie_lv2_fertig': 1});
+                                    progress_add('data_bar','data_text', -20);">
+                    </button>
                 </div>
                 <div class="modal-body">
-                    body
+                    <h4>Einstellungen speichern </h4>
+                    <p>Um die zuvor angegebenen Cookie Präferenzen zu speichern drücke "Einstellungen speichern"</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                <div class="d-flex">
+                    <div class="p-2 flex-grow-1"></div>
+                    <div class="p-2">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                            onclick="set_session_value({'data_score': -40, 'cookie_lv2_fertig': 1}); 
+                                    progress_add('data_bar','data_text', -40);">Alle akzeptieren
+                    </button>
+                    </div>
+                    <div class="p-2">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                            onclick="set_session_value({'data_score': -20, 'cookie_lv2_fertig': 1});
+                                    progress_add('data_bar','data_text', -20);">Einstellungen speichern
+                    </button>
+                    </div>
+                </div>
+                <hr class="my-0">
+                <!-- Misdirection Dark Pattern: Text mit hinweis auf berechtigtes Interesse is schwer zu sehen und sehr klein.
+                erst auf Knopfklick auf mehr anzeigen wird das versteckte Form mit preticked checkboxes angezeigt.
+                Boxen müssen angetickt werden und das "form" abgeschickt, damit die "cookies" abgelehnt werden und Spieler*innen dp_score Punkte bekommen-->
+                <div class="accordion" id="berecht_accordion">
+                    <div class="accordion-item">
+                        <p class="small_text" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                             Wir erheben Daten auf Basis von berechtigtem Interesse. 
+                             <span class="cursor_pointer text-decoration-underline">Mehr erfahren</span>
+                        </p>
+                        <div id="collapseOne" class="accordion-collapse collapse hide" data-bs-parent="#berecht_accordion">
+                            <div class="accordion-body">
+                                <form action="{{ url_for('decepdive_cookies') }}" method="post">
+                                    <input class="form-check-input" type="checkbox" name="interesse1">
+                                    <label class="form-check-label" for="interesse1">
+                                        Personenbezogene Daten erheben
+                                    </label>                                
+                                    <input class="form-check-input" type="checkbox" name="interesse2">
+                                    <label class="form-check-label" for="interesse2">
+                                        Angepasste Inhalte anzeigen und Interaktion erheben
+                                    </label>   
+                                    <input  type="submit" value="Einstellungen zu berechtigttem Interesse speichern" 
+                                            id="button_interesse" class="btn btn-success" data-bs-dismiss="modal">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-        
     <script>
         // Starte Level countdown bzw. setzte fort
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
@@ -153,3 +228,4 @@
         }
     </script>
     {% endblock %}
+

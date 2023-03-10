@@ -58,18 +58,22 @@ function set_session_value(json_obj){
     bar: die id der Progress-Bar, die geändert werden soll
     value_now: Aktueller Wert der Bar
     value_add: Wert, um den sich die Bar-ändern soll*/
-function progress_add(bar, value_now, value_add){
-    var  value_after = value_now +   value_add;
-    console.log(bar, value_now, value_add, value_after)
+function progress_add(bar, value_now_id, value_add){
+    var value_now = parseInt(document.getElementById(value_now_id).textContent)
+    var  value_after = value_now + value_add;
+    console.log(bar, value_after, value_now, value_add);
 
     if(document.getElementById(bar) == document.getElementById("dp_score_bar")){
         document.getElementById(bar).style.width = value_after + '%';
+        document.getElementById('dp_score_text').innerText = value_after;
     }
     else if(document.getElementById(bar) == document.getElementById("geld_bar")){
         document.getElementById(bar).style.width = value_after + '%';
+        document.getElementById('geld_text').innerText = value_after;
     }
     else if(document.getElementById(bar) == document.getElementById("data_bar")){
         document.getElementById(bar).style.width = value_after + '%';
+        document.getElementById('data_text').innerText = value_after;
     }
 }
 
@@ -132,6 +136,8 @@ function ist_erreichbar(){
         console.log('test2')
         // Backend update:
         set_session_value({'dp_score': 4, 'dp_roachmotel2': true});
+        // Frontend update
+        progress_add('dp_score_bar','dp_score_text', 4);
         // Halte Uhr an
         clearInterval(uhrzeit);
         // "Anrufen" Knopf verschwinden lassen

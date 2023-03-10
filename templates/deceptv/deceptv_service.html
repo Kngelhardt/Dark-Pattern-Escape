@@ -59,7 +59,7 @@
                                             // nächsten schritt zeigen
                                             show_hide_div('container_kündigung');
                                             //frontend update
-                                            progress_add('dp_score_bar',{{session['dp_score']}}, 4);">
+                                            progress_add('dp_score_bar','dp_score_text', 4);">
                                     Ich finde die Optionen zum Verwalten oder Aufheben meiner Mitgliedschaft nicht
                                 </a>
                             </li>
@@ -82,7 +82,8 @@
                 <p class="text-secondary"> <small> Zum Beenden drücken sie hier: 
                     <a  id="service_kündigen" class="text-secondary" href="{{url_for('level1_beenden')}}"
                         onclick="// Backend update, Frontend nicht mehr sichtbar, das seitewechsel
-                        set_session_value({'dp_score': 4 });">
+                                set_session_value({'dp_score': 4 });
+                                progress_add('dp_score_bar','dp_score_text', 4);">
                         Kündigen
                     </a>
                 </small></p>

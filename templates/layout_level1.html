@@ -99,166 +99,154 @@
         <div class="modal fade" id="cookie_manager_lv1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookie_manager_lv1Label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="{{ url_for('set_session_value') + '/'}}" method="post">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="cookie_manager_lv1_Label">Cookie Manager</h1>
+                    <form action="{{ url_for('cookie_form_lv1')}}" method="post">
+                        <h1 class="modal-title fs-5" id="cookie_manager_lv1_Label">Cookie Manager</h1>
+                        <hr>
+                        <p>Auf dieser Seite benutzen wir Cookies um unsere Dienste zu verbessern
+                        und eine gute Performance zu liefern. Datenschutz liegt uns hier bei
+                        <b>Decep</b>tv am Herzen, darum kannst deine Cookies hier managen. Du kannst deine
+                        Cookie-Einstellungen jeder zeit im <b>Datenschutzmanager</b> neu anpassen.</p>
+                        <hr>
+                        <!-- Überschrift -->
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <h4>Funktion</h4>
+                            </div>
+                            <!-- Dark Pattern: Trick Question? nach zusage zu absage Fragen, statt einfach "An/Aus" anzugeben -->
+                            <!-- Dark Patter Misdirection: Farbe lenkt von Inhalt ab: 
+                                Die falsche Antwort "Ablehnen: Nein" ist nicht farbig und 
+                                die richtige Antwort "Ablehnen: Ja" ist gegen die Erwartung bei einer Absage farbig-->
+                            <!-- Dark Pattern: Opt-out -->
+                            <div class="p-2 ms-auto">
+                                <h5>Ablehnen</h5>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <p>Auf dieser Seite benutzen wir Cookies um unsere Dienste zu verbessern
-                            und eine gute Performance zu liefern. Datenschutz liegt uns hier bei
-                            <b>Decep</b>tv am Herzen, darum kannst deine Cookies hier managen. Du kannst deine
-                            Cookie-Einstellungen jeder zeit im <b>Datenschutzmanager</b> neu anpassen.</p>
-                            <!-- Überschrift -->
-                            <div class="d-flex">
-                                <div class="p-2">
-                                    <h4>Funktion</h4>
-                                </div>
-                                <!-- Dark Pattern: Trick Question? nach zusage zu absage Fragen, statt einfach "An/Aus" anzugeben -->
-                                <!-- Dark Patter Misdirection: Farbe lenkt von Inhalt ab: 
-                                    Die falsche Antwort "Ablehnen: Nein" ist nicht farbig und 
-                                    die richtige Antwort "Ablehnen: Ja" ist gegen die Erwartung bei einer Absage farbig-->
-                                <!-- Dark Pattern: Opt-out -->
-                                <div class="p-2 ms-auto">
-                                    <h5>Ablehnen</h5>
+                        <hr class="my-0">
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="form-check-label" for="CookieStandort">Standortdaten verwenden</label>
+                            </div>
+                            <div class="col">
+                                <small>Nein</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="CookieStandort">
+                                    <small>Ja</small>
+                                </div>   
+                            </div>
+                        </div>
+                        <hr class="my-0"> <!-- Trenner ohne viel Platz einzunehmen -->
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="form-check-label" for="CookieIdent">Geräteeigeschaften zu identifikation abfragen</label>
+                            </div>
+                            <div class="col">
+                                <small>Nein</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="CookieIdent">  
+                                    <small>Ja</small>
+                                </div> 
+                            </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="form-check-label" for="CookieDeviceSaves">Informationen auf dem Gerät speichern und abrufen</label>
+                            </div>
+                            <div class="col">
+                                <small>Nein</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="CookieDeviceSaves">
+                                    <small>Ja</small> 
                                 </div>
                             </div>
-                            <hr class="my-0">
-                            <div class="row">
-                                <div class="col-9">
-                                    <label class="form-check-label" for="CookieStandort">Standortdaten verwenden</label>
-                                </div>
-                                <div class="col">
-                                    <small>Nein</small>
-                                    <div class="form-check form-switch d-inline-block">
-                                        <input class="form-check-input" type="checkbox" name="CookieStandort">
-                                        <small>Ja</small>
-                                    </div>   
+                        </div>
+                        <hr class="my-0">
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="form-check-label" for="CookiePersonalisierung">Personalisierte Anzeigen und Inhalte zeigen</label>
+                            </div>
+                            <div class="col">
+                                <small>Nein</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="CookiePersonalisierung">
+                                    <small>Ja</small> 
                                 </div>
                             </div>
-                            <hr class="my-0"> <!-- Trenner ohne viel Platz einzunehmen -->
-                            <div class="row">
-                                <div class="col-9">
-                                    <label for="CookieIdent">Geräteeigeschaften zu identifikation abfragen</label>
-                                </div>
-                                <div class="col">
-                                    <small>Nein</small>
-                                    <div class="form-check form-switch d-inline-block">
-                                        <input class="form-check-input" type="checkbox" name="CookieIdent">  
-                                        <small>Ja</small>
-                                    </div> 
-                                </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="form-check-label" for="CookieTargeting">Zielgruppen messen und Produkte verbessern</label>
                             </div>
-                            <hr class="my-0">
-                            <div class="row">
-                                <div class="col-9">
-                                    <label for="CookieDeviceSaves">Informationen auf dem Gerät speichern und abrufen</label>
-                                </div>
-                                <div class="col">
-                                    <small>Nein</small>
-                                    <div class="form-check form-switch d-inline-block">
-                                        <input class="form-check-input" type="checkbox" name="CookieDeviceSaves">
-                                        <small>Ja</small> 
-                                    </div>
-                                </div>
+                            <div class="col">
+                                <small>Nein</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="CookieTargeting">        
+                                    <small>Ja</small> 
+                                </div>                       
                             </div>
-                            <hr class="my-0">
-                            <div class="row">
-                                <div class="col-9">
-                                    <label for="CookiePersonalisierung">Personalisierte Anzeigen und Inhalte zeigen</label>
-                                </div>
-                                <div class="col">
-                                    <small>Nein</small>
-                                    <div class="form-check form-switch d-inline-block">
-                                        <input class="form-check-input" type="checkbox" name="CookiePersonalisierung">
-                                        <small>Ja</small> 
-                                    </div>
-                                </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="row">
+                            <div class="col-9">
+                                <p>Funktionale Cookies</p>
                             </div>
-                            <hr class="my-0">
-                            <div class="row">
-                                <div class="col-9">
-                                    <label for="CookieTargeting">Zielgruppen messen und Produkte verbessern</label>
-                                </div>
-                                <div class="col">
-                                    <small>Nein</small>
-                                    <div class="form-check form-switch d-inline-block">
-                                        <input class="form-check-input" type="checkbox" name="CookieTargeting">        
-                                        <small>Ja</small> 
-                                    </div>                       
-                                </div>
+                            <div class="col">
+                                <small>Immer aktiv</small>
                             </div>
-                            <hr class="my-0">
-                            <div class="row">
-                                <div class="col-9">
-                                    <p>Funktionale Cookies</p>
-                                </div>
-                                <div class="col">
-                                    <small>Immer aktiv</small>
-                                </div>
-                            </div>
-                            <div class="accordion accordion-flush" id="accordionFlush">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingOne">
-                                    <!-- px und py = 0 damit der Buttoen nicht so sehr als alleinstehendes Element auffällt -->
-                                    <button class="accordion-button collapsed px-0 py-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        <small>Berechtigtes Interesse</small>
-                                    </button>
-                                    </h2>
-                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushs">
-                                        <div class="accordion-body px-0">
-                                            <div class="row">
-                                                <div class="col-9">
-                                                    <label for="CookeiBerechtigt1">Informationen auf einem Gerät speichern und abfragen</label>
-                                                </div>
-                                                <div class="col">
-                                                    <small>Off</small>
-                                                    <div class="form-check form-switch d-inline-block">
-                                                        <input class="form-check-input" type="checkbox" name="CookeiBerechtigt1"  checked>
-                                                        <small>On</small> 
-                                                    </div>
+                        </div>
+                        <div class="accordion accordion-flush" id="accordionFlush">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                <!-- px und py = 0 damit der Buttoen nicht so sehr als alleinstehendes Element auffällt -->
+                                <button class="accordion-button collapsed px-0 py-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <small>Berechtigtes Interesse</small>
+                                </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushs">
+                                    <div class="accordion-body px-0">
+                                        <div class="d-flex">
+                                            <label class="p-2 flex-grow-1 form-check-label" for="CookeiBerechtigt1">Informationen auf einem Gerät speichern und abfragen</label>
+                                            <div class="col">
+                                                <small>Off</small>
+                                                <div class="form-check form-switch d-inline-block">
+                                                    <input class="form-check-input" type="checkbox" name="CookeiBerechtigt1"  checked>
+                                                    <small>On</small> 
                                                 </div>
                                             </div>
-                                            <hr class="my-0">
-                                            <div class="row">
-                                                <div class="col-9">
-                                                    <label for="CookeiBerechtigt2">Zielgruppen messen und Produkte verbessern</label>
-                                                </div>
-                                                <div class="col">
-                                                    <small>Off</small>
-                                                    <div class="form-check form-switch d-inline-block">
-                                                        <input class="form-check-input" type="checkbox" name="CookeiBerechtigt2" checked>        
-                                                        <small>On</small> 
-                                                    </div>                      
-                                                </div>
+                                        </div>
+                                        <hr class="my-0">
+                                        <div class="d-flex">
+                                            <label class="p-2 flex-grow-1 form-check-label" for="CookeiBerechtigt2">Zielgruppen messen und Produkte verbessern</label>
+                                            <div class="p-2">
+                                                <small>Off</small>
+                                                <div class="form-check form-switch d-inline-block">
+                                                    <input class="form-check-input" type="checkbox" name="CookeiBerechtigt2" checked>        
+                                                    <small>On</small> 
+                                                </div>                      
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
+                        <hr>
                         <!-- Misdirection/Trickquestion Dark Pattern: Button zum submit der Checkboxe sieht 
                             nicht aus wie Button sonder wie Text, der auf den Button neben dran hinweist  -->
-                        <input 
-                            type="submit"
-                            value="Auswahl bestätigen: " 
-                            onclick="// Backend update
-                                    set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'dp_score': 4 });
-                                    // Frontend update
-                                    progress_add('dp_score_bar',{{session['dp_score']}}, 4);">   
-                        </input>
-                        <button 
+                        <input type="submit" value="Auswahl bestätigen: " class="unscheinbarer_button"
+                                onclick="progress_add('dp_score_bar','dp_score_text', 4);//Frontend update, Backend in Flask Formverarbeitung">      
+                        
+                    </form>
+                    <button 
                             type="button" 
                             class="btn btn-primary"
                             data-bs-dismiss="modal"
                             onclick="// Backend update
                                     set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score':  -40 });
                                     //frontend update
-                                    progress_add('data_bar',{{session['data_score']}}, -40); ">
+                                    progress_add('data_bar','data_text', -40); ">
                             Alle bestätigen
                         </button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

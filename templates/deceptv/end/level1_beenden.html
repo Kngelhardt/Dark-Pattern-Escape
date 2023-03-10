@@ -22,7 +22,7 @@
                                     // Backend update
                                     set_session_value({'dp_score': 4 });
                                     // Frontend update
-                                    progress_add('dp_score_bar',{{session['dp_score']}}, 4); "
+                                    progress_add('dp_score_bar','dp_score_text', 4); "
                             >Ich will DecepTV Serien und Filme nicht mehr sehen
                         </a>
                     </div>
@@ -90,7 +90,7 @@
                             onclick="// Backend update
                                     set_session_value({'dp_score': 4 });
                                     // Frontend update
-                                    progress_add('dp_score_bar',{{session['dp_score']}}, 4); ">
+                                    progress_add('dp_score_bar','dp_score_text', 4); ">
                             Ich stinke eh nach Geld, mir egal dass ich das 5% sparen würde
                         </a> 
                         <a class="btn btn-success " href="{{url_for('deceptv')}}">

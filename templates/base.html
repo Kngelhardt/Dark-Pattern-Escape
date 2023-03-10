@@ -43,7 +43,7 @@
                                     // Backend update
                                     set_session_value({'dp_score': 4 })
                                     // Frontend update
-                                    progress_add('dp_score_bar',{{session['dp_score']}}, 4); 
+                                    progress_add('dp_score_bar','dp_score_text', 4); 
                                     show_hide_div('cookie_fussleiste_lv1');">
                                 hier
                             </span>
@@ -58,7 +58,7 @@
                             onclick="// Backend update
                                     set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score': -40 });
                                     //frontend update
-                                    progress_add('data_bar',{{session['data_score']}}, -40); 
+                                    progress_add('data_bar','data_text', -40); 
                                     //hide cookiebanner
                                     show_hide_div('cookie_fussleiste_lv1');">
                             Ablehnen <br>
@@ -68,54 +68,10 @@
                             onclick="// Backend update
                                     set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score': -40 });
                                     //frontend update
-                                    progress_add('data_bar',{{session['data_score']}}, -40);
+                                    progress_add('data_bar','data_text', -40);
                                     //hide cookiebanner
                                     show_hide_div('cookie_fussleiste_lv1');">
                             <p>Alle <br> Akzeptieren</p>
-                        </div>
-                    </div>
-                </div>
-             </div>
-            {% elif session['cookie_lv2_show'] == True %}
-            <div id="'cookie_fussleiste_lv1'" class="maincolor_level1 pt-0">
-                <div class="d-flex justify-content-between">
-                    <div class="p-2">
-                        <p>Auf dieser Seite benutzen wir Cookies um unsere Dienste zu verbessern
-                             und eine gute Performance zu liefern. Datenshutz liegt uns hier bei
-                             <b>Decep</b>TV am Herzen, darum kannst sie 
-                             <span 
-                                class="text-decoration-underline" 
-                                onclick="
-                                        // Backend update
-                                        set_session_value({'dp_score': 4 });
-                                        //frontend update
-                                        progress_add('dp_score_bar',{{session['dp_score']}}, 4); 
-                                        show_hide_div('cookie_fussleiste_lv1');
-                                        show_hide_div('cookie_manager_lv1')">
-                                hier</span>
-                             managen. <br>
-                             Du kannst deine Cookie-Einstellungen jeder zeit im Datenschutzmanager neu anpassen.
-                        </p>
-                    </div>
-                    <div class="p-2">
-                        <!-- Beide Knöpfe machen das selbe-->
-                        <div class="btn btn-outline-primary" 
-                             onclick="  // Backend update
-                                        set_session_value({'cookie_lv2_fertig': 1,'cookie_lv2_show': 0, 'data_score': -40 } );
-                                        //frontend update
-                                        progress_add('data_bar', {{ session['data_score'] }}, -40);
-                                        show_hide_div('cookie_fussleiste_lv1');">
-                             Ablehnen <br>
-                             <span class="small_text">zu wiedersprechen</span> 
-                        </div>
-                        <div class="btn btn-primary" style="height: auto;"
-                             onclick="  // Backend update
-                                        set_session_value({'cookie_lv2_fertig': 1,'cookie_lv2_show': 0, 'data_score':  -40 });
-                                        //frontend update
-                                        progress_add('data_bar', {{ session['data_score'] }}, -40);
-                                        show_hide_div('cookie_fußleiste');">
-                             Akzeptieren
-                             <p></p>
                         </div>
                     </div>
                 </div>
@@ -142,7 +98,7 @@
                 </div>
                 <div class="col">
                     <div class="progress position-relative">
-                        <p class="position-absolute start-50 text-dark fw-bolder">{{session['data_score']}}</p>
+                        <p id="data_text" class="position-absolute start-50 text-dark fw-bolder">{{session['data_score']}}</p>
                         <div id="data_bar" class="progress-bar bg-info" role="progressbar" style="width: {{session['data_score']}}%" 
                             aria-valuenow="{{session['data_score']}}" aria-valuemin="0" aria-valuemax="100">
                         </div>
@@ -151,7 +107,7 @@
                 </div>
                 <div class="col">
                     <div class="progress position-relative">
-                        <p class="position-absolute start-50 text-dark fw-bolder">{{session['geld_score']}}</p>
+                        <p id="geld_text" class="position-absolute start-50 text-dark fw-bolder">{{session['geld_score']}}</p>
                         <div id="geld_bar" class="progress-bar bg-warning" role="progressbar" style="width: {{ session['geld_score' ]}}%" 
                             aria-valuenow="{{ session['geld_score' ]}}%" aria-valuemin="0" aria-valuemax="100">
                         </div>
@@ -160,7 +116,7 @@
                 </div>
                 <div class="col me-3"><!-- padding-right:2 da durch überlänge die seite nach recht verlängert würde -->
                     <div class="progress position-relative">
-                        <p class="position-absolute start-50 text-dark fw-bolder">{{session['dp_score']}}</p>
+                        <p id="dp_score_text" class="position-absolute start-50 text-dark fw-bolder">{{session['dp_score']}}</p>
                         <div id="dp_score_bar" class="progress-bar bg-success" role="progressbar" style="width: {{ session['dp_score'] }}%" 
                             aria-valuenow="{{ session['dp_score'] }}" aria-valuemin="0" aria-valuemax="100">
                         </div>

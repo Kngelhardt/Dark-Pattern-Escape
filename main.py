@@ -152,12 +152,15 @@ def get_streaming_images():
 @app.route("/cookie-form-lv1", methods=['GET','POST'])
 def cookie_form_lv1():
     if request.method == 'POST':
+        # Cookiedialog beenden
+        session['cookie_lv1_fertig'] = 1
+        session['cookie_lv1_show'] = 0
         print('test')
         print(request.form)
         print(request.form.get("CookieStandort"))
         print(request.form.get("CookieIdent"))
 
-    return render_template('deceptv/deceptv.html', deceptv_images = deceptv_images)
+    return '', 204
 
 #Startseite
 @app.route('/deceptv/')
@@ -321,6 +324,27 @@ def decepdive():
     if session['level_fortschritt'] >= 2:
         return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive.html')
+
+# Formverarbeitung für ein Dark Pattern in Level2 
+# Das Form besteht aus preticked checkboxes, die unticked werden müssen
+@app.route('/decepdive_cookies', methods=['GET','POST'])
+def decepdive_cookies():
+    if request.method == "POST":
+        # Cookiebanner auf beendet setzten, damit es nicht mehr erscheint
+        session['cookie_lv2_fertig']= True
+        # abfrage ob checkbox geticked wurde für box 1
+        if 'interesse1' in request.form:
+            # Wenn geticked wird dp_score erhöht
+            session['dp_score'] = session['dp_score'] +2
+        else:
+            # Wenn nicht geticked wird data_score verringert
+            session['data_score'] = session['data_score'] -10
+        # Abfrage: box 2
+        if 'interesse2' in request.form:
+            session['dp_score'] = session['dp_score'] +2
+        else:
+            session['data_score'] = session['data_score'] -10
+    return '', 204
 
 @app.route('/decepdive_produkt1')
 def decepdive_produkt1():
