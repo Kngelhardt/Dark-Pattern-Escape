@@ -1,4 +1,3 @@
-
 /* Funktion um Elemente verschwinden oder erscheinen zu lasssen */
 function show_hide_div(a){
     console.log(document.getElementById(a), a);
@@ -49,11 +48,29 @@ function set_session_value(json_obj){
     ajax_request('POST', '/change-session', json_obj);
 }
 
+function set_wenn_nicht_geloest(dark_pattern_id, json_obj){
+    console.log('schon gelöst außer:');
+    /* Check, ob das Pattern schon gelöst wurde, wenn nein -> update session */
+    if (dark_pattern_id == 'None'){
+        console.log('noch nicht gelöst');
+        set_session_value(json_obj);
+    }
+}
+
+/* Delay beim aufrufen einer neuen Seite, damit ein POST request um die session zu ipdaten noch durchgeht */
+function url_delay_set_session(dark_pattern_id, url, json_obj){
+    set_wenn_nicht_geloest(dark_pattern_id, json_obj);
+    delay = setInterval(function(){
+        window.location.href = url;
+        clearInterval(delay)
+    },1000);
+}
+
 /*  Funktion um die Werte der Progressbars upzudaten und anschließend in der Session zu speihern
     Session-Keys:
     dp_score: Permanent steigend
     geld_score: update nach levelende
-    data_score (unterteilt in zwei variable mit 50 % für die jeweiligen level): permanent sinkend. Kann im richtigen menü wieder zurückgesetzt werden
+    data_score (unterteilt in zwei variable mit 50 % für die jeweiligen level): permanent sinkend.
     inputs:
     bar: die id der Progress-Bar, die geändert werden soll
     value_now: Aktueller Wert der Bar
@@ -109,7 +126,7 @@ function level_countdown(zeit_state, level_fortschritt){
                     ) 
             );
         }
-    }, 9999999999); 
+    }, 1099999900); 
 }
 
 /* Timer der dei Uhrzeit darstellt. 
@@ -130,14 +147,12 @@ function starte_uhr(){
 }
 
 function ist_erreichbar(){
-    console.log('test')
     // Button funktioniert nur, wenn der starte_uht timer zwischen 14 und 16 ist
     if(parseInt(document.getElementById('uhr').textContent) >= 14 && parseInt(document.getElementById('uhr').textContent) <= 16){
-        console.log('test2')
-        // Backend update:
-        set_session_value({'dp_score': 4, 'dp_roachmotel2': true});
+        // Backend update: KEINE MOEGLSICHERUNG BEI MEHRMALIGEM DRÜCKEN 
+        set_session_value({'dp_score': 5, 'dp_roachmotel2': true});
         // Frontend update
-        progress_add('dp_score_bar','dp_score_text', 4);
+        progress_add('dp_score_bar','dp_score_text', 5);
         // Halte Uhr an
         clearInterval(uhrzeit);
         // "Anrufen" Knopf verschwinden lassen
@@ -153,6 +168,22 @@ function ist_erreichbar(){
     }
 }
 
+/* calculate_total(); */
+function calculate_total(){
+    if (document.getElementById('probe_container').style.display != "none"){
+        let produkpreis = parseFloat(document.getElementById('produkt_preis').textContent);
+        let probenpreis = 0.99;
+        // Textanzeige für Gesamtpreis updaten
+        document.getElementById('gesamt_preis').textContent = produkpreis + probenpreis;
+        // Value updaten, damit der preis der form an Flask weitergegeben werden kann
+        document.getElementById('preis_input').value = produkpreis + probenpreis;
+        console.log(document.getElementById('preis_input').value)
+    }else{
+        let produkpreis = parseFloat(document.getElementById('produkt_preis').textContent);
+        document.getElementById('gesamt_preis').textContent = produkpreis;
+        document.getElementById('preis_input').value = produkpreis;
+    }
+}
 
     
 

@@ -53,27 +53,28 @@
                     </table>
                     <div class="row">
                         <div class="col-10">
-                            <a  class="btn btn-close-white" href="{{url_for('ende_lv2')}}" 
-                                onclick="show_hide_div('misdirection'); show_hide_div('ende_lv2'); progress_add('dp_score_bar','dp_score_text', 4);">
-                                <p class="misdirection_text">Jetzt Zahlen <br> <small>mit Spende</small> </p>
-                            </a>
+                            <div class="btn btn-close-white" 
+                                onclick="
+                                    url_delay_set_session('{{ session['dp_misdirect_spende'] }}','{{url_for('ende_lv2')}}', {'dp_score': 5, 'dp_misdirect_spende': 1 });
+                                    progress_add('dp_score_bar','dp_score_text', 5);">
+                                <p class="misdirection_text">Jetzt Zahlen <br>
+                                <small>ohne Spende</small> </p>
+                             </div>
                         </div>
                         <div class="col">
-                            <a class="btn btn-success" href="{{url_for('ende_lv2')}}" onclick="show_hide_div('misdirection'); show_hide_div('ende_lv2');">
+                            <div class="btn btn-success" onclick="
+                                    url_delay_set_session('{{ session['dp_misdirect_spende'] }}','{{url_for('ende_lv2')}}', {'geld_score': -10, 'dp_misdirect_spende': 0 });
+                                    progress_add('dp_score_bar','dp_score_text', 4);">
                                 Jetzt Zahlen <br>
-                                <small class="misdirection_text">mit Spende</small>
-                            </a>
+                                <span class="small_text">mit Spende</span>
+                            </div>
                         </div>
+                        <p>In Kooperation mit dem Projekt DecepLive sammeln wir Spenden um die Meeresflora zu retten- Wir würden uns sehr über einen Beitrag freuen.
+                            Meer Infos findest du hier <a href="#">DecepLive.com</a>. Danke!
+                        </p>
                     </div>
                 </div>
             </div>
-            <div id="ende_lv2">
-                <h1>Du hast es geschafft, die Sonnencreme ist eingekauft. Du hast {{20 - session['geld_score']}} von maximal möglichem 15 eingespart</h1>
-                <div class="d-flex">
-                    <a href="{{url_for('home_intro')}}" class="btn btn-success">Zurück zur Levelübersicht</a>
-                </div>
-                <div class="platzfülller" style="height: 300px;"></div>
-            </div> 
         </div>
         <div class="platzfülller" style="height: 250px;"></div>
     </div>

@@ -1,261 +1,105 @@
+{% extends 'base.html' %}
 
-    {% extends 'base.html' %}
-
-    <div class="navigation"> 
-    {% block navigation %}
-        <!-- Flex container, since offcanvas for the user menu does not werk inside navbar -->
-        <div class="d-flex maincolor_level1">
-            <!-- ERstes Flex element soll die gesamte fläche außer den benutzer-button einnehmen daher w-100 -->
-            <nav class="navbar navbar-expand-md sticky-top navbar p-2 w-100" data-bs-theme="dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="{{ url_for('deceptv')}}">
-                        <span id="logo" class="maincolor"><b>Decep</b>TV</span>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav white">
-                            <li class="nav-item nav_item_level1">
-                                <a class="nav-link" href="{{url_for('deceptv_premium')}}">Premium</a>
+<div class="navigation"> 
+{% block navigation %}
+    <!-- Flex container, since offcanvas for the user menu does not werk inside navbar -->
+    <div class="d-flex maincolor_level1">
+        <!-- ERstes Flex element soll die gesamte fläche außer den benutzer-button einnehmen daher w-100 -->
+        <nav class="navbar navbar-expand-md sticky-top navbar p-2 w-100" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('deceptv')}}">
+                    <span id="logo" class="maincolor"><b>Decep</b>TV</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav white">
+                        <li class="nav-item nav_item_level1">
+                            <a class="nav-link" href="{{url_for('deceptv_premium')}}">Premium</a>
+                        </li>
+                        <li class="nav-item nav_item_level1 ">
+                            <a class="nav-link " href="#">Filme</a>
+                        </li>
+                        <li class="nav-item nav_item_level1">
+                            <a class="nav-link" href="#">Serien</a>
+                        </li>
+                        <li class="nav-item nav_item_level1 ">
+                            <a class="nav-link " href="#">Genre</a>
+                        </li>
+                    </ul>
+                    <!-- Suchleiste -->
+                    <form class="d-flex ms-auto p-2" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </nav>
+        <!-- align-self-center: button zentrieren| ms-auto: auf dei rechte seite schieben |p-2: flex element -->
+        <div class="p-2 ms-auto align-self-center account_menu">
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Menü</button>
+                <div class="offcanvas offcanvas-end " data-bs-backdrop="false" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" data-bs-theme="dark">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasRightLabel">DecepTV Menü</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body offcanvas_level1">
+                        <ul class="account_menu_options">
+                            <li>
+                                <a href="{{url_for('deceptv_account')}}">Dein Account</a>
                             </li>
-                            <li class="nav-item nav_item_level1 ">
-                                <a class="nav-link " href="#">Filme</a>
+                            <li>
+                                <a href="{{url_for('deceptv_favoriten')}}">Deine Favoriten</a>
                             </li>
-                            <li class="nav-item nav_item_level1">
-                                <a class="nav-link" href="#">Serien</a>
+                            <li>
+                                <a href="{{url_for('deceptv_vorschlaege')}}">Unsere Vorschläge für dich</a>
                             </li>
-                            <li class="nav-item nav_item_level1 ">
-                                <a class="nav-link " href="#">Genre</a>
+                            <li>
+                                <a href="{{url_for('deceptv_social')}}">ProcrasTV Social</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('deceptv_angebote')}}">PracrasTV Angebote</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('deceptv_shop')}}">ProcrasTV Shop</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('deceptv_datenschutzrichtlinie')}}">Datenschutzrichtlinie</a>
+                            </li>
+                            <li>
+                                <a href="#">Demnächst bei uns</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('deceptv_erkunden')}}">Erkunden</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('deceptv_datenschutzmanager')}}">Datenschutz-Manager</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('deceptv_premium')}}">ProcrasTV Premium</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('deceptv_service')}}">Kund*innenservice</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('deceptv_feedback')}}">Feedback</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('deceptv_impressum')}}">Impressum</a>
                             </li>
                         </ul>
-                        <!-- Suchleiste -->
-                        <form class="d-flex ms-auto p-2" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-primary" type="submit">Search</button>
-                    </div>
-                </div>
-            </nav>
-            <!-- align-self-center: button zentrieren| ms-auto: auf dei rechte seite schieben |p-2: flex element -->
-            <div class="p-2 ms-auto align-self-center account_menu">
-                <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Menü</button>
-                    <div class="offcanvas offcanvas-end " data-bs-backdrop="false" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" data-bs-theme="dark">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasRightLabel">DecepTV Menü</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body offcanvas_level1">
-                            <ul class="account_menu_options">
-                                <li>
-                                    <a href="{{url_for('deceptv_account')}}">Dein Account</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_favoriten')}}">Deine Favoriten</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_vorschlaege')}}">Unsere Vorschläge für dich</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_social')}}">ProcrasTV Social</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_angebote')}}">PracrasTV Angebote</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_shop')}}">ProcrasTV Shop</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_datenschutzrichtlinie')}}">Datenschutzrichtlinie</a>
-                                </li>
-                                <li>
-                                    <a href="#">Demnächst bei uns</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_erkunden')}}">Erkunden</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_datenschutzmanager')}}">Datenschutz-Manager</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_premium')}}">ProcrasTV Premium</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_service')}}">Kund*innenservice</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_feedback')}}">Feedback</a>
-                                </li>
-                                <li>
-                                    <a href="{{url_for('deceptv_impressum')}}">Impressum</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Cookie Dialog Popup -->
-        <div class="modal fade" id="cookie_manager_lv1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookie_manager_lv1Label" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form action="{{ url_for('cookie_form_lv1')}}" method="post">
-                        <h1 class="modal-title fs-5" id="cookie_manager_lv1_Label">Cookie Manager</h1>
-                        <hr>
-                        <p>Auf dieser Seite benutzen wir Cookies um unsere Dienste zu verbessern
-                        und eine gute Performance zu liefern. Datenschutz liegt uns hier bei
-                        <b>Decep</b>tv am Herzen, darum kannst deine Cookies hier managen. Du kannst deine
-                        Cookie-Einstellungen jeder zeit im <b>Datenschutzmanager</b> neu anpassen.</p>
-                        <hr>
-                        <!-- Überschrift -->
-                        <div class="d-flex">
-                            <div class="p-2">
-                                <h4>Funktion</h4>
-                            </div>
-                            <!-- Dark Pattern: Trick Question? nach zusage zu absage Fragen, statt einfach "An/Aus" anzugeben -->
-                            <!-- Dark Patter Misdirection: Farbe lenkt von Inhalt ab: 
-                                Die falsche Antwort "Ablehnen: Nein" ist nicht farbig und 
-                                die richtige Antwort "Ablehnen: Ja" ist gegen die Erwartung bei einer Absage farbig-->
-                            <!-- Dark Pattern: Opt-out -->
-                            <div class="p-2 ms-auto">
-                                <h5>Ablehnen</h5>
-                            </div>
-                        </div>
-                        <hr class="my-0">
-                        <div class="row">
-                            <div class="col-9">
-                                <label class="form-check-label" for="CookieStandort">Standortdaten verwenden</label>
-                            </div>
-                            <div class="col">
-                                <small>Nein</small>
-                                <div class="form-check form-switch d-inline-block">
-                                    <input class="form-check-input" type="checkbox" name="CookieStandort">
-                                    <small>Ja</small>
-                                </div>   
-                            </div>
-                        </div>
-                        <hr class="my-0"> <!-- Trenner ohne viel Platz einzunehmen -->
-                        <div class="row">
-                            <div class="col-9">
-                                <label class="form-check-label" for="CookieIdent">Geräteeigeschaften zu identifikation abfragen</label>
-                            </div>
-                            <div class="col">
-                                <small>Nein</small>
-                                <div class="form-check form-switch d-inline-block">
-                                    <input class="form-check-input" type="checkbox" name="CookieIdent">  
-                                    <small>Ja</small>
-                                </div> 
-                            </div>
-                        </div>
-                        <hr class="my-0">
-                        <div class="row">
-                            <div class="col-9">
-                                <label class="form-check-label" for="CookieDeviceSaves">Informationen auf dem Gerät speichern und abrufen</label>
-                            </div>
-                            <div class="col">
-                                <small>Nein</small>
-                                <div class="form-check form-switch d-inline-block">
-                                    <input class="form-check-input" type="checkbox" name="CookieDeviceSaves">
-                                    <small>Ja</small> 
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="my-0">
-                        <div class="row">
-                            <div class="col-9">
-                                <label class="form-check-label" for="CookiePersonalisierung">Personalisierte Anzeigen und Inhalte zeigen</label>
-                            </div>
-                            <div class="col">
-                                <small>Nein</small>
-                                <div class="form-check form-switch d-inline-block">
-                                    <input class="form-check-input" type="checkbox" name="CookiePersonalisierung">
-                                    <small>Ja</small> 
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="my-0">
-                        <div class="row">
-                            <div class="col-9">
-                                <label class="form-check-label" for="CookieTargeting">Zielgruppen messen und Produkte verbessern</label>
-                            </div>
-                            <div class="col">
-                                <small>Nein</small>
-                                <div class="form-check form-switch d-inline-block">
-                                    <input class="form-check-input" type="checkbox" name="CookieTargeting">        
-                                    <small>Ja</small> 
-                                </div>                       
-                            </div>
-                        </div>
-                        <hr class="my-0">
-                        <div class="row">
-                            <div class="col-9">
-                                <p>Funktionale Cookies</p>
-                            </div>
-                            <div class="col">
-                                <small>Immer aktiv</small>
-                            </div>
-                        </div>
-                        <div class="accordion accordion-flush" id="accordionFlush">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                <!-- px und py = 0 damit der Buttoen nicht so sehr als alleinstehendes Element auffällt -->
-                                <button class="accordion-button collapsed px-0 py-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    <small>Berechtigtes Interesse</small>
-                                </button>
-                                </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushs">
-                                    <div class="accordion-body px-0">
-                                        <div class="d-flex">
-                                            <label class="p-2 flex-grow-1 form-check-label" for="CookeiBerechtigt1">Informationen auf einem Gerät speichern und abfragen</label>
-                                            <div class="col">
-                                                <small>Off</small>
-                                                <div class="form-check form-switch d-inline-block">
-                                                    <input class="form-check-input" type="checkbox" name="CookeiBerechtigt1"  checked>
-                                                    <small>On</small> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="my-0">
-                                        <div class="d-flex">
-                                            <label class="p-2 flex-grow-1 form-check-label" for="CookeiBerechtigt2">Zielgruppen messen und Produkte verbessern</label>
-                                            <div class="p-2">
-                                                <small>Off</small>
-                                                <div class="form-check form-switch d-inline-block">
-                                                    <input class="form-check-input" type="checkbox" name="CookeiBerechtigt2" checked>        
-                                                    <small>On</small> 
-                                                </div>                      
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <!-- Misdirection/Trickquestion Dark Pattern: Button zum submit der Checkboxe sieht 
-                            nicht aus wie Button sonder wie Text, der auf den Button neben dran hinweist  -->
-                        <input type="submit" value="Auswahl bestätigen: " class="unscheinbarer_button"
-                                onclick="progress_add('dp_score_bar','dp_score_text', 4);//Frontend update, Backend in Flask Formverarbeitung">      
-                        
-                    </form>
-                    <button 
-                            type="button" 
-                            class="btn btn-primary"
-                            data-bs-dismiss="modal"
-                            onclick="// Backend update
-                                    set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score':  -40 });
-                                    //frontend update
-                                    progress_add('data_bar','data_text', -40); ">
-                            Alle bestätigen
-                        </button>
-                </div>
-            </div>
-        </div>
-    {% endblock %}
     </div>
+{% endblock %}
+</div>
 
-    <div class="content">
-        {% block content %} 
-        
-        {% endblock %}
-    </div>
+<div class="content">
+    {% block content %} 
+    
+    {% endblock %}
+</div>
 

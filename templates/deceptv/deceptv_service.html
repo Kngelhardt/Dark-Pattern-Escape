@@ -1,97 +1,102 @@
 
-    {% extends 'layout_level1.html' %}
+{% extends 'layout_level1.html' %}
 
-    {% block content %}
-        <div class="container deceptv_premium_container">
-            <br>
-            <h1>Deine <b>Decep</b>TV Premium Hilfezentrum </h1>
-            <hr>
-            <div class="row">
-                <div class="col">
-                    Benutzerbild
-                </div>
-                <div class="col">
-                    <h3>FAQ</h3> <br>
-                    <div class="justify-content-center">
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" 
-                                aria-expanded="false">Häufig gestellte Fragen</button>
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu"> 
-                            <li><a class="dropdown-item" href="#">Wie funktioniert Social Watch?</a> </li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Wieso kann ich bei DecepTV nicht Avatar 3 gucken</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Wann kommt Star Wars 16 endlich raus?</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Wie stellt ihr die Auswahl an Filmen zusammen?</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{url_for('deceptv_nicht')}}">Ich hasse DecepTV!! Wie bekomme ich mein Geld zurück?!</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{url_for('deceptv_wie_kuendigen')}}">Wie kündige ich mein DecepTV Premium Abo?</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Wie stellt ihr die Auswahl an Serien zusammen?</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col">
-                    <h3>Hilfezentrum</h3> <br>
-                    <div class="justify-content-center">
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
-                                 aria-expanded="false">Häufige Probleme
-                        </button>
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu"> 
-                            <li><a class="dropdown-item" href="#">Die Wiedergabe von Filmen funktioniert nicht</a> </li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Social Watch ist nicht synchron</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Die wiedergabequalität ist schlecht</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Ich bekomme keine 4k Auflösung trotz Premium Gold Abo</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <!-- "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden -->
-                            <li>
-                                <a  class="dropdown-item" style="cursor: pointer" 
-                                    onclick="//Backend update
-                                            set_session_value({'dp_score': 4 });
-                                            // nächsten schritt zeigen
-                                            show_hide_div('container_kündigung');
-                                            //frontend update
-                                            progress_add('dp_score_bar','dp_score_text', 4);">
-                                    Ich finde die Optionen zum Verwalten oder Aufheben meiner Mitgliedschaft nicht
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>   
-            <hr>
-            <h5>Bei weiteren, oder bestehenden offenen Fragen, wenden sie sich an unseren E-Mail-Service unter: deceptv@service.com</h5>           
-            <div id="container_kündigung" class="mt-5">
-                <hr class="mb-5">
-                <h3>Verwaltung und Kündigung ihres DecepTV Abonnement</h3>
-                <p> Wollen sie ihr Abonnement verwalten? Hier finden sie alle Abonnement-Optionen:
-                <!-- "Misdirection" Dark Pattern: Option ist gut ist prominent plaziert und eingefärbt und zusätzlich verheißungsvoll benannt.
-                    Dadurch sollen Spieler*innen vom relevanten Link abgelenkt werden -->
-                    <a href="{{url_for('deceptv_angebote')}}" class="btn btn-success">Abonnement-Verwaltungsmenü</a>
-                </p>
-                <hr class="mt-1">
-                <!-- Hier ist der eigentlich relevante Link, klein geschreiben, ohne farben mit abstand und durch horizontale Liene als Teil eines anderen Inhalts getarnt-->
-                <p class="text-secondary"> <small> Zum Beenden drücken sie hier: 
-                    <a  id="service_kündigen" class="text-secondary" href="{{url_for('level1_beenden')}}"
-                        onclick="// Backend update, Frontend nicht mehr sichtbar, das seitewechsel
-                                set_session_value({'dp_score': 4 });
-                                progress_add('dp_score_bar','dp_score_text', 4);">
-                        Kündigen
-                    </a>
-                </small></p>
+{% block content %}
+<div class="container deceptv_premium_container">
+    <br>
+    <h1>Deine <b>Decep</b>TV Premium Hilfezentrum </h1>
+    <hr>
+    <div class="row">
+        <div class="col">
+            Benutzerbild
+        </div>
+        <div class="col">
+            <h3>FAQ</h3> <br>
+            <div class="justify-content-center">
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" 
+                        aria-expanded="false">Häufig gestellte Fragen</button>
+                <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu"> 
+                    <li><a class="dropdown-item" href="#">Wie funktioniert Social Watch?</a> </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Wieso kann ich bei DecepTV nicht Avatar 3 gucken</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Wann kommt Star Wars 16 endlich raus?</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Wie stellt ihr die Auswahl an Filmen zusammen?</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{{url_for('deceptv_nicht')}}">Ich hasse DecepTV!! Wie bekomme ich mein Geld zurück?!</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{{url_for('deceptv_wie_kuendigen')}}">Wie kündige ich mein DecepTV Premium Abo?</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Wie stellt ihr die Auswahl an Serien zusammen?</a></li>
+                </ul>
             </div>
         </div>
-        <script>
-            // Element verstecken. "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden
-            document.getElementById("container_kündigung").style.display = "none";
-            window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
-        </script>
-    {% endblock %}
+        <div class="col">
+            <h3>Hilfezentrum</h3> <br>
+            <div class="justify-content-center">
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">Häufige Probleme
+                </button>
+                <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu"> 
+                    <li><a class="dropdown-item" href="#">Die Wiedergabe von Filmen funktioniert nicht</a> </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Social Watch ist nicht synchron</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Die wiedergabequalität ist schlecht</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Ich bekomme keine 4k Auflösung trotz Premium Gold Abo</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <!-- "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden -->
+                    <li>
+                        <a  class="dropdown-item" style="cursor: pointer" 
+                            onclick="//Backend update wenn noch nicht gelöst
+                                    set_wenn_nicht_geloest('{{ session['dp_roachmotel1'] }}',{'dp_score': 5 , 'dp_roachmotel1': 1});
+                                    // nächsten schritt zeigen
+                                    show_hide_div('container_kündigung');
+                                    //frontend update
+                                    progress_add('dp_score_bar','dp_score_text', 5);">
+                            Ich finde die Optionen zum Verwalten oder Aufheben meiner Mitgliedschaft nicht
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>   
+    <hr>
+    <h5>Bei weiteren, oder bestehenden offenen Fragen, wenden sie sich an unseren E-Mail-Service unter: deceptv@service.com</h5>           
+    <div id="container_kündigung" class="mt-5">
+        <hr class="mb-5">
+        <h3>Verwaltung und Kündigung ihres DecepTV Abonnement</h3>
+        <p> Wollen sie ihr Abonnement verwalten? Hier finden sie alle Abonnement-Optionen:
+        <!-- "Misdirection" Dark Pattern: Option ist gut ist prominent plaziert und eingefärbt und zusätzlich verheißungsvoll benannt.
+            Dadurch sollen Spieler*innen vom relevanten Link abgelenkt werden -->
+            <a href="{{url_for('deceptv_angebote')}}" class="btn btn-success">Abonnement-Verwaltungsmenü</a>
+        </p>
+        <div style="height: 250px">
+
+        </div>
+        
+        <!-- Hier ist der eigentlich relevante Link, klein geschreiben, ohne farben mit abstand und durch horizontale Liene als Teil eines anderen Inhalts getarnt-->
+        <p class="text-secondary "> <small> Zum Beenden des Abos drücken sie hier: 
+        <button  class="unscheinbarer_button text-secondary"
+                onclick="// Backend session update und call der nächsten seite
+                        url_delay_set_session('{{ session['dp_misdirect_kuendigen'] }}', '{{url_for('level1_beenden')}}', {'dp_score': 5 });
+                        //frontend update
+                        progress_add('dp_score_bar','dp_score_text', 5);">
+                Kündigen
+        </button>
+        </small></p>
+        <hr class="mt-1">
+    </div>
+</div>
+<script>
+    // Element verstecken. "Roach Motel" Dark Pattern: Option ist gut versteckt muss von Spieler*innen gefunden werden
+    document.getElementById("container_kündigung").style.display = "none";
+    window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
+</script>
+{% endblock %}

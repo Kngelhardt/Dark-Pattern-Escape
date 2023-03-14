@@ -10,12 +10,9 @@
                         <h2>Füller</h2>
                     </div>
                     <div id="filter">
-                        <h5>Sucheinstellungen</h5>
+                        <h5>Sucheinstellungen: </h5>
                         <p><b>Preis</b><br>
-                            Von .. bis ... <br>
-                        </p>
-                        <p><b>Versand</b><br>
-                            Von .. bis ... <br>
+                            Von: 0 bis: 10 € <br>
                         </p>
                         <p><b>Lieferstandort</b><br>
                             Europa<br>
@@ -32,49 +29,57 @@
                         <div class="col produkt "> <!-- margin: 1 1 1 0 -->
                             <a href="{{ url_for('decepdive_produkt1') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream1.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, 500 milliliter</p>
+                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (4340)</small> <br> 500 milliliter <br>
+                                <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt ">
-                            <a href="{{ url_for('decepdive_produkt1') }}" >
+                            <a href="{{ url_for('decepdive_produkt2') }}" >
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream2.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Mega Sun LSF 50, 5 deziliter</p>
+                                <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (1302)</small> <br> 5 deziliter <br>
+                                <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt ">
-                            <a href="{{ url_for('decepdive_produkt1') }}">
+                            <a href="{{ url_for('decepdive_produkt3') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream3.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, 10 deziliter</p>
+                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (53)</small> <br> 10 deziliter <br>
+                                <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt  "> 
-                            <a href="{{ url_for('decepdive_produkt1') }}">
+                            <a href="{{ url_for('decepdive_produkt4') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream4.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 30, 800 milliliter</p>
+                                <p>Super Sun LSF 30, <small class="text-warning">★★★★☆ (24)</small> <br> 800 milliliter <br>
+                                <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt  ">
-                            <a href="">
+                            <a href="{{ url_for('decepdive_produkt5') }}">
                                 <img class="rounded mx-auto" src="{{url_for('static', filename='images/decepdive/suncream5.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 30, 0.004 hektoliter</p>
+                                <p>Super Sun LSF 30, <small class="text-warning">★★★★☆ (174)</small> <br> 0.004 hektoliter <br>
+                                <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt ">
-                            <a href="">
+                            <a href="{{ url_for('decepdive_produkt6') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream6.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 70, 50 zentiliter</p>
+                                <p>Super Sun LSF 70,<small class="text-warning">★★★★☆ (234)</small> <br> 50 zentiliter <br>
+                                <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt ">
-                            <a href="">
+                            <a href="{{ url_for('decepdive_produkt7') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream7.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 70, 25 zentiliter</p>
+                                <p>Super Sun LSF 70, <small class="text-warning">★★★★☆ (567)</small> <br> 25 zentiliter <br>
+                                <b>9.99€</b></p>
                             </a>    
                         </div>
                         <div class="col produkt ">
-                            <a href="">
+                            <a href="{{ url_for('decepdive_produkt8') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream8.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Mega Sun LSF 30, 0.01 hektoliter</p>
+                                <p>Mega Sun LSF 30, <small class="text-warning">★★★★☆ (124)</small> <br> 0.01 hektoliter <br>
+                                <b>9.99€</b></p>
                             </a>
                         </div>
                     </div>
@@ -96,7 +101,7 @@
                     <h1 class="modal-title fs-2" id="cookiedialog_lv2Label">Cookie Manager</h1>
                     <!-- Wenn der Cookie-Dialog im ersten Modal-Fenster geschlossen wird werden 40 Datenpunkte abgezogen und die Aufgabe ist unwiderruflich beendet -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
-                            onclick="set_session_value({'data_score': -40, 'cookie_lv2_fertig': 1});
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}', {'data_score': -40, 'cookie_lv2_fertig': 1});
                                     progress_add('data_bar','data_text', -40);">
                     </button>
                 </div>
@@ -107,16 +112,16 @@
                     </p>
                     <hr>
                     <h4>Zugeschnittene Inhalte und Anzeigen:</h4>
-                    <small>Willst du, dass wir Cookies nicht benutzen dir für dich interessante Inhalte zu zeigen?</small>
+                    <small>Willst du, dass wir Cookies nicht benutzen, um dir, für dich interessante Inhalte zu zeigen?</small>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2"
-                            onclick="set_session_value({'data_score': -10});
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}',{'data_score': -10, 'dp_cookielv2_trickquestion': 0});
                                     progress_add('data_bar','data_text', -10);">Nein
                     </button>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2"
-                            onclick="set_session_value({'dp_score': 4});
-                            progress_add('dp_score_bar','dp_score_text', 4);">
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}',{'dp_score': 5, 'dp_cookielv2_trickquestion': 1});
+                            progress_add('dp_score_bar','dp_score_text', 5);">
                             Ja
                     </button>
                 </div>
@@ -131,7 +136,7 @@
                     <!-- Wenn der Cookie-Dialog im zweite Modal-Fenster geschlossen wird werden 30 Datenpunkte abgezogen (Eine Art von Cookies wurde schon abgelehnt)
                          und die Aufgabe ist unwiderruflich beendet -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                            onclick="set_session_value({'data_score': -30, 'cookie_lv2_fertig': 1});
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}',{'data_score': -30, 'cookie_lv2_fertig': 1});
                                     progress_add('data_bar','data_text', -30);">
                     </button>
                 </div>
@@ -141,13 +146,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
-                            onclick="set_session_value({'data_score': -10, 'cookie_lv2_fertig': 1});
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'data_score': -10, 'cookie_lv2_fertig': 1});
                                     progress_add('data_bar','data_text', -10);">
                             Nein
                     </button>
                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
-                            onclick="set_session_value({'dp_score': 4 }); 
-                                    progress_add('dp_score_bar','dp_score_text', 4);" >
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'dp_score': 5, 'dp_cookielv2_trickqeustion2': 1 }); 
+                                    progress_add('dp_score_bar','dp_score_text', 5);" >
                             Ja
                     </button>
                 </div>
@@ -174,13 +179,13 @@
                     <div class="p-2 flex-grow-1"></div>
                     <div class="p-2">
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                            onclick="set_session_value({'data_score': -40, 'cookie_lv2_fertig': 1}); 
-                                    progress_add('data_bar','data_text', -40);">Alle akzeptieren
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_berechtigt'] }}',{'data_score': -20, 'cookie_lv2_fertig': 1, 'dp_cookielv2_berechtigt': 0}); 
+                                    progress_add('data_bar','data_text', -20);">Alle akzeptieren
                     </button>
                     </div>
                     <div class="p-2">
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                            onclick="set_session_value({'data_score': -20, 'cookie_lv2_fertig': 1});
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_berechtigt'] }}',{'data_score': -20, 'cookie_lv2_fertig': 1, 'dp_cookielv2_berechtigt': 0});
                                     progress_add('data_bar','data_text', -20);">Einstellungen speichern
                     </button>
                     </div>
@@ -198,15 +203,17 @@
                         <div id="collapseOne" class="accordion-collapse collapse hide" data-bs-parent="#berecht_accordion">
                             <div class="accordion-body">
                                 <form action="{{ url_for('decepdive_cookies') }}" method="post">
-                                    <input class="form-check-input" type="checkbox" name="interesse1">
+                                    <input class="form-check-input" type="checkbox" name="interesse1" checked>
                                     <label class="form-check-label" for="interesse1">
                                         Personenbezogene Daten erheben
-                                    </label>                                
-                                    <input class="form-check-input" type="checkbox" name="interesse2">
+                                    </label>
+                                     <br>                                
+                                    <input class="form-check-input" type="checkbox" name="interesse2" checked>
                                     <label class="form-check-label" for="interesse2">
-                                        Angepasste Inhalte anzeigen und Interaktion erheben
-                                    </label>   
-                                    <input  type="submit" value="Einstellungen zu berechtigttem Interesse speichern" 
+                                        Angepasste Inhalte anzeigen, Interaktion erheben
+                                    </label>
+                                    <br>
+                                    <input  type="submit" value="Einstellungen zu berechtigtem Interesse speichern" 
                                             id="button_interesse" class="btn btn-success" data-bs-dismiss="modal">
                                 </form>
                             </div>

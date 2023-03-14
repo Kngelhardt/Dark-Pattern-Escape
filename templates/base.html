@@ -23,60 +23,6 @@
 
         <!-- Fußzeile mit den Werten der jeweiligen Session -->
         <div class="fussleiste mainbackground maincolor" >
-            {% if session['cookie_lv1_show'] == True %}
-            <!-- Cookiebanner: werden angezeigt, wenn session['cookie_lv1_show'] == True. 
-                session['cookie_lv1/2_show'] wird beim ersten aufrufen der Homepade des jeweiligen Levels
-                auf true gesetzt, wenn session['cookie_lv_1/2_fertig] true ist -->
-            <div id="cookie_fussleiste_lv1" class="maincolor_level1 pt-0">
-                <div class="d-flex justify-content-between">
-                    <div class="p-2">
-                        <p> Auf dieser Seite benutzen wir Cookies um unsere Dienste zu verbessern
-                            und eine gute Performance zu liefern. Datenschutz liegt uns hier bei
-                            <b>Decep</b>tv am Herzen, darum kannst deine Cookies 
-                            <!-- Misdirection DarkPattern: Button um zum Cookiemanager zu kommen ist kein Knopf, 
-                                sondern nur ein unterstrichener Text ohne pointer beim derüber Hovern. 
-                                Währenddessen sind zwei andere KNöpfe in der Fußleiste prominent dargestellt um abzulenken-->
-                            <span  class="text-decoration-underline" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#cookie_manager_lv1"
-                                    onclick="
-                                    // Backend update
-                                    set_session_value({'dp_score': 4 })
-                                    // Frontend update
-                                    progress_add('dp_score_bar','dp_score_text', 4); 
-                                    show_hide_div('cookie_fussleiste_lv1');">
-                                hier
-                            </span>
-                            managen. <br> Du kannst deine Cookie-Einstellungen jeder Zeit im 
-                            <b>Datenschutzmanager</b> neu anpassen.
-                        </p>
-                    </div>
-                    <div class="p-2">
-                        <!-- Beide Knöpfe machen das selbe
-                            Trick-Question Dark Pattern: "Ablehnen zu widersprecehn ist das selbe wie Akzeptieren"-->
-                        <div class="btn btn-outline-primary pb-3" 
-                            onclick="// Backend update
-                                    set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score': -40 });
-                                    //frontend update
-                                    progress_add('data_bar','data_text', -40); 
-                                    //hide cookiebanner
-                                    show_hide_div('cookie_fussleiste_lv1');">
-                            Ablehnen <br>
-                            <span class="small_text misdirection_text">zu wiedersprechen</span> 
-                        </div>
-                        <div class="btn btn-primary pb-0"
-                            onclick="// Backend update
-                                    set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score': -40 });
-                                    //frontend update
-                                    progress_add('data_bar','data_text', -40);
-                                    //hide cookiebanner
-                                    show_hide_div('cookie_fussleiste_lv1');">
-                            <p>Alle <br> Akzeptieren</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
             <div class="row text-center pt-3">
                 <div class="col-1">
                     <a href="{{url_for('initialize_session')}}" class="btn btn-warning">Reset</a>

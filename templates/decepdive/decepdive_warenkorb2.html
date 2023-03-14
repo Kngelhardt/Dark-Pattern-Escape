@@ -18,15 +18,17 @@
                         <input type="text" class="form-control-sm" placeholder="Passwort"> 
                         <p class="btn btn-primary">Anmelden</p>
                         <div class="d-grid gap-2 w-75 my-5 mx-auto">
-                            <a href="{{ url_for('decepdive_warenkorb3') }}" class="btn btn-success">Google</a> <br>
-                            <a href="{{ url_for('decepdive_warenkorb3') }}" class="btn btn-success">Facebook</a> <br>
-                            <a href="{{ url_for('decepdive_warenkorb3') }}" 
-                                    class="text-secondary text-decoration-none small_text"
-                                    onclick="// Backend update
-                                            set_session_value({'dp_score': 4 });
-                                            // Frontend update
-                                            progress_add('dp_score_bar','dp_score_text', 4);">
-                                    Weiter als Gast
+                            <a href="{{ url_for('decepdive_warenkorb3') }}" class="btn btn-success" 
+                                onclick="url_delay_set_session('{{ session['dp_misdirect_login'] }}',{'data_score': -10, 'dp_misdirect_login': 0 });">
+                                Google
+                            </a> <br>
+                            <a href="{{ url_for('decepdive_warenkorb3') }}" class="btn btn-success"
+                                onclick="url_delay_set_session('{{ session['dp_misdirect_login'] }}', {'data_score': -10, 'dp_misdirect_login': 0 });">
+                                Facebook
+                            </a> <br>
+                            <a href="{{ url_for('decepdive_warenkorb3') }}" class="text-secondary text-decoration-none small_text"
+                                    onclick="url_delay_set_session('{{ session['dp_misdirect_login'] }}', {'dp_score': 5, 'dp_misdirect_login': 1 });">
+                                Weiter als Gast
                             </a>
                         </div>
                     </div>

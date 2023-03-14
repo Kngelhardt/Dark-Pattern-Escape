@@ -1,72 +1,72 @@
+{% extends 'base.html' %}
 
-    {% extends 'base.html' %}
-        <div class="navigation"> 
-        {% block navigation %}
-            <!-- Flex container, since offcanvas for the user menu does not werk inside navbar -->
-            <div class="d-flex maincolor_level2">
-                <!-- ERstes Flex element soll die gesamte fläche außer den benutzer-button einnehmen daher w-100 -->
-                <nav class="navbar navbar-expand-xl sticky-top navbar p-2 w-100" data-bs-theme="dark">
-                    <div class="container-fluid">
-                        <a class="navbar-brand maincolor_level2" href="{{ url_for('decepdive')}}">
-                            <span id="logo"><b>Decep</b>Dive</span>
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <form class="d-flex p-2 mx-2" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Sonnencreme" aria-label="Search">
-                                <button class="btn btn-outline-dark" type="submit">Search</button>
-                            </form>
-                            <ul class="navbar-nav white">
-                                <li class="nav-item nav_item_level2 mx-1">
-                                    <a class="nav-link maincolor_level2 " href="#">Angebote</a>
-                                </li>
-                                <li class="nav-item nav_item_level2 mx-1">
-                                    <a class="nav-link maincolor_level2" href="#">Kategorien</a>
-                                </li>
-                                <li class="nav-item nav_item_level2 mx-1">
-                                    <a class="nav-link maincolor_level2" href="#">Nachhaltigkeit</a>
-                                </li>
-                                <li class="nav-item nav_item_level2 mx-1">
-                                    <a class="nav-link maincolor_level2" href="#">Unternehmensphilosophie</a>
-                                </li>
-                            </ul>
+<div class="navigation"> 
+{% block navigation %}
+    <!-- Flex container, since offcanvas for the user menu does not werk inside navbar -->
+    <div class="d-flex maincolor_level2">
+        <!-- ERstes Flex element soll die gesamte fläche außer den benutzer-button einnehmen daher w-100 -->
+        <nav class="navbar navbar-expand-xl sticky-top navbar p-2 w-100" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand maincolor_level2 " href="{{ url_for('decepdive')}}">
+                    <span id="logo"><b>Decep</b>Dive</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <form class="d-flex p-2 mx-2" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Sonnencreme" aria-label="Search">
+                        <button class="btn btn-outline-dark" type="submit">Search</button>
+                    </form>
+                    <ul class="navbar-nav white">
+                        <li class="nav-item nav_item_level2 mx-1">
+                            <a class="nav-link maincolor_level2 " href="#">Angebote</a>
+                        </li>
+                        <li class="nav-item nav_item_level2 mx-1">
+                            <a class="nav-link maincolor_level2" href="#">Kategorien</a>
+                        </li>
+                        <li class="nav-item nav_item_level2 mx-1">
+                            <a class="nav-link maincolor_level2" href="#">Nachhaltigkeit</a>
+                        </li>
+                        <li class="nav-item nav_item_level2 mx-1">
+                            <a class="nav-link maincolor_level2" href="#">Unternehmensphilosophie</a>
+                        </li>
+                    </ul>
 
-                        </div>
+                </div>
+            </div>
+        </nav>
+        <!-- align-self-center: button zentrieren| ms-auto: auf dei rechte seite schieben |p-2: flex element -->
+        <div class="p-2 ms-auto align-self-center account_menu">
+            <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Warenkorb</button>
+                <div class="offcanvas offcanvas-end offcanvas_level2" data-bs-backdrop="false" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" data-bs-theme="dark">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title offcanvas_level2" id="offcanvasRightLabel">Dein Warenkorb</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
-                </nav>
-                <!-- align-self-center: button zentrieren| ms-auto: auf dei rechte seite schieben |p-2: flex element -->
-                <div class="p-2 ms-auto align-self-center account_menu">
-                    <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Warenkorb</button>
-                        <div class="offcanvas offcanvas-end offcanvas_level2" data-bs-backdrop="false" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" data-bs-theme="dark">
-                            <div class="offcanvas-header">
-                                <h5 class="offcanvas-title offcanvas_level2" id="offcanvasRightLabel">Dein Warenkorb</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
-                            <div class="offcanvas-body">
-                                <ul class="account_menu_options">
-                                    <li>
-                                        <p>item 1</p>
-                                    </li>
-                                    <li>
-                                        <p>item 2 ...</p>
-                                    </li>
-                                    <!-- <li>
-                                        <a class="btn btn primary" href="{{url_for('decepdive_warenkorb')}}">Jetzt bezahlen</a>
-                                    </li> -->
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="offcanvas-body">
+                        <ul class="account_menu_options">
+                            <li>
+                                <p>item 1</p>
+                            </li>
+                            <li>
+                                <p>item 2 ...</p>
+                            </li>
+                            <!-- <li>
+                                <a class="btn btn primary" href="{{url_for('decepdive_warenkorb')}}">Jetzt bezahlen</a>
+                            </li> -->
+                        </ul>
                     </div>
                 </div>
             </div>
-        {% endblock %}
         </div>
+    </div>
+{% endblock %}
+</div>
 
-        <div class="content">
-            {% block content %} 
-            
-            {% endblock %}
-        </div>
+<div class="content">
+    {% block content %} 
+    
+    {% endblock %}
+</div>

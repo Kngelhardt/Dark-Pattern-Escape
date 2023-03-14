@@ -46,7 +46,7 @@ def initialize_session():
     # Definiert ob im jeweiligen Level das Cookiebanner abgeschlossen wurde
     session['cookie_lv1_fertig']= False
     session['cookie_lv2_fertig']= False
-    session['warenkorb'] = [1, 2, 3]
+    session['warenkorb'] = 0
     # Aufreigungen mit Cookiebannern und ob sie richtig gelöst wurden
     # 3 Mögliche Werte: None(nicht abgeschlossen), True, False
     # cookiebanner lv1: 
@@ -55,18 +55,25 @@ def initialize_session():
     session['dp_berechtiges_interesse_lv1'] = None
     session['dp_cookiedialog_lv1'] = None
     # level1
-    session['dp_roachmotel1'] = None
+    session['dp_roachmotel1'] = Nones
     session['dp_misdirect_kuendigen'] = None
     session['dp_trickquestion1'] = None
     session['dp_shaming_lv1'] = None
     session['dp_roachmotel2'] = None
+    #cookiebanner lv2:
+    session['dp_cookielv2_trickquestion']= None
+    session['dp_cookielv2_trickquestion2']= None
+    session['dp_cookielv2_berechtigt']= None
+
     # level 2
     session['dp_vergleich'] = None
     session['dp_preticked'] = None
     session['dp_sneakinbasket'] = None
-    session['dp_misdirect_login'] = None
-    session['dp_misdirect_spende'] = None
     session['dp_hiddennewsletter'] = None
+    session['dp_misdirect_login'] = None
+    session['dp_misdirect_konto_erstellen'] = None
+    session['dp_misdirect_spende'] = None
+
     
     return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
 
@@ -149,18 +156,17 @@ def get_streaming_images():
     # Return: Die Namen der Bilder als string inkliusive path, um sie einfach laden zu können
     return ['/static/images/deceptv/' +file for file in image_dir]
 
-@app.route("/cookie-form-lv1", methods=['GET','POST'])
+#####################################BAUSTELLE####################################################
+@app.route('/cookie_form_lv1', methods=['GET','POST'])
 def cookie_form_lv1():
     if request.method == 'POST':
         # Cookiedialog beenden
         session['cookie_lv1_fertig'] = 1
         session['cookie_lv1_show'] = 0
-        print('test')
-        print(request.form)
-        print(request.form.get("CookieStandort"))
-        print(request.form.get("CookieIdent"))
-
+        session['dp_cookie_lv1'] = 1
+        session['dp_berechtiges_interesse_lv1'] = 1
     return '', 204
+#####################################BAUSTELLE####################################################
 
 #Startseite
 @app.route('/deceptv/')
@@ -171,7 +177,7 @@ def deceptv():
         return redirect(url_for('home_intro'))
     # Cookiebanner beim ersten aufrufen sichtbar machen, es wird nach dem beenden der 
     # können Banner-Aufgabe wieder versteckt
-    if session["cookie_lv1_fertig"] == False:
+    if session["cookie_lv1_fertig"] is False:
         session['cookie_lv1_show'] = True
     # lade bilder aus dem static/images/deceptv ordner
     deceptv_images = get_streaming_images()
@@ -332,20 +338,61 @@ def decepdive_cookies():
     if request.method == "POST":
         # Cookiebanner auf beendet setzten, damit es nicht mehr erscheint
         session['cookie_lv2_fertig']= True
-        # abfrage ob checkbox geticked wurde für box 1
-        if 'interesse1' in request.form:
-            # Wenn geticked wird dp_score erhöht
-            session['dp_score'] = session['dp_score'] +2
+        # abfrage ob die angekruezte checkbox ausgeschaltet wurde
+        if 'interesse1' not in request.form and 'interesse2' not in request.form:
+            # Wenn angekruezt, wird dp_score erhöht
+            session['dp_score'] = session['dp_score'] +5
+            # Dark Pattern als richtig gelöst markieren
+            session['dp_cookielv2_berechtigt'] = True
         else:
-            # Wenn nicht geticked wird data_score verringert
+            # Wenn nicht angekruezt, wird data_score verringert
             session['data_score'] = session['data_score'] -10
-        # Abfrage: box 2
-        if 'interesse2' in request.form:
-            session['dp_score'] = session['dp_score'] +2
-        else:
-            session['data_score'] = session['data_score'] -10
-    return '', 204
+            # Dark Pattern als flasch gelöst markieren
+            session['dp_cookielv2_berechtigt'] = False
 
+    return render_template('decepdive/decepdive.html')
+
+@app.route('/warenkorb', methods=['GET', 'POST'])
+def add_warenkorb():
+    if request.method == "POST":
+        if 'bestellung' in request.form:
+            # dp falsch gelöst. (Monatliche kosten vermeiden)
+            if request.form['bestellung'] == 'bestellung_monatl':
+                session['warenkorb'] = 9
+                session['dp_preticked'] = False
+            # dp richtig gelöst. (Monatliche kosten vermeiden)
+            if request.form['bestellung'] == 'bestellung_einzel':
+                # checken, ob es schon gelöst wurde. Nur wenn nicht: Punkte vergeben
+                if session['dp_preticked'] is None:
+                    session['dp_score'] = session['dp_score'] + 5
+                session['dp_preticked'] = True
+                session['warenkorb'] = 9.99
+
+   # direct zu warenkorb (nächste seite)
+    return render_template('decepdive/decepdive_warenkorb.html')
+
+@app.route('/konto_warenkorb', methods=['GET', 'POST'])
+def agb_warenkorb():
+    if request.method == "POST":
+        # Error vermeiden
+        if 'preis' in request.form:
+            session['warenkorb'] = request.form['preis']
+        # Wenn newslestter nicht abgelehnt: ziehe daten ab, 
+        # Wenn abgelehnt: erhöhe dark pattern score
+        if 'newsletter' in request.form:
+            if request.form['newsletter'] == 'selected':
+                # mehrfaches lösen verhindern
+                if  session["dp_hiddennewsletter"] is None:
+                    session['data_score'] = session['data_score']-10
+                    session['dp_hiddennewsletter'] = False
+            elif request.form['newsletter'] == 'abgelehnt':
+                # mehrfaches lösen verhindern
+                if  session["dp_hiddennewsletter"] is None:
+                    session['dp_score'] = session['dp_score'] + 5
+                    session['dp_hiddennewsletter'] = True
+   # direct zu warenkorb2 (nächste seite)
+    return render_template('decepdive/decepdive_warenkorb2.html')
+ 
 @app.route('/decepdive_produkt1')
 def decepdive_produkt1():
     if session['level_fortschritt'] >= 2:
@@ -375,6 +422,25 @@ def decepdive_produkt5():
     if session['level_fortschritt'] >= 2:
         return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_produkt5.html')
+
+@app.route('/decepdive_produkt6')
+def decepdive_produkt6():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
+    return render_template('decepdive/decepdive_produkt6.html')
+
+@app.route('/decepdive_produkt7')
+def decepdive_produkt7():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
+    return render_template('decepdive/decepdive_produkt7.html')
+
+@app.route('/decepdive_produkt8')
+def decepdive_produkt8():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
+    return render_template('decepdive/decepdive_produkt8.html')
+
 
 @app.route('/decepdive/warenkorb')
 def decepdive_warenkorb():
@@ -411,6 +477,5 @@ def ende_lv2():
     # und stelle sicher das cokkie_banner_lv2 nicht angezeigt wird
     if session['cookie_lv2_fertig'] is False:
         session['data_score'] = session['data_score'] -40
-        session['cookie_lv2_show'] = False
         session['cookie_lv2_fertig']= True    
-    return '', 204
+    return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])

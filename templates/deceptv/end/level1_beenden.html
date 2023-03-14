@@ -20,9 +20,9 @@
                             onclick="show_hide_div('confirmshaming'); 
                                     show_hide_div('trick_question'); 
                                     // Backend update
-                                    set_session_value({'dp_score': 4 });
+                                    set_wenn_nicht_geloest('{{ session['dp_trickquestion1'] }}',{'dp_score': 5 , 'dp_trickquestion1': 1});
                                     // Frontend update
-                                    progress_add('dp_score_bar','dp_score_text', 4); "
+                                    progress_add('dp_score_bar','dp_score_text', 5); "
                             >Ich will DecepTV Serien und Filme nicht mehr sehen
                         </a>
                     </div>
@@ -86,13 +86,13 @@
                         </a> 
                     <!-- "Confirmshaming" Dark Pattern: Formulierung des knopfes soll Spieler*innen sich dumm,
                          naiv oder herzlos dafür fühlen lassen die Option zu wählen-->
-                        <a class="btn btn-secondary " href="{{url_for('level1_beenden2')}}" 
+                        <button class="btn btn-secondary " href="{{url_for('level1_beenden2')}}" 
                             onclick="// Backend update
-                                    set_session_value({'dp_score': 4 });
+                                    url_delay_set_session('{{ session['dp_shaming_lv1'] }}', '{{url_for('level1_beenden2')}}', {'dp_score': 5 });
                                     // Frontend update
-                                    progress_add('dp_score_bar','dp_score_text', 4); ">
+                                    progress_add('dp_score_bar','dp_score_text', 5); ">
                             Ich stinke eh nach Geld, mir egal dass ich das 5% sparen würde
-                        </a> 
+                         </button> 
                         <a class="btn btn-success " href="{{url_for('deceptv')}}">
                             Natürlich will ich das 5% sparen, ich bin doch nicht blöd.
                         </a>

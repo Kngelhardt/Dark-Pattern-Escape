@@ -18,23 +18,31 @@
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Sonnencreme LSF50 500ml</td>
+                    <tr >
+                        <th scope="row"><button class="btn-close py-0"></button> 1</th>
+                        <td>Sonnencreme</td>
                         <td>1</td>
-                        <td>9.95€</td>
+                        <td id="produkt_preis">{{ session['warenkorb'] }}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
+                    <tr id="probe_container">
+                        <th scope="row">
+                            <button class="btn-close py-0" 
+                                onclick="show_hide_div('probe_container');
+                                        calculate_total();
+                                        set_wenn_nicht_geloest('{{ session['dp_sneakinbasket'] }}',{'dp_score': 5 , 'dp_sneakinbasket': 1 }); 
+                                        progress_add('dp_score_bar','dp_score_text', 5);">
+                            </button> 
+                            2
+                        </th>
                         <td>Aftersun Probe 30ml</td>
                         <td>1</td>
-                        <td>0.99€</td>
+                        <td id="probe_preis">0.99</td>
                     </tr>
                     <tfoot>
                         <th scope="row "><b>Total</b></th>
                         <td></td>
                         <td></td>
-                        <td>10.94€</td>
+                        <td id="gesamt_preis"></td>
                     </tfoot>
                     </tbody>
                 </table>
@@ -43,33 +51,36 @@
                     <input class="rounded" type="text" placeholder="Gibt deinen Code ein">
                     <div class="btn btn-primary"><b>Abschicken</b></div>
                 </form>
-                    <div class="col text-r text-secondary position-relative">
-                        <form class="position position-absolute end-0" action="">
-                            <label for="agb">Ich Akzeptiere die AGB von DecepDive</label>
-                            <input type="checkbox" name="agb" value="Ich habe die AGB gelesen">
-                            <button type="button" class="d-2 btn dropdown-toggle dropdown-toggle-split text-secondary" 
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-lg-end text-secondary">
-                                <li><label for="newsletter"> <b>Newsletter erhalten</b></label></li>
-                                <li><input type="checkbox" name="newsletter" value="akzeptiert" checked="true">
-                                    Ich will Neuhigkeiten <br>
-                                    und Angebote von DecepDive <br> 
-                                    und Partnerfirmen bekommen
-                                </li>
-                            </ul>
-                            <!-- hier sollte ien submit sein -->
-                            <a class="btn btn-success" href="{{url_for('decepdive_warenkorb2')}}">Weiter</a>
+                    <!-- Misdirection Dark Pattern: Checkbox "agb" dient dazu, den weiter-Button zu enablen 
+                        und von dem button für das dropdown menü mit preticked Newsletter-Abonnement abzulenkten --->
+                    <div class="float-end dropdown">
+                        <form action="{{ url_for('agb_warenkorb') }}" method="POST">
+                            <label for="agb" class="text-secondary ">Ich Akzeptiere die AGB von DecepDive</label>
+                            <input type="checkbox" name="agb" value="Ich habe die AGB gelesen"
+                                   onclick="document.getElementById('submit_button').disabled = false;">
+                            <div class="custom-select text-secondary " style="width:200px;">
+                                <select name="newsletter">
+                                    <option value="selected" selected>
+                                          Ich will Neuhigkeiten und Angebote von DecepDive und Partnerfirmen bekommen.
+                                    </option>
+                                    <option value="abgelehnt">
+                                          Nein Danke, ich lehne ab.
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Visually hidden input: dient dazu den gesamtpreis an flask zu senden -->
+                            <input type="number" step="0.01" name="preis" id="preis_input" value="0" class="visually-hidden">
+
+                            <input id="submit_button" type="submit" class="btn btn-success" value="Weiter" disabled ></input>
                         </form>
                     </div> 
             </div>
-            <div class="platzfülller" style="height: 400px;">
-
-            </div>
+            <div style="height: 400px;"></div>
         </div>
     </div>
     <script>
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
+        calculate_total();
     </script>
     {% endblock %}

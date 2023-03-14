@@ -13,17 +13,25 @@
             <input type="text" name="name" class="form-control-sm" placeholder="Maxi">
             <input type="text" name="nachname" class="form-control-sm" placeholder="Mustermensch">
             <p>Adresse:</p>
-            <input type="text" class="form-control-sm" placeholder="Ein Straßename">
-            <input type="text" class="form-control-sm" placeholder="Eine hausnummer"> 
+            <input type="text" class="form-control-sm" placeholder="Straßenstraße">
+            <input type="text" class="form-control-sm" placeholder="Nr. 6"> 
             <input type="text" class="form-control-sm" placeholder="99999">
             <input type="text" class="form-control-sm" placeholder="Musterstadt"> 
             <p>Telefonnummer, E-Mail:</p>
             <input type="text" class="form-control-sm" placeholder="123456789876543">
-            <input type="text" class="form-control-sm" placeholder="E-Mail@email.com"> 
-            <a class="btn btn-success" href="{{url_for('decepdive_warenkorb4')}}">Weiter</a>
+            <input type="text" class="form-control-sm" placeholder="maxi-mustermensch@email.com"> 
+            <div class="pt-4">
+                <button class="btn btn-outline-secondary float-end" 
+                        onclick="url_delay_set_session('{{ session['dp_misdirect_konto'] }}','{{url_for('decepdive_warenkorb4')}}', {'dp_score': 5, 'dp_misdirect_konto': 1 });">
+                        Weiter
+                </button>
+                <button class="btn btn-success " 
+                        onclick="url_delay_set_session('{{ session['dp_misdirect_konto'] }}','{{url_for('decepdive_warenkorb4')}}', {'data_score': -10, 'dp_misdirect_konto': 0 });">
+                        Konto erstellen und weiter
+                </button>
+            </div>
         </div>
-        <div class="platzfülller" style="height: 100px;"></div>
-        <div class="platzfülller" style="height: 100px;"></div>
+        <div class="platzfülller" style="height: 200px;"></div>
     </div>
 </div>
 <script>

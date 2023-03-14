@@ -53,10 +53,7 @@
         #zeit_anzeige{
             left: 40%;
         }
-        .cookie_manager{
-            top: 30%;
-            left: 30%;
-        }
+        /* --------------------------------------------------------------------------------------------------------------------------------------------- */
         /* Dark Pattern Bausteine */
         .misdirection_text{
             color: gray;
@@ -72,6 +69,34 @@
         .unscheinbarer_button{
             border: none;
             background-color: transparent;
+        }
+        /* Verstecktes select menü */
+        .custom-select{
+            display: inline-block;
+            max-width: 20px;
+            padding-left: 3px;
+        }
+        .custom-select select{
+            position: relative;
+            appearance: none;
+            background-color: transparent;
+            color: transparent;
+            border: none;
+            outline: none;
+            max-width: 7px;
+        }
+        .custom-select::before{
+            position: absolute;
+            left: 303px;
+            content: ">";
+            transform: rotate(90deg);
+            font-weight:lighter;
+        }
+        .custom-select select:hover{
+            cursor: pointer;
+        }
+        .custom-select option{
+            color: black;
         }
         /* --------------------------------------------------------------------------------------------------------------------------------------------- */
         /* CSS für die Landingpage */
@@ -126,8 +151,10 @@
             text-decoration: none;
             text-shadow: 0 0 2px rgb(28, 134, 255);
         }
+        #cookie_fussleiste_lv1{
+            bottom: 90px;
+        }
         /* Kontent für Streaming-startseite */  
-    
         .content_level1{
             /*  alternatives Farbschema */
             background-color: rgb(4, 8, 17);
@@ -164,9 +191,6 @@
         }
         .dropdown-item{
             font-weight: bolder;
-        }
-        #service_kündigen{
-            text-decoration: none;
         }
         /* --------------------------------------------------------------------------------------------------------------------------------------------- */
         /* CSS Level2: Shoppingseite */
@@ -212,6 +236,7 @@
             height: 70vh;
             padding: 20% 30%;
         }
+
     </style>
     <title>DP Escape</title>
 </head>

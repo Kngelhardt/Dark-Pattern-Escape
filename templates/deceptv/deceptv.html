@@ -2,7 +2,7 @@
     {% extends 'layout_level1.html' %}
 
     {% block content %}
-    <div class="content_level1 ">
+    <div class="content_level1 position-relative">
         <div class="showcase">
             <img class="img-fluid rounded atrappe" src="{{url_for('static', filename='images/showcase.jpg')}}" alt="">
         </div>
@@ -104,6 +104,7 @@
             {% endfor %}
         </div>
     </div>
+    
 
     <script>
         // starte countdown für das level, rufe dafür die aktuelle Zeit des countdown timers von 'session['countdown']' ab
