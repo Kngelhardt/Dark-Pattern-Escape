@@ -53,11 +53,10 @@
                     </table>
                     <div class="row">
                         <div class="col-10">
-                            <div class="btn btn-close-white" 
-                                onclick="
+                            <div class="btn btn-close-white border" onclick="
                                     url_delay_set_session('{{ session['dp_misdirect_spende'] }}','{{url_for('ende_lv2')}}', {'dp_score': 5, 'dp_misdirect_spende': 1 });
                                     progress_add('dp_score_bar','dp_score_text', 5);">
-                                <p class="misdirection_text">Jetzt Zahlen <br>
+                                <p class="misdirection_text mb-0">Jetzt Zahlen <br>
                                 <small>ohne Spende</small> </p>
                              </div>
                         </div>
@@ -79,7 +78,6 @@
         <div class="platzfülller" style="height: 250px;"></div>
     </div>
     <script>
-        document.getElementById("ende_lv2").style.display = "none";
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
     </script>  
     {% endblock %}

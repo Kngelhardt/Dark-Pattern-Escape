@@ -86,13 +86,11 @@
                         </a> 
                     <!-- "Confirmshaming" Dark Pattern: Formulierung des knopfes soll Spieler*innen sich dumm,
                          naiv oder herzlos dafür fühlen lassen die Option zu wählen-->
-                        <button class="btn btn-secondary " href="{{url_for('level1_beenden2')}}" 
-                            onclick="// Backend update
-                                    url_delay_set_session('{{ session['dp_shaming_lv1'] }}', '{{url_for('level1_beenden2')}}', {'dp_score': 5 });
-                                    // Frontend update
-                                    progress_add('dp_score_bar','dp_score_text', 5); ">
+                         <div class="btn btn-secondary" onclick="
+                                url_delay_set_session('{{ session['dp_shaming_lv1'] }}', '/deceptv/premium/mitgliedschaft-beenden', {'dp_score': 5,'dp_shaming_lv1': 1 });
+                                progress_add('dp_score_bar','dp_score_text', 5); ">
                             Ich stinke eh nach Geld, mir egal dass ich das 5% sparen würde
-                         </button> 
+                        </div>
                         <a class="btn btn-success " href="{{url_for('deceptv')}}">
                             Natürlich will ich das 5% sparen, ich bin doch nicht blöd.
                         </a>

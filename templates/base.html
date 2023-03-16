@@ -23,6 +23,13 @@
 
         <!-- Fußzeile mit den Werten der jeweiligen Session -->
         <div class="fussleiste mainbackground maincolor" >
+
+            <div class="cookieleiste">
+                {% block cookieleiste %}
+
+                {% endblock %}
+            </div>
+
             <div class="row text-center pt-3">
                 <div class="col-1">
                     <a href="{{url_for('initialize_session')}}" class="btn btn-warning">Reset</a>
@@ -71,6 +78,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="cookiemodal">
+            {% block cookiemodal %} 
+            
+            {% endblock %}
+        </div>
+
     {% endblock %}
     </div>
     

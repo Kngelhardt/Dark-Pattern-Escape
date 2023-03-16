@@ -21,14 +21,14 @@
             <input type="text" class="form-control-sm" placeholder="123456789876543">
             <input type="text" class="form-control-sm" placeholder="maxi-mustermensch@email.com"> 
             <div class="pt-4">
-                <button class="btn btn-outline-secondary float-end" 
-                        onclick="url_delay_set_session('{{ session['dp_misdirect_konto'] }}','{{url_for('decepdive_warenkorb4')}}', {'dp_score': 5, 'dp_misdirect_konto': 1 });">
+                <div class="btn btn-outline-secondary float-end" 
+                        onclick="url_delay_set_session('{{ session['dp_misdirect_konto_erstellen'] }}', '{{url_for('decepdive_warenkorb4')}}', {'dp_score': 5, 'dp_misdirect_konto_erstellen': 1 });">
                         Weiter
-                </button>
-                <button class="btn btn-success " 
-                        onclick="url_delay_set_session('{{ session['dp_misdirect_konto'] }}','{{url_for('decepdive_warenkorb4')}}', {'data_score': -10, 'dp_misdirect_konto': 0 });">
+                </div>
+                <div class="btn btn-success " 
+                        onclick="url_delay_set_session('{{ session['dp_misdirect_konto_erstellen'] }}', '{{url_for('decepdive_warenkorb4')}}', {'data_score': -10, 'dp_misdirect_konto_erstellen': 0 });">
                         Konto erstellen und weiter
-                </button>
+                </div>
             </div>
         </div>
         <div class="platzfülller" style="height: 200px;"></div>

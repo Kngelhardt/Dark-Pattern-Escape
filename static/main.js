@@ -1,6 +1,5 @@
 /* Funktion um Elemente verschwinden oder erscheinen zu lasssen */
 function show_hide_div(a){
-    console.log(document.getElementById(a), a);
     if(document.getElementById(a).style.display != "none"){
         document.getElementById(a).style.display = "none";
     }else{
@@ -60,10 +59,12 @@ function set_wenn_nicht_geloest(dark_pattern_id, json_obj){
 /* Delay beim aufrufen einer neuen Seite, damit ein POST request um die session zu ipdaten noch durchgeht */
 function url_delay_set_session(dark_pattern_id, url, json_obj){
     set_wenn_nicht_geloest(dark_pattern_id, json_obj);
+
     delay = setInterval(function(){
+        console.log(dark_pattern_id, json_obj)
         window.location.href = url;
         clearInterval(delay)
-    },1000);
+    },70);
 }
 
 /*  Funktion um die Werte der Progressbars upzudaten und anschließend in der Session zu speihern
@@ -78,7 +79,6 @@ function url_delay_set_session(dark_pattern_id, url, json_obj){
 function progress_add(bar, value_now_id, value_add){
     var value_now = parseInt(document.getElementById(value_now_id).textContent)
     var  value_after = value_now + value_add;
-    console.log(bar, value_after, value_now, value_add);
 
     if(document.getElementById(bar) == document.getElementById("dp_score_bar")){
         document.getElementById(bar).style.width = value_after + '%';
@@ -126,7 +126,7 @@ function level_countdown(zeit_state, level_fortschritt){
                     ) 
             );
         }
-    }, 1099999900); 
+    }, 1000); 
 }
 
 /* Timer der dei Uhrzeit darstellt. 
@@ -150,7 +150,7 @@ function ist_erreichbar(){
     // Button funktioniert nur, wenn der starte_uht timer zwischen 14 und 16 ist
     if(parseInt(document.getElementById('uhr').textContent) >= 14 && parseInt(document.getElementById('uhr').textContent) <= 16){
         // Backend update: KEINE MOEGLSICHERUNG BEI MEHRMALIGEM DRÜCKEN 
-        set_session_value({'dp_score': 5, 'dp_roachmotel2': true});
+        set_session_value({'dp_score': 5, 'dp_roachmotel2': 1});
         // Frontend update
         progress_add('dp_score_bar','dp_score_text', 5);
         // Halte Uhr an

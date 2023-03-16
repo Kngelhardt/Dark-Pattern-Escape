@@ -33,6 +33,7 @@
                     <form class="d-flex ms-auto p-2" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -102,4 +103,209 @@
     
     {% endblock %}
 </div>
+
+<div class="cookieleiste">
+    {% block cookieleiste %} 
+        <!-- Cookie Dialog Popup -->
+        {% if session['cookie_lv1_show'] == True %}
+        <!-- Cookiebanner: werden angezeigt, wenn session['cookie_lv1_show'] == True. 
+        session['cookie_lv1/2_show'] wird beim ersten aufrufen der Homepade des jeweiligen Levels
+        auf true gesetzt, wenn session['cookie_lv_1/2_fertig] true ist -->
+        <div id="cookie_fussleiste_lv1" class="maincolor_level1">
+            <div class="d-flex justify-content-between">
+                <div class="p-2">
+                    <p> Auf dieser Seite benutzen wir Cookies um unsere Dienste zu verbessern
+                        und eine gute Performance zu liefern. Datenschutz liegt uns hier bei
+                        <b>Decep</b>tv am Herzen, darum kannst deine Cookies 
+                        <!-- Misdirection DarkPattern: Button um zum Cookiemanager zu kommen ist kein Knopf, 
+                            sondern nur ein unterstrichener Text ohne pointer beim derüber Hovern. 
+                            Währenddessen sind zwei andere KNöpfe in der Fußleiste prominent dargestellt um abzulenken-->
+                        <span  class="text-decoration-underline" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#cookie_manager_lv1"
+                                onclick="
+                                /*  Backend update */
+                                set_wenn_nicht_geloest('{{session['dp_open_cookiemanager_lv1']}}', {'dp_score': 5, 'dp_open_cookiemanager_lv1': 1 })
+                                /*  Frontend update */
+                                progress_add('dp_score_bar','dp_score_text', 5); 
+                                show_hide_div('cookie_fussleiste_lv1');">
+                            hier
+                        </span>
+                        managen. <br> Du kannst deine Cookie-Einstellungen jeder Zeit im 
+                        <b>Datenschutzmanager</b> neu anpassen.
+                    </p>
+                </div>
+                <div class="p-2">
+                    <!-- Beide Knöpfe machen das selbe
+                        Trick-Question Dark Pattern: "Ablehnen zu widersprecehn ist das selbe wie Akzeptieren"-->
+                    <div class="btn btn-outline-primary pb-3" 
+                        onclick="// Backend update
+                                set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score': -40, 'dp_cookiemanager_lv': 0 });
+                                //frontend update
+                                progress_add('data_bar','data_text', -40); 
+                                //hide cookiebanner
+                                show_hide_div('cookie_fussleiste_lv1');">
+                        Ablehnen <br>
+                        <span class="small_text misdirection_text">zu wiedersprechen</span> 
+                    </div>
+                    <div class="btn btn-primary pb-0"
+                        onclick="// Backend update
+                                set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score': -40, 'dp_cookiemanager_lv': 0 });
+                                //frontend update
+                                progress_add('data_bar','data_text', -40);
+                                //hide cookiebanner
+                                show_hide_div('cookie_fussleiste_lv1');">
+                        <p>Alle <br> Akzeptieren</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}           
+    {% endblock %}
+</div>
+
+<div class="cookiemodal">
+    {% block cookiemodal %} 
+    <!-- Modal (Bootstrap static modal von: https://getbootstrap.com/docs/5.3/components/modal) -->
+    <div class="modal fade" id="cookie_manager_lv1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Cookie Manager</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                            onclick="set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score':  -40 });
+                                    progress_add('data_bar','data_text', -40); ">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url_for('cookie_form_lv1')}}" method="post">
+                        <p>Auf dieser Seite benutzen wir Cookies um unsere Dienste zu verbessern
+                        und eine gute Performance zu liefern. Datenschutz liegt uns hier bei
+                        <b>Decep</b>tv am Herzen, darum kannst deine Cookies hier managen. Du kannst deine
+                        Cookie-Einstellungen jeder zeit im <b>Datenschutzmanager</b> neu anpassen.</p>
+                        <hr>
+                        <!-- Überschrift -->
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <h4>Funktion</h4>
+                            </div>
+                            <!-- Dark Pattern: Trick Question? nach zusage zu absage Fragen, statt einfach "An/Aus" anzugeben -->
+                            <!-- Dark Patter Misdirection: Farbe lenkt von Inhalt ab: 
+                                Die falsche Antwort "Ablehnen: Nein" ist nicht farbig und 
+                                die richtige Antwort "Ablehnen: Ja" ist gegen die Erwartung bei einer Absage farbig-->
+                            <!-- Dark Pattern: Opt-out -->
+                            <div class="p-2 ms-auto">
+                                <h5>Ablehnen</h5>
+                            </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="d-flex">
+                            <label class="flex-grow-1 px-0 py-0 form-check-label" for="CookieStandort">Standortdaten verwenden</label>
+                            <div>
+                                <small>Nein</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="CookieStandort">
+                                    <small>Ja</small>
+                                </div>   
+                            </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="d-flex">
+                            <label class="flex-grow-1 form-check-label" for="CookieIdent">Geräteeigeschaften zu identifikation abfragen</label>
+                            <div>
+                                <small>Nein</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="CookieIdent">  
+                                    <small>Ja</small>
+                                </div> 
+                            </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="d-flex">
+                            <label class="flex-grow-1 form-check-label" for="CookieDeviceSaves">Informationen auf dem Gerät speichern und abrufen</label>
+                            <div>
+                                <small>Ja</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input switch_rotate" type="checkbox" name="CookieDeviceSaves">
+                                    <small>Nein</small> 
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="d-flex">
+                            <label class="flex-grow-1 form-check-label" for="CookiePersonalisierung">Personalisierte Anzeigen und Inhalte zeigen</label>
+                            <div>
+                                <small>Nein</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="CookiePersonalisierung">
+                                    <small>Ja</small> 
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="d-flex">
+                            <label class="flex-grow-1 form-check-label" for="CookieTargeting">Zielgruppen messen und Produkte verbessern</label>
+                            <div>
+                                <small>Nein</small>
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="CookieTargeting">        
+                                    <small>Ja</small> 
+                                </div>       
+                            </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="d-flex">
+                            <p class="flex-grow-1 py-0 mb-0">Funktionale Cookies</p>
+                            <p class="mb-0">Immer aktiv</p>
+                        </div>
+                        <hr class="my-0">
+                        <small class="cursor_pointer py-0" onclick="show_hide_div('berechtigtes_interesse');progress_add('dp_score_bar','dp_score_text', 5);">
+                            Berechtigtes Interesse
+                        </small> 
+                        <br>
+                        <div id="berechtigtes_interesse">
+                            <h5>Berechtigtes Interesse</h5>
+                            <hr class="my-0">
+                            <div class="d-flex">
+                                <label class="flex-grow-1 form-check-label" for="cookie_berechtigt1">Informationen auf einem Gerät speichern/abfragen</label>
+                                <div>
+                                    <small>Off</small>
+                                    <div class="form-check form-switch d-inline-block">
+                                        <input class="form-check-input" type="checkbox" name="cookie_berechtigt1"  checked>
+                                        <small>On</small> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <label class="flex-grow-1 form-check-label" for="cookie_berechtigt2">Zielgruppen messen und Produkte verbessern</label>
+                                <div class="float-end">
+                                    <small>Off</small>
+                                    <div class="form-check form-switch d-inline-block">
+                                        <input class="form-check-input" type="checkbox" name="cookie_berechtigt2" checked>        
+                                        <small>On</small>                      
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-0">
+                        </div>
+                        <!-- Misdirection/Trickquestion Dark Pattern: Button zum submit der Checkboxe sieht 
+                        nicht aus wie Button sonder wie Text, der auf den Button neben dran hinweist  -->
+                        <div class="float-end">
+                            <input type="submit" value="Auswahl bestätigen: " class="unscheinbarer_button" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    onclick="set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0,'dp_cookiemisdirection_lv1': 0, 'data_score':  -40 });progress_add('data_bar','data_text', -40); ">
+                                    Akzeptieren
+                            </button>
+                        </div>
+                    </form>     
+                </div>            
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('berechtigtes_interesse').style.display = "none";
+    </script>
+    {% endblock %}
+</div>
+
 

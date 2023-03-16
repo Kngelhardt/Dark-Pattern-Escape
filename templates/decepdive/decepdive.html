@@ -101,7 +101,7 @@
                     <h1 class="modal-title fs-2" id="cookiedialog_lv2Label">Cookie Manager</h1>
                     <!-- Wenn der Cookie-Dialog im ersten Modal-Fenster geschlossen wird werden 40 Datenpunkte abgezogen und die Aufgabe ist unwiderruflich beendet -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}', {'data_score': -40, 'cookie_lv2_fertig': 1});
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}', {'data_score': -40, 'cookie_lv2_fertig': 1, 'dp_cookielv2_trickquestion': 0});
                                     progress_add('data_bar','data_text', -40);">
                     </button>
                 </div>
@@ -136,7 +136,7 @@
                     <!-- Wenn der Cookie-Dialog im zweite Modal-Fenster geschlossen wird werden 30 Datenpunkte abgezogen (Eine Art von Cookies wurde schon abgelehnt)
                          und die Aufgabe ist unwiderruflich beendet -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}',{'data_score': -30, 'cookie_lv2_fertig': 1});
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}',{'data_score': -30, 'cookie_lv2_fertig': 1,'dp_cookielv2_trickquestion2': 0});
                                     progress_add('data_bar','data_text', -30);">
                     </button>
                 </div>
@@ -146,12 +146,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'data_score': -10, 'cookie_lv2_fertig': 1});
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'data_score': -10, 'cookie_lv2_fertig': 1, 'dp_cookielv2_trickquestion2': 0});
                                     progress_add('data_bar','data_text', -10);">
                             Nein
                     </button>
                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'dp_score': 5, 'dp_cookielv2_trickqeustion2': 1 }); 
+                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'dp_score': 5, 'dp_cookielv2_trickquestion2': 1 }); 
                                     progress_add('dp_score_bar','dp_score_text', 5);" >
                             Ja
                     </button>
