@@ -13,36 +13,47 @@
                     <tr>
                         <th scope="col">Warenkorb</th>
                         <th scope="col">Inhalt</th>
-                        <th scope="col">Stück</th>
+                        <th scope="col">Anzahl</th>
                         <th scope="col">Preis</th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
                     <tr >
-                        <th scope="row"><button class="btn-close py-0"></button> 1</th>
+                        <th scope="row"><button class="btn-close py-0"></button> </th>
                         <td>Sonnencreme</td>
                         <td>1</td>
-                        <td id="produkt_preis">{{ session['warenkorb'] }}</td>
+                        <td ><span id="produkt_preis">9.99</span>€</td>
                     </tr>
+                    {% if session['bestellung_monatl'] == True %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Monatslieferungs-Rabatt</td>
+                        <td>10%</td>
+                        <td><span id="rabatt_monatl">-0.99</span>€</td>
+                    </tr>
+                    {% endif %}
+                    {% if session['dp_sneakinbasket'] == None %}
                     <tr id="probe_container">
                         <th scope="row">
+                            <!-- Dark Pattern: Sneak in the Basket: Probe wurde hinzugefügt. Kostet nicht viel aber der Versand wird dadurch auch teurer.
+                            Folgend: button um aus warenkorb zu entfernen -->
                             <button class="btn-close py-0" 
                                 onclick="show_hide_div('probe_container');
                                         calculate_total();
-                                        set_wenn_nicht_geloest('{{ session['dp_sneakinbasket'] }}',{'dp_score': 5 , 'dp_sneakinbasket': 1 }); 
+                                        set_session_value({'dp_score': 5 , 'dp_sneakinbasket': 1 }); 
                                         progress_add('dp_score_bar','dp_score_text', 5);">
                             </button> 
-                            2
                         </th>
                         <td>Aftersun Probe 30ml</td>
                         <td>1</td>
-                        <td id="probe_preis">0.99</td>
+                        <td><span id="probe_preis">0.99</span>€</td>
                     </tr>
+                    {% endif %}
                     <tfoot>
                         <th scope="row "><b>Total</b></th>
                         <td></td>
                         <td></td>
-                        <td id="gesamt_preis"></td>
+                        <td><span id="gesamt_preis"></span>€</td>
                     </tfoot>
                     </tbody>
                 </table>

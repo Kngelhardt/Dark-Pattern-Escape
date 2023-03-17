@@ -1,0 +1,55 @@
+
+{% extends 'layout_level2.html' %}
+
+
+{% block content %}
+<div class=" content_level2">
+    <div class="container py-5">
+        <div id="misdirection">
+            <div>
+                <h3><a class="text-black" href="{{ url_for('decepdive_warenkorb') }}">Warenkorb</a> |
+                    <a class="text-black" href="{{ url_for('decepdive_warenkorb2') }}">Konto</a>  |
+                    <a class="text-black" href="{{ url_for('decepdive_warenkorb3') }}">Daten</a> |
+                    <a class="text-black" href="{{ url_for('decepdive_warenkorb4') }}">Übersicht</a> |
+                    <b class="text-primary">Zahlung</b> 
+                </h3>
+            </div>
+            <div class="border border-dark-subtle rounded py-5 px-5" >
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th scope="col">Warenkorb</th>
+                        <th scope="col">Preis</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row "><b>Total</b></th>
+                        <td><span id="gesamt_preis">{{ session['warenkorb'] + session['spende_lv2'] }} </span>€</td>
+                    </tr>
+                    </tbody>
+                </table>
+                {% if  session['warenkorb'] + session['spende_lv2'] > session['geld_score'] %}
+                    <div class="red_box_shadow rounded my-5 px-3 py-3">
+                        <h3>Du hast nicht mehr genug Geld um zu bezahlen.</h3>
+                        <p>Dir fehlen <b class="text-danger">{{ ((session['warenkorb'] + session['spende_lv2']) - session['geld_score'])|round(2) }}€</b> <br>
+                            Gehe im Einkaufsprozess zurück und finde Wege weniger zu bezahlen 
+                        </p>
+                        <a href="{{ url_for('decepdive_warenkorb') }}" class="btn btn-danger">Zurück zum Warenkorb</a>
+                    </div>
+                {% else %}
+                    <div class="green_box_shadow rounded my-5 px-3 py-3"">
+                        <h4>Glückwunsch, du hast Level 2 erfolgreich gemeistert. Wenn du mit deinem Einkauf zufrieden bist, kannst du das Level jetzt abschließen.</h4>
+                    <a href="{{ url_for('ende_lv2') }}" class="btn btn-success">Jetzt Zahlen und Level 2 erfolgreich beenden</a>
+                    </div>         
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="platzfülller" style="height: 250px;"></div>
+</div>
+<script>
+    window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
+</script>  
+{% endblock %}
+

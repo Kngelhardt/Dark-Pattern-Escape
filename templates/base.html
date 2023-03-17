@@ -60,8 +60,8 @@
                 </div>
                 <div class="col">
                     <div class="progress position-relative">
-                        <p id="geld_text" class="position-absolute start-50 text-dark fw-bolder">{{session['geld_score']}}</p>
-                        <div id="geld_bar" class="progress-bar bg-warning" role="progressbar" style="width: {{ session['geld_score' ]}}%" 
+                        <p id="geld_text" class="position-absolute start-50 text-dark fw-bolder">{{session['geld_score']}}€</p>
+                        <div id="geld_bar" class="progress-bar bg-warning" role="progressbar" style="width: {{ session['geld_score' ]*4 }}%" 
                             aria-valuenow="{{ session['geld_score' ]}}%" aria-valuemin="0" aria-valuemax="100">
                         </div>
                     </div>

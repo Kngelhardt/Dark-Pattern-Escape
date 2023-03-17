@@ -4,81 +4,115 @@
     {% block content %}
     <div class=" content_level2">
         <div class="container py-5">
-            <div id="misdirection">
-                <div>
-                    <h3> Warenkorb | Konto | Daten | <b class="text-primary">Übersicht</b> | Zahlung</h3>
-                </div>
-                <div class="border border-dark-subtle rounded py-5 px-5" >
-                    <table class="table ">
-                        <thead>
-                        <tr>
-                            <th scope="col">Warenkorb</th>
-                            <th scope="col">Inhalt</th>
-                            <th scope="col">Stück</th>
-                            <th scope="col">Preis</th>
-                        </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Sonnencreme LSF50 500ml</td>
-                            <td>1</td>
-                            <td>9.95€</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Aftersun Probe 30ml</td>
-                            <td>1</td>
-                            <td>0.99€</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Versand</td>
-                            <td>1</td>
-                            <td>4.99€</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Monatslieferungs-Rabatt</td>
-                            <td>10%</td>
-                            <td>-0.99€</td>
-                        </tr>
-                        <tfoot>
-                            <th scope="row "><b>Total</b></th>
-                            <td></td>
-                            <td></td>
-                            <td>14.94€</td>
-                        </tfoot>
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-10">
-                            <div class="btn btn-close-white border" onclick="
-                                    url_delay_set_session('{{ session['dp_misdirect_spende'] }}','{{url_for('ende_lv2')}}', {'dp_score': 5, 'dp_misdirect_spende': 1 });
-                                    progress_add('dp_score_bar','dp_score_text', 5);">
-                                <p class="misdirection_text mb-0">Jetzt Zahlen <br>
-                                <small>ohne Spende</small> </p>
-                             </div>
+            <div>
+                <h3><a class="text-black" href="{{ url_for('decepdive_warenkorb') }}">Warenkorb</a> |
+                    <a class="text-black" href="{{ url_for('decepdive_warenkorb2') }}">Konto</a>  |
+                    <a class="text-black" href="{{ url_for('decepdive_warenkorb3') }}">Daten</a> |
+                    <b class="text-primary">Übersicht</b> |
+                    Zahlung
+                </h3>
+            </div>
+            <div class="border border-dark-subtle rounded py-5 px-5" >
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th scope="col">Warenkorb</th>
+                        <th scope="col">Inhalt</th>
+                        <th scope="col">Anzahl</th>
+                        <th scope="col">Preis</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Sonnencreme LSF50 500ml</td>
+                        <td>1</td>
+                        <td><span id="produkt_preis">9.99</span>€</td>
+                    </tr>
+                    <!-- Wenn monatliche Lieferung nicht abgewählt wurde, gibt es Rabatt. 
+                    allerdings wird dann am Ende mehr Geld abgezugen, weil das Dark Pattern falsch gelöst wurde
+                    und in den folgenden Monaten Geld kosten würde -->
+                    {% if session['bestellung_monatl'] == True %}
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Monatslieferungs-Rabatt</td>
+                        <td>10%</td>
+                        <td><span id="rabatt_monatl">-0.99</span>€</td>
+                    </tr>
+                    {% endif %}
+                    {% if session['dp_sneakinbasket'] == None %}
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Aftersun Probe 30ml</td>
+                        <td>1</td>
+                        <td><span id="probe_preis">0.99</span>€</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Versand</td>
+                        <td>1</td>
+                        <td><span id="versand_preis">4.99</span>€</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Versand</td>
+                        <td>1</td>
+                        <td><span id="versand_preis">3.99</span>€</td>
+                    </tr>
+                    {% endif %}
+                    <tfoot>
+                        <th scope="row "><b>Total</b></th>
+                        <td></td>
+                        <td></td>
+                        <td><span id="gesamt_preis"></span>€</td>
+                    </tfoot>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <!-- Nur sichtbar im 1. Durchlauf -->
+                    {% if session['dp_misdirect_spende'] == None %}
+                    <div class="col-10">
+                        <div class="btn btn-close-white border" onclick="
+                                url_delay_set_session('{{ session['dp_misdirect_spende'] }}','{{url_for('decepdive_warenkorb5')}}', {'spende_lv2': 0.00,'dp_score': 5, 'dp_misdirect_spende': 1 });
+                                progress_add('dp_score_bar','dp_score_text', 5);">
+                            <p class="misdirection_text mb-0">Zum Zahlen <br>
+                            <small>ohne Spende</small> </p>
                         </div>
-                        <div class="col">
-                            <div class="btn btn-success" onclick="
-                                    url_delay_set_session('{{ session['dp_misdirect_spende'] }}','{{url_for('ende_lv2')}}', {'geld_score': -10, 'dp_misdirect_spende': 0 });
-                                    progress_add('dp_score_bar','dp_score_text', 4);">
-                                Jetzt Zahlen <br>
-                                <span class="small_text">mit Spende</span>
-                            </div>
-                        </div>
-                        <p>In Kooperation mit dem Projekt DecepLive sammeln wir Spenden um die Meeresflora zu retten- Wir würden uns sehr über einen Beitrag freuen.
-                            Meer Infos findest du hier <a href="#">DecepLive.com</a>. Danke!
-                        </p>
                     </div>
+                    <div class="col">
+                        <div class="btn btn-success" onclick="url_delay_set_session('{{ session['dp_misdirect_spende'] }}','{{url_for('decepdive_warenkorb5')}}', {'spende_lv2': 1.99, 'dp_misdirect_spende': 0 });">
+                            Zum Zahlen <br>
+                            <span class="small_text">mit Spende</span>
+                        </div>
+                    </div>
+                    <!-- Gleiche Buttons wie oben, aber hier wird nur session['spende_lv2'] geändert.
+                    Nur sichtbar, wenn ein einem ersten durchlauf die buttons schon gedrückt wurden-->
+                    {% else %}
+                    <div class="col-10">
+                        <div class="btn btn-close-white border" onclick="url_delay_set_session('None', '{{url_for('decepdive_warenkorb5')}}', {'spende_lv2': 0.00});">
+                            <p class="misdirection_text mb-0">Zum Zahlen <br>
+                            <small>ohne Spende</small> </p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="btn btn-success" onclick=" url_delay_set_session('None', '{{url_for('decepdive_warenkorb5')}}', {'spende_lv2': 1.99});">
+                            Zum Zahlen <br>
+                            <span class="small_text">mit Spende</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <p>In Kooperation mit dem Projekt DecepLive sammeln wir Spenden um die Meeresflora zu retten- Wir würden uns sehr über einen Beitrag freuen. 
+                        Spende mit deimen Einkauf 1.99€ für gute Zwecke. Meer Infos findest du hier <a href="#">DecepLive.com</a>. Danke!
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="platzfülller" style="height: 250px;"></div>
     </div>
+    <div class="platzfülller" style="height: 250px;"></div>
     <script>
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
+        calculate_total();
     </script>  
     {% endblock %}
 

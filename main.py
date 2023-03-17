@@ -24,7 +24,6 @@ def initialize_session():
         'success: ',session['level_fortschritt'],'\n',
         'lv1_show: ',session['cookie_lv1_show'],'\n',
         'lv1_fin: ', session['cookie_lv1_fertig'],'\n',
-        'lv2_show: ',session['cookie_lv2_show'],'\n',
         'lv2_fin: ',session['cookie_lv1_fertig'],'\n',
         'warenkorb: ',session['warenkorb'],'\n',
         session['data_score'],'\n',
@@ -36,6 +35,7 @@ def initialize_session():
         session['cookie_lv1_fertig'],'\n',
         session['cookie_lv2_fertig'],'\n',
         'warenkorb',session['warenkorb'],'\n',
+        'spende', session['spende_lv2'], '\n',
         # Aufreigungen mit Cookiebannern und ob sie richtig gelöst wurden
         # 3 Mögliche Werte: None(nicht abgeschlossen), True, False
         # cookiebanner lv1: 
@@ -55,7 +55,7 @@ def initialize_session():
         'dp_cookielv2_berechtigt', session['dp_cookielv2_berechtigt'],'\n',
         # level 2
         'dp_vergleich', session['dp_vergleich'],'\n',
-        'dp_preticked', session['dp_preticked'],'\n',
+        'dp_preticked_monatl', session['dp_preticked_monatl'],'\n',
         'dp_sneakinbasket', session['dp_sneakinbasket'],'\n',
         'dp_hiddennewsletter', session['dp_hiddennewsletter'],'\n',
         'dp_misdirect_login', session['dp_misdirect_login'],'\n',
@@ -63,41 +63,46 @@ def initialize_session():
         'dp_misdirect_spende', session['dp_misdirect_spende'],'\n'
         )
 
-    
+    ######## Scores #############################
     session['data_score'] = 100
-    session['geld_score'] = 100
+    session['geld_score'] = 25
     # Countdown = 300 sekunden, also 5 minuten
     session['countdown'] = 300
     session['dp_score'] = 0
      # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
     session['level_fortschritt'] = 0 
-    # Definiert ob im jeweiligen Level das Cookiebanner gezegt wird
+    # Definiert ob in Level 1 das Cookiebanner gezegt wird
     session['cookie_lv1_show'] = False
     # Definiert ob im jeweiligen Level das Cookiebanner abgeschlossen wurde
     session['cookie_lv1_fertig']= False
     session['cookie_lv2_fertig']= False
+    # Gesamtsumme des Warenkorbs in Level 2
     session['warenkorb'] = 0
+    # Ist eine Monatliche Bestellung oder einfache Bestellung ausgewählt
+    session['bestellung_monatl'] = None
+    # Wenn das Dark Pattern 'dp_misdirect_spende' falsch gelöst wurde werden 2€ dem Entbetrag hinzugefügt
+    session['spende_lv2'] = 0.00
     # Aufreigungen mit Cookiebannern und ob sie richtig gelöst wurden
     # 3 Mögliche Werte: None(nicht abgeschlossen), True, False
-    # cookiebanner lv1: 
+    ######## cookiebanner lv1: ######################
     session['dp_open_cookiemanager_lv1']  = None
     session['dp_cookie_lv1']  = None
     session['dp_berechtiges_interesse_lv1']  = None
     session['dp_cookiemisdirection_lv1']  = None
-    # level1
+    ######## level1 #################################
     session['dp_roachmotel1']  = None
     session['dp_misdirect_kuendigen']  = None
     session['dp_trickquestion1']  = None
     session['dp_shaming_lv1']  = None
     session['dp_roachmotel2'] = None
-    #cookiebanner lv2:
+    ######### cookiebanner lv2: #####################
     session['dp_cookielv2_trickquestion']= None
     session['dp_cookielv2_trickquestion2']= None
     session['dp_cookielv2_berechtigt']= None
-    # level 2
+    ######### level 2 ###############################
     session['dp_vergleich']  = None
-    session['dp_preticked'] = None
-    session['dp_sneakinbasket'] = None
+    session['dp_preticked_monatl'] = None
+    session['dp_sneakinbasket'] = None 
     session['dp_hiddennewsletter'] = None
     session['dp_misdirect_login'] = None
     session['dp_misdirect_konto_erstellen'] = None
@@ -122,12 +127,13 @@ def set_session_value():
                 session[session_key] = bool(session_data[session_key])
                 #debugging
                 print('update bool',session_key, session[session_key])
-            elif isinstance(session[session_key],int):
+            elif isinstance(session[session_key], int):
                 session[session_key] = session[session_key] + session_data[session_key]
                 #debugging
                 print('update int', session_key, session[session_key])    
             else:
                 session[session_key] = session_data[session_key]
+                # debugging
                 print('update', session_key, session[session_key])   
         return '', 204
     else:
@@ -141,6 +147,7 @@ def update_timer():
         zeit_state = request.get_json()
         # speicher den Wert in session
         session['countdown'] = zeit_state['object']
+        print(zeit_state['object'])
         return '', 204
     else:
         return '', 204
@@ -362,15 +369,14 @@ def level1_beenden2():
 @app.route('/ende_lv1')
 def level1_beendet():
     if session['level_fortschritt'] == 0:
-        # resert countdown für level 2
-        session['countdown'] = 300
 
         session['level_fortschritt'] = 1
-
+        print(session['geld_score'], session['countdown'])
         # Wenn der Countdown abläuft ohne, dass das Abo beendet wird, verlieren
         # Spieler*innen das Geld für das Abo
         if session['countdown'] <= 0:
-            session['geld_score'] = session['geld_score'] -50
+            session['geld_score'] = session['geld_score'] -10
+            
             
         # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv1
         # und stelle sicher das cokkie_banner_lv1 nicht angezeigt wird
@@ -378,7 +384,10 @@ def level1_beendet():
             session['data_score'] = session['data_score'] -40
             session['cookie_lv1_show'] = False
             session['cookie_lv1_fertig']= True
-        
+
+        # resert countdown für level 2
+        session['countdown'] = 300
+    
     return render_template('deceptv/end/level1_beendet.html')
 
 
@@ -426,14 +435,16 @@ def add_warenkorb():
             # dp falsch gelöst. (Monatliche kosten vermeiden)
             if request.form['bestellung'] == 'bestellung_monatl':
                 session['warenkorb'] = 9
-                if session['dp_preticked'] is None:
-                    session['dp_preticked'] = 0
+                session['bestellung_monatl'] = True
+                if session['dp_preticked_monatl'] is None:
+                    session['dp_preticked_monatl'] = 0
             # dp richtig gelöst. (Monatliche kosten vermeiden)
             if request.form['bestellung'] == 'bestellung_einzel':
                 # checken, ob es schon gelöst wurde. Nur wenn nicht: Punkte vergeben
-                if session['dp_preticked'] is None:
+                if session['dp_preticked_monatl'] is None:
                     session['dp_score'] = session['dp_score'] + 5
-                    session['dp_preticked'] = 1
+                    session['dp_preticked_monatl'] = 1
+                session['bestellung_monatl'] = False
                 session['warenkorb'] = 9.99
 
    # direct zu warenkorb (nächste seite)
@@ -534,16 +545,41 @@ def decepdive_warenkorb4():
         return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_warenkorb4.html')
 
+
+@app.route('/decepdive/warenkorb/zahlen')
+def decepdive_warenkorb5():
+    if session['level_fortschritt'] >= 2:
+        return redirect(url_for('home_intro'))
+    return render_template('decepdive/decepdive_warenkorb5.html')
+
 @app.route('/decepdive/ende_lv2')
 def ende_lv2():
     # Setze levle_fortschritt auf null und leite damit den Abschluss des Spiels ein
     session['level_fortschritt'] = 2
-    # Wenn der Countdown abgelaufen ist, wird al Strafe das Geld runtergesetzt
+
+    # Wenn der Countdown abgelaufen ist, wird als Strafe der 'Geld Score' runtergesetzt
     if session['countdown'] <= 0:
-        session['geld_score'] = session['geld_score'] - 50
+        # Wenn noch gar nichts im Warenkorb ist
+        if session['warenkorb'] == 0:
+            # Ziehe den in Levle 2 maximal möglichen Betrag (wie wenn alle DP's falsch gelöst wurden) ab
+            session['geld_score'] = session['geld_score'] - 16.97
+        # Sonst: ziehe den momentanen Warenkorb vom 'Geld Score' ab
+        else:
+            session['geld_score'] = session['geld_score'] - (session['warenkorb']+ session['spende_lv2'])
+
+    # Wenn das DP 'bestellung_monatl' falsch (oder nicht) gelöst wurde, ziehe 9,00€ vom 
+    # 'Geld Score' ab, so als würde es in einem Monat dann überraschend noch einmal geliefert
+    if session['dp_preticked_monatl'] == 0 or session['dp_preticked_monatl'] is None:
+        session['geld_score'] = session['geld_score'] - 9
+    
+    # Geld Score kann nich unter 0 sein:
+    if session['geld_score'] < 0:
+        session['geld_score'] = 0
+
     # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv2
     # und stelle sicher das cokkie_banner_lv2 nicht angezeigt wird
     if session['cookie_lv2_fertig'] is False:
         session['data_score'] = session['data_score'] -40
-        session['cookie_lv2_fertig']= True    
-    return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
+        session['cookie_lv2_fertig']= True
+
+    return render_template('decepdive/ende_lv2.html')
