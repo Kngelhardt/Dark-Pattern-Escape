@@ -1,14 +1,68 @@
 
-    {% extends 'layout_level2.html' %}
+{% extends 'layout_level2.html' %}
 
-    {% block content %}
-    <div class="content_level2">
-        <div class="px-5 py-5">
+{% block content %}
+<div class="content_level2">
+    <div class="px-5 py-5">
+        <div class="container">
             <h1>So hast du in Level 2 abgeschnitten:</h1>
 
+            {% set dp_count = namespace(value=0) %}
+            {% set data_count = namespace(value=0) %}
+            {% for loesung in dp_list_lv2 %}
+                <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein-->
+                {% if loesung == 1 %}
+                    {% set dp_count.value = dp_count.value + 1 %}
+                {% endif %}
+                <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken-->
+                
+                {% if loop.index0 < 7  %}
+                    {% if loesung == 1 %}
+                        {% set data_count.value = data_count.value + 1 %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            <div class="lightblue_box_shadow rounded py-4 px-4 my-3">
+                <h2>Data Score</h2>   
+
+                <p> Du hast <span class="text-primary fw-bolder">{{ data_count.value }} von 6</span> Dark Patterns, die dir Daten abluchsen wollten richtig gelöst
+                    und damit <span class="text-primary fw-bolder "> {{data_count.value*10}}</span> von maximal  <span class="text-primary fw-bolder ">60</span>
+                    Data Score Punkten behalten</p>
+            </div>
+            <div class="yellow_box_shadow rounded py-4 px-4 my-3">
+                <h2>Geld Score</h2>
+                
+                {% if (session['warenkorb']+ session['spende_lv2']) == 13.98 %}
+                    <h4>Perfekt gemacht!</h4>
+                    <p>Du hast dir absolut keine Kosten unterschieben lassen.</p>
+                    <p>Dein Geld Score beträgt damit: <span class="text-warning fw-bolder text_shadow">{{ session['geld_score']|round(2) }}</span>€</p>
+                {% elif session['dp_preticked_monatl'] == None or  session['dp_preticked_monatl'] == 0 %}
+                    <h4>Da du eine monatlich wiederkehrende Bestellung abgeschlossen hast, werden dir die 9€ für die Sonnencreme 2x abgebucht. </h4>
+                    <p> Du hast in diesem Level <span class="text-warning fw-bolder text_shadow">{{ (session['warenkorb']+ session['spende_lv2']+9)|round(2) }}</span>
+                        € verloren.
+                    </p>
+                    <p> Dein Geld Score in disem Level beträgt damit: 
+                        <span class="text-warning fw-bolder text_shadow">{{ (session['warenkorb']+ session['spende_lv2'])-9|round(2) }}</span>
+                        € von maximal möglichen <span class="text-warning fw-bolder text_shadow">11.02</span>€
+                    </p>
+                {% else %}
+                    <p> Dein Geld Score in disem Level beträgt: 
+                        <span class="text-warning fw-bolder text_shadow">{{ session['warenkorb']+ session['spende_lv2']|round(2) }}</span>
+                        € von maximal möglichen <span class="text-warning fw-bolder text_shadow">11.02</span>€
+                    </p>
+                {% endif %}
+            </div>
+            <div class="green_box_shadow rounded py-4 px-4 my-3">
+                <h2>Dark Pattern Score</h2> 
+                <p>Du hast in Level 2 <span class="text-success fw-bolder">{{ dp_count.value }} von 10</span> Dark Patterns richtig gelöst
+                und damit <span class="text-success fw-bolder "> {{dp_count.value*5}}</span> Dark Pattern Score Punkte erhalten</p>
+            </div>
+            <a href="{{ url_for('home_intro') }}" class="btn btn-success w-100">Spiel abschließen und zurück zu Übersicht</a>
         </div>
     </div>
-    <script>
-    </script>
-    {% endblock %}
+    <!-- Kosmetisch: Seite bis unten ausfüllen -->
+    <div style="height: 160px;"></div>
+</div>
+{% endblock %}
 

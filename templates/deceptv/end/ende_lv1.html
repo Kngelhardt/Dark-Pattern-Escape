@@ -1,0 +1,53 @@
+
+{% extends 'layout_level1.html' %}
+
+{% block content %}
+<div class="content_level1">
+    <div class="px-5 py-5">
+        <div class="container">
+            <h1>So hast du in Level 1 abgeschnitten:</h1>
+
+            {% set dp_count = namespace(value=0) %}
+            {% set data_count = namespace(value=0) %}
+            {% for loesung in dp_list_lv1 %}
+                <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein-->
+                {% if loesung == 1 %}
+                    {% set dp_count.value = dp_count.value + 1 %}
+                {% endif %}
+                <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken-->
+                {% if loop.index0 < 4  %}
+                    {% if loesung == 1 %}
+                        {% set data_count.value = data_count.value + 1 %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            <div class="lightblue_box_shadow rounded py-4 px-4 my-3">
+                <h2>Data Score</h2>   
+
+                <p> Du hast <span class="text-primary fw-bolder">{{ data_count.value }} von 4</span> Dark Patterns, die dir Daten abluchsen wollten richtig gelöst
+                    und damit <span class="text-primary fw-bolder "> {{data_count.value*10}}</span> von maximal <span class="text-primary fw-bolder ">40</span>
+                    Data Score Punkten behalten</p>
+            </div>
+            <div class="yellow_box_shadow rounded py-4 px-4 my-3">
+                <h2>Geld Score</h2>
+                
+                {% if session['abo_beendet'] ==  False %}
+                    <p>Du hast es leider nicht in der vorgegebenen Zeit geschafft dein Abo zu beende, daher musst du es leider mit 10€ für den nächten Monat bezahlen</p>
+                {% else %}
+                    <p>Super gemacht! Da du das Abo beendet hast, wird dir kein Geld abgezogen.</p>
+                {% endif %}
+            </div>
+            <div class="green_box_shadow rounded py-4 px-4 my-3">
+                <h2>Dark Pattern Score</h2> 
+                <p>Du hast in Level 1 <span class="text-success fw-bolder">{{ dp_count.value }} von 10</span> Dark Patterns richtig gelöst
+                und damit <span class="text-success fw-bolder "> {{dp_count.value*5}}</span> Dark Pattern Score Punkte erhalten</p>
+            </div>
+            <a href="{{ url_for('home_intro') }}" class="btn btn-success w-100">Spiel abschließen und zurück zu Übersicht</a>
+        </div>
+    </div>
+    <!-- Kosmetisch: Seite bis unten ausfüllen -->
+    <div style="height: 170px;"></div>
+</div>
+{% endblock %}
+

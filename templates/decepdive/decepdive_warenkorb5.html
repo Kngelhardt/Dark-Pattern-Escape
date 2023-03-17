@@ -39,8 +39,12 @@
                     </div>
                 {% else %}
                     <div class="green_box_shadow rounded my-5 px-3 py-3"">
-                        <h4>Glückwunsch, du hast Level 2 erfolgreich gemeistert. Wenn du mit deinem Einkauf zufrieden bist, kannst du das Level jetzt abschließen.</h4>
-                    <a href="{{ url_for('ende_lv2') }}" class="btn btn-success">Jetzt Zahlen und Level 2 erfolgreich beenden</a>
+                        <h4>Glückwunsch, du hast Level 2 erfolgreich gemeistert. Wenn du mit deinem Einkauf zufrieden bist, kannst du das Level jetzt abschließen.
+                        </h4>
+                        
+                    <a href="{{ url_for('ende_lv2') }}" class="btn btn-success mb-3">Jetzt Zahlen und Level 2 erfolgreich beenden</a>
+                    <p> Wenn du noch einmal schauen willst, ob du etwas besser machen könntest, kannst noch hier noch einmal zurück zum Warenkorb:</p>
+                    <a href="{{ url_for('decepdive_warenkorb') }}" class="btn btn-success">Zurück zum Warenkorb</a>
                     </div>         
                 {% endif %}
             </div>

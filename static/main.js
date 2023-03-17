@@ -125,7 +125,7 @@ function level_countdown(zeit_state, level_fortschritt){
                     );
             }
         }
-    },19999000); 
+    },1000); 
 }
 
 

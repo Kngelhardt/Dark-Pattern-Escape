@@ -369,15 +369,15 @@ def level1_beenden2():
 @app.route('/ende_lv1')
 def level1_beendet():
     if session['level_fortschritt'] == 0:
-
         session['level_fortschritt'] = 1
-        print(session['geld_score'], session['countdown'])
         # Wenn der Countdown abläuft ohne, dass das Abo beendet wird, verlieren
         # Spieler*innen das Geld für das Abo
         if session['countdown'] <= 0:
             session['geld_score'] = session['geld_score'] -10
-            
-            
+            session['abo_beendet']= False
+        else:
+            session['abo_beendet']= True
+        
         # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv1
         # und stelle sicher das cokkie_banner_lv1 nicht angezeigt wird
         if session['cookie_lv1_fertig'] is False:
@@ -387,8 +387,18 @@ def level1_beendet():
 
         # resert countdown für level 2
         session['countdown'] = 300
+
+    dp_list_lv1 = [ session['dp_cookie_lv1'],
+                    session['dp_berechtiges_interesse_lv1'],
+                    session['dp_cookiemisdirection_lv1'],
+                    session['dp_open_cookiemanager_lv1'],
+                    session['dp_roachmotel1'],
+                    session['dp_misdirect_kuendigen'],
+                    session['dp_trickquestion1'],
+                    session['dp_shaming_lv1'],
+                    session['dp_roachmotel2'] ]
     
-    return render_template('deceptv/end/level1_beendet.html')
+    return render_template('deceptv/end/ende_lv1.html', dp_list_lv1 = dp_list_lv1)
 
 
 ###########################################################################################
@@ -554,12 +564,10 @@ def decepdive_warenkorb5():
 
 @app.route('/decepdive/ende_lv2')
 def ende_lv2():
-    # Setze levle_fortschritt auf null und leite damit den Abschluss des Spiels ein
-    session['level_fortschritt'] = 2
-
-    # Wenn der Countdown abgelaufen ist, wird als Strafe der 'Geld Score' runtergesetzt
-    if session['countdown'] <= 0:
-        # Wenn noch gar nichts im Warenkorb ist
+    
+    if session['level_fortschritt'] < 2:
+        # Wenn der Countdown abgelaufen und an dem Punkt nichts im Warenkorb ist,wird als Strafe der 
+        # 'Geld Score' runtergesetzt
         if session['warenkorb'] == 0:
             # Ziehe den in Levle 2 maximal möglichen Betrag (wie wenn alle DP's falsch gelöst wurden) ab
             session['geld_score'] = session['geld_score'] - 16.97
@@ -567,19 +575,29 @@ def ende_lv2():
         else:
             session['geld_score'] = session['geld_score'] - (session['warenkorb']+ session['spende_lv2'])
 
-    # Wenn das DP 'bestellung_monatl' falsch (oder nicht) gelöst wurde, ziehe 9,00€ vom 
-    # 'Geld Score' ab, so als würde es in einem Monat dann überraschend noch einmal geliefert
-    if session['dp_preticked_monatl'] == 0 or session['dp_preticked_monatl'] is None:
-        session['geld_score'] = session['geld_score'] - 9
-    
-    # Geld Score kann nich unter 0 sein:
-    if session['geld_score'] < 0:
-        session['geld_score'] = 0
+        # Wenn das DP 'bestellung_monatl' falsch (oder nicht) gelöst wurde, ziehe 9,00€ vom 
+        # 'Geld Score' ab, so als würde es in einem Monat dann überraschend noch einmal geliefert
+        if session['dp_preticked_monatl'] == 0 or session['dp_preticked_monatl'] is None:
+            session['geld_score'] = session['geld_score'] - 9
+        
+        # Geld Score kann nich unter 0 sein:
+        if session['geld_score'] < 0:
+            session['geld_score'] = 0
 
-    # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv2
-    # und stelle sicher das cokkie_banner_lv2 nicht angezeigt wird
-    if session['cookie_lv2_fertig'] is False:
-        session['data_score'] = session['data_score'] -40
-        session['cookie_lv2_fertig']= True
+        # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv2
+        # und stelle sicher das cokkie_banner_lv2 nicht angezeigt wird
+        if session['cookie_lv2_fertig'] is False:
+            session['data_score'] = session['data_score'] -40
+            session['cookie_lv2_fertig']= True
+        
+    # Liste mit den Lösungen der Spieler*in für alle Dark Patterns in level 2
+    dp_list_lv2 = [session['dp_cookielv2_trickquestion'], session['dp_cookielv2_trickquestion2'],
+                    session['dp_cookielv2_berechtigt'], session['dp_hiddennewsletter'],
+                    session['dp_misdirect_login'], session['dp_misdirect_konto_erstellen'],
+                    session['dp_vergleich'], session['dp_preticked_monatl'],
+                    session['dp_sneakinbasket'], session['dp_misdirect_spende']]
 
-    return render_template('decepdive/ende_lv2.html')
+    # Setze levle_fortschritt auf null und leite damit den Abschluss des Spiels ein
+    session['level_fortschritt'] = 2
+
+    return render_template('decepdive/ende_lv2.html', dp_list_lv2 = dp_list_lv2)
