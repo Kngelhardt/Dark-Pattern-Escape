@@ -1,14 +1,270 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fragebogen - DP Escape</title>
-</head>
-<body>
-    <div class="container">
 
+{% extends 'main_css.html' %}
+
+<div class="content">
+{% block body %}
+    <div class="container py-5 my-5">
+        <h1>Fragebogen zum Spiel</h1>
+        <p> Bitte lese die Fragen Aufmerksam durch und versuche intuitiv darauf zu antworten ohne zu lange darüber nachzudenken.
+            Alle Items müssen angekreuzt werden, wenn du dir unsicher bist, kreuze "Neutral" an.</p>
+        <h3>Bedienbarkeit:</h3>
+        <div class="border border-dark-subtle rounded pe-4 py-5">
+            <form action="{{ url_for('fragebogen_SUS') }}" method="post">
+                <ol>
+                    <li>
+                        <label for="gerne_oft"><b>Ich denke, dass ich die Anwendung gerne häufig benutzen würde.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="gerne_oft" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="gerne_oft" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="gerne_oft" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="gerne_oft" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="gerne_oft" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="komplex"><b>Ich fand die Anwendung unnötig komplex.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="komplex" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="komplex" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="komplex" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="komplex" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="komplex" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="gerne_oft"><b>Ich fand die Anwendung einfach zu benutzen.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="einfach" value="0">
+                            </div>
+                            <div class="col"> 
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="einfach" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="einfach" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="einfach" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="einfach" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="hilfe"><b>Ich glaube, ich würde die Hilfe einer technisch versierten Person benötigen, um die Anwendung benutzen zu können.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="hilfe" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="hilfe" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="hilfe" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="hilfe" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="hilfe" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="funktionen_integriert"><b>Ich fand, die verschiedenen Funktionen in diesie Anwendung waren gut integriert.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="funktionen_integriert" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="funktionen_integriert" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="funktionen_integriert" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="funktionen_integriert" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="funktionen_integriert" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="inkonsistenzen"><b>Ich denke, die Anwendung enthielt zu viele Inkonsistenzen.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="inkonsistenzen" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="inkonsistenzen" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="inkonsistenzen" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="inkonsistenzen" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="inkonsistenzen" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="umgang_lernen"><b>Ich kann mir vorstellen, dass die meisten Menschen den Umgang mit diesie Anwendung sehr schnell lernen.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="umgang_lernen" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="umgang_lernen" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="umgang_lernen" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="umgang_lernen" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="umgang_lernen" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="umstaendlich"><b>Ich fand die Anwendung sehr umständlich zu nutzen.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="umstaendlich" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="umstaendlich" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="umstaendlich" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="umstaendlich" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="umstaendlich" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="benutzung_sicher"><b>Ich fühlte mich bei der Benutzung die Anwendungs sehr sicher.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="benutzung_sicher" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="benutzung_sicher" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="benutzung_sicher" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="benutzung_sicher" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="benutzung_sicher" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="musste_lernen"><b>Ich musste eine Menge lernen, bevor ich anfangen konnte die Anwendung zu verwenden.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="musste_lernen" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="musste_lernen" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="musste_lernen" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="musste_lernen" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="musste_lernen" value="4">
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+                <input type="submit" value="Abschicken" class="btn btn-success float-end">
+            </form>
+        </div>
     </div>
-</body>
-</html>
+{% endblock %}
+</div>

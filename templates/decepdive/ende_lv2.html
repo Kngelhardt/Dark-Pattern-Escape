@@ -43,7 +43,7 @@
                         € verloren.
                     </p>
                     <p> Dein Geld Score in disem Level beträgt damit: 
-                        <span class="text-warning fw-bolder text_shadow">{{ (session['warenkorb']+ session['spende_lv2'])-9|round(2) }}</span>
+                        <span class="text-warning fw-bolder text_shadow">{{ ((session['warenkorb']+ session['spende_lv2'])-9)|round(2) }}</span>
                         € von maximal möglichen <span class="text-warning fw-bolder text_shadow">11.02</span>€
                     </p>
                 {% else %}

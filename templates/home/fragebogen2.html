@@ -1,0 +1,95 @@
+
+{% extends 'main_css.html' %}
+
+<div class="content">
+{% block body %}
+    <div class="container py-5 my-5">
+        <h1>Fragebogen zum Spiel</h1>
+        <p> Bitte lese die Fragen Aufmerksam durch und versuche intuitiv darauf zu antworten ohne zu lange darüber nachzudenken.
+            Alle Items müssen angekreuzt werden, wenn du dir unsicher bist, kreuze "Neutral" an.</p>
+        <h3>Bewusstseinsförderung:</h3>
+        <div class="border border-dark-subtle rounded pe-4 py-5">
+            <form action="{{ url_for('fragebogen_bewusstsein') }}" method="post">
+                <ol>
+                    <li>
+                        <label for="gerne_oft"><b>Die Dozentin / Der Dozent fördert mein Interesse am Themengebiet.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="gerne_oft" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="gerne_oft" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="gerne_oft" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="gerne_oft" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="gerne_oft" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="komplex"><b>Wie viel haben Sie in dieser Lehrveranstaltung gelernt?</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="komplex" value="0">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="komplex" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="komplex" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="komplex" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="komplex" value="4">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="gerne_oft"><b>Ich fand die Anwendung einfach zu benutzen.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="einfach" value="0">
+                            </div>
+                            <div class="col"> 
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="einfach" value="1">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="einfach" value="2">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="einfach" value="3">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="einfach" value="4">
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+                <input type="submit" value="Abschicken" class="btn btn-success float-end">
+            </form>
+        </div>
+    </div>
+{% endblock %}
+</div>

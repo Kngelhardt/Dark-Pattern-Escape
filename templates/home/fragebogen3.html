@@ -1,0 +1,32 @@
+
+{% extends 'main_css.html' %}
+
+<div class="content">
+{% block body %}
+    <div class="container py-5 my-5">
+        <h1>Danke fürs Teilnehmen</h1>
+        <p> Wenn Cognitive Science an der Uni Osnabrück studierst kannst du dir 0.5 VP Stunden anrechnen lassen. Gib dazu deinen Namen und deine Mtrikelnummer an.</p>
+        <h3>Bewusstseinsförderung:</h3>
+        <div class="border border-dark-subtle rounded px-4 py-5">
+            <form action="{{ url_for('fragebogen_vp') }}" method="post">
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col">
+                        <label for="name">Name, Nachname: </label>
+                        <br>
+                        <input type="text" name="name" placeholder="Name">
+                    </div>
+                    <div class="col">
+                        <label for="matrikelnr">Matrikelnummer: </label>
+                        <br>
+                        <input type="text" name="matrikelnr" placeholder="Matrikel-Nr.">
+                    </div>
+                    <div class="col">
+                        <input type="submit" value="Abschicken" class="btn btn-success float-end">
+                    </div>
+                </div>
+            </form>
+            <p class="text-success fw-bold mt-3">{{validation}}</p>
+        </div>
+    </div>
+{% endblock %}
+</div>

@@ -4,36 +4,30 @@ import os
 app = Flask(__name__)
 
 if __name__ == "__main__":
-    # Activate debugging
+    # Activate debugging (not working)
     app.run(debug = True)
 
 # Set the secret key to some random bytes.
 app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
 
-###################################################################################
+
+
 """  Reset der Session auf die initialen werte """
 @app.route('/initialize-session')
 def initialize_session():
-    #debugging##############################
+    ############## DEBUGGING #####################
     if session.get("data_score") is not None:
         print(
-        'data: ', session['data_score'],'\n',
-        'geld: ',session['geld_score'],'\n',
-        'countdown: ',session['countdown'],'\n',
-        'dp: ',session['dp_score'],'\n',
         'success: ',session['level_fortschritt'],'\n',
         'lv1_show: ',session['cookie_lv1_show'],'\n',
         'lv1_fin: ', session['cookie_lv1_fertig'],'\n',
         'lv2_fin: ',session['cookie_lv1_fertig'],'\n',
         'warenkorb: ',session['warenkorb'],'\n',
-        session['data_score'],'\n',
-        session['geld_score'],'\n',
-        session['countdown'],'\n',
-        session['dp_score'],'\n',
+        'data_score: ',session['data_score'],'\n',
+        'geld_score: ',session['geld_score'],'\n',
+        'dp_score: ',session['dp_score'],'\n',
         'level_fortschritt',session['level_fortschritt'],'\n',
-        session['cookie_lv1_show'],'\n',
-        session['cookie_lv1_fertig'],'\n',
-        session['cookie_lv2_fertig'],'\n',
+        'countdown: ',session['countdown'],'\n',
         'warenkorb',session['warenkorb'],'\n',
         'spende', session['spende_lv2'], '\n',
         # Aufreigungen mit Cookiebannern und ob sie richtig gelöst wurden
@@ -62,8 +56,9 @@ def initialize_session():
         'dp_misdirect_konto_erstellen', session['dp_misdirect_konto_erstellen'],'\n',
         'dp_misdirect_spende', session['dp_misdirect_spende'],'\n'
         )
+    ############## DEBUGGING #####################
 
-    ######## Scores #############################
+    # Initialisiere Session Werte
     session['data_score'] = 100
     session['geld_score'] = 25
     # Countdown = 300 sekunden, also 5 minuten
@@ -82,24 +77,24 @@ def initialize_session():
     session['bestellung_monatl'] = None
     # Wenn das Dark Pattern 'dp_misdirect_spende' falsch gelöst wurde werden 2€ dem Entbetrag hinzugefügt
     session['spende_lv2'] = 0.00
-    # Aufreigungen mit Cookiebannern und ob sie richtig gelöst wurden
-    # 3 Mögliche Werte: None(nicht abgeschlossen), True, False
-    ######## cookiebanner lv1: ######################
+    # Werte der jeweiligen Dark Patterns 
+    #   3 Mögliche Werte: None(nicht abgeschlossen), 1(richt gelöst), 0(falsch gelöst)
+    #   cookiebanner lv1: 
     session['dp_open_cookiemanager_lv1']  = None
     session['dp_cookie_lv1']  = None
     session['dp_berechtiges_interesse_lv1']  = None
     session['dp_cookiemisdirection_lv1']  = None
-    ######## level1 #################################
+    #   level1 
     session['dp_roachmotel1']  = None
     session['dp_misdirect_kuendigen']  = None
     session['dp_trickquestion1']  = None
     session['dp_shaming_lv1']  = None
     session['dp_roachmotel2'] = None
-    ######### cookiebanner lv2: #####################
+    #    cookiebanner lv2:
     session['dp_cookielv2_trickquestion']= None
     session['dp_cookielv2_trickquestion2']= None
     session['dp_cookielv2_berechtigt']= None
-    ######### level 2 ###############################
+    #    level 2 
     session['dp_vergleich']  = None
     session['dp_preticked_monatl'] = None
     session['dp_sneakinbasket'] = None 
@@ -177,9 +172,31 @@ def anleitung():
 def hintergrund():
     return render_template('home/hintergrund.html')
 
-@app.route('/home/fragebogen/')
+@app.route('/fragebogen-bedienbarkeit')
 def fragebogen():
     return render_template('home/fragebogen.html')
+
+@app.route('/fragebogen-bewusstsein', methods=['POST'])
+def fragebogen_SUS():
+    if request.method == 'POST':
+        if 'gerne_oft' in request.form:
+            print(request.form['gerne_oft'])
+    return render_template('home/fragebogen2.html')
+
+@app.route('/vp-stunden', methods=['POST'])
+def fragebogen_bewusstsein():
+    if request.method == 'POST':
+        if 'gerne_oft' in request.form:
+            print(request.form['gerne_oft'])
+    return render_template('home/fragebogen3.html', validation='')
+
+@app.route('/fragebogen-abgeschlossen', methods=['POST'])
+def fragebogen_vp():
+    if request.method == 'POST':
+        if 'name' in request.form:
+            print(request.form['name'])
+    return render_template('home/fragebogen3.html', validation='Erfolgreich abgeschickt. Vielen Dank')
+
 
 ###################################################################################
 """ Level 1: Streming Abo beenden """
@@ -601,3 +618,6 @@ def ende_lv2():
     session['level_fortschritt'] = 2
 
     return render_template('decepdive/ende_lv2.html', dp_list_lv2 = dp_list_lv2)
+
+
+
