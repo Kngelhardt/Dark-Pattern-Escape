@@ -1,111 +1,124 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 import os
+import csv
 
 app = Flask(__name__)
 
-if __name__ == "__main__":
-    # Activate debugging (not working)
-    app.run(debug = True)
-
-# Set the secret key to some random bytes.
+# initialisiere secret key
 app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
 
+########################### Datenspeicherung ##################################  
+def write_dp_ergebnisse_csv():
+    file_exists = os.path.isfile('ergebnisse/dark_pattern_results.csv')
 
+    with open('ergebnisse/dark_pattern_results.csv', mode='a') as csv_file:
 
+        fieldnames = [  'session_id', 
+                'dp_open_cookiemanager_lv1',
+                'dp_cookie_lv1', 
+                'dp_berechtiges_interesse_lv1',
+                'dp_cookiemisdirection_lv1', 
+                'dp_roachmotel1', 
+                'dp_misdirect_kuendigen', 
+                'dp_trickquestion1',
+                'dp_shaming_lv1',
+                'dp_roachmotel2', 
+                'dp_cookielv2_trickquestion',
+                'dp_cookielv2_trickquestion2',
+                'dp_cookielv2_berechtigt', 
+                'dp_vergleich', 
+                'dp_preticked_monatl', 
+                'dp_sneakinbasket',
+                'dp_hiddennewsletter', 
+                'dp_misdirect_login', 
+                'dp_misdirect_konto_erstellen', 
+                'dp_misdirect_spende' ] 
+        
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow({item: session[item] for item in fieldnames})
+
+  
+########################## ROUTES ###################################
 """  Reset der Session auf die initialen werte """
 @app.route('/initialize-session')
 def initialize_session():
-    ############## DEBUGGING #####################
-    if session.get("data_score") is not None:
-        print(
-        'success: ',session['level_fortschritt'],'\n',
-        'lv1_show: ',session['cookie_lv1_show'],'\n',
-        'lv1_fin: ', session['cookie_lv1_fertig'],'\n',
-        'lv2_fin: ',session['cookie_lv1_fertig'],'\n',
-        'warenkorb: ',session['warenkorb'],'\n',
-        'data_score: ',session['data_score'],'\n',
-        'geld_score: ',session['geld_score'],'\n',
-        'dp_score: ',session['dp_score'],'\n',
-        'level_fortschritt',session['level_fortschritt'],'\n',
-        'countdown: ',session['countdown'],'\n',
-        'warenkorb',session['warenkorb'],'\n',
-        'spende', session['spende_lv2'], '\n',
-        # Aufreigungen mit Cookiebannern und ob sie richtig gelöst wurden
-        # 3 Mögliche Werte: None(nicht abgeschlossen), True, False
-        # cookiebanner lv1: 
-        'dp_cookiemanager_lv',session['dp_open_cookiemanager_lv1'],'\n',
-        'dp_cookie_lv1',session['dp_cookie_lv1'],'\n',
-        'dp_berechtiges_interesse_lv1',session['dp_berechtiges_interesse_lv1'],'\n',
-        'dp_cookiemisdirection_lv1',session['dp_cookiemisdirection_lv1'] ,'\n',
-        # level1
-        'dp_roachmotel1',session['dp_roachmotel1'] ,'\n',
-        'dp_misdirect_kuendigen',session['dp_misdirect_kuendigen'],'\n',
-        'dp_trickquestion1',session['dp_trickquestion1'] ,'\n',
-        'dp_shaming_lv1', session['dp_shaming_lv1'],'\n',
-        'dp_roachmotel2',session['dp_roachmotel2'] ,'\n',
-        #cookiebanner lv2:
-        'dp_cookielv2_trickquestion',session['dp_cookielv2_trickquestion'],'\n',
-        'dp_cookielv2_trickquestion2',session['dp_cookielv2_trickquestion2'],'\n',
-        'dp_cookielv2_berechtigt', session['dp_cookielv2_berechtigt'],'\n',
-        # level 2
-        'dp_vergleich', session['dp_vergleich'],'\n',
-        'dp_preticked_monatl', session['dp_preticked_monatl'],'\n',
-        'dp_sneakinbasket', session['dp_sneakinbasket'],'\n',
-        'dp_hiddennewsletter', session['dp_hiddennewsletter'],'\n',
-        'dp_misdirect_login', session['dp_misdirect_login'],'\n',
-        'dp_misdirect_konto_erstellen', session['dp_misdirect_konto_erstellen'],'\n',
-        'dp_misdirect_spende', session['dp_misdirect_spende'],'\n'
-        )
-    ############## DEBUGGING #####################
-
     # Initialisiere Session Werte
-    session['data_score'] = 100
-    session['geld_score'] = 25
-    # Countdown = 300 sekunden, also 5 minuten
-    session['countdown'] = 300
-    session['dp_score'] = 0
-     # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
-    session['level_fortschritt'] = 0 
-    # Definiert ob in Level 1 das Cookiebanner gezegt wird
-    session['cookie_lv1_show'] = False
-    # Definiert ob im jeweiligen Level das Cookiebanner abgeschlossen wurde
-    session['cookie_lv1_fertig']= False
-    session['cookie_lv2_fertig']= False
-    # Gesamtsumme des Warenkorbs in Level 2
-    session['warenkorb'] = 0
-    # Ist eine Monatliche Bestellung oder einfache Bestellung ausgewählt
-    session['bestellung_monatl'] = None
-    # Wenn das Dark Pattern 'dp_misdirect_spende' falsch gelöst wurde werden 2€ dem Entbetrag hinzugefügt
-    session['spende_lv2'] = 0.00
-    # Werte der jeweiligen Dark Patterns 
-    #   3 Mögliche Werte: None(nicht abgeschlossen), 1(richt gelöst), 0(falsch gelöst)
-    #   cookiebanner lv1: 
-    session['dp_open_cookiemanager_lv1']  = None
-    session['dp_cookie_lv1']  = None
-    session['dp_berechtiges_interesse_lv1']  = None
-    session['dp_cookiemisdirection_lv1']  = None
-    #   level1 
-    session['dp_roachmotel1']  = None
-    session['dp_misdirect_kuendigen']  = None
-    session['dp_trickquestion1']  = None
-    session['dp_shaming_lv1']  = None
-    session['dp_roachmotel2'] = None
-    #    cookiebanner lv2:
-    session['dp_cookielv2_trickquestion']= None
-    session['dp_cookielv2_trickquestion2']= None
-    session['dp_cookielv2_berechtigt']= None
-    #    level 2 
-    session['dp_vergleich']  = None
-    session['dp_preticked_monatl'] = None
-    session['dp_sneakinbasket'] = None 
-    session['dp_hiddennewsletter'] = None
-    session['dp_misdirect_login'] = None
-    session['dp_misdirect_konto_erstellen'] = None
-    session['dp_misdirect_spende'] = None
+
+    #exists = dark_pattern_results.query.filter_by(session_id= id).first()
+    if session.get('session_id') is None:
+
+        # Initialisiere ID
+        session['session_id'] = 1
+        # erstelle liste mit allen vergebenen IDs
+        id_list = []
+        # check ob datei existiert
+        if os.path.isfile('ergebnisse/id_list.csv'):
+            with open('ergebnisse/id_list.csv', 'r') as id_csv:
+                reader = csv.reader(id_csv)
+                for col in reader:
+                    id_list.append(col[0])
+    
+        # falls die generierte id schon existiert, erhöhe ID um 1 bis ID einzigartig ist
+        while str(session['session_id']) in id_list:
+            session['session_id'] += 1
+
+        # speicher id in id_csv, damit sie nicht erneut vergeben werden kann
+        with open('ergebnisse/id_list.csv', 'a') as id_csv:
+            writer = csv.writer(id_csv)
+            writer.writerow([session['session_id']])
+
+        print(session['session_id'], 'all_ids: ', id_list)
+        # initiale Werte der Punkte
+        session['data_score'] = 100
+        session['geld_score'] = 25
+        session['dp_score'] = 0
+        # Countdown = 300 sekunden, also 5 minuten (pro level)
+        session['countdown'] = 300
+        # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
+        session['level_fortschritt'] = 0 
+        # Definiert ob in Level 1 das Cookiebanner gezegt wird
+        session['cookie_lv1_show'] = False
+        # Definiert ob im jeweiligen Level das Cookiebanner abgeschlossen wurde
+        session['cookie_lv1_fertig']= False
+        session['cookie_lv2_fertig']= False
+        # Gesamtsumme des Warenkorbs in Level 2
+        session['warenkorb'] = 0
+        # Ist eine Monatliche Bestellung oder einfache Bestellung ausgewählt
+        session['bestellung_monatl'] = None
+        # Wenn das Dark Pattern 'dp_misdirect_spende' falsch gelöst wurde werden 2€ dem Entbetrag hinzugefügt
+        session['spende_lv2'] = 0.00
+        # Werte der jeweiligen Dark Patterns 
+        # 3 Mögliche Werte: None(nicht abgeschlossen), 1(richt gelöst), 0(falsch gelöst)
+        # cookiebanner lv1: 
+        session['dp_open_cookiemanager_lv1']  = None
+        session['dp_cookie_lv1']  = None
+        session['dp_berechtiges_interesse_lv1']  = None
+        session['dp_cookiemisdirection_lv1']  = None
+        # level1 
+        session['dp_roachmotel1']  = None
+        session['dp_misdirect_kuendigen']  = None
+        session['dp_trickquestion1']  = None
+        session['dp_shaming_lv1']  = None
+        session['dp_roachmotel2'] = None
+        # cookiebanner lv2:
+        session['dp_cookielv2_trickquestion']= None
+        session['dp_cookielv2_trickquestion2']= None
+        session['dp_cookielv2_berechtigt']= None
+        # level 2 
+        session['dp_vergleich']  = None
+        session['dp_preticked_monatl'] = None
+        session['dp_sneakinbasket'] = None 
+        session['dp_hiddennewsletter'] = None
+        session['dp_misdirect_login'] = None
+        session['dp_misdirect_konto_erstellen'] = None
+        session['dp_misdirect_spende'] = None
 
 
     return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
 
+# Funktion mit der Sessionwerte geändert werden können, return: '', 204
 @app.route('/change-session', methods=['GET', 'POST'])
 def set_session_value():
     if request.method == "POST":
@@ -122,6 +135,7 @@ def set_session_value():
                 session[session_key] = bool(session_data[session_key])
                 #debugging
                 print('update bool',session_key, session[session_key])
+            # bei int werten soll es auf den momentanten Wert der Session aufaddiert werden
             elif isinstance(session[session_key], int):
                 session[session_key] = session[session_key] + session_data[session_key]
                 #debugging
@@ -134,7 +148,8 @@ def set_session_value():
     else:
         return '', 204
 
-""" Upadate des timers """
+
+""" Upadate des timers in den Levels """
 @app.route('/update_timer', methods=['GET', 'POST'])
 def update_timer():
     if request.method == "POST":
@@ -142,12 +157,12 @@ def update_timer():
         zeit_state = request.get_json()
         # speicher den Wert in session
         session['countdown'] = zeit_state['object']
-        print(zeit_state['object'])
         return '', 204
     else:
         return '', 204
+    
 
-###################################################################################
+#################### HOMEPAGE ########################
 """ Mainpage """
 @app.route('/')
 def home():
@@ -198,7 +213,7 @@ def fragebogen_vp():
     return render_template('home/fragebogen3.html', validation='Erfolgreich abgeschickt. Vielen Dank')
 
 
-###################################################################################
+############################## LEVEL 1 ##################################
 """ Level 1: Streming Abo beenden """
 
 """ Funktion: Bilder aus dem static/images/deceptv Verzeichnis laden
@@ -608,11 +623,18 @@ def ende_lv2():
             session['cookie_lv2_fertig']= True
         
     # Liste mit den Lösungen der Spieler*in für alle Dark Patterns in level 2
-    dp_list_lv2 = [session['dp_cookielv2_trickquestion'], session['dp_cookielv2_trickquestion2'],
-                    session['dp_cookielv2_berechtigt'], session['dp_hiddennewsletter'],
-                    session['dp_misdirect_login'], session['dp_misdirect_konto_erstellen'],
-                    session['dp_vergleich'], session['dp_preticked_monatl'],
-                    session['dp_sneakinbasket'], session['dp_misdirect_spende']]
+    dp_list_lv2 = [ session['dp_cookielv2_trickquestion'], 
+                    session['dp_cookielv2_trickquestion2'],
+                    session['dp_cookielv2_berechtigt'], 
+                    session['dp_hiddennewsletter'],
+                    session['dp_misdirect_login'], 
+                    session['dp_misdirect_konto_erstellen'],
+                    session['dp_vergleich'], 
+                    session['dp_preticked_monatl'],
+                    session['dp_sneakinbasket'], 
+                    session['dp_misdirect_spende'] ]
+    
+    write_dp_ergebnisse_csv()
 
     # Setze levle_fortschritt auf null und leite damit den Abschluss des Spiels ein
     session['level_fortschritt'] = 2
@@ -620,4 +642,114 @@ def ende_lv2():
     return render_template('decepdive/ende_lv2.html', dp_list_lv2 = dp_list_lv2)
 
 
+if __name__ == "__main__":
+    # Activate debugging (not working)
+    app.run(debug = True)
+    #db.create_all()
 
+"""
+############## DEBUGGING #####################
+if session.get("data_score") is not None:
+    print(
+    'success: ',session['level_fortschritt'],'\n',
+    'lv1_show: ',session['cookie_lv1_show'],'\n',
+    'lv1_fin: ', session['cookie_lv1_fertig'],'\n',
+    'lv2_fin: ',session['cookie_lv1_fertig'],'\n',
+    'warenkorb: ',session['warenkorb'],'\n',
+    'data_score: ',session['data_score'],'\n',
+    'geld_score: ',session['geld_score'],'\n',
+    'dp_score: ',session['dp_score'],'\n',
+    'level_fortschritt',session['level_fortschritt'],'\n',
+    'countdown: ',session['countdown'],'\n',
+    'warenkorb',session['warenkorb'],'\n',
+    'spende', session['spende_lv2'], '\n',
+    # Aufreigungen mit Cookiebannern und ob sie richtig gelöst wurden
+    # 3 Mögliche Werte: None(nicht abgeschlossen), True, False
+    # cookiebanner lv1: 
+    'dp_cookiemanager_lv',session['dp_open_cookiemanager_lv1'],'\n',
+    'dp_cookie_lv1',session['dp_cookie_lv1'],'\n',
+    'dp_berechtiges_interesse_lv1',session['dp_berechtiges_interesse_lv1'],'\n',
+    'dp_cookiemisdirection_lv1',session['dp_cookiemisdirection_lv1'] ,'\n',
+    # level1
+    'dp_roachmotel1',session['dp_roachmotel1'] ,'\n',
+    'dp_misdirect_kuendigen',session['dp_misdirect_kuendigen'],'\n',
+    'dp_trickquestion1',session['dp_trickquestion1'] ,'\n',
+    'dp_shaming_lv1', session['dp_shaming_lv1'],'\n',
+    'dp_roachmotel2',session['dp_roachmotel2'] ,'\n',
+    #cookiebanner lv2:
+    'dp_cookielv2_trickquestion',session['dp_cookielv2_trickquestion'],'\n',
+    'dp_cookielv2_trickquestion2',session['dp_cookielv2_trickquestion2'],'\n',
+    'dp_cookielv2_berechtigt', session['dp_cookielv2_berechtigt'],'\n',
+    # level 2
+    'dp_vergleich', session['dp_vergleich'],'\n',
+    'dp_preticked_monatl', session['dp_preticked_monatl'],'\n',
+    'dp_sneakinbasket', session['dp_sneakinbasket'],'\n',
+    'dp_hiddennewsletter', session['dp_hiddennewsletter'],'\n',
+    'dp_misdirect_login', session['dp_misdirect_login'],'\n',
+    'dp_misdirect_konto_erstellen', session['dp_misdirect_konto_erstellen'],'\n',
+    'dp_misdirect_spende', session['dp_misdirect_spende'],'\n'
+    ) 
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///dark_pattern_results.sqlite3"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///fragebogen_daten.sqlite3"
+
+db = SQLAlchemy(app)
+
+# database für die Resultate des Lösens der Dark Patterns der spielenden Personen
+class dark_pattern_results(db.Model):
+    _id = db.Column(db.Integer, primary_key = True)
+    session_id = db.Column(db.String)
+    #
+    dp_open_cookiemanager_lv1 = db.Column(db.Integer)
+    dp_cookie_lv1 = db.Column(db.Integer)
+    dp_berechtiges_interesse_lv1 = db.Column(db.Integer)
+    dp_cookiemisdirection_lv1 = db.Column(db.Integer)
+    # level1 
+    dp_roachmotel1 = db.Column(db.Integer)
+    dp_misdirect_kuendigen = db.Column(db.Integer)
+    dp_trickquestion1 = db.Column(db.Integer)
+    dp_shaming_lv1 = db.Column(db.Integer)
+    dp_roachmotel2 = db.Column(db.Integer)
+    # cookiebanner lv2:
+    dp_cookielv2_trickquestion = db.Column(db.Integer)
+    dp_cookielv2_trickquestion2 = db.Column(db.Integer)
+    dp_cookielv2_berechtigt = db.Column(db.Integer)
+    # level 2 
+    dp_vergleich = db.Column(db.Integer)
+    dp_preticked_monatl = db.Column(db.Integer)
+    dp_sneakinbasket = db.Column(db.Integer)
+    dp_hiddennewsletter = db.Column(db.Integer)
+    dp_misdirect_login = db.Column(db.Integer)
+    dp_misdirect_konto_erstellen = db.Column(db.Integer)
+    dp_misdirect_spende = db.Column(db.Integer)
+    ############## DEBUGGING #####################
+
+def __init__(self, session_id, dp_open_cookiemanager_lv1, dp_cookie_lv1, dp_berechtiges_interesse_lv1,
+                dp_cookiemisdirection_lv1, dp_roachmotel1, dp_misdirect_kuendigen, dp_trickquestion1,
+                dp_shaming_lv1, dp_roachmotel2, dp_cookielv2_trickquestion,dp_cookielv2_trickquestion2,
+                dp_cookielv2_berechtigt, dp_vergleich, dp_preticked_monatl, dp_sneakinbasket,
+                dp_hiddennewsletter, dp_misdirect_login, dp_misdirect_konto_erstellen, dp_misdirect_spende):
+    self.session_id = session_id
+    self.dp_open_cookiemanager_lv1 = dp_open_cookiemanager_lv1
+    self.dp_cookie_lv1 = dp_cookie_lv1
+    self.dp_berechtiges_interesse_lv1 = dp_berechtiges_interesse_lv1
+    self.dp_cookiemisdirection_lv1 = dp_cookiemisdirection_lv1
+    self.dp_roachmotel1 = dp_roachmotel1
+    self.dp_misdirect_kuendigen = dp_misdirect_kuendigen
+    self.dp_trickquestion1 = dp_trickquestion1
+    self.dp_shaming_lv1 = dp_shaming_lv1
+    self.dp_roachmotel2 = dp_roachmotel2
+    self.dp_cookielv2_trickquestion = dp_cookielv2_trickquestion
+    self.dp_cookielv2_trickquestion2 = dp_cookielv2_trickquestion2
+    self.dp_cookielv2_berechtigt = dp_cookielv2_berechtigt
+    self.dp_vergleich = dp_vergleich
+    self.dp_preticked_monatl = dp_preticked_monatl
+    self.dp_sneakinbasket = dp_sneakinbasket
+    self.dp_hiddennewsletter = dp_hiddennewsletter
+    self.dp_misdirect_login = dp_misdirect_login
+    self.dp_misdirect_konto_erstellen = dp_misdirect_konto_erstellen
+    self.dp_misdirect_spende = dp_misdirect_spende
+
+class fragebogen_daten(db.Model):
+    _id = db.Column(db.Integer, primary_key = True)    
+"""
