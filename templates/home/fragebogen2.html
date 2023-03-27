@@ -12,77 +12,77 @@
             <form action="{{ url_for('fragebogen_bewusstsein') }}" method="post">
                 <ol>
                     <li>
-                        <label for="gerne_oft"><b>Die Dozentin / Der Dozent fördert mein Interesse am Themengebiet.</b></label>
+                        <label for="interesse_gefoerdert"><b>Das Speil hat mein Interesse am Themengebiet gefördert.</b></label>
                         <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
                             <div class="col">
                                 <p>Stimme überhaupt nicht zu</p>
-                                <input type="radio" name="gerne_oft" value="0">
+                                <input type="radio" name="interesse_gefoerdert" id="interesse_gefoerdert" value="0" required oninvalid="this.setCustomValidity('Feld muss ausgefüllt sein')" oninput="clearValidity('interesse_gefoerdert');">
                             </div>
                             <div class="col">
                                 <p>Stimme eher nicht zu</p>
-                                <input type="radio" name="gerne_oft" value="1">
+                                <input type="radio" name="interesse_gefoerdert" value="1" oninput="clearValidity('interesse_gefoerdert');">
                             </div>
                             <div class="col">
                                 <p>Neutral</p>
-                                <input type="radio" name="gerne_oft" value="2">
+                                <input type="radio" name="interesse_gefoerdert" value="2" oninput="clearValidity('interesse_gefoerdert');">
                             </div>
                             <div class="col">
                                 <p>Stimme eher zu</p>
-                                <input type="radio" name="gerne_oft" value="3">
+                                <input type="radio" name="interesse_gefoerdert" value="3" oninput="clearValidity('interesse_gefoerdert');">
                             </div>
                             <div class="col">
                                 <p>Stimme voll zu</p>
-                                <input type="radio" name="gerne_oft" value="4">
+                                <input type="radio" name="interesse_gefoerdert" value="4" oninput="clearValidity('interesse_gefoerdert');">
                             </div>
                         </div>
                     </li>
                     <li>
-                        <label for="komplex"><b>Wie viel haben Sie in dieser Lehrveranstaltung gelernt?</b></label>
+                        <label for="viel_gelernt"><b>Ich habe viel in diesem Spiel gelernt</b></label>
                         <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
                             <div class="col">
                                 <p>Stimme überhaupt nicht zu</p>
-                                <input type="radio" name="komplex" value="0">
+                                <input type="radio" name="viel_gelernt" id="viel_gelernt" value="0" required oninvalid="this.setCustomValidity('Feld muss ausgefüllt sein')" oninput="clearValidity('viel_gelernt');">
                             </div>
                             <div class="col">
                                 <p>Stimme eher nicht zu</p>
-                                <input type="radio" name="komplex" value="1">
+                                <input type="radio" name="viel_gelernt" value="1" oninput="clearValidity('viel_gelernt');">
                             </div>
                             <div class="col">
                                 <p>Neutral</p>
-                                <input type="radio" name="komplex" value="2">
+                                <input type="radio" name="viel_gelernt" value="2" oninput="clearValidity('viel_gelernt');">
                             </div>
                             <div class="col">
                                 <p>Stimme eher zu</p>
-                                <input type="radio" name="komplex" value="3">
+                                <input type="radio" name="viel_gelernt" value="3" oninput="clearValidity('viel_gelernt');">
                             </div>
                             <div class="col">
                                 <p>Stimme voll zu</p>
-                                <input type="radio" name="komplex" value="4">
+                                <input type="radio" name="viel_gelernt" value="4" oninput="clearValidity('viel_gelernt');">
                             </div>
                         </div>
                     </li>
                     <li>
-                        <label for="gerne_oft"><b>Ich fand die Anwendung einfach zu benutzen.</b></label>
+                        <label for="interesse_gefoerdert"><b>Ich werde mich in Zukunft aufmerksamer im Internet bewegen.</b></label>
                         <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
                             <div class="col">
                                 <p>Stimme überhaupt nicht zu</p>
-                                <input type="radio" name="einfach" value="0">
+                                <input type="radio" name="aufmerksamkeit" id="aufmerksamkeit" value="0" required oninvalid="this.setCustomValidity('Feld muss ausgefüllt sein')" oninput="clearValidity('aufmerksamkeit');">
                             </div>
                             <div class="col"> 
                                 <p>Stimme eher nicht zu</p>
-                                <input type="radio" name="einfach" value="1">
+                                <input type="radio" name="aufmerksamkeit" value="1"  oninput="clearValidity('aufmerksamkeit');">
                             </div>
                             <div class="col">
                                 <p>Neutral</p>
-                                <input type="radio" name="einfach" value="2">
+                                <input type="radio" name="aufmerksamkeit" value="2"  oninput="clearValidity('aufmerksamkeit');">
                             </div>
                             <div class="col">
                                 <p>Stimme eher zu</p>
-                                <input type="radio" name="einfach" value="3">
+                                <input type="radio" name="aufmerksamkeit" value="3"  oninput="clearValidity('aufmerksamkeit');">
                             </div>
                             <div class="col">
                                 <p>Stimme voll zu</p>
-                                <input type="radio" name="einfach" value="4">
+                                <input type="radio" name="aufmerksamkeit" value="4"  oninput="clearValidity('aufmerksamkeit');">
                             </div>
                         </div>
                     </li>

@@ -75,7 +75,9 @@
         <p> Wollen sie ihr Abonnement verwalten? Hier finden sie alle Abonnement-Optionen:
         <!-- "Misdirection" Dark Pattern: Option ist gut ist prominent plaziert und eingefärbt und zusätzlich verheißungsvoll benannt.
             Dadurch sollen Spieler*innen vom relevanten Link abgelenkt werden -->
-            <a href="{{url_for('deceptv_angebote')}}" class="btn btn-success">Abonnement-Verwaltungsmenü</a>
+            <a class="btn btn-success" onclick="url_delay_set_session('{{ session['dp_misdirect_kuendigen'] }}', '/deceptv/angebote/', { 'dp_misdirect_kuendigen': 0 });">
+                Abonnement-Verwaltungsmenü
+            </a>
         </p>
         <div style="height: 250px">
 

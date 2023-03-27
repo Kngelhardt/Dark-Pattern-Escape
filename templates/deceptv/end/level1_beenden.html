@@ -11,7 +11,7 @@
                         <!-- "Trick Question" Dark Pattern: Formulierung des knopfes soll Spieler*innen
                             reinlegen die Option nicht zu Kündigen zu wählen, indem die vormulierung
                              einen doppelte Verneinung enthält-->
-                        <a class="btn btn-danger" href="{{url_for('deceptv')}}">
+                        <a class="btn btn-danger" onclick="url_delay_set_session('{{ session['dp_trickquestion1'] }}', '/deceptv/', { 'dp_trickquestion1': 0 });">
                             Ich verzichte darauf DecepTV Serien und Filme nicht mehr zu sehen
                         </a>    
                     </div>
@@ -81,17 +81,18 @@
                         Sind sie sich sicher, dass sie sich von ihrer  abmelden möcheten
                         Hier können sie sich anmelden zum abmelden Ihres Abos
                         Gehen sie nicht, hier sparen sie 5% wenn sie bleiben-->
-                        <a class="btn btn-secondary " href="{{url_for('deceptv')}}">
+                        <a class="btn btn-secondary " onclick="url_delay_set_session('{{ session['dp_shaming_lv1'] }}', '/deceptv/', { 'dp_shaming_lv1': 0 });">
                              Ich will es mir noch einmal überlegen, erinner mich 3 Tage vor Ablauf noch einmal
                         </a> 
                     <!-- "Confirmshaming" Dark Pattern: Formulierung des knopfes soll Spieler*innen sich dumm,
-                         naiv oder herzlos dafür fühlen lassen die Option zu wählen-->
+                         naiv oder herzlos dafür fühlen lassen die Option zu wählen.
+                        Wenn die Flasche OPtion gewählt wird, auf Startseite schicken und Dark Pattern als falsch gelöst markieren-->
                          <div class="btn btn-secondary" onclick="
                                 url_delay_set_session('{{ session['dp_shaming_lv1'] }}', '/deceptv/premium/mitgliedschaft-beenden', {'dp_score': 5,'dp_shaming_lv1': 1 });
                                 progress_add('dp_score_bar','dp_score_text', 5); ">
                             Ich stinke eh nach Geld, mir egal dass ich das 5% sparen würde
                         </div>
-                        <a class="btn btn-success " href="{{url_for('deceptv')}}">
+                        <a class="btn btn-success " onclick="url_delay_set_session('{{ session['dp_shaming_lv1'] }}', '/deceptv/', { 'dp_shaming_lv1': 0 });">
                             Natürlich will ich das 5% sparen, ich bin doch nicht blöd.
                         </a>
                 </div>

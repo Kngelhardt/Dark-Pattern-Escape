@@ -1,4 +1,5 @@
 /* -------------------------------------------FLASK REQUEST FUNKTIONEN--------------------------------------------------------------------- */
+
 /* Testen ob post_object im JSON Format ist */
 function isJson(str) {
     var objectConstructor = ({}).constructor;
@@ -41,21 +42,20 @@ function set_session_value(json_obj){
 }
 
 /* Erhöhe oder verringere Scores nur, wenn DP noch nit schon einmal gelöst */
-function set_wenn_nicht_geloest(dark_pattern_id, json_obj){
+function set_wenn_nicht_geloest(dark_pattern_value, json_obj){
     console.log('schon gelöst außer:');
     /* Check, ob das Pattern schon gelöst wurde, wenn nein -> update session */
-    if (dark_pattern_id == 'None'){
+    if (dark_pattern_value == 'None'){
         console.log('noch nicht gelöst');
         set_session_value(json_obj);
     }
 }
 
-/* Delay beim aufrufen einer neuen Seite, damit ein POST request um die session zu ipdaten noch durchgeht */
-function url_delay_set_session(dark_pattern_id, url, json_obj){
-    set_wenn_nicht_geloest(dark_pattern_id, json_obj);
+/* Delay beim aufrufen einer neuen Seite, damit ein POST request um die session zu updaten noch durchgeht */
+function url_delay_set_session(dark_pattern_value, url, json_obj){
+    set_wenn_nicht_geloest(dark_pattern_value, json_obj);
 
     delay = setInterval(function(){
-        console.log(dark_pattern_id, json_obj)
         window.location.href = url;
         clearInterval(delay)
     },70);
@@ -94,6 +94,11 @@ function show_hide_div(a){
     }a
 }
 
+/* Forms: Validität wieder zu valid setzen */
+function clearValidity(input_name){
+    document.getElementById(input_name).setCustomValidity('');
+}
+
 /* -----------------------------------------------TIMER FUNKTIONEN--------------------------------------------------------------------- */
 /* Countdown Timer. Nach ablauf wird weitergeleitet zur spielübersicht */
 function level_countdown(zeit_state, level_fortschritt){
@@ -107,7 +112,7 @@ function level_countdown(zeit_state, level_fortschritt){
             if(level_fortschritt == 0){
                 window.location.href = '/ende_lv1';
             }else if(level_fortschritt == 1){
-                ajax_request('GET', "/decepdive/ende_lv2", null);
+                window.location.href = '/decepdive/ende_lv2'
             }
         } else {
             // Sekunden runterzählen
@@ -129,8 +134,6 @@ function level_countdown(zeit_state, level_fortschritt){
 }
 
 
-
-
 /* Timer der eine Digitale Uhr Uhrzeit anzeigen lässt. 
 Zählt in 150ms-Schritten von null hoch. Wenn 24 erricht ist, fängt er wieder bei 0 an */
 function starte_uhr(){
@@ -147,6 +150,7 @@ function starte_uhr(){
         }
     }, 150); 
 }
+
 /* Ruft URL '/ende_lv1' auf, wenn die var 'stunde' in starte_uhr() zwischen 14 und 16 ist*/
 function ist_erreichbar(){
     // Button funktioniert nur, wenn der starte_uht timer zwischen 14 und 16 ist
@@ -170,7 +174,7 @@ function ist_erreichbar(){
     }
 }
 
-/* -------------------------------Warenkorbkaltulation für level 2 ----------------------------------------- */
+/* -------------------------------Warenkorbkalkulation für level 2 ----------------------------------------- */
 /* calculate_total(); */
 function calculate_total(){
     let produkpreis = parseFloat(document.getElementById('produkt_preis').textContent);

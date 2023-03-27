@@ -13,12 +13,14 @@
                     <div class="col">
                         <label for="name">Name, Nachname: </label>
                         <br>
-                        <input type="text" name="name" placeholder="Name">
+                        <input type="text" name="name" id="name" placeholder="Name" value="{{name if name}}" required
+                                oninvalid="this.setCustomValidity('Feld muss ausgefüllt sein')" oninput="clearValidity('name');">
                     </div>
                     <div class="col">
                         <label for="matrikelnr">Matrikelnummer: </label>
                         <br>
-                        <input type="text" name="matrikelnr" placeholder="Matrikel-Nr.">
+                        <input type="text" name="matrikelnr" id="matrikelnr" placeholder="Matrikel-Nr." value="{{matrikelnr if matrikelnr}}" required 
+                                oninvalid="this.setCustomValidity('Feld muss ausgefüllt sein')" oninput="clearValidity('matrikelnr');">
                     </div>
                     <div class="col">
                         <input type="submit" value="Abschicken" class="btn btn-success float-end">

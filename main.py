@@ -7,69 +7,35 @@ app = Flask(__name__)
 # initialisiere secret key
 app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
 
-########################### Datenspeicherung ##################################  
-def write_dp_ergebnisse_csv():
-    file_exists = os.path.isfile('ergebnisse/dark_pattern_results.csv')
-
-    with open('ergebnisse/dark_pattern_results.csv', mode='a') as csv_file:
-
-        fieldnames = [  'session_id', 
-                'dp_open_cookiemanager_lv1',
-                'dp_cookie_lv1', 
-                'dp_berechtiges_interesse_lv1',
-                'dp_cookiemisdirection_lv1', 
-                'dp_roachmotel1', 
-                'dp_misdirect_kuendigen', 
-                'dp_trickquestion1',
-                'dp_shaming_lv1',
-                'dp_roachmotel2', 
-                'dp_cookielv2_trickquestion',
-                'dp_cookielv2_trickquestion2',
-                'dp_cookielv2_berechtigt', 
-                'dp_vergleich', 
-                'dp_preticked_monatl', 
-                'dp_sneakinbasket',
-                'dp_hiddennewsletter', 
-                'dp_misdirect_login', 
-                'dp_misdirect_konto_erstellen', 
-                'dp_misdirect_spende' ] 
-        
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        if not file_exists:
-            writer.writeheader()
-        writer.writerow({item: session[item] for item in fieldnames})
-
   
 ########################## ROUTES ###################################
-"""  Reset der Session auf die initialen werte """
+"""  Funktion initialisiert Standardwerte der Session, falls noch sie nicht initialisiert sind"""
 @app.route('/initialize-session')
 def initialize_session():
     # Initialisiere Session Werte
 
-    #exists = dark_pattern_results.query.filter_by(session_id= id).first()
+    # Nur beim ersten aufrufen der Seite ausführen
     if session.get('session_id') is None:
 
         # Initialisiere ID
         session['session_id'] = 1
         # erstelle liste mit allen vergebenen IDs
         id_list = []
-        # check ob datei existiert
+        # check ob datei existiert, wenn ja öffnen zum lesen
         if os.path.isfile('ergebnisse/id_list.csv'):
             with open('ergebnisse/id_list.csv', 'r') as id_csv:
                 reader = csv.reader(id_csv)
+                # Füge verhandene IDs zu id_list hinzu
                 for col in reader:
                     id_list.append(col[0])
-    
         # falls die generierte id schon existiert, erhöhe ID um 1 bis ID einzigartig ist
         while str(session['session_id']) in id_list:
             session['session_id'] += 1
-
-        # speicher id in id_csv, damit sie nicht erneut vergeben werden kann
+        # speicher id in id_csv, damit sie nicht doppelt vergeben werden kann
         with open('ergebnisse/id_list.csv', 'a') as id_csv:
             writer = csv.writer(id_csv)
             writer.writerow([session['session_id']])
 
-        print(session['session_id'], 'all_ids: ', id_list)
         # initiale Werte der Punkte
         session['data_score'] = 100
         session['geld_score'] = 25
@@ -118,7 +84,7 @@ def initialize_session():
 
     return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
 
-# Funktion mit der Sessionwerte geändert werden können, return: '', 204
+""" Funktion mit der Sessionwerte geändert werden können """
 @app.route('/change-session', methods=['GET', 'POST'])
 def set_session_value():
     if request.method == "POST":
@@ -162,12 +128,12 @@ def update_timer():
         return '', 204
     
 
-#################### HOMEPAGE ########################
+########################################## HOMEPAGE ###############################################
 """ Mainpage """
 @app.route('/')
 def home():
-    #initialisierung der Werte für eine Session, check if session is initialised
-    if session.get("data_score") is None:
+    # initialisierung der Werte für die Session, falls noch nicht initialisiert
+    if session.get("session_id") is None:
         initialize_session()
     return render_template('home/home.html')
 
@@ -187,34 +153,8 @@ def anleitung():
 def hintergrund():
     return render_template('home/hintergrund.html')
 
-@app.route('/fragebogen-bedienbarkeit')
-def fragebogen():
-    return render_template('home/fragebogen.html')
 
-@app.route('/fragebogen-bewusstsein', methods=['POST'])
-def fragebogen_SUS():
-    if request.method == 'POST':
-        if 'gerne_oft' in request.form:
-            print(request.form['gerne_oft'])
-    return render_template('home/fragebogen2.html')
-
-@app.route('/vp-stunden', methods=['POST'])
-def fragebogen_bewusstsein():
-    if request.method == 'POST':
-        if 'gerne_oft' in request.form:
-            print(request.form['gerne_oft'])
-    return render_template('home/fragebogen3.html', validation='')
-
-@app.route('/fragebogen-abgeschlossen', methods=['POST'])
-def fragebogen_vp():
-    if request.method == 'POST':
-        if 'name' in request.form:
-            print(request.form['name'])
-    return render_template('home/fragebogen3.html', validation='Erfolgreich abgeschickt. Vielen Dank')
-
-
-############################## LEVEL 1 ##################################
-""" Level 1: Streming Abo beenden """
+######################################## LEVEL 1: Streaming Abo beenden ##########################################
 
 """ Funktion: Bilder aus dem static/images/deceptv Verzeichnis laden
     return: liste mit strings der Files inkl. Path """
@@ -433,8 +373,8 @@ def level1_beendet():
     return render_template('deceptv/end/ende_lv1.html', dp_list_lv1 = dp_list_lv1)
 
 
-###########################################################################################
-# Level 2: Shopping
+############################ Level 2: Shopping ############################################
+# Starseite
 @app.route('/decepdive') 
 def decepdive():
     #Zeige Cookibanner
@@ -448,7 +388,7 @@ def decepdive():
     return render_template('decepdive/decepdive.html')
 
 # Formverarbeitung für ein Dark Pattern in Level2 
-# Das Form besteht aus preticked checkboxes, die unticked werden müssen
+# Das Form besteht aus vorangekreutzen Checkboxen, bei denen das Kreuz entfernt werden muss
 @app.route('/decepdive_cookies', methods=['GET','POST'])
 def decepdive_cookies():
     if request.method == "POST":
@@ -634,6 +574,7 @@ def ende_lv2():
                     session['dp_sneakinbasket'], 
                     session['dp_misdirect_spende'] ]
     
+    # speicher die Lösungen aller Dark Patterns für diese Session in CSV für Evaluierung
     write_dp_ergebnisse_csv()
 
     # Setze levle_fortschritt auf null und leite damit den Abschluss des Spiels ein
@@ -641,6 +582,117 @@ def ende_lv2():
 
     return render_template('decepdive/ende_lv2.html', dp_list_lv2 = dp_list_lv2)
 
+########################### Datenspeicherung ##################################  
+def write_dp_ergebnisse_csv():
+
+    with open('ergebnisse/dark_pattern_results.csv', mode='a') as csv_file:
+        fieldnames = [  'session_id', 
+                'dp_open_cookiemanager_lv1',
+                'dp_cookie_lv1', 
+                'dp_berechtiges_interesse_lv1',
+                'dp_cookiemisdirection_lv1', 
+                'dp_roachmotel1', 
+                'dp_misdirect_kuendigen', 
+                'dp_trickquestion1',
+                'dp_shaming_lv1',
+                'dp_roachmotel2', 
+                'dp_cookielv2_trickquestion',
+                'dp_cookielv2_trickquestion2',
+                'dp_cookielv2_berechtigt', 
+                'dp_vergleich', 
+                'dp_preticked_monatl', 
+                'dp_sneakinbasket',
+                'dp_hiddennewsletter', 
+                'dp_misdirect_login', 
+                'dp_misdirect_konto_erstellen', 
+                'dp_misdirect_spende' ] 
+        
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+        file_exists = os.path.isfile('ergebnisse/dark_pattern_results.csv')
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow({item: session[item] for item in fieldnames})
+
+""" Funktion um CSV zu schreiben
+    inputs: 
+        data_list(liste mit listen): jedes Listenelement besteht aus einem Key(item-ID) und dem dazugehörigen Wert
+        dateiname: name der CSV-Datei in der geschrieben werden soll """
+def write_fragebogen_csv(data_list, dateiname):
+        with open('ergebnisse/'+dateiname , mode='a') as csv_file:
+            
+            #initielisiere Fieldlist
+            fieldnames= []
+            for itemID, itemValue in data_list:
+                fieldnames.append(itemID)
+
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            
+            file_exists = os.path.isfile('ergebnisse/fragebogen_SUS.csv')
+            if not file_exists:
+                writer.writeheader()
+            
+            writer.writerow({itemID: itemValue for itemID, itemValue in data_list})
+
+################################## Fragebögen ##################################
+@app.route('/fragebogen-bedienbarkeit')
+def fragebogen():
+    return render_template('home/fragebogen.html', status='')
+
+@app.route('/fragebogen-bewusstsein', methods=['POST'])
+def fragebogen_SUS():
+    if request.method == 'POST':
+        item_list= ['gerne_oft', 'komplex', 'einfach', 'hilfe',
+                    'funktionen_integriert', 'inkonsistenzen', 
+                    'umgang_lernen', 'umstaendlich',
+                    'benutzung_sicher', 'musste_lernen' ]
+        # liste, in der die Daten gespeichert werden, die unique session ID hinzufügen
+        data_list = [ ['session_id', session['session_id']] ]
+        for itemID in item_list:
+            if itemID in request.form:
+                 data_list.append([itemID, request.form[itemID]])
+            else:
+                status= ' Bitte alle Fragen beantworten'
+                return render_template('home/fragebogen.html', status=status )
+
+        write_fragebogen_csv(data_list, 'fragebogen_SUS.csv')
+
+    return render_template('home/fragebogen2.html', )
+
+@app.route('/vp-stunden', methods=['POST'])
+def fragebogen_bewusstsein():
+    if request.method == 'POST':
+        # liste, in der die Daten gespeichert werden, die unique session ID hinzufügen
+        data_list = [ ['session_id', session['session_id']] ]
+        for itemID in  ['interesse_gefoerdert', 'viel_gelernt', 'aufmerksamkeit' ]:
+            if itemID in request.form:
+                 data_list.append([itemID, request.form[itemID]])
+            else:
+                status= ' Bitte alle Fragen beantworten'
+                return render_template('home/fragebogen2.html', status=status )
+            
+        write_fragebogen_csv(data_list, 'fragebogen_bewusstsein.csv')
+    return render_template('home/fragebogen3.html', validation='')
+
+@app.route('/fragebogen-abgeschlossen', methods=['POST'])
+def fragebogen_vp():
+    # liste, in der die Daten gespeichert werden
+    data_list = []
+    for itemID in  ['name', 'matrikelnr']:
+        if itemID in request.form:
+                data_list.append([itemID, request.form[itemID]])
+        else:
+            status= ' Bitte alle Fragen beantworten'
+            return render_template('home/fragebogen2.html', validation='Bitte alle Felder angeben!' )
+        
+    write_fragebogen_csv(data_list, 'VP_Stunden.csv')
+
+    return render_template('home/fragebogen3.html', 
+                           validation='Erfolgreich abgeschickt. Vielen Dank',
+                           name =  request.form['name'],
+                           matrikelnr = request.form['matrikelnr'])
+
+####################################################################
 
 if __name__ == "__main__":
     # Activate debugging (not working)
@@ -689,67 +741,4 @@ if session.get("data_score") is not None:
     'dp_misdirect_konto_erstellen', session['dp_misdirect_konto_erstellen'],'\n',
     'dp_misdirect_spende', session['dp_misdirect_spende'],'\n'
     ) 
-
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///dark_pattern_results.sqlite3"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///fragebogen_daten.sqlite3"
-
-db = SQLAlchemy(app)
-
-# database für die Resultate des Lösens der Dark Patterns der spielenden Personen
-class dark_pattern_results(db.Model):
-    _id = db.Column(db.Integer, primary_key = True)
-    session_id = db.Column(db.String)
-    #
-    dp_open_cookiemanager_lv1 = db.Column(db.Integer)
-    dp_cookie_lv1 = db.Column(db.Integer)
-    dp_berechtiges_interesse_lv1 = db.Column(db.Integer)
-    dp_cookiemisdirection_lv1 = db.Column(db.Integer)
-    # level1 
-    dp_roachmotel1 = db.Column(db.Integer)
-    dp_misdirect_kuendigen = db.Column(db.Integer)
-    dp_trickquestion1 = db.Column(db.Integer)
-    dp_shaming_lv1 = db.Column(db.Integer)
-    dp_roachmotel2 = db.Column(db.Integer)
-    # cookiebanner lv2:
-    dp_cookielv2_trickquestion = db.Column(db.Integer)
-    dp_cookielv2_trickquestion2 = db.Column(db.Integer)
-    dp_cookielv2_berechtigt = db.Column(db.Integer)
-    # level 2 
-    dp_vergleich = db.Column(db.Integer)
-    dp_preticked_monatl = db.Column(db.Integer)
-    dp_sneakinbasket = db.Column(db.Integer)
-    dp_hiddennewsletter = db.Column(db.Integer)
-    dp_misdirect_login = db.Column(db.Integer)
-    dp_misdirect_konto_erstellen = db.Column(db.Integer)
-    dp_misdirect_spende = db.Column(db.Integer)
-    ############## DEBUGGING #####################
-
-def __init__(self, session_id, dp_open_cookiemanager_lv1, dp_cookie_lv1, dp_berechtiges_interesse_lv1,
-                dp_cookiemisdirection_lv1, dp_roachmotel1, dp_misdirect_kuendigen, dp_trickquestion1,
-                dp_shaming_lv1, dp_roachmotel2, dp_cookielv2_trickquestion,dp_cookielv2_trickquestion2,
-                dp_cookielv2_berechtigt, dp_vergleich, dp_preticked_monatl, dp_sneakinbasket,
-                dp_hiddennewsletter, dp_misdirect_login, dp_misdirect_konto_erstellen, dp_misdirect_spende):
-    self.session_id = session_id
-    self.dp_open_cookiemanager_lv1 = dp_open_cookiemanager_lv1
-    self.dp_cookie_lv1 = dp_cookie_lv1
-    self.dp_berechtiges_interesse_lv1 = dp_berechtiges_interesse_lv1
-    self.dp_cookiemisdirection_lv1 = dp_cookiemisdirection_lv1
-    self.dp_roachmotel1 = dp_roachmotel1
-    self.dp_misdirect_kuendigen = dp_misdirect_kuendigen
-    self.dp_trickquestion1 = dp_trickquestion1
-    self.dp_shaming_lv1 = dp_shaming_lv1
-    self.dp_roachmotel2 = dp_roachmotel2
-    self.dp_cookielv2_trickquestion = dp_cookielv2_trickquestion
-    self.dp_cookielv2_trickquestion2 = dp_cookielv2_trickquestion2
-    self.dp_cookielv2_berechtigt = dp_cookielv2_berechtigt
-    self.dp_vergleich = dp_vergleich
-    self.dp_preticked_monatl = dp_preticked_monatl
-    self.dp_sneakinbasket = dp_sneakinbasket
-    self.dp_hiddennewsletter = dp_hiddennewsletter
-    self.dp_misdirect_login = dp_misdirect_login
-    self.dp_misdirect_konto_erstellen = dp_misdirect_konto_erstellen
-    self.dp_misdirect_spende = dp_misdirect_spende
-
-class fragebogen_daten(db.Model):
-    _id = db.Column(db.Integer, primary_key = True)    
 """

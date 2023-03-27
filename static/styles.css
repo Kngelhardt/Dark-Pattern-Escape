@@ -1,189 +1,244 @@
- /* --------------------------------------------------------------------------------------------------------------------------------------------- */
-        /* CSS für alle Seiten */
-        #noscript{
-            min-height: 100vh;
-        }
-        body{
-            text-align: justify;
-            background-color: rgb(221, 221, 221);
-        }
-        .content{
-            min-height: 90vh; /* Damit der footer unabhängig von der Kontentgröße unten bleibt */
-        }
-        .mainbackground{
-            background-color: black;
-        }
-        .maincolor{
-            color: white;
-        }
-        .nav_item_landing{
-            color: white;
-        }
-        .nav_item_landing a:hover{
-            box-shadow: 0 0 5px rgb(255, 0, 0);
-            border-radius: 5px;
-        }
-        .navbar-brand{
-            padding: 5px 10px;
-        }
-        .fussleiste{
-            position: sticky;
-            bottom: 0;
-        }
-        .fussleiste_brand{
-            float: left;
-            margin: 0px 20px 30px 20px;
-            color: white;
-            box-shadow: 0 0 5px rgb(255, 0, 0);
-            text-decoration: none;
-        }
-        #zeit_anzeige{
-            left: 40%;
-        }
-        .misdirection_text{
-            color: gray;
-            font-weight: lighter;
-        }
-        .small_text{
-            font-size: 8px;
-            margin-top: 1px;
-        }
-        /* --------------------------------------------------------------------------------------------------------------------------------------------- */
-        /* CSS für die Landingpage */
-        #logo1{
-            text-shadow: 0px 0px 3px rgb(255, 0, 0);
-            font-size: 40px;
-        }
-        #logo2{
-            font-weight: 300;
-            font-size: 30px;
-            text-align: right;
-            line-height: 0px;
-            text-shadow: 0px 0px 3px rgb(255, 0, 0)
-        }
-        .bild-intro{
-            max-height: 350px;
-            box-shadow: 3px 3px 5px black;
-        }
-        /* --------------------------------------------------------------------------------------------------------------------------------------------- */
-        /* CSS für Level 1: Streamingdienst kündigen */
-        /* Navigationsleiste */
-        .maincolor_level1{
-            background-color:rgb(32, 39, 53);
-            color: white;
-        }
-        .nav_item_level1{
-            color: white;
-        }
-        .nav_item_level1 a:hover{
-            box-shadow: 0 0 5px rgb(0, 174, 255);
-            border-radius: 5px;
-        }
-        .account_menu{
-            margin: 0px 5px;
-            padding-left: 0px;
-        }
-        /* Styles füf das Offcanvas Menü und dessen Knopf*/
-        .offcanvas_level1{
-            background-color:rgb(32, 39, 53);
-        }
-        .account_menu_options{
-            line-height: 50px;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .account_menu_options a{
-            text-decoration: none;
-            color: white;
-        }
-        .account_menu_options a:hover{
-            text-decoration: none;
-            text-shadow: 0 0 2px rgb(28, 134, 255);
-        }
-        /* Kontent für Streaming-startseite */  
-    
-        .content_level1{
-            /*  alternatives Farbschema */
-            background-color: rgb(4, 8, 17);
-            color: white;
-            text-shadow: 0px 0px 5px black;
-            padding: 0px 20px;
-        }
-        .atrappe:hover{ /* Für Elemente, die als klickbare Objekte bzw. Links erscheinen sollen */
-            cursor: pointer;
-            box-shadow: 0px 0px 10px rgb(28, 134, 255);
-        }
-        .carousel-item img{
-            border-radius: 5px;
-            margin: 5px 0px;
-        }
-        .carousel-control-prev{ /* position und Größe der Crrouselbuttons anpassen. Wichtig um zu verhindern, dass sie den Hauptmenü-Button in der Fußleiste überdecken */
-            width: min-content;
-            margin-left: 10px;
-        }
-        .carousel-control-next{
-            width: min-content;
-            margin-right: 10px;
-        }
-        /* Kontent für Deceptv_premium, _Angebote, _Shop, _Service, _Social */
-        #vorteile_banner{
-            font-size:xx-large;
-            height: 30vh;
-        }
-        #vorteile{
-            margin: 20px 0px;
-        }
-        .deceptv_premium_container{
-            text-align: center ;
-        }
-        .dropdown-item{
-            font-weight: bolder;
-        }
-        #service_kündigen{
-            text-decoration: none;
-        }
-        /* --------------------------------------------------------------------------------------------------------------------------------------------- */
-        /* CSS Level2: Shoppingseite */
-        /* Farbpalette inspiriert von https://www.shutterstock.com/de/blog/farbpaletten-ideen-website */
-        .maincolor_level2{
-            background-color: #8cBDB9;
-            color: rgb(10, 10, 10);
-        }
-        .nav_item_level2 a:hover{
-            background-color: #bae0dd;
-            border-radius: 5px;
-            color: rgb(10, 10, 10);
-            box-shadow: 0 0 10px #bae0dd;
-        }
-        .offcanvas_level2{
-            background-color: #8cBDB9;
-            color: rgb(10, 10, 10);
-        }
-        .content_level2{
-            background-color: #f4fffe;
-        }
-        .content_level2 img{
-            box-shadow: 1px 1px 5px black;
-        }
-        .content_level2 a{
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .platzfülller{ /* Unsichbares element um platz zu füllen*/
-            visibility: hidden;  
-        }
-        .produkt{
-            border-radius: 5px;
-            box-shadow: 0 0 1px #8cBDB9;
-            padding-top: 10px;
-        }
-        /* Produktpages */
-        .produktbeschreibung{ 
-            font-size: 24px;
-        }
-        /* Warenkorb und checkout */
-        #container_konto{
-            height: 70vh;
-            padding: 20% 30%;
-        }
+/* CSS für alle Seiten */
+#noscript{
+    min-height: 100vh;
+}
+body{
+    text-align: justify;
+    background-color: rgb(243, 243, 243);
+}
+.content{
+    min-height: 90vh; /* Damit der footer unabhängig von der Kontentgröße unten bleibt */
+}
+.mainbackground{
+    background-color: black;
+}
+.maincolor{
+    color: white;
+}
+.nav_item_landing{
+    color: white;
+}
+.nav_item_landing a:hover{
+    box-shadow: 0 0 5px rgb(255, 0, 0);
+    border-radius: 5px;
+}
+.navbar-brand{
+    padding: 5px 10px;
+}
+.fussleiste{
+    position: sticky;
+    bottom: 0;
+}
+.fussleiste_brand{
+    float: left;
+    margin: 0px 20px 30px 20px;
+    color: white;
+    box-shadow: 0 0 5px rgb(255, 0, 0);
+    text-decoration: none;
+}
+#zeit_anzeige{
+    left: 40%;
+}
+.red_box_shadow{
+    box-shadow: 0 0 5px red;
+}
+.green_box_shadow{
+    box-shadow: 0 0 5px green
+}
+.yellow_box_shadow{
+    box-shadow: 0 0 5px #FFC107
+}
+.lightblue_box_shadow{
+    box-shadow: 0 0 5px #54B4D3
+}
+.text_shadow{
+    text-shadow: 0 0 1px black;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+/* Dark Pattern Bausteine */
+.misdirection_text{
+    color: gray;
+    font-weight: lighter;
+}
+.small_text{
+    font-size: 7px;
+    margin-top: 1px;
+}
+.cursor_pointer:hover{ /* Für Elemente, die als klickbare Objekte erscheinen sollen */
+    cursor: pointer;
+}
+.unscheinbarer_button{
+    border: none;
+    background-color: transparent;
+}
+/* Verstecktes select menü */
+.custom-select{
+    display: inline-block;
+    max-width: 20px;
+    padding-left: 3px;
+}
+.custom-select select{
+    position: relative;
+    appearance: none;
+    background-color: transparent;
+    color: transparent;
+    border: none;
+    outline: none;
+    max-width: 7px;
+}
+.custom-select::before{
+    position: absolute;
+    left: 303px;
+    content: ">";
+    transform: rotate(90deg);
+    font-weight:lighter;
+}
+.custom-select select:hover{
+    cursor: pointer;
+}
+.custom-select option{
+    color: black;
+}
+.switch_rotate{
+    transform: rotate(180deg);
+}
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+/* CSS für die Landingpage */
+#logo1{
+    text-shadow: 0px 0px 3px rgb(255, 0, 0);
+    font-size: 40px;
+}
+#logo2{
+    font-weight: 300;
+    font-size: 30px;
+    text-align: right;
+    line-height: 0px;
+    text-shadow: 0px 0px 3px rgb(255, 0, 0)
+}
+.bild-intro{
+    max-height: 350px;
+    box-shadow: 3px 3px 5px black;
+}
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+/* CSS für Level 1: Streamingdienst kündigen */
+/* Navigationsleiste */
+.maincolor_level1{
+    background-color:rgb(32, 39, 53);
+    color: white;
+}
+.nav_item_level1{
+    color: white;
+}
+.nav_item_level1 a:hover{
+    box-shadow: 0 0 5px rgb(0, 174, 255);
+    border-radius: 5px;
+}
+.account_menu{
+    margin: 0px 5px;
+    padding-left: 0px;
+}
+/* Styles füf das Offcanvas Menü und dessen Knopf*/
+.offcanvas_level1{
+    background-color:rgb(32, 39, 53);
+}
+.account_menu_options{
+    line-height: 50px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.account_menu_options a{
+    text-decoration: none;
+    color: white;
+}
+.account_menu_options a:hover{
+    text-decoration: none;
+    text-shadow: 0 0 2px rgb(28, 134, 255);
+}
+#cookie_fussleiste_lv1{
+    bottom: 90px;
+}
+/* Kontent für Streaming-startseite */  
+.content_level1{
+    /*  alternatives Farbschema */
+    background-color: rgb(4, 8, 17);
+    color: white;
+    text-shadow: 0px 0px 5px black;
+    padding: 0px 20px;
+}
+.atrappe:hover{ /* Für Elemente, die als klickbare Objekte bzw. Links erscheinen sollen */
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgb(28, 134, 255);
+}
+.carousel-item img{
+    border-radius: 5px;
+    margin: 5px 0px;
+}
+/* Position und Größe der Crrouselbuttons anpassen. Wichtig um zu verhindern, dass sie den Hauptmenü-Button in der Fußleiste überdecken */
+.carousel-control-prev{
+    width: min-content;
+    margin-left: 10px;
+}
+.carousel-control-next{
+    width: min-content;
+    margin-right: 10px;
+}
+/* Kontent für Deceptv_premium, _Angebote, _Shop, _Service, _Social */
+#vorteile_banner{
+    font-size:xx-large;
+    height: 30vh;
+}
+#vorteile{
+    margin: 20px 0px;
+}
+.deceptv_premium_container{
+    text-align: center ;
+}
+.dropdown-item{
+    font-weight: bolder;
+}
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+/* CSS Level2: Shoppingseite */
+/* Farbpalette inspiriert von https://www.shutterstock.com/de/blog/farbpaletten-ideen-website */
+.maincolor_level2{
+    background-color: #8cBDB9;
+    color: rgb(10, 10, 10);
+}
+.nav_item_level2 a:hover{
+    background-color: #bae0dd;
+    border-radius: 5px;
+    color: rgb(10, 10, 10);
+    box-shadow: 0 0 10px #bae0dd;
+}
+.offcanvas_level2{
+    background-color: #8cBDB9;
+    color: rgb(10, 10, 10);
+}
+.content_level2{
+    background-color: #f4fffe;
+}
+.content_level2 img{
+    box-shadow: 1px 1px 5px black;
+}
+.content_level2 a{
+    text-decoration: none;
+    font-weight: bold;
+}
+.platzfülller{ /* Unsichbares element um platz zu füllen*/
+    visibility: hidden;  
+}
+.produkt{
+    border-radius: 5px;
+    box-shadow: 0 0 1px #8cBDB9;
+    padding-top: 10px;
+}
+/* Produktpages */
+.produktbeschreibung{ 
+    font-size: 24px;
+}
+/* Warenkorb und checkout */
+#container_konto{
+    height: 70vh;
+    padding: 20% 30%;
+}
