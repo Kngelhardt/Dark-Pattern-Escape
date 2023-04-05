@@ -86,9 +86,6 @@
                             <li>
                                 <a href="{{url_for('deceptv_feedback')}}">Feedback</a>
                             </li>
-                            <li>
-                                <a href="{{url_for('deceptv_impressum')}}">Impressum</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -108,9 +105,7 @@
     {% block cookieleiste %} 
         <!-- Cookie Dialog Popup -->
         {% if session['cookie_lv1_show'] == True %}
-        <!-- Cookiebanner: werden angezeigt, wenn session['cookie_lv1_show'] == True. 
-        session['cookie_lv1/2_show'] wird beim ersten aufrufen der Homepade des jeweiligen Levels
-        auf true gesetzt, wenn session['cookie_lv_1/2_fertig] true ist -->
+        <!-- Cookiebanner: werden angezeigt, wenn session['cookie_lv1_show'] == True. als True definiert -->
         <div id="cookie_fussleiste_lv1" class="maincolor_level1">
             <div class="d-flex justify-content-between">
                 <div class="p-2">
@@ -140,7 +135,7 @@
                         Trick-Question Dark Pattern: "Ablehnen zu widersprecehn ist das selbe wie Akzeptieren"-->
                     <div class="btn btn-outline-primary pb-3" 
                         onclick="// Backend update
-                                set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score': -40, 'dp_open_cookiemanager_lv1': 0 });
+                                set_session_value({'cookie_lv1_show': 0, 'cookie_lv1_fertig': 1, 'data_score': -40, 'dp_open_cookiemanager_lv1': 0 });
                                 //frontend update
                                 progress_add('data_bar','data_text', -40); 
                                 //hide cookiebanner
@@ -150,7 +145,7 @@
                     </div>
                     <div class="btn btn-primary pb-0"
                         onclick="// Backend update
-                                set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score': -40, 'dp_open_cookiemanager_lv1': 0 });
+                                set_session_value({'cookie_lv1_show': 0, 'cookie_lv1_fertig': 1, 'data_score': -40, 'dp_open_cookiemanager_lv1': 0 });
                                 //frontend update
                                 progress_add('data_bar','data_text', -40);
                                 //hide cookiebanner
@@ -173,7 +168,7 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Cookie Manager</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
-                            onclick="set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0, 'data_score':  -30 });
+                            onclick="set_wenn_nicht_geloest('{{ session['cookie_lv1_fertig'] }}',{'data_score': -30 , 'cookie_lv1_fertig': 1});
                                     progress_add('data_bar','data_text', -30); ">
                     </button>
                 </div>
@@ -302,7 +297,54 @@
             </div>
         </div>
     </div>
+    <!-- Nicht sichtbarer Button: triggert 'nagging_modal' -->
+    <button type="button" id="nagging_modal_trigger" class="visually-hidden" data-bs-toggle="modal" data-bs-target="#nagging_modal">trigger</button>
+    <!-- Modal -->
+    <div class="modal fade" id="nagging_modal" tabindex="0" aria-labelledby="nagging_modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content maincolor_level1" id="nagging_modal_content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nagging_modalLabel">Du magst jederzeit, überall Streams ansehen? Hol die jetzt die <b>Decep</b>TV APP!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img class="rounded level1_hover" src="/static/images/deceptv/Cloaki_soaki.jpg" alt="Ein Blauer Blob mit ausgestreckter Zunge in einem Gulli, ein Ausschnitt einer Beins ist zu sehen">
+                    <ul>
+                        <li>
+                            Cloaki Soaky und viele weitere Titel unterwegs ansehen
+                        </li>
+                        <li>
+                            Über neue Folgen deiner Lieblingstitel informiert werden
+                        </li>
+                        <li>
+                            Günstige Angebote zu <b>Decep</b>TV HD und Platin bekommen
+                        </li>
+                    </ul>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal" onclick="set_session_value({'show_nagging': 0, 'dp_nagging_level1': 0})">
+                        <b>Decep</b>TV App herunterladen
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Nein Danke</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
+        /* 5 Sekunden nach dem aufrufen jeglicher URL's in Level 1 wird der Nagging Dialog geöffnet,
+         bis auf "App installieren" geklickt wird (resultiert in Punktverlust) */
+        console.log('{{session['show_nagging']}}');
+        if( '{{session['show_nagging']}}' == 'True'){
+            delay = setInterval(function(){
+                /* Wenn Cookiedialog-Modal offen ist, Nagging Modal nicht öffnen, da sonst Cookiedialog geschlossen wird  */
+                if (document.getElementById('cookie_manager_lv1').classList.contains('show') == false){
+                    /* öffen modal */
+                    document.getElementById('nagging_modal_trigger').click();
+                    clearInterval(delay);
+                }
+            },4000);
+        }
+        /* versteckt den Breich zu berechtigtem Interesse im Cookiedialog. Kann durch den richtigen Buttonclick sichtbar gemacht werden */
         document.getElementById('berechtigtes_interesse').style.display = "none";
     </script>
     {% endblock %}

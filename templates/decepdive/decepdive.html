@@ -29,56 +29,56 @@
                         <div class="col produkt "> 
                             <a href="{{ url_for('decepdive_produkt1') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream1.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (4340)</small> <br> 500 milliliter <br>
+                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (4340)</small> <br> 400 milliliter <br>
                                 <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt ">
                             <a href="{{ url_for('decepdive_produkt2') }}" >
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream2.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (1302)</small> <br> 5 deziliter <br>
+                                <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (1302)</small> <br> 4.5 deziliter <br>
                                 <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt ">
                             <a href="{{ url_for('decepdive_produkt3') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream3.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (53)</small> <br> 0.5 liter <br>
+                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (53)</small> <br> 0,5 liter <br>
                                 <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt  "> 
                             <a href="{{ url_for('decepdive_produkt4') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream4.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (24)</small> <br> 800 milliliter <br>
+                                <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (24)</small> <br> 590000 mikroliter <br>
                                 <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt  ">
                             <a href="{{ url_for('decepdive_produkt5') }}">
                                 <img class="rounded mx-auto" src="{{url_for('static', filename='images/decepdive/suncream5.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (174)</small> <br> 0.005 hektoliter <br>
+                                <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (174)</small> <br> 490000 mikroliter <br>
                                 <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt ">
                             <a href="{{ url_for('decepdive_produkt6') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream6.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50,<small class="text-warning">★★★★☆ (234)</small> <br> 50 zentiliter <br>
+                                <p>Mega Sun  LSF 50,<small class="text-warning">★★★★☆ (234)</small> <br> 5.5 zentiliter <br>
                                 <b>9.99€</b></p>
                             </a>
                         </div>
                         <div class="col produkt ">
                             <a href="{{ url_for('decepdive_produkt7') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream7.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (567)</small> <br> 25 zentiliter <br>
+                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (567)</small> <br> 60 zentiliter <br>
                                 <b>9.99€</b></p>
                             </a>    
                         </div>
                         <div class="col produkt ">
                             <a href="{{ url_for('decepdive_produkt8') }}">
                                 <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream8.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (124)</small> <br> 0.01 hektoliter <br>
+                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (124)</small> <br> 0.0055 hektoliter <br>
                                 <b>9.99€</b></p>
                             </a>
                         </div>
@@ -227,7 +227,7 @@
         // Starte Level countdown bzw. setzte fort
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
         // Wenn Das Cookiebanner noch nicht gelöst wurde drücke den unsichtbaren Knopf um das Cookie Modal zu öffnen
-        if( '{{session['cookie_lv2_fertig']}}' == 'False'){
+        if( '{{session['cookie_lv2_fertig']}}' == 'None'){
             delay = setInterval(function(){
                 document.getElementById('modal_button').click();
                 clearInterval(delay);

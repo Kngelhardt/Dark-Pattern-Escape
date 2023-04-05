@@ -3,8 +3,13 @@
 
     {% block content %}
     <div class="container">
-        <hr>
-        <h1>Feedback :)</h1>
+        <h1>Feedback:</h1>
+        <div>
+            <p>Wenn du Verbesserungsvorschläge für unsere Dienste oder unsere Website hast, lass es uns gerne wissen!</p>
+            <label for="text">Dein Feedback: </label>
+            <input type="text" class="w-100">
+            <input type="submit" class="btn btn-success mt-2" value="Abschicken">
+        </div>
     </div>
     <script>
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');

@@ -9,10 +9,10 @@
             Alle Items müssen angekreuzt werden, wenn du dir unsicher bist, kreuze "Neutral" an.</p>
         <h3>Bewusstseinsförderung:</h3>
         <div class="border border-dark-subtle rounded pe-4 py-5">
-            <form action="{{ url_for('fragebogen_bewusstsein') }}" method="post">
+            <form action="{{ url_for('fragebogen_allgemein') }}" method="post">
                 <ol>
                     <li>
-                        <label for="interesse_gefoerdert"><b>Das Speil hat mein Interesse am Themengebiet gefördert.</b></label>
+                        <label for="interesse_gefoerdert"><b>Das Spiel hat mein Interesse am Themengebiet "Dark Patterns" gefördert.</b></label>
                         <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
                             <div class="col">
                                 <p>Stimme überhaupt nicht zu</p>
@@ -62,7 +62,7 @@
                         </div>
                     </li>
                     <li>
-                        <label for="interesse_gefoerdert"><b>Ich werde mich in Zukunft aufmerksamer im Internet bewegen.</b></label>
+                        <label for="interesse_gefoerdert"><b>Ich hat mich motiviert, mich in Zukunft aufmerksamer im Internet zu bewegen.</b></label>
                         <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
                             <div class="col">
                                 <p>Stimme überhaupt nicht zu</p>
@@ -83,6 +83,31 @@
                             <div class="col">
                                 <p>Stimme voll zu</p>
                                 <input type="radio" name="aufmerksamkeit" value="4"  oninput="clearValidity('aufmerksamkeit');">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="interesse_gefoerdert"><b>Das Spiel zu spielen hat viel Spass gemacht.</b></label>
+                        <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
+                            <div class="col">
+                                <p>Stimme überhaupt nicht zu</p>
+                                <input type="radio" name="spass" id="spass" value="0" required oninvalid="this.setCustomValidity('Feld muss ausgefüllt sein')" oninput="clearValidity('spass');">
+                            </div>
+                            <div class="col"> 
+                                <p>Stimme eher nicht zu</p>
+                                <input type="radio" name="spass" value="1"  oninput="clearValidity('spass');">
+                            </div>
+                            <div class="col">
+                                <p>Neutral</p>
+                                <input type="radio" name="spass" value="2"  oninput="clearValidity('spass');">
+                            </div>
+                            <div class="col">
+                                <p>Stimme eher zu</p>
+                                <input type="radio" name="spass" value="3"  oninput="clearValidity('spass');">
+                            </div>
+                            <div class="col">
+                                <p>Stimme voll zu</p>
+                                <input type="radio" name="spass" value="4"  oninput="clearValidity('spass');">
                             </div>
                         </div>
                     </li>

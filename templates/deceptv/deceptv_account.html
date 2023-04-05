@@ -1,9 +1,43 @@
 
-    {% extends 'layout_level1.html' %}
+{% extends 'layout_level1.html' %}
 
-    {% block content %}
-    <script>
-        window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
-    </script>
-    {% endblock %}
+{% block content %}
+<!-- Ablenkungsseite -->
+<div class="container text-center">
+    <br>
+    <h1 class="text-start">Dein <b>Decep</b>TV Premium Account </h1>
+    <hr>
+    <div class="row">
+        <div class="col-2">
+            <div class="circle">
+                <br>
+                <p class="text-white">Profilbild</p>
+            </div>
+        </div>
+        <div class="col maincolor_level1 mx-5 py-3 rounded text-start">
+            <p> Name: Maxi Mustermensch <br>
+                Abo: Premium Silver
+            </p>
+        </div>
+        <div class="col maincolor_level1 rounded">
+            <a href="{{ url_for('deceptv_premium') }}" class="btn btn-outline-primary my-4">
+                <p class="fw-bolder">Zahlung und Abo verwalten</p>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div class="text-start">
+        <h3>Deine Daten:</h3>
+        <div class=" maincolor_level1 py-3 px-5 rounded ">
+            <p><b>Name, Nachname:</b> <br> Maxi Mustermensch</p>
+            <p><b>Adresse</b>: <br> Straßenstraße Nr. 6, 99999, Musterstadt </p> 
+            <p><b>Telefonnummer: </b><br> 12345678987654321 </p>
+            <p><b>E-Mail:</b> <br>  maxi-mustermensch@darkpattermail.com </p>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
+</script>
+{% endblock %}
 

@@ -13,7 +13,6 @@ app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598
 @app.route('/initialize-session')
 def initialize_session():
     # Initialisiere Session Werte
-
     # Nur beim ersten aufrufen der Seite ausführen
     if session.get('session_id') is None:
 
@@ -44,11 +43,12 @@ def initialize_session():
         session['countdown'] = 300
         # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
         session['level_fortschritt'] = 0 
-        # Definiert ob in Level 1 das Cookiebanner gezegt wird
+        # Definiert ob in Level 1 das Cookiebanner und Nagging-Dialog gezegt wird
         session['cookie_lv1_show'] = False
+        session['show_nagging']= True
         # Definiert ob im jeweiligen Level das Cookiebanner abgeschlossen wurde
-        session['cookie_lv1_fertig']= False
-        session['cookie_lv2_fertig']= False
+        session['cookie_lv1_fertig']= None
+        session['cookie_lv2_fertig']= None
         # Gesamtsumme des Warenkorbs in Level 2
         session['warenkorb'] = 0
         # Ist eine Monatliche Bestellung oder einfache Bestellung ausgewählt
@@ -63,6 +63,7 @@ def initialize_session():
         session['dp_berechtiges_interesse_lv1']  = None
         session['dp_cookiemisdirection_lv1']  = None
         # level1 
+        session['dp_nagging_level1'] = None
         session['dp_roachmotel1']  = None
         session['dp_misdirect_kuendigen']  = None
         session['dp_trickquestion1']  = None
@@ -172,27 +173,44 @@ def cookie_form_lv1():
         session['cookie_lv1_show'] = 0
 
         # Wenn das Opt-Out Cookie Dark Pattern noch nicht gelöst wurde, ehöhe dp_score 
-        # für jedes richtige Opt-Out-Feld
+        # Kombination aus 2 Dark Patterns: Misdirection- (Aufmerksamkeit von relevanten Inhalten ablenken)
+        # und Trickquestion Dark Pattern (Ja-Nein Antwort bezieht sich auch Ablenen, anstatt wie gewöhlich auf Annhemen)
+        # für jedes richtige Opt-In-to-Opt-Out Feld: ehrhöhe den DP,Score, für jedes falsche: ziehe 4 Datenpunkte ab
         if session["dp_cookie_lv1"] is None:
             counter_richtig = 0
             if 'CookieStandort' in request.form:
                 session['dp_score'] = session['dp_score'] + 1
                 counter_richtig += 1
+            else:
+                session['data_score'] = session['data_score'] -4
             if 'CookieIdent' in request.form:
                 session['dp_score'] = session['dp_score'] + 1
                 counter_richtig += 1
+            else:
+                session['data_score'] = session['data_score'] -4
             if 'CookieDeviceSaves' in request.form:
                 session['dp_score'] = session['dp_score'] + 1
                 counter_richtig += 1
+            else:
+                session['data_score'] = session['data_score'] -4
             if 'CookiePersonalisierung' in request.form:
                 session['dp_score'] = session['dp_score'] + 1
                 counter_richtig += 1
+            else:
+                session['data_score'] = session['data_score'] -4
             if 'CookieTargeting' in request.form:
                 session['dp_score'] = session['dp_score'] + 1
                 counter_richtig += 1
+            else:
+                session['data_score'] = session['data_score'] -4
             # Wenn alle richtig markiert, dark Pattern als richtig gelöst setzen
             if counter_richtig == 5:
-                 session['dp_cookie_lv1'] = 1
+                session['dp_cookie_lv1'] = 1
+                # Wenn es versäumt wurde, dan Cookiedialog richtig zu öffnen (-> -40 "data_score"), gibt es eine einmalige
+                # Chance die Datenpunkte wieder zurückzubekommen, wenn Dialog über die seite "Datenschutz-Manager"
+                # geöffnet wurde
+                if session['data_score'] != 100:
+                    session['data_score'] = session['data_score'] +20
             else:
                  session['dp_cookie_lv1'] = 0
 
@@ -202,10 +220,16 @@ def cookie_form_lv1():
             if 'cookie_berechtigt1' not in request.form and 'cookie_berechtigt2' not in request.form:
                 session['dp_score'] = session['dp_score'] + 5
                 session['dp_berechtiges_interesse_lv1'] = 1
+                # Wenn es versäumt wurde, dan Cookiedialog richtig zu öffnen (-> -40 "data_score"), gibt es eine einmalige
+                # Chance die Datenpunkte wieder zurückzubekommen, wenn Dialog über die seite "Datenschutz-Manager"
+                # geöffnet wurde
+                if session['data_score'] != 100:
+                    session['data_score'] = session['data_score'] +20
             else:
                 session['dp_berechtiges_interesse_lv1'] = 0
+                session['data_score'] = session['data_score'] -20
         
-        # Wenn das "Misdirection" Dark Pattern noch nicht gelöst ist:
+        # Wenn das "Misdirection" Dark Pattern ("Auswahl bestätigen" ist schlicht, "Akzeptieren" ist auffallend) noch nicht gelöst ist:
         if session['dp_cookiemisdirection_lv1'] is None:
             session['dp_cookiemisdirection_lv1'] = 1
             session['dp_score'] = session['dp_score'] +5
@@ -221,7 +245,7 @@ def deceptv():
         return redirect(url_for('home_intro'))
     # Cookiebanner beim ersten aufrufen sichtbar machen, es wird nach dem beenden der 
     # können Banner-Aufgabe wieder versteckt
-    if session["cookie_lv1_fertig"] is False:
+    if session["cookie_lv1_fertig"] is None:
         session['cookie_lv1_show'] = True
     # lade bilder aus dem static/images/deceptv ordner
     deceptv_images = get_streaming_images()
@@ -268,19 +292,18 @@ def deceptv_erkunden():
 def deceptv_favoriten():
     if session['level_fortschritt'] >= 1:
         return redirect(url_for('home_intro'))
-    return render_template('deceptv/deceptv_favoriten.html')
+    
+    deceptv_images = get_streaming_images()
+    while len(deceptv_images) <= 5*15:
+        deceptv_images = deceptv_images + deceptv_images
+
+    return render_template('deceptv/deceptv_favoriten.html', deceptv_images=deceptv_images)
 
 @app.route('/deceptv/feedback/')
 def deceptv_feedback():
     if session['level_fortschritt'] >= 1:
         return redirect(url_for('home_intro'))
     return render_template('deceptv/deceptv_feedback.html')
-
-@app.route('/deceptv/impressum/')
-def deceptv_impressum():
-    if session['level_fortschritt'] >= 1:
-        return redirect(url_for('home_intro'))
-    return render_template('deceptv/deceptv_impressum.html')
 
 @app.route('/deceptv/premium/')
 def deceptv_premium():
@@ -310,7 +333,12 @@ def deceptv_social():
 def deceptv_vorschlaege():
     if session['level_fortschritt'] >= 1:
         return redirect(url_for('home_intro'))
-    return render_template('deceptv/deceptv_vorschlaege.html')
+    
+    deceptv_images = get_streaming_images()
+    while len(deceptv_images) <= 5*15:
+        deceptv_images = deceptv_images + deceptv_images
+
+    return render_template('deceptv/deceptv_vorschlaege.html', deceptv_images=deceptv_images)
 
 @app.route('/deceptv/rückerstattung')
 def deceptv_nicht():
@@ -340,6 +368,7 @@ def level1_beenden2():
 
 @app.route('/ende_lv1')
 def level1_beendet():
+    # updates nur, falls Level noch nicht beendet war, damit updates nicht zwei mal durchgeführt werden können
     if session['level_fortschritt'] == 0:
         session['level_fortschritt'] = 1
         # Wenn der Countdown abläuft ohne, dass das Abo beendet wird, verlieren
@@ -352,10 +381,16 @@ def level1_beendet():
         
         # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv1
         # und stelle sicher das cokkie_banner_lv1 nicht angezeigt wird
-        if session['cookie_lv1_fertig'] is False:
+        if session['cookie_lv1_fertig'] is None:
             session['data_score'] = session['data_score'] -40
             session['cookie_lv1_show'] = False
             session['cookie_lv1_fertig']= True
+
+        # Wenn im Naggingdialog nie auf "APP installieren" gedrückt wurde erhöhe dp_score um 5 und markiere dp als gelöst
+        if  session['dp_nagging_level1'] is not None:
+            session['dp_nagging_level1'] = 1
+            session['dp_score'] = session['dp_score'] +5
+            session['show_nagging'] = False
 
         # resert countdown für level 2
         session['countdown'] = 300
@@ -364,11 +399,13 @@ def level1_beendet():
                     session['dp_berechtiges_interesse_lv1'],
                     session['dp_cookiemisdirection_lv1'],
                     session['dp_open_cookiemanager_lv1'],
+                    session['dp_nagging_level1'],
                     session['dp_roachmotel1'],
                     session['dp_misdirect_kuendigen'],
                     session['dp_trickquestion1'],
                     session['dp_shaming_lv1'],
                     session['dp_roachmotel2'] ]
+    print(dp_list_lv1)
     
     return render_template('deceptv/end/ende_lv1.html', dp_list_lv1 = dp_list_lv1)
 
@@ -413,21 +450,34 @@ def decepdive_cookies():
 @app.route('/warenkorb', methods=['GET', 'POST'])
 def add_warenkorb():
     if request.method == "POST":
+        # error vermeiden: check, ob input vorhanden
         if 'bestellung' in request.form:
-            # dp falsch gelöst. (Monatliche kosten vermeiden)
+            # dp_preticked_monatl falsch gelöst. (Monatliche kosten vermeiden): als flasch(0) setzen
             if request.form['bestellung'] == 'bestellung_monatl':
                 session['warenkorb'] = 9
                 session['bestellung_monatl'] = True
                 if session['dp_preticked_monatl'] is None:
                     session['dp_preticked_monatl'] = 0
-            # dp richtig gelöst. (Monatliche kosten vermeiden)
-            if request.form['bestellung'] == 'bestellung_einzel':
+            # dp richtig gelöst: als gelöst(1) setzten
+            elif request.form['bestellung'] == 'bestellung_einzel':
                 # checken, ob es schon gelöst wurde. Nur wenn nicht: Punkte vergeben
                 if session['dp_preticked_monatl'] is None:
                     session['dp_score'] = session['dp_score'] + 5
+                    # dark pattern als gelöst(1) setzen
                     session['dp_preticked_monatl'] = 1
                 session['bestellung_monatl'] = False
                 session['warenkorb'] = 9.99
+            # dp_vergleich falsch gelöst: als flasch(0) setzen
+            if request.form['dp_vergleich'] == 'teurer':
+                # nur änder, wenn noch nicht gelöst (None)
+                if session['dp_vergleich'] is None:
+                    session['dp_vergleich'] = 0
+            # dp_vergleich richtig gelöst: als gelöst(1) setzen und dp_score erhöhen
+            elif request.form['dp_vergleich'] == 'guenstigste':
+                if session['dp_vergleich'] is None:
+                    session['dp_vergleich'] = 1
+                    session['dp_score'] = session['dp_score'] + 5
+            
 
    # direct zu warenkorb (nächste seite)
     return render_template('decepdive/decepdive_warenkorb.html')
@@ -590,7 +640,8 @@ def write_dp_ergebnisse_csv():
                 'dp_open_cookiemanager_lv1',
                 'dp_cookie_lv1', 
                 'dp_berechtiges_interesse_lv1',
-                'dp_cookiemisdirection_lv1', 
+                'dp_cookiemisdirection_lv1',
+                'dp_nagging_level1', 
                 'dp_roachmotel1', 
                 'dp_misdirect_kuendigen', 
                 'dp_trickquestion1',
@@ -639,7 +690,7 @@ def write_fragebogen_csv(data_list, dateiname):
 def fragebogen():
     return render_template('home/fragebogen.html', status='')
 
-@app.route('/fragebogen-bewusstsein', methods=['POST'])
+@app.route('/fragebogen-allgemein', methods=['POST'])
 def fragebogen_SUS():
     if request.method == 'POST':
         item_list= ['gerne_oft', 'komplex', 'einfach', 'hilfe',
@@ -660,18 +711,20 @@ def fragebogen_SUS():
     return render_template('home/fragebogen2.html', )
 
 @app.route('/vp-stunden', methods=['POST'])
-def fragebogen_bewusstsein():
+def fragebogen_allgemein():
     if request.method == 'POST':
-        # liste, in der die Daten gespeichert werden, die unique session ID hinzufügen
+        # liste, in der die Daten gespeichert werden. Die unique session ID an index 0 hinzufügen
         data_list = [ ['session_id', session['session_id']] ]
-        for itemID in  ['interesse_gefoerdert', 'viel_gelernt', 'aufmerksamkeit' ]:
+        # für jedes item key und request.form daten als liste in data_list speichern
+        for itemID in  ['interesse_gefoerdert', 'viel_gelernt', 'aufmerksamkeit', 'spass']:
             if itemID in request.form:
                  data_list.append([itemID, request.form[itemID]])
             else:
                 status= ' Bitte alle Fragen beantworten'
                 return render_template('home/fragebogen2.html', status=status )
-            
-        write_fragebogen_csv(data_list, 'fragebogen_bewusstsein.csv')
+        
+        # daten in CSV schreiben und speichern
+        write_fragebogen_csv(data_list, 'fragebogen_allgemein.csv')
     return render_template('home/fragebogen3.html', validation='')
 
 @app.route('/fragebogen-abgeschlossen', methods=['POST'])
@@ -682,7 +735,6 @@ def fragebogen_vp():
         if itemID in request.form:
                 data_list.append([itemID, request.form[itemID]])
         else:
-            status= ' Bitte alle Fragen beantworten'
             return render_template('home/fragebogen2.html', validation='Bitte alle Felder angeben!' )
         
     write_fragebogen_csv(data_list, 'VP_Stunden.csv')
@@ -699,46 +751,4 @@ if __name__ == "__main__":
     app.run(debug = True)
     #db.create_all()
 
-"""
-############## DEBUGGING #####################
-if session.get("data_score") is not None:
-    print(
-    'success: ',session['level_fortschritt'],'\n',
-    'lv1_show: ',session['cookie_lv1_show'],'\n',
-    'lv1_fin: ', session['cookie_lv1_fertig'],'\n',
-    'lv2_fin: ',session['cookie_lv1_fertig'],'\n',
-    'warenkorb: ',session['warenkorb'],'\n',
-    'data_score: ',session['data_score'],'\n',
-    'geld_score: ',session['geld_score'],'\n',
-    'dp_score: ',session['dp_score'],'\n',
-    'level_fortschritt',session['level_fortschritt'],'\n',
-    'countdown: ',session['countdown'],'\n',
-    'warenkorb',session['warenkorb'],'\n',
-    'spende', session['spende_lv2'], '\n',
-    # Aufreigungen mit Cookiebannern und ob sie richtig gelöst wurden
-    # 3 Mögliche Werte: None(nicht abgeschlossen), True, False
-    # cookiebanner lv1: 
-    'dp_cookiemanager_lv',session['dp_open_cookiemanager_lv1'],'\n',
-    'dp_cookie_lv1',session['dp_cookie_lv1'],'\n',
-    'dp_berechtiges_interesse_lv1',session['dp_berechtiges_interesse_lv1'],'\n',
-    'dp_cookiemisdirection_lv1',session['dp_cookiemisdirection_lv1'] ,'\n',
-    # level1
-    'dp_roachmotel1',session['dp_roachmotel1'] ,'\n',
-    'dp_misdirect_kuendigen',session['dp_misdirect_kuendigen'],'\n',
-    'dp_trickquestion1',session['dp_trickquestion1'] ,'\n',
-    'dp_shaming_lv1', session['dp_shaming_lv1'],'\n',
-    'dp_roachmotel2',session['dp_roachmotel2'] ,'\n',
-    #cookiebanner lv2:
-    'dp_cookielv2_trickquestion',session['dp_cookielv2_trickquestion'],'\n',
-    'dp_cookielv2_trickquestion2',session['dp_cookielv2_trickquestion2'],'\n',
-    'dp_cookielv2_berechtigt', session['dp_cookielv2_berechtigt'],'\n',
-    # level 2
-    'dp_vergleich', session['dp_vergleich'],'\n',
-    'dp_preticked_monatl', session['dp_preticked_monatl'],'\n',
-    'dp_sneakinbasket', session['dp_sneakinbasket'],'\n',
-    'dp_hiddennewsletter', session['dp_hiddennewsletter'],'\n',
-    'dp_misdirect_login', session['dp_misdirect_login'],'\n',
-    'dp_misdirect_konto_erstellen', session['dp_misdirect_konto_erstellen'],'\n',
-    'dp_misdirect_spende', session['dp_misdirect_spende'],'\n'
-    ) 
-"""
+

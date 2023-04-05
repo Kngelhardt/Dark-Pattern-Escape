@@ -2,6 +2,23 @@
     {% extends 'layout_level1.html' %}
 
     {% block content %}
+    <div class="container py-5">
+        <h1>Dateschutz Manager</h1>
+        <h3 class="pt-4">Hier kannst deine Cookieeinstellungen ändern:</h3>
+        <p> Auf dieser Seite benutzen wir Cookies um unsere Dienste zu verbessern
+            und eine gute Performance zu liefern. Datenschutz liegt uns hier bei
+            <b>Decep</b>TV am Herzen, darum kannst deine Cookie-Einstellungen jederzeit 
+            <!-- Misdirection DarkPattern: Button um zum Cookiemanager zu kommen ist kein Knopf, 
+                sondern nur ein unterstrichener Text ohne pointer beim derüber Hovern. 
+                Währenddessen sind zwei andere KNöpfe in der Fußleiste prominent dargestellt um abzulenken-->
+            <span  class="text-decoration-underline text-primary cursor_pointer" data-bs-toggle="modal" data-bs-target="#cookie_manager_lv1"
+                    onclick=" set_wenn_nicht_geloest('{{session['dp_open_cookiemanager_lv1']}}', {'dp_score': 5, 'dp_open_cookiemanager_lv1': 1 })
+                              progress_add('dp_score_bar','dp_score_text', 5);"> hier
+            </span>
+            <span class="text-warning">*</span> managen.
+        </p>
+        <p class="text-warning">* Hat nur Einfluss auf deine Scores, wenn du den Cookiemanager noch nicht gelöst hast</p>
+    </div>
     <script>
         window.onload = level_countdown('{{session['countdown']}}', '{{session['level_fortschritt']}}');
     </script>

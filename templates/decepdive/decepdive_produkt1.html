@@ -10,7 +10,7 @@
                     <img class="rounded img-fluid" src="{{url_for('static', filename='images/decepdive/suncream1.jpg')}}" alt="Sonnencreme">
                 </div>
                 <div class="col ">
-                    <h2> Super Sun LSF 50, 500ml</h2>
+                    <h2> Super Sun LSF 50, 400ml</h2>
                     <p class="produktbeschreibung"><b class="text-warning">★★★★☆</b> (534) </p>
                     <hr>
                     <p class="produktbeschreibung">
@@ -32,7 +32,7 @@
                     <hr>
                     <h3>Infos über das Produkt</h3>
                     <p>
-                        Inhalt: 500ml <br>
+                        Inhalt: 400ml <br>
                         Farbe der Creme: Weiß <br>
                     </p>
                 </div>
@@ -41,18 +41,15 @@
                         <form action="{{ url_for('add_warenkorb') }}" method="POST">
                             <input type="radio" name="bestellung" value="bestellung_einzel" id="bestellung_einzel">
                             <label for="bestellung_einzel"><small>Einzelbestellung</small></label>
-                            <input class="visually-hidden" type="number" name="preis" value="9.99">
                             <hr>
                             <input type="radio" name="bestellung" value="bestellung_monatl" checked="true">
                             <label for="bestellung_monatl"><small> Monatliche bestellung: <b>10% Rabatt</b></small></label>
-                            <input class="visually-hidden" type="number" name="preis" value="8">
+                            <input class="visually-hidden" type="text" name="dp_vergleich" value="teurer">
                             <p> <small> nutzen sie den Komfort, dass immer Nachschub kommt und sie sich keine Sorgen machen müssen,
                                 falls ihr Produkt bald leer wird. Mit der Monatlichen lieferung sparen sie sich die Arbeit
                                 immer neu bestellen zu müssen und bekommen nebenbei auch noch 10% Rabatt auf jede Fuhre 
                             </small></p>
                             <hr>
-                            
-                            <!-- <input class="btn btn-success" type="submit" name="submit" value="Zum Warenkorb hinzufügen"> -->
                             <input type="submit" class="btn btn-success mb-2 " value="Zum Warenkorb hinzufügen">
                         </form>
                     </div>

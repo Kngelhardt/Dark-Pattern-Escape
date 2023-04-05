@@ -22,13 +22,13 @@
             <input type="text" class="form-control-sm" placeholder="Musterstadt"> 
             <p>Telefonnummer, E-Mail:</p>
             <input type="text" class="form-control-sm" placeholder="123456789876543">
-            <input type="text" class="form-control-sm" placeholder="maxi-mustermensch@email.com"> 
+            <input type="text" class="form-control-sm" placeholder="maxi-mustermensch@darkpattermail.com"> 
             <div class="pt-4">
-                <div class="btn btn-outline-secondary float-end" 
+                <div class="btn btn-outline-secondary" 
                         onclick="url_delay_set_session('{{ session['dp_misdirect_konto_erstellen'] }}', '{{url_for('decepdive_warenkorb4')}}', {'dp_score': 5, 'dp_misdirect_konto_erstellen': 1 });">
                         Weiter
                 </div>
-                <div class="btn btn-success " 
+                <div class="btn btn-success float-end" 
                         onclick="url_delay_set_session('{{ session['dp_misdirect_konto_erstellen'] }}', '{{url_for('decepdive_warenkorb4')}}', {'data_score': -10, 'dp_misdirect_konto_erstellen': 0 });">
                         Konto erstellen und weiter
                 </div>

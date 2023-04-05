@@ -66,6 +66,12 @@
         .text_shadow{
             text-shadow: 0 0 1px black;
         }
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(32, 39, 53);
+            border-radius: 50px;
+        }
 
         /* --------------------------------------------------------------------------------------------------------------------------------------------- */
         /* Dark Pattern Bausteine */
@@ -132,8 +138,7 @@
             max-height: 350px;
             box-shadow: 3px 3px 5px black;
         }
-        /* --------------------------------------------------------------------------------------------------------------------------------------------- */
-        /* CSS für Level 1: Streamingdienst kündigen */
+        /* --------------------------------------------CSS für Level 1: Streamingdienst kündigen -------------------------------------------------------- */
         /* Navigationsleiste */
         .maincolor_level1{
             background-color:rgb(32, 39, 53);
@@ -179,21 +184,30 @@
             text-shadow: 0px 0px 5px black;
             padding: 0px 20px;
         }
-        .atrappe:hover{ /* Für Elemente, die als klickbare Objekte bzw. Links erscheinen sollen */
+        /* Für Elemente, die als klickbare Objekte bzw. Links erscheinen sollen */
+        .atrappe:hover{
             cursor: pointer;
             box-shadow: 0px 0px 10px rgb(28, 134, 255);
+        }
+        .level1_hover:hover{
+            box-shadow: 0 0 10px rgb(28, 134, 255);
         }
         .carousel-item img{
             border-radius: 5px;
             margin: 5px 0px;
         }
-        .carousel-control-prev{ /* position und Größe der Crrouselbuttons anpassen. Wichtig um zu verhindern, dass sie den Hauptmenü-Button in der Fußleiste überdecken */
+        /* position und Größe der Crrouselbuttons anpassen. Wichtig um zu verhindern, dass sie den Hauptmenü-Button in der Fußleiste überdecken */
+        .carousel-control-prev{ 
             width: min-content;
             margin-left: 10px;
         }
         .carousel-control-next{
             width: min-content;
             margin-right: 10px;
+        }
+        /* modals */
+        #nagging_modal_content{
+            box-shadow: 0px 0px 10px rgb(28, 134, 255);
         }
         /* Kontent für Deceptv_premium, _Angebote, _Shop, _Service, _Social */
         #vorteile_banner{

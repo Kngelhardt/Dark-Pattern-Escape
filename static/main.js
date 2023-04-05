@@ -43,10 +43,8 @@ function set_session_value(json_obj){
 
 /* Erhöhe oder verringere Scores nur, wenn DP noch nit schon einmal gelöst */
 function set_wenn_nicht_geloest(dark_pattern_value, json_obj){
-    console.log('schon gelöst außer:');
     /* Check, ob das Pattern schon gelöst wurde, wenn nein -> update session */
     if (dark_pattern_value == 'None'){
-        console.log('noch nicht gelöst');
         set_session_value(json_obj);
     }
 }
@@ -130,7 +128,7 @@ function level_countdown(zeit_state, level_fortschritt){
                     );
             }
         }
-    },1000); 
+    },10000000); 
 }
 
 
@@ -173,9 +171,17 @@ function ist_erreichbar(){
         }, 4000); 
     }
 }
+/* -------------------------------Nagging Modal öffnen in Level 1 ------------------------------------------- */
+/* function load_nagging(){
+    bis_oeffnung = setInterval(function(){
+        modal = document.getElementById('nagging_modal')
+        console.log('naggingmodal', modal)
+        modal.show()
+    },5000)
+} */
 
-/* -------------------------------Warenkorbkalkulation für level 2 ----------------------------------------- */
-/* calculate_total(); */
+
+/* -------------------------------Warenkorb-Kalkulation für level 2 ----------------------------------------- */
 function calculate_total(){
     let produkpreis = parseFloat(document.getElementById('produkt_preis').textContent);
     let versandpreis = 0;
@@ -207,7 +213,6 @@ function calculate_total(){
     if (document.getElementById('preis_input') != null){
         document.getElementById('preis_input').value = gesamtpreis;
     }
-    console.log(gesamtpreis);
 }
 
     

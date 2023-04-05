@@ -15,8 +15,7 @@
                     {% set dp_count.value = dp_count.value + 1 %}
                 {% endif %}
                 <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken-->
-                
-                {% if loop.index0 < 7  %}
+                {% if loop.index0 < 6  %}
                     {% if loesung == 1 %}
                         {% set data_count.value = data_count.value + 1 %}
                     {% endif %}
