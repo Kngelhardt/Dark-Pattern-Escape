@@ -2,59 +2,65 @@
     {% extends 'layout_home.html' %}
 
     {% block content %}
-    <div id="body" class="container">
-        <b id="logo1">Dark Pattern</b><br><span id="logo2">Escape Room</span>
-        <div id="beschreibung">
-            <p> Dark Pattern ist ein Begriff, der manipulatives Oberflächendesign auf Websites, Apps oder Spielen beschreibt.
-                Diese Dark Patterns manipulieren oder täuschen Nutzer*innen gezielt so, dass sie Dinge tun, die sie slebst nicht so vorhatten,
-                zum Beispiel ungewollt Cookies aktzeptieren, Newsletter abbonieren oder mehr Geld auszugeben als eigentlich geplant. <br>
-                Das <b>Dark Pattern Escape Room</b> Spiel ist ein Brwoserspiel, bei dem der Spieler*innen die Problemlage und bestimmte Mechanismen hinter Dark Patterns bewusst gemacht werden soll. <br>
-            </p>
-            <h5>Schaffst du es nicht manipuliert zu werden und de Dark Patterns zu entkommen?</h4>
-            <button type="button" class="btn btn-danger" onclick="show_hide_div('story'); show_hide_div('aufgaben'); show_hide_div('beschreibung');">
-                 Ja klar, los gehts
-            </button>
-            <br>
-        </div>
-        <div id="story" >
-            <div class="row my-3">
-                <div class="col">
-                    <p> Dein Urlaub steht bevor, das wird Toll!
-                        Du träumst schon vom Strand, der Sonne und dem Geräusch der Wellen. <br>
-                        Bevor es losgeht, musst du allerdings noch ein paar Dinge im Internet erledigen: <br>
-                    </p>
-                    <ul>
-                        <li> Du musst dein Streaming-Abo beenden, da du es während des Urlaubs nicht brauchst und es zu teuer ist es weiter laufen zu lassen.</li>
-                        <li> Zusätzlich ist dir aufgefallen, dass für den Urlaub noch Sonnencreme gebraucht wird, die du Online einkaufen willst.</li>
-                    </ul>
+    <div class="blackbackground_90vh py-5">
+        <div class="container whitebackground red_box_shadow rounded py-4">
+            <div>
+                <b id="logo1">Dark Pattern</b><br><span id="logo2">Escape Room</span>
+            </div>
+            <div id="beschreibung" class=" my-4 mx-4">
+                <p> Dark Pattern ist ein Begriff, der manipulatives Oberflächendesign auf Websites, Apps oder Spielen beschreibt.
+                    Diese Dark Patterns manipulieren oder täuschen Nutzer*innen gezielt so, dass sie Dinge tun, die sie selbst nicht so vorhatten,
+                    zum Beispiel ungewollt Cookies akzeptieren, Newsletter abonnieren oder mehr Geld auszugeben als eigentlich geplant. <br>
+                    Das <b>Dark Pattern Escape Room</b> Spiel ist ein Browserspiel, bei dem Spieler*innen Dark Patterns lösen bzw. ausweichen müssen
+                    um bestimmte Aufgaben zu lösen. Ziel ist es, mehr Aufmerksamkeit für das Thema zu schaffen und verschiedene Wirkmechanismen von Dark Patterns aufzuzeigen.
+                </p>
+                <div class="mt-5">
+                    <h5>Schaffst du es nicht manipuliert zu werden und den Dark Patterns zu entkommen?</h4>
+                    <button type="button" class="btn btn-success" onclick="show_hide_div('story'); show_hide_div('aufgaben'); show_hide_div('beschreibung');">
+                            Ja klar, los gehts
+                    </button>
                 </div>
-                <div class="col-4">
-                    <img class="img-fluid float-end rounded bild-intro" 
-                         src="{{url_for('static', filename='images/hammock_CC0.jpg')}}" 
-                         alt="Strand am Meer, mit leichten Wellen und blauem Himmel">
+                <br>
+            </div>
+            <div id="story">
+                <div class="row my-4 mx-4">
+                    <div class="col">
+                        <p> Dein Urlaub steht bevor, das wird Toll!
+                            Du träumst schon vom Strand, der Sonne und dem Geräusch der Wellen. <br>
+                            Bevor es losgeht, musst du allerdings noch ein paar Dinge im Internet erledigen: <br>
+                        </p>
+                        <ul>
+                            <li> Du musst dein Streaming-Abo beenden, da du es während des Urlaubs nicht brauchst und es zu teuer ist es weiter laufen zu lassen.</li>
+                            <li> Zusätzlich ist dir aufgefallen, dass für den Urlaub noch Sonnencreme gebraucht wird, die du Online einkaufen willst.</li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <img class="img-fluid float-end rounded bild-intro" 
+                            src="{{url_for('static', filename='images/hammock_CC0.jpg')}}" 
+                            alt="Strand am Meer, mit leichten Wellen und blauem Himmel">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="aufgaben">
-            <div class="row my-5">
-                <div class="col-3">
-                    <h3>Deine Aufgaben</h3>
-                    <img class="img-fluid rounded bild-intro" 
-                         src="{{url_for('static', filename='images/Clipboard.png')}}" 
-                         alt="Clipboard mit den zu erledigenden Aufgaben">
-                </div>
-                <div  class="col">
-                    <p> Hier auf dem Clipboard siehst du die Aufgaben, die du in diesem Spiel erledigen musst. Zunächst klingen die Aufgaben ein Streaming-Abo zu beenden
-                        und einfach Sonnencreme zu bestellen simpel und alltäglich. Aber <b>Achtung!</b> diese Websites sind voll mit Dark Patterns, 
-                        die dich dazu bringen wollen, das Abo doch nicht zu beenden oder mehr Geld als geplant auszugeben. <br>
-                    </p>
-                    <p>
-                        Dein Ziel ist es den <b>Dark Patterns</b> so gut es geht <b>auszuweichen</b> ohne das <b>Zeitlimit</b> zu überschreiten 
-                        -Bis zu Urlaub ist es nicht mehr viel Zeit!
-                    </p>
-                    <form action="">
-                        <a href="{{ url_for('home_intro', level_update = '1') }}" class="btn btn-danger" >Weiter zur Spielanleitung</a>
-                    </form>
+            <div id="aufgaben">
+                <div class="row my-4 mx-4">
+                    <div class="col-3">
+                        <h3>Deine Aufgaben</h3>
+                        <img class="img-fluid rounded bild-intro" 
+                            src="{{url_for('static', filename='images/Clipboard.png')}}" 
+                            alt="Clipboard mit den zu erledigenden Aufgaben">
+                    </div>
+                    <div  class="col">
+                        <p> Hier auf dem Clipboard siehst du die Aufgaben, die du in diesem Spiel erledigen musst. 
+                            Zunächst klingen die Aufgaben ein Streaming-Abo zu beenden und einfach Sonnencreme zu bestellen simpel und alltäglich.
+                            Nur bist du unglücklicherweise auf zwei üblen Websites gelandet.
+                            Diese Websites sind voll mit Dark Patterns, die dich dazu bringen wollen, das Abo doch nicht zu beenden und mehr Geld als geplant auszugeben. 
+                        </p>
+                        <p class="mt-5">
+                            Dein Ziel ist es den <b>Dark Patterns</b> so gut es geht auszuweichen ohne das <b>Zeitlimit</b> zu überschreiten 
+                            - Bis zu Urlaub ist es nicht mehr viel Zeit!
+                        </p>
+                        <a href="{{ url_for('home_intro', level_update = '1') }}" class="btn btn-success" >Weiter zur Spielanleitung</a>
+                    </div>
                 </div>
             </div>
         </div>

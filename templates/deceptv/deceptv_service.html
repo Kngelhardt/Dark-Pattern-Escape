@@ -60,7 +60,7 @@
                                     show_hide_div('container_kündigung');
                                     //frontend update
                                     progress_add('dp_score_bar','dp_score_text', 5);">
-                            Ich finde die Optionen zum Verwalten oder Aufheben meiner Mitgliedschaft nicht
+                            Ich finde die Optionen zum Verwalten oder Kündigen meiner Mitgliedschaft nicht
                         </a>
                     </li>
                 </ul>
@@ -79,12 +79,12 @@
                 Abonnement-Verwaltungsmenü
             </a>
         </p>
-        <div style="height: 250px">
+        <div style="height: 230px">
 
         </div>
         
         <!-- Hier ist der eigentlich relevante Link, klein geschreiben, ohne farben mit abstand und durch horizontale Liene als Teil eines anderen Inhalts getarnt-->
-        <p class="text-secondary "> <small> Zum Beenden des Abos drücken sie hier: 
+        <p class="text-secondary "> <small> Zum Kündigen des Abos drücken sie hier: 
             <span class=" text-secondary cursor_pointer"
                     onclick="url_delay_set_session('{{ session['dp_misdirect_kuendigen'] }}', '/deceptv/premium/mitgliedschaft', {'dp_score': 5, 'dp_misdirect_kuendigen': 1 });
                             progress_add('dp_score_bar','dp_score_text', 5);">

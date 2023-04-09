@@ -4,38 +4,33 @@
     {% block content %}
         <div  class="container deceptv_premium_container">
             <div id="trick_question">
-                <br>
-                <h1>Willst du dein Abonnement wirklich Kündigen und damit Zugriff auf alle unsere Filme und Serien velieren?</h1>
+                <h1 class="my-5">Willst du dein Abonnement wirklich Kündigen und damit Zugriff auf alle unsere Filme und Serien velieren?</h1>
                 <div class="row">
                     <div class="col">
                         <!-- "Trick Question" Dark Pattern: Formulierung des knopfes soll Spieler*innen
                             reinlegen die Option nicht zu Kündigen zu wählen, indem die vormulierung
                              einen doppelte Verneinung enthält-->
-                        <a class="btn btn-danger" onclick="url_delay_set_session('{{ session['dp_trickquestion1'] }}', '/deceptv/', { 'dp_trickquestion1': 0 });">
+                        <a class="btn btn-success w-100" onclick="url_delay_set_session('{{ session['dp_trickquestion1'] }}', '/deceptv/', { 'dp_trickquestion1': 0 });">
                             Ich verzichte darauf DecepTV Serien und Filme nicht mehr zu sehen
                         </a>    
                     </div>
                     <div class="col">
-                        <a class="btn btn-success" 
+                        <a class="btn btn-danger w-100" 
                             onclick="show_hide_div('confirmshaming'); 
                                     show_hide_div('trick_question'); 
-                                    // Backend update
                                     set_wenn_nicht_geloest('{{ session['dp_trickquestion1'] }}',{'dp_score': 5 , 'dp_trickquestion1': 1});
-                                    // Frontend update
                                     progress_add('dp_score_bar','dp_score_text', 5); "
-                            >Ich will DecepTV Serien und Filme nicht mehr sehen
+                            >Ich will ganz sicher keine DecepTV Serien und Filme mehr sehen
                         </a>
                     </div>
                 </div>
             </div>
             <div id="confirmshaming">
                 <h1 class="mt-5">Diese unglaublich kostengüsten <b>VORTEILE</b> wirst du alle <b>VERLIEREN!</b></h1>
-                <div class="my-5"> <!-- my: margin top and bottom -->
+                <div class="my-5">
                     <h2>Exklusive <b>Decep</b>TV Blockbuster</h2>
                     <div class="row px-5 py-5 rounded-2 maincolor_level1">
                         <div class="col">
-                            <!-- bestimmt die größe und border-radius der bilder in base durch .carousel-item img{} bestimmt-->
-                            <!-- Alt-texte optional noch hinzufügen -->
                             <img src="{{deceptv_images.pop()}}" class="d-block w-100 rounded-2 atrappe" alt="...">
                         </div>
                         <div class="col">
@@ -74,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <h1 class="mt-5">Wenn du bleibst bekommst du 5% Rabatt auf dein Abo für die enäcshten 3 Monate</b></h1>
+                <h1 class="mt-5 mb-4">Wenn du bleibst bekommst du 5% Rabatt auf dein Abo für die enäcshten 3 Monate</b></h1>
                 <!-- d-grid und gap um knöpfe untereinander darzustellen, w-50 für die breite der knöpfe -->
                 <div class="d-grid gap-2 w-50 mx-auto mb-5">
                         <!--Ideen
@@ -90,7 +85,7 @@
                          <div class="btn btn-secondary" onclick="
                                 url_delay_set_session('{{ session['dp_shaming_lv1'] }}', '/deceptv/premium/mitgliedschaft-beenden', {'dp_score': 5,'dp_shaming_lv1': 1 });
                                 progress_add('dp_score_bar','dp_score_text', 5); ">
-                            Ich stinke eh nach Geld, mir egal dass ich das 5% sparen würde
+                            Ich stinke eh nach Geld, mir egal dass ich 5% sparen würde
                         </div>
                         <a class="btn btn-success " onclick="url_delay_set_session('{{ session['dp_shaming_lv1'] }}', '/deceptv/', { 'dp_shaming_lv1': 0 });">
                             Natürlich will ich das 5% sparen, ich bin doch nicht blöd.

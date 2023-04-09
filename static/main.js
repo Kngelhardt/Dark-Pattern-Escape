@@ -128,7 +128,7 @@ function level_countdown(zeit_state, level_fortschritt){
                     );
             }
         }
-    },10000000); 
+    }, 1000); 
 }
 
 
@@ -146,7 +146,7 @@ function starte_uhr(){
         if(stunde >= 24){
             stunde = 0
         }
-    }, 150); 
+    }, 100); 
 }
 
 /* Ruft URL '/ende_lv1' auf, wenn die var 'stunde' in starte_uhr() zwischen 14 und 16 ist*/

@@ -6,7 +6,6 @@
     <div class="px-5 py-5">
         <div class="container">
             <h1>So hast du in Level 1 abgeschnitten:</h1>
-
             {% set dp_count = namespace(value=0) %}
             {% set data_count = namespace(value=0) %}
             {% for loesung in dp_list_lv1 %}
@@ -21,10 +20,8 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-
             <div class="lightblue_box_shadow rounded py-4 px-4 my-3">
                 <h2>Data Score</h2>   
-
                 <p> Du hast <span class="text-primary fw-bolder">{{ data_count.value }} von 4</span> Dark Patterns, die dir Daten abluchsen wollten richtig gelöst
                     und damit <span class="text-primary fw-bolder "> {{data_count.value*10}}</span> von maximal <span class="text-primary fw-bolder ">40</span>
                     Data Score Punkten behalten</p>
@@ -42,6 +39,267 @@
                 <h2>Dark Pattern Score</h2> 
                 <p>Du hast in Level 1 <span class="text-success fw-bolder">{{ dp_count.value }} von 10</span> Dark Patterns richtig gelöst
                 und damit <span class="text-success fw-bolder "> {{dp_count.value*5}}</span> Dark Pattern Score Punkte erhalten</p>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_1">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_1">
+                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_1" aria-expanded="true" aria-controls="collapse_dp_1">
+                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_1" aria-expanded="true" aria-controls="collapse_dp_1">
+                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_1" class="accordion-collapse collapse" aria-labelledby="heading_dp_1" data-bs-parent="#accordion_dp_1">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_2">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_2">
+                        {% if  session['dp_cookie_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_2" aria-expanded="true" aria-controls="collapse_dp_2">
+                            Nicht gelöst: Trick question Dark Pattern - Cookies ablehnen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_2" aria-expanded="true" aria-controls="collapse_dp_2">
+                            Gelöst: Trick question Dark Pattern - Cookies ablehnen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_2" class="accordion-collapse collapse" aria-labelledby="heading_dp_2" data-bs-parent="#accordion_dp_2">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_1.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_3">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_3">
+                        {% if  session['dp_berechtiges_interesse_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
+                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Optionen zu berechtigtem Interesse öffnen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
+                            Gelöst: Misdirection Dark Pattern - Cookie-Optionen zu berechtigtem Interesse öffnen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_3" class="accordion-collapse collapse" aria-labelledby="heading_dp_3" data-bs-parent="#accordion_dp_3">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_2.png') }}" alt="Screenshot aus dem Spiel">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_2_2.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_4">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_4">
+                        {% if  session['dp_cookiemisdirection_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_4" aria-expanded="true" aria-controls="collapse_dp_4">
+                            Nicht gelöst: Misdirection Dark Pattern - Cookie Auswahl bestätigen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_4" aria-expanded="true" aria-controls="collapse_dp_4">
+                            Gelöst: Misdirection Dark Pattern - Cookie Auswahl bestätigen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_4" class="accordion-collapse collapse" aria-labelledby="heading_dp_4" data-bs-parent="#accordion_dp_4">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_3.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_5">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_5">
+                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
+                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
+                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_5" class="accordion-collapse collapse" aria-labelledby="heading_dp_5" data-bs-parent="#accordion_dp_5">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern-4.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_6">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_6">
+                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_6" aria-expanded="true" aria-controls="collapse_dp_6">
+                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_6" aria-expanded="true" aria-controls="collapse_dp_6">
+                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_6" class="accordion-collapse collapse" aria-labelledby="heading_dp_6" data-bs-parent="#accordion_dp_6">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_5.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_7">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_7">
+                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
+                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
+                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_7" class="accordion-collapse collapse" aria-labelledby="heading_dp_7" data-bs-parent="#accordion_dp_7">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_6.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_8">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_8">
+                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
+                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
+                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_8" class="accordion-collapse collapse" aria-labelledby="heading_dp_8" data-bs-parent="#accordion_dp_8">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_7.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_9">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_9">
+                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
+                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
+                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_9" class="accordion-collapse collapse" aria-labelledby="heading_dp_9" data-bs-parent="#accordion_dp_9">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_9.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion my-1" id="accordion_dp_10">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_10">
+                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
+                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% else %}
+                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
+                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                        </button>
+                        {% endif %}
+                    </h2>
+                    <div id="collapse_dp_10" class="accordion-collapse collapse" aria-labelledby="heading_dp_10" data-bs-parent="#accordion_dp_10">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Beschreibung</p></div>
+                                <div class="col">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_9.png') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
             </div>
             <a href="{{ url_for('home_intro') }}" class="btn btn-success w-100">Level 1 abschließen und zurück zu Übersicht</a>
         </div>

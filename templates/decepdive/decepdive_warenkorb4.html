@@ -70,14 +70,14 @@
                     </tbody>
                 </table>
                 <div class="row">
-                    <!-- Nur sichtbar im 1. Durchlauf -->
+                    <!-- Nur sichtbar im 1. Durchlauf: Da Button die Sessionwerte für das Dark Pattern Misdirection/Sneak in the Basket updaten (im zweiten durchlauf nicht gewollt) -->
                     {% if session['dp_misdirect_spende'] == None %}
                     <div class="col-10">
-                        <div class="btn btn-close-white border" onclick="
+                        <div class="btn rounded border text-secondary" onclick="
                                 url_delay_set_session('{{ session['dp_misdirect_spende'] }}','{{url_for('decepdive_warenkorb5')}}', {'spende_lv2': 0.00,'dp_score': 5, 'dp_misdirect_spende': 1 });
                                 progress_add('dp_score_bar','dp_score_text', 5);">
-                            <p class="misdirection_text mb-0">Zum Zahlen <br>
-                            <small>ohne Spende</small> </p>
+                            <p class=" mb-0">Zum Zahlen <br>
+                            <small class="small_text ">ohne Spende</small> </p>
                         </div>
                     </div>
                     <div class="col">
@@ -90,9 +90,9 @@
                     Nur sichtbar, wenn ein einem ersten durchlauf die buttons schon gedrückt wurden-->
                     {% else %}
                     <div class="col-10">
-                        <div class="btn btn-close-white border" onclick="url_delay_set_session('None', '{{url_for('decepdive_warenkorb5')}}', {'spende_lv2': 0.00});">
-                            <p class="misdirection_text mb-0">Zum Zahlen <br>
-                            <small>ohne Spende</small> </p>
+                        <div class="btn rounded border text-secondary" onclick="url_delay_set_session('None', '{{url_for('decepdive_warenkorb5')}}', {'spende_lv2': 0.00});">
+                            <p class="text-secondary mb-0">Zum Zahlen <br>
+                            <small class="small_text">ohne Spende</small> </p>
                         </div>
                     </div>
                     <div class="col">
@@ -102,8 +102,9 @@
                         </div>
                     </div>
                     {% endif %}
-                    <p>In Kooperation mit dem Projekt DecepLive sammeln wir Spenden um die Meeresflora zu retten- Wir würden uns sehr über einen Beitrag freuen. 
-                        Spende mit deimen Einkauf 1.99€ für gute Zwecke. Meer Infos findest du hier <a href="#">DecepLive.com</a>. Danke!
+                    <p class="text-secondary mt-3">
+                        <small> In Kooperation mit dem Projekt DecepLive sammeln wir Spenden um die Meeresflora zu retten- Wir würden uns sehr über einen Beitrag freuen. 
+                        Spende mit deimen Einkauf 1.99€ für gute Zwecke. Meer Infos findest du hier <a href="#">DecepLive.com</a>. Danke!</small>
                     </p>
                 </div>
             </div>

@@ -1,221 +1,281 @@
+{% extends 'layout_level2.html' %}
 
-    {% extends 'layout_level2.html' %}
-
-    {% block content %}
-    <div class="content_level2">
-        <div class="px-5 py-5">
-            <div class="row">
-                <div class="col-2">
-                    <div class="platzfülller">
-                        <h2>Füller</h2>
-                    </div>
-                    <div id="filter">
-                        <h5>Sucheinstellungen: </h5>
-                        <p><b>Preis</b><br>
-                            Von: 0 bis: 10 € <br>
-                        </p>
-                        <p><b>Lieferstandort</b><br>
-                            Europa<br>
-                        </p>
-                        <p><b>Marke</b><br>
-                            Super Sun<br>
-                            Mega Sun <br>
-                        </p>
+{% block content %}
+<div class="content_level2">
+    <div class="px-5 py-5">
+        <div class="row">
+            <div class="col-2">
+                <div class="platzfülller">
+                    <h2>Füller</h2>
+                </div>
+                <div id="filter">
+                    <h4>Sucheinstellungen: </h4>
+                    <hr>
+                    <p><b>Preis</b><br>
+                        Von: 0 bis: 10 € <br>
+                    </p>
+                    <hr>
+                    <p><b>Lieferstandort</b><br>
+                        Europa<br>
+                    </p>
+                    <hr>
+                    <p><b>Marke</b><br>
+                        Super Sun<br>
+                        Mega Sun <br>
+                    </p>
+                    <hr>
+                    <h4>Infotmationen: </h4>
+                    <div class="accordion accordion-flush" id="accordionFlush">
+                        <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
+                            Mengeneinheiten
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlush">
+                            <div class="accordion-body">
+                            <div class="table-responsive">
+                                <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Einheit</th>
+                                            <th scope="col">in Liter</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="">
+                                            <td scope="row">Mikroliter</td>
+                                            <td>0,000001 l</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td scope="row">Milliliter</td>
+                                            <td>0,001 l</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td scope="row">Zentiliter</td>
+                                            <td>0,01 l</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td scope="row">Deziliter</td>
+                                            <td>0,1 l</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td scope="row">Liter</td>
+                                            <td>1 l</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td scope="row">Hektoliter</td>
+                                            <td>100 l</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            </div>
+                        </div>
+                        </div>
+                        
                     </div>
                 </div>
-                <div id="Suchergebnisse" class="col">
-                    <h2>Ergebnisse für "Sonnencreme LSF 50"</h2>
-                    <div class="row text-center">
-                        <div class="col produkt "> 
-                            <a href="{{ url_for('decepdive_produkt1') }}">
-                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream1.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (4340)</small> <br> 400 milliliter <br>
-                                <b>9.99€</b></p>
-                            </a>
-                        </div>
-                        <div class="col produkt ">
-                            <a href="{{ url_for('decepdive_produkt2') }}" >
-                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream2.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (1302)</small> <br> 4.5 deziliter <br>
-                                <b>9.99€</b></p>
-                            </a>
-                        </div>
-                        <div class="col produkt ">
-                            <a href="{{ url_for('decepdive_produkt3') }}">
-                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream3.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (53)</small> <br> 0,5 liter <br>
-                                <b>9.99€</b></p>
-                            </a>
-                        </div>
-                        <div class="col produkt  "> 
-                            <a href="{{ url_for('decepdive_produkt4') }}">
-                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream4.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (24)</small> <br> 590000 mikroliter <br>
-                                <b>9.99€</b></p>
-                            </a>
-                        </div>
-                        <div class="col produkt  ">
-                            <a href="{{ url_for('decepdive_produkt5') }}">
-                                <img class="rounded mx-auto" src="{{url_for('static', filename='images/decepdive/suncream5.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (174)</small> <br> 490000 mikroliter <br>
-                                <b>9.99€</b></p>
-                            </a>
-                        </div>
-                        <div class="col produkt ">
-                            <a href="{{ url_for('decepdive_produkt6') }}">
-                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream6.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Mega Sun  LSF 50,<small class="text-warning">★★★★☆ (234)</small> <br> 5.5 zentiliter <br>
-                                <b>9.99€</b></p>
-                            </a>
-                        </div>
-                        <div class="col produkt ">
-                            <a href="{{ url_for('decepdive_produkt7') }}">
-                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream7.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (567)</small> <br> 60 zentiliter <br>
-                                <b>9.99€</b></p>
-                            </a>    
-                        </div>
-                        <div class="col produkt ">
-                            <a href="{{ url_for('decepdive_produkt8') }}">
-                                <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream8.jpg')}}" alt="Sonnencreme in comicstyle">
-                                <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (124)</small> <br> 0.0055 hektoliter <br>
-                                <b>9.99€</b></p>
-                            </a>
-                        </div>
+            </div>
+            <div id="Suchergebnisse" class="col">
+                <h2>Ergebnisse für "Sonnencreme LSF 50"</h2>
+                <div class="row text-center">
+                    <div class="col produkt "> 
+                        <a href="{{ url_for('decepdive_produkt1') }}">
+                            <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream1.jpg')}}" alt="Sonnencreme in comicstyle">
+                            <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (4340)</small> <br> 400 milliliter <br>
+                            <b>9.99€</b></p>
+                        </a>
+                    </div>
+                    <div class="col produkt ">
+                        <a href="{{ url_for('decepdive_produkt2') }}" >
+                            <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream2.jpg')}}" alt="Sonnencreme in comicstyle">
+                            <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (1302)</small> <br> 4.5 deziliter <br>
+                            <b>9.99€</b></p>
+                        </a>
+                    </div>
+                    <div class="col produkt ">
+                        <a href="{{ url_for('decepdive_produkt3') }}">
+                            <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream3.jpg')}}" alt="Sonnencreme in comicstyle">
+                            <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (53)</small> <br> 0,5 liter <br>
+                            <b>9.99€</b></p>
+                        </a>
+                    </div>
+                    <div class="col produkt  "> 
+                        <a href="{{ url_for('decepdive_produkt4') }}">
+                            <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream4.jpg')}}" alt="Sonnencreme in comicstyle">
+                            <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (24)</small> <br> 590000 mikroliter <br>
+                            <b>9.99€</b></p>
+                        </a>
+                    </div>
+                    <div class="col produkt  ">
+                        <a href="{{ url_for('decepdive_produkt5') }}">
+                            <img class="rounded mx-auto" src="{{url_for('static', filename='images/decepdive/suncream5.jpg')}}" alt="Sonnencreme in comicstyle">
+                            <p>Mega Sun LSF 50, <small class="text-warning">★★★★☆ (174)</small> <br> 490000 mikroliter <br>
+                            <b>9.99€</b></p>
+                        </a>
+                    </div>
+                    <div class="col produkt ">
+                        <a href="{{ url_for('decepdive_produkt6') }}">
+                            <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream6.jpg')}}" alt="Sonnencreme in comicstyle">
+                            <p>Mega Sun  LSF 50,<small class="text-warning">★★★★☆ (234)</small> <br> 5.5 zentiliter <br>
+                            <b>9.99€</b></p>
+                        </a>
+                    </div>
+                    <div class="col produkt ">
+                        <a href="{{ url_for('decepdive_produkt7') }}">
+                            <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream7.jpg')}}" alt="Sonnencreme in comicstyle">
+                            <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (567)</small> <br> 60 zentiliter <br>
+                            <b>9.99€</b></p>
+                        </a>    
+                    </div>
+                    <div class="col produkt ">
+                        <a href="{{ url_for('decepdive_produkt8') }}">
+                            <img class="rounded" src="{{url_for('static', filename='images/decepdive/suncream8.jpg')}}" alt="Sonnencreme in comicstyle">
+                            <p>Super Sun LSF 50, <small class="text-warning">★★★★☆ (124)</small> <br> 0.0055 hektoliter <br>
+                            <b>9.99€</b></p>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Cookie Dialog -->
+</div>
+{% endblock %}
+<div class="cookiemodal">
+    {% block cookiemodal %}
+            <!-- Cookie Dialog -->
     <!-- Button trigger modal -->
     <button id="modal_button" type="button" class="btn btn-primary visually-hidden" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2" >
         Launch static backdrop modal
     </button>
     
     <!-- Modal -->
-    <div class="modal modal-lg fade" id="cookiedialog_lv2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookiedialog_lv2Label">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-2" id="cookiedialog_lv2Label">Cookie Manager</h1>
-                    <!-- Wenn der Cookie-Dialog im ersten Modal-Fenster geschlossen wird werden 40 Datenpunkte abgezogen und die Aufgabe ist unwiderruflich beendet -->
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}', {'data_score': -30, 'cookie_lv2_fertig': 1, 'dp_cookielv2_trickquestion': 0});
-                                    progress_add('data_bar','data_text', -30);">
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        Auf dieser Website benutzen wir Cookies um für dich unsere Produkte zu verbessern und die passende Angebote zu zeigen. <br>
-                        Hier im Cookie Manager kannst du ganz einfach bestimmen wie wir Cookies verwenden sollen.
-                    </p>
-                    <hr>
-                    <h4>Zugeschnittene Inhalte und Anzeigen:</h4>
-                    <small>Willst du, dass wir Cookies nicht benutzen, um dir, für dich interessante Inhalte zu zeigen?</small>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}',{'data_score': -10, 'dp_cookielv2_trickquestion': 0});
-                                    progress_add('data_bar','data_text', -10);">Nein
-                    </button>
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}',{'dp_score': 5, 'dp_cookielv2_trickquestion': 1});
-                            progress_add('dp_score_bar','dp_score_text', 5);">
-                            Ja
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal modal-lg fade" id="cookiedialog_lv2_step2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookiedialog_lv2_step2Label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-2" id="cookiedialog_lv2_step2Label">Cookie Manager</h1>
-                    <!-- Wenn der Cookie-Dialog im zweite Modal-Fenster geschlossen wird werden 30 Datenpunkte abgezogen (Eine Art von Cookies wurde schon abgelehnt)
-                         und die Aufgabe ist unwiderruflich beendet -->
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}',{'data_score': -20, 'cookie_lv2_fertig': 1,'dp_cookielv2_trickquestion2': 0});
-                                    progress_add('data_bar','data_text', -20);">
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h4>Website Performance und Produkte verbessern:</h4>
-                    <small> Wenn du nicht willst, dass wir keine Cookies nutzen sollen um unsere Produkte zu verbessern, klicke „Nein“.</small>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'data_score': -10, 'cookie_lv2_fertig': 1, 'dp_cookielv2_trickquestion2': 0});
-                                    progress_add('data_bar','data_text', -10);">
-                            Nein
-                    </button>
-                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'dp_score': 5, 'dp_cookielv2_trickquestion2': 1 }); 
-                                    progress_add('dp_score_bar','dp_score_text', 5);" >
-                            Ja
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal modal-lg fade" id="cookiedialog_lv2_step3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookiedialog_lv2_step3Label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-2" id="cookiedialog_lv2_step3Label">Cookie Manager</h1>
-                    <!-- Wenn der Cookie-Dialog im zweite Modal-Fenster geschlossen wird werden 20 Datenpunkte abgezogen (Zwei Arten von Cookies wurde schon abgelehnt)
-                         und die Aufgabe ist unwiderruflich beendet -->
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                            onclick="set_session_value({'data_score': -10, 'cookie_lv2_fertig': 1});
-                                    progress_add('data_bar','data_text', -10);">
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h4>Einstellungen speichern </h4>
-                    <p>Um die zuvor angegebenen Cookie Präferenzen zu speichern drücke "Einstellungen speichern"</p>
-                </div>
-                <div class="d-flex">
-                    <div class="p-2 flex-grow-1"></div>
-                    <div class="p-2">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_berechtigt'] }}',{'data_score': -30, 'cookie_lv2_fertig': 1, 'dp_cookielv2_berechtigt': 0}); 
-                                    progress_add('data_bar','data_text', -30);">Alle akzeptieren
-                    </button>
+    <div class="modal_container">
+        <div class="modal fade" id="cookiedialog_lv2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookiedialog_lv2Label">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-2" id="cookiedialog_lv2Label">Cookie Manager</h1>
+                        <!-- Wenn der Cookie-Dialog im ersten Modal-Fenster geschlossen wird werden 40 Datenpunkte abgezogen und die Aufgabe ist unwiderruflich beendet -->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                                onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}', {'data_score': -30, 'cookie_lv2_fertig': 1, 'dp_cookielv2_trickquestion': 0});
+                                        progress_add('data_bar','data_text', -30);">
+                        </button>
                     </div>
-                    <div class="p-2">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                            onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_berechtigt'] }}',{'data_score': -10, 'cookie_lv2_fertig': 1, 'dp_cookielv2_berechtigt': 0});
-                                    progress_add('data_bar','data_text', -10);">Einstellungen speichern
-                    </button>
-                    </div>
-                </div>
-                <hr class="my-0">
-                <!-- Misdirection Dark Pattern: Text mit hinweis auf berechtigtes Interesse is schwer zu sehen und sehr klein.
-                erst auf Knopfklick auf mehr anzeigen wird das versteckte Form mit preticked checkboxes angezeigt.
-                Boxen müssen angetickt werden und das "form" abgeschickt, damit die "cookies" abgelehnt werden und Spieler*innen dp_score Punkte bekommen-->
-                <div class="accordion" id="berecht_accordion">
-                    <div class="accordion-item">
-                        <p class="small_text" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                             Wir erheben Daten auf Basis von berechtigtem Interesse. 
-                             <span class="cursor_pointer text-decoration-underline">Mehr erfahren</span>
+                    <div class="modal-body">
+                        <p>
+                            Auf dieser Website benutzen wir Cookies um für dich unsere Produkte zu verbessern und die passende Angebote zu zeigen. <br>
+                            Hier im Cookie Manager kannst du ganz einfach bestimmen wie wir Cookies verwenden sollen.
                         </p>
-                        <div id="collapseOne" class="accordion-collapse collapse hide" data-bs-parent="#berecht_accordion">
-                            <div class="accordion-body">
-                                <form action="{{ url_for('decepdive_cookies') }}" method="post">
-                                    <input class="form-check-input" type="checkbox" name="interesse1" checked>
-                                    <label class="form-check-label" for="interesse1">
-                                        Personenbezogene Daten erheben
-                                    </label>
-                                     <br>                                
-                                    <input class="form-check-input" type="checkbox" name="interesse2" checked>
-                                    <label class="form-check-label" for="interesse2">
-                                        Angepasste Inhalte anzeigen, Interaktion erheben
-                                    </label>
-                                    <br>
-                                    <input  type="submit" value="Einstellungen zu berechtigtem Interesse speichern" 
-                                            id="button_interesse" class="btn btn-success" data-bs-dismiss="modal">
-                                </form>
+                        <hr>
+                        <h4>Zugeschnittene Inhalte und Anzeigen:</h4>
+                        <small>Willst du, dass wir Cookies nicht benutzen, um dir, für dich interessante Inhalte zu zeigen?</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2"
+                                onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}',{'data_score': -10, 'dp_cookielv2_trickquestion': 0});
+                                        progress_add('data_bar','data_text', -10);">Nein
+                        </button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step2"
+                                onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion'] }}',{'dp_score': 5, 'dp_cookielv2_trickquestion': 1});
+                                progress_add('dp_score_bar','dp_score_text', 5);">
+                                Ja
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal fade" id="cookiedialog_lv2_step2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookiedialog_lv2_step2Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-2" id="cookiedialog_lv2_step2Label">Cookie Manager</h1>
+                        <!-- Wenn der Cookie-Dialog im zweite Modal-Fenster geschlossen wird werden 30 Datenpunkte abgezogen (Eine Art von Cookies wurde schon abgelehnt)
+                            und die Aufgabe ist unwiderruflich beendet -->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}',{'data_score': -20, 'cookie_lv2_fertig': 1,'dp_cookielv2_trickquestion2': 0});
+                                        progress_add('data_bar','data_text', -20);">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Website Performance und Produkte verbessern:</h4>
+                        <small> Wenn du nicht willst, dass wir keine Cookies nutzen sollen um unsere Produkte zu verbessern, klicke „Nein“.</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
+                                onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'data_score': -10, 'cookie_lv2_fertig': 1, 'dp_cookielv2_trickquestion2': 0});
+                                        progress_add('data_bar','data_text', -10);">
+                                Nein
+                        </button>
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cookiedialog_lv2_step3"
+                                onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_trickquestion2'] }}', {'dp_score': 5, 'dp_cookielv2_trickquestion2': 1 }); 
+                                        progress_add('dp_score_bar','dp_score_text', 5);" >
+                                Ja
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="cookiedialog_lv2_step3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cookiedialog_lv2_step3Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-2" id="cookiedialog_lv2_step3Label">Cookie Manager</h1>
+                        <!-- Wenn der Cookie-Dialog im zweite Modal-Fenster geschlossen wird werden 20 Datenpunkte abgezogen (Zwei Arten von Cookies wurde schon abgelehnt)
+                            und die Aufgabe ist unwiderruflich beendet -->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                onclick="set_session_value({'data_score': -10, 'cookie_lv2_fertig': 1});
+                                        progress_add('data_bar','data_text', -10);">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Einstellungen speichern </h4>
+                        <p>Um die zuvor angegebenen Cookie Präferenzen zu speichern drücke "Einstellungen speichern"</p>
+                    </div>
+                    <div class="d-flex">
+                        <div class="p-2 flex-grow-1"></div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                                onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_berechtigt'] }}',{'data_score': -30, 'cookie_lv2_fertig': 1, 'dp_cookielv2_berechtigt': 0}); 
+                                        progress_add('data_bar','data_text', -30);">Alle akzeptieren
+                        </button>
+                        </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                                onclick="set_wenn_nicht_geloest('{{ session['dp_cookielv2_berechtigt'] }}',{'data_score': -10, 'cookie_lv2_fertig': 1, 'dp_cookielv2_berechtigt': 0});
+                                        progress_add('data_bar','data_text', -10);">Einstellungen speichern
+                        </button>
+                        </div>
+                    </div>
+                    <hr class="my-0">
+                    <!-- Misdirection Dark Pattern: Text mit hinweis auf berechtigtes Interesse is schwer zu sehen und sehr klein.
+                    erst auf Knopfklick auf mehr anzeigen wird das versteckte Form mit preticked checkboxes angezeigt.
+                    Boxen müssen angetickt werden und das "form" abgeschickt, damit die "cookies" abgelehnt werden und Spieler*innen dp_score Punkte bekommen-->
+                    <div class="accordion" id="berecht_accordion">
+                        <div class="accordion-item">
+                            <p class="small_text" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Wir erheben Daten auf Basis von berechtigtem Interesse. 
+                                <span class="cursor_pointer text-decoration-underline">Mehr erfahren</span>
+                            </p>
+                            <div id="collapseOne" class="accordion-collapse collapse hide" data-bs-parent="#berecht_accordion">
+                                <div class="accordion-body">
+                                    <form action="{{ url_for('decepdive_cookies') }}" method="post">
+                                        <input class="form-check-input" type="checkbox" name="interesse1" checked>
+                                        <label class="form-check-label" for="interesse1">
+                                            Personenbezogene Daten erheben
+                                        </label>
+                                        <br>                                
+                                        <input class="form-check-input" type="checkbox" name="interesse2" checked>
+                                        <label class="form-check-label" for="interesse2">
+                                            Angepasste Inhalte anzeigen, Interaktion erheben
+                                        </label>
+                                        <br>
+                                        <input  type="submit" value="Einstellungen zu berechtigtem Interesse speichern" 
+                                                id="button_interesse" class="btn btn-success" data-bs-dismiss="modal">
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -235,4 +295,5 @@
         }
     </script>
     {% endblock %}
+</div>
 

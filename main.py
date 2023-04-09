@@ -6,9 +6,8 @@ app = Flask(__name__)
 
 # initialisiere secret key
 app.secret_key = 'ba07947163bdb665ab81b575db5f22a60083e6737e739c0ed73efd78af4598c9'
-
   
-########################## ROUTES ###################################
+########################### Request Funktionen ###################################
 """  Funktion initialisiert Standardwerte der Session, falls noch sie nicht initialisiert sind"""
 @app.route('/initialize-session')
 def initialize_session():
@@ -82,17 +81,14 @@ def initialize_session():
         session['dp_misdirect_konto_erstellen'] = None
         session['dp_misdirect_spende'] = None
 
-
     return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
 
 """ Funktion mit der Sessionwerte geändert werden können """
 @app.route('/change-session', methods=['GET', 'POST'])
 def set_session_value():
     if request.method == "POST":
-
         # lade json
         session_data = request.json
-
         # get session key
         for session_key in session_data:
             print('input', session_key, session_data[session_key])
@@ -128,8 +124,7 @@ def update_timer():
     else:
         return '', 204
     
-
-########################################## HOMEPAGE ###############################################
+###################################### HOMEPAGE ROUTES ############################################
 """ Mainpage """
 @app.route('/')
 def home():
@@ -142,20 +137,12 @@ def home():
 def home_intro():
     return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
 
-@app.route('/home/kontakt/')
-def kontakt():
-    return render_template('home/kontakt.html')
-
 @app.route('/home/anleitung/')
 def anleitung():
     return render_template('home/anleitung.html')
 
-@app.route('/home/hintergrund/')
-def hintergrund():
-    return render_template('home/hintergrund.html')
 
-
-######################################## LEVEL 1: Streaming Abo beenden ##########################################
+################################## LEVEL 1: Streaming Abo beenden ##################################
 
 """ Funktion: Bilder aus dem static/images/deceptv Verzeichnis laden
     return: liste mit strings der Files inkl. Path """
@@ -378,34 +365,35 @@ def level1_beendet():
             session['abo_beendet']= False
         else:
             session['abo_beendet']= True
-        
-        # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv1
-        # und stelle sicher das cokkie_banner_lv1 nicht angezeigt wird
-        if session['cookie_lv1_fertig'] is None:
-            session['data_score'] = session['data_score'] -40
-            session['cookie_lv1_show'] = False
-            session['cookie_lv1_fertig']= True
-
-        # Wenn im Naggingdialog nie auf "APP installieren" gedrückt wurde erhöhe dp_score um 5 und markiere dp als gelöst
-        if  session['dp_nagging_level1'] is not None:
-            session['dp_nagging_level1'] = 1
-            session['dp_score'] = session['dp_score'] +5
-            session['show_nagging'] = False
-
         # resert countdown für level 2
         session['countdown'] = 300
+        
+    # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv1
+    # und stelle sicher das cokkie_banner_lv1 nicht angezeigt wird
+    if session['cookie_lv1_fertig'] is None:
+        session['data_score'] = session['data_score'] -40
+        session['cookie_lv1_show'] = False
+        session['cookie_lv1_fertig']= True
 
-    dp_list_lv1 = [ session['dp_cookie_lv1'],
+    # Wenn im Naggingdialog nie auf "APP installieren" gedrückt wurde erhöhe dp_score um 5 und markiere dp als gelöst
+    if  session['dp_nagging_level1'] is None:
+        # Dark Pattern als richtig gelöst setzen
+        session['dp_nagging_level1'] = 1
+        # DP-Score erhöhrn
+        session['dp_score'] = session['dp_score'] +5
+    #Nagging-Fenster nicht merh anzeigen
+    session['show_nagging'] = False
+    
+    dp_list_lv1 = [ session['dp_open_cookiemanager_lv1'],
+                    session['dp_cookie_lv1'],
                     session['dp_berechtiges_interesse_lv1'],
                     session['dp_cookiemisdirection_lv1'],
-                    session['dp_open_cookiemanager_lv1'],
                     session['dp_nagging_level1'],
                     session['dp_roachmotel1'],
                     session['dp_misdirect_kuendigen'],
                     session['dp_trickquestion1'],
                     session['dp_shaming_lv1'],
                     session['dp_roachmotel2'] ]
-    print(dp_list_lv1)
     
     return render_template('deceptv/end/ende_lv1.html', dp_list_lv1 = dp_list_lv1)
 
@@ -634,7 +622,6 @@ def ende_lv2():
 
 ########################### Datenspeicherung ##################################  
 def write_dp_ergebnisse_csv():
-
     with open('ergebnisse/dark_pattern_results.csv', mode='a') as csv_file:
         fieldnames = [  'session_id', 
                 'dp_open_cookiemanager_lv1',
@@ -657,9 +644,7 @@ def write_dp_ergebnisse_csv():
                 'dp_misdirect_login', 
                 'dp_misdirect_konto_erstellen', 
                 'dp_misdirect_spende' ] 
-        
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-
         file_exists = os.path.isfile('ergebnisse/dark_pattern_results.csv')
         if not file_exists:
             writer.writeheader()
@@ -671,18 +656,15 @@ def write_dp_ergebnisse_csv():
         dateiname: name der CSV-Datei in der geschrieben werden soll """
 def write_fragebogen_csv(data_list, dateiname):
         with open('ergebnisse/'+dateiname , mode='a') as csv_file:
-            
             #initielisiere Fieldlist
             fieldnames= []
             for itemID, itemValue in data_list:
                 fieldnames.append(itemID)
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames) 
 
-            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            
             file_exists = os.path.isfile('ergebnisse/fragebogen_SUS.csv')
             if not file_exists:
-                writer.writeheader()
-            
+                writer.writeheader()  
             writer.writerow({itemID: itemValue for itemID, itemValue in data_list})
 
 ################################## Fragebögen ##################################
@@ -725,12 +707,13 @@ def fragebogen_allgemein():
         
         # daten in CSV schreiben und speichern
         write_fragebogen_csv(data_list, 'fragebogen_allgemein.csv')
-    return render_template('home/fragebogen3.html', validation='')
+    return render_template('home/fragebogen3.html', validation='', show_feedback_form= False)
 
 @app.route('/fragebogen-abgeschlossen', methods=['POST'])
 def fragebogen_vp():
     # liste, in der die Daten gespeichert werden
     data_list = []
+    # für jedes item key und request.form daten als liste in data_list speichern
     for itemID in  ['name', 'matrikelnr']:
         if itemID in request.form:
                 data_list.append([itemID, request.form[itemID]])
@@ -738,17 +721,22 @@ def fragebogen_vp():
             return render_template('home/fragebogen2.html', validation='Bitte alle Felder angeben!' )
         
     write_fragebogen_csv(data_list, 'VP_Stunden.csv')
+    show_feedback_form = True
 
     return render_template('home/fragebogen3.html', 
                            validation='Erfolgreich abgeschickt. Vielen Dank',
                            name =  request.form['name'],
-                           matrikelnr = request.form['matrikelnr'])
+                           matrikelnr = request.form['matrikelnr'],
+                           show_feedback_form = show_feedback_form)
 
-####################################################################
+@app.route('/fragebogen-abgeschlossen/feedback', methods=['POST'])
+def feedback_form():
+    if 'feedback' in request.form:
+        csv_list = [['feedback', request.form['feedback']]]
+        write_fragebogen_csv(csv_list, 'Feedback.csv')
 
-if __name__ == "__main__":
-    # Activate debugging (not working)
-    app.run(debug = True)
-    #db.create_all()
+    return redirect(url_for('home_intro'))
+
+
 
 
