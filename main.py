@@ -133,7 +133,7 @@ def home():
         initialize_session()
     return render_template('home/home.html')
 
-@app.route('/home/intro')
+@app.route('/home/uebersicht')
 def home_intro():
     return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
 
@@ -163,43 +163,40 @@ def cookie_form_lv1():
         # Kombination aus 2 Dark Patterns: Misdirection- (Aufmerksamkeit von relevanten Inhalten ablenken)
         # und Trickquestion Dark Pattern (Ja-Nein Antwort bezieht sich auch Ablenen, anstatt wie gewöhlich auf Annhemen)
         # für jedes richtige Opt-In-to-Opt-Out Feld: ehrhöhe den DP,Score, für jedes falsche: ziehe 4 Datenpunkte ab
-        if session["dp_cookie_lv1"] is None:
-            counter_richtig = 0
-            if 'CookieStandort' in request.form:
-                session['dp_score'] = session['dp_score'] + 1
-                counter_richtig += 1
-            else:
-                session['data_score'] = session['data_score'] -4
-            if 'CookieIdent' in request.form:
-                session['dp_score'] = session['dp_score'] + 1
-                counter_richtig += 1
-            else:
-                session['data_score'] = session['data_score'] -4
-            if 'CookieDeviceSaves' in request.form:
-                session['dp_score'] = session['dp_score'] + 1
-                counter_richtig += 1
-            else:
-                session['data_score'] = session['data_score'] -4
-            if 'CookiePersonalisierung' in request.form:
-                session['dp_score'] = session['dp_score'] + 1
-                counter_richtig += 1
-            else:
-                session['data_score'] = session['data_score'] -4
-            if 'CookieTargeting' in request.form:
-                session['dp_score'] = session['dp_score'] + 1
-                counter_richtig += 1
-            else:
-                session['data_score'] = session['data_score'] -4
-            # Wenn alle richtig markiert, dark Pattern als richtig gelöst setzen
-            if counter_richtig == 5:
+        counter_richtig = 0
+        if 'CookieStandort' in request.form:
+            counter_richtig += 1
+        if 'CookieIdent' in request.form:
+            counter_richtig += 1
+        if 'CookieDeviceSaves' in request.form:
+            counter_richtig += 1
+        if 'CookiePersonalisierung' in request.form:
+            counter_richtig += 1
+        if 'CookieTargeting' in request.form:
+            counter_richtig += 1
+            print('counter_richtig', counter_richtig)
+        # Wenn alle Cookiezustimmungen entfernt wurden
+        if counter_richtig == 5:
+            # Wenn Dark Pattern noch nicht gelöst, als Pattern als richtig gelöst setzen und Punkte erhöhen
+            if session["dp_cookie_lv1"] is None:
                 session['dp_cookie_lv1'] = 1
-                # Wenn es versäumt wurde, dan Cookiedialog richtig zu öffnen (-> -40 "data_score"), gibt es eine einmalige
-                # Chance die Datenpunkte wieder zurückzubekommen, wenn Dialog über die seite "Datenschutz-Manager"
-                # geöffnet wurde
-                if session['data_score'] != 100:
-                    session['data_score'] = session['data_score'] +20
-            else:
-                 session['dp_cookie_lv1'] = 0
+                session['dp_score'] = session['dp_score'] + counter_richtig
+                print('in dp: ', session['data_score'] )
+            # Wenn es versäumt wurde, dan Cookiedialog richtig zu öffnen (-> -40 "data_score"), gibt es die
+            # Chance die Datenpunkte wieder zurückzubekommen, wenn Dialog über die seite "Datenschutz-Manager"
+            # geöffnet wurde
+            elif session['dp_cookie_lv1'] == 0:
+                session['data_score'] = session['data_score'] + (counter_richtig*4)
+                print('not in dp: ', session['data_score'])
+        # Punkte nur abziehen, falls data Score noch bei 100, damit ein erneutes aufrufen des Cookie-Managers
+        # nicht bestraft werden kann, sondern nur belohnt
+        else:
+            if session['data_score'] == 100:
+                session['data_score'] = session['data_score'] - (20 -counter_richtig*4)
+                print('akzeptiert: ', session['data_score'])
+            if session["dp_cookie_lv1"] is None:
+                session['dp_cookie_lv1'] = 0
+            
 
         # Wenn Dark Pattern mit Opt-Out Dark Pattern noch nicht gelöst ist:
         if session["dp_berechtiges_interesse_lv1"] is None:
@@ -207,25 +204,32 @@ def cookie_form_lv1():
             if 'cookie_berechtigt1' not in request.form and 'cookie_berechtigt2' not in request.form:
                 session['dp_score'] = session['dp_score'] + 5
                 session['dp_berechtiges_interesse_lv1'] = 1
-                # Wenn es versäumt wurde, dan Cookiedialog richtig zu öffnen (-> -40 "data_score"), gibt es eine einmalige
-                # Chance die Datenpunkte wieder zurückzubekommen, wenn Dialog über die seite "Datenschutz-Manager"
-                # geöffnet wurde
-                if session['data_score'] != 100:
-                    session['data_score'] = session['data_score'] +20
-            else:
-                session['dp_berechtiges_interesse_lv1'] = 0
+            else: 
+                session['dp_berechtiges_interesse_lv1'] = 0 
                 session['data_score'] = session['data_score'] -20
+                print('akzeptiert berecht: ', session['data_score'])
+        # Wenn es versäumt wurde, dan Cookiedialog richtig zu öffnen (-> -40 "data_score"), gibt es eine
+        # Chance die Datenpunkte wieder zurückzubekommen, wenn Dialog über die seite "Datenschutz-Manager"
+        # geöffnet wurde
+        if session["dp_berechtiges_interesse_lv1"] == 0:
+            if 'cookie_berechtigt1' not in request.form and 'cookie_berechtigt2' not in request.form:
+                session['data_score'] = session['data_score'] +20
         
         # Wenn das "Misdirection" Dark Pattern ("Auswahl bestätigen" ist schlicht, "Akzeptieren" ist auffallend) noch nicht gelöst ist:
         if session['dp_cookiemisdirection_lv1'] is None:
             session['dp_cookiemisdirection_lv1'] = 1
             session['dp_score'] = session['dp_score'] +5
+        
+        # Sicherung, dass durch Fehler data_score nicht über 100 Sein kann
+        if session['data_score'] > 100:
+            session['data_score'] = 100
 
     return redirect(url_for('deceptv'))
 
 #Startseite
 @app.route('/deceptv/')
 def deceptv():
+    print('start: ', session['dp_score'])
     # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden 
     # daher wird ein redirect zur levelübersicht vollführt
     if session['level_fortschritt'] >= 1:
@@ -394,6 +398,7 @@ def level1_beendet():
                     session['dp_trickquestion1'],
                     session['dp_shaming_lv1'],
                     session['dp_roachmotel2'] ]
+    print(dp_list_lv1)
     
     return render_template('deceptv/end/ende_lv1.html', dp_list_lv1 = dp_list_lv1)
 
@@ -604,12 +609,12 @@ def ende_lv2():
     dp_list_lv2 = [ session['dp_cookielv2_trickquestion'], 
                     session['dp_cookielv2_trickquestion2'],
                     session['dp_cookielv2_berechtigt'], 
-                    session['dp_hiddennewsletter'],
-                    session['dp_misdirect_login'], 
-                    session['dp_misdirect_konto_erstellen'],
                     session['dp_vergleich'], 
                     session['dp_preticked_monatl'],
-                    session['dp_sneakinbasket'], 
+                    session['dp_sneakinbasket'],
+                    session['dp_hiddennewsletter'],
+                    session['dp_misdirect_login'], 
+                    session['dp_misdirect_konto_erstellen'], 
                     session['dp_misdirect_spende'] ]
     
     # speicher die Lösungen aller Dark Patterns für diese Session in CSV für Evaluierung

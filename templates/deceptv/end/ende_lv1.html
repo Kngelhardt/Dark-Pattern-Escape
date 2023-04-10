@@ -22,8 +22,8 @@
             {% endfor %}
             <div class="lightblue_box_shadow rounded py-4 px-4 my-3">
                 <h2>Data Score</h2>   
-                <p> Du hast <span class="text-primary fw-bolder">{{ data_count.value }} von 4</span> Dark Patterns, die dir Daten abluchsen wollten richtig gelöst
-                    und damit <span class="text-primary fw-bolder "> {{data_count.value*10}}</span> von maximal <span class="text-primary fw-bolder ">40</span>
+                <p> Du hast <span class="text-primary fw-bolder">{{ data_count.value }} von 4</span> Dark Patterns die dir Daten abluchsen wollten richtig gelöst
+                    und <span class="text-primary fw-bolder "> {{session['data_score']-60}}</span> von maximal <span class="text-primary fw-bolder ">40</span>
                     Data Score Punkten behalten</p>
             </div>
             <div class="yellow_box_shadow rounded py-4 px-4 my-3">
@@ -43,7 +43,7 @@
             <div class="accordion my-1" id="accordion_dp_1">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_1">
-                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        {% if session['dp_open_cookiemanager_lv1'] == 0 or session['dp_open_cookiemanager_lv1'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_1" aria-expanded="true" aria-controls="collapse_dp_1">
                             Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
                         </button>
@@ -69,7 +69,7 @@
             <div class="accordion my-1" id="accordion_dp_2">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_2">
-                        {% if  session['dp_cookie_lv1'] == 0 or None %}
+                        {% if session['dp_cookie_lv1'] == 0 or session['dp_cookie_lv1'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_2" aria-expanded="true" aria-controls="collapse_dp_2">
                             Nicht gelöst: Trick question Dark Pattern - Cookies ablehnen
                         </button>
@@ -95,13 +95,13 @@
             <div class="accordion my-1" id="accordion_dp_3">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_3">
-                        {% if  session['dp_berechtiges_interesse_lv1'] == 0 or None %}
+                        {% if session['dp_berechtiges_interesse_lv1'] == 0 or session['dp_berechtiges_interesse_lv1'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Optionen zu berechtigtem Interesse öffnen
+                            Nicht gelöst: Misdirection/ Hidden Information Dark Pattern - Cookie-Optionen zu berechtigtem Interesse öffnen
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
-                            Gelöst: Misdirection Dark Pattern - Cookie-Optionen zu berechtigtem Interesse öffnen
+                            Gelöst: Misdirection Dark Pattern/ Hidden Information - Cookie-Optionen zu berechtigtem Interesse öffnen
                         </button>
                         {% endif %}
                     </h2>
@@ -122,13 +122,13 @@
             <div class="accordion my-1" id="accordion_dp_4">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_4">
-                        {% if  session['dp_cookiemisdirection_lv1'] == 0 or None %}
+                        {% if  session['dp_cookiemisdirection_lv1'] == 0 or session['dp_cookiemisdirection_lv1'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_4" aria-expanded="true" aria-controls="collapse_dp_4">
                             Nicht gelöst: Misdirection Dark Pattern - Cookie Auswahl bestätigen
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_4" aria-expanded="true" aria-controls="collapse_dp_4">
-                            Gelöst: Misdirection Dark Pattern - Cookie Auswahl bestätigen
+                            Gelöst: Misdirection Dark Pattern - Cookie Auswahl bestätigen 
                         </button>
                         {% endif %}
                     </h2>
@@ -148,13 +148,13 @@
             <div class="accordion my-1" id="accordion_dp_5">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_5">
-                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        {% if  session['dp_nagging_level1'] == 0 or session['dp_nagging_level1'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Nicht gelöst: Nagging Dark Pattern - Pop-Up das so lange nervt, bis "App installieren" gedrückt wird.
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
-                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Gelöst:  Nagging Dark Pattern - Pop-Up das so lange nervt, bis "App installieren" gedrückt wird.
                         </button>
                         {% endif %}
                     </h2>
@@ -174,13 +174,13 @@
             <div class="accordion my-1" id="accordion_dp_6">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_6">
-                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        {% if  session['dp_roachmotel1'] == 0 or session['dp_roachmotel1'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_6" aria-expanded="true" aria-controls="collapse_dp_6">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Nicht gelöst: Hidden Information/Roach Motel Dark Pattern - Möglickeit zum Kündigen ist schwer zu finden.
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_6" aria-expanded="true" aria-controls="collapse_dp_6">
-                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Gelöst:  Hidden Information/Roach Motel Dark Pattern - Möglickeit zum Kündigen ist schwer zu finden.
                         </button>
                         {% endif %}
                     </h2>
@@ -200,13 +200,13 @@
             <div class="accordion my-1" id="accordion_dp_7">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_7">
-                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        {% if  session['dp_misdirect_kuendigen'] == 0 or session['dp_misdirect_kuendigen'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Nicht gelöst: Misdirection Dark Pattern - Button zu Kündigen unscheinbar.
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
-                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Gelöst: Misdirection Dark Pattern - Button zu Kündigen unscheinbar.
                         </button>
                         {% endif %}
                     </h2>
@@ -226,13 +226,13 @@
             <div class="accordion my-1" id="accordion_dp_8">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_8">
-                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        {% if  session['dp_trickquestion1'] == 0 or session['dp_trickquestion1'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Nicht gelöst: Trick Question Dark Pattern - Doppelte Verneinung
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
-                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Gelöst: Trick Question Dark Pattern - Doppelte Verneinung
                         </button>
                         {% endif %}
                     </h2>
@@ -252,13 +252,13 @@
             <div class="accordion my-1" id="accordion_dp_9">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_9">
-                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        {% if  session['dp_shaming_lv1'] == 0 or session['dp_shaming_lv1'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Nicht gelöst: Confirmshaming Dark Pattern - Bestätigung durch unangenehme Antwortmöglichkeit
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
-                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Gelöst: Confirmshaming Dark Pattern - Bestätigung durch unangenehme Antwortmöglichkeit
                         </button>
                         {% endif %}
                     </h2>
@@ -268,7 +268,7 @@
                                 <div class="col">
                                     <p>Beschreibung</p></div>
                                 <div class="col">
-                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_9.png') }}" alt="Screenshot aus dem Spiel">
+                                    <img class="rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_8.png') }}" alt="Screenshot aus dem Spiel">
                                 </div>
                             </div>              
                         </div>
@@ -278,13 +278,13 @@
             <div class="accordion my-1" id="accordion_dp_10">
                 <div class="accordion-item ">
                     <h2 class="accordion-header" id="heading_dp_10">
-                        {% if  session['dp_open_cookiemanager_lv1'] == 0 or None %}
+                        {% if session['dp_roachmotel2'] == 0 or session['dp_roachmotel2'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Nicht gelöst: Roach Motel Dark Pattern - Kündigung nur telefonisch
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
-                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Gelöst: Roach Motel Dark Pattern - Kündigung nur telefonisch
                         </button>
                         {% endif %}
                     </h2>
@@ -301,7 +301,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ url_for('home_intro') }}" class="btn btn-success w-100">Level 1 abschließen und zurück zu Übersicht</a>
+            <a href="{{ url_for('home_intro') }}" class="btn btn-primary w-25 mt-5 float-end">Level 1 abschließen und zurück zu Übersicht</a>
         </div>
     </div>
     <!-- Kosmetisch: Seite bis unten ausfüllen -->
