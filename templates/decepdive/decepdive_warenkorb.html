@@ -64,7 +64,7 @@
                 </form>
                     <!-- Misdirection Dark Pattern: Checkbox "agb" dient dazu, den weiter-Button zu enablen 
                         und von dem button für das dropdown menü mit preticked Newsletter-Abonnement abzulenkten --->
-                    <div class="float-end dropdown">
+                    <div class="float-end dropdown open">
                         <form action="{{ url_for('agb_warenkorb') }}" method="POST">
                             <label for="agb" class="text-secondary ">Ich Akzeptiere die AGB von DecepDive</label>
                             <input type="checkbox" name="agb" value="Ich habe die AGB gelesen"
@@ -79,10 +79,8 @@
                                     </option>
                                 </select>
                             </div>
-
                             <!-- Visually hidden input: dient dazu den gesamtpreis an flask zu senden -->
                             <input type="number" step="0.01" name="preis" id="preis_input" value="0" class="visually-hidden">
-
                             <input id="submit_button" type="submit" class="btn btn-success" value="Weiter" disabled ></input>
                         </form>
                     </div> 
