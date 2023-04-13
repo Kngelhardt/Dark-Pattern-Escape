@@ -40,7 +40,8 @@
                     <!-- Größe der Bar wird an den "Hauptmenü" Button angepasst -->
                     <div id="container_zeit_bar" class="d-2 progress position-relative" style="height: 36px;">
                         <h3 id="zeit_anzeige" class="position-absolute text-dark">{{session['countdown']}}s</h3>
-                        <div id="zeit_bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{session['countdown']/3}}%" 
+                        <div id="zeit_bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" 
+                            style="width: {{ session['countdown']/3}}%" 
                             aria-valuenow="{{session['countdown']}}" aria-valuemin="0" aria-valuemax="300">
                         </div>
                     </div>

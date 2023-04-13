@@ -40,238 +40,267 @@
                 <p>Du hast in Level 1 <span class="text-success fw-bolder">{{ dp_count.value }} von 10</span> Dark Patterns richtig gelöst
                 und damit <span class="text-success fw-bolder "> {{dp_count.value*5}}</span> Dark Pattern Score Punkte erhalten</p>
             </div>
-            <div class="accordion my-1" id="accordion_dp_1">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_1">
-                        {% if session['dp_open_cookiemanager_lv1'] == 0 or session['dp_open_cookiemanager_lv1'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_1" aria-expanded="true" aria-controls="collapse_dp_1">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_1" aria-expanded="true" aria-controls="collapse_dp_1">
-                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_1" class="accordion-collapse collapse" aria-labelledby="heading_dp_1" data-bs-parent="#accordion_dp_1">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern.jpg') }}" alt="Screenshot aus dem Spiel">
-                                </div>
-                            </div>              
+            <div id="accordion_container">
+                <div class="accordion my-1" id="accordion_dp_1">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_1">
+                            {% if session['dp_open_cookiemanager_lv1'] == 0 or session['dp_open_cookiemanager_lv1'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_1" aria-expanded="true" aria-controls="collapse_dp_1">
+                                Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_1" aria-expanded="true" aria-controls="collapse_dp_1">
+                                Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_1" class="accordion-collapse collapse" aria-labelledby="heading_dp_1" data-bs-parent="#accordion_dp_1">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <p><b>Misdirection Dark Pattern:</b> Design lenkt durch auffällige graphische Elemente vom Inhalt ab.*</p>
+                                        <p><b>Hier:</b> Die Großen Knöpfe rechts lenken von der klickbaren "<span class="text-decoration-underline">hier</span>" Fläche ab.
+                                        Durch das klicken auf diese öffnet sich das Cookie-Verwaltungsmenü.</p>
+                                    </div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_0.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div> 
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <p><b>Trick Question Dark Pattern:</b> Verwirrend formulierte Frage (z.B. doppelte Verneinung).*</p>
+                                        <p><b>Hier:</b> Auf dem linken von dem beiden Knöpfen rechts steht: "Ablehnen" und in kleiner Schrift darunter: "zu widersprechen"
+                                        Wer hier unaufmerksam nur Ablehnen liest und den Knopf drückt, akzeptiert alle Cookies.</p>
+                                    </div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_0_2.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>            
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion my-1" id="accordion_dp_2">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_2">
-                        {% if session['dp_cookie_lv1'] == 0 or session['dp_cookie_lv1'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_2" aria-expanded="true" aria-controls="collapse_dp_2">
-                            Nicht gelöst: Trick question Dark Pattern - Cookies ablehnen
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_2" aria-expanded="true" aria-controls="collapse_dp_2">
-                            Gelöst: Trick question Dark Pattern - Cookies ablehnen
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_2" class="accordion-collapse collapse" aria-labelledby="heading_dp_2" data-bs-parent="#accordion_dp_2">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_1.jpg') }}" alt="Screenshot aus dem Spiel">
-                                </div>
-                            </div>              
+                <div class="accordion my-1" id="accordion_dp_2">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_2">
+                            {% if session['dp_cookie_lv1'] == 0 or session['dp_cookie_lv1'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_2" aria-expanded="true" aria-controls="collapse_dp_2">
+                                Nicht gelöst: Trick question Dark Pattern - Cookies ablehnen
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_2" aria-expanded="true" aria-controls="collapse_dp_2">
+                                Gelöst: Trick question Dark Pattern - Cookies ablehnen
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_2" class="accordion-collapse collapse" aria-labelledby="heading_dp_2" data-bs-parent="#accordion_dp_2">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <p><b>Trick Question Dark Pattern:</b> Verwirrend formulierte Frage (z.B. doppelte Verneinung).*</p>
+                                        <p><b>Hier:</b> Unnötig kompliziert wird nach Zustimmung zur Ablehnung gefragt. </p>
+                                        <hr>
+                                        <p><b>Bait and Switch Dark Pattern:</b> Klick auf Schaltfläche führt zu anderem Ergebnis als als üblicherweise erwartet.*</p>
+                                        <p><b>Hier: </b>Da es die Norm ist, kann normalerweise davon ausgegangen werden, das eine mit "Nein" beschriftete Schaltfläche "Ablehnen" bedeutet</p>
+                                        <hr>
+                                        <p><b>Preselection Dark Pattern: </b> Auswahlmöglichkeiten sind bereits (abänderbar) getroffen, insbesondere durch gesetzte Häkchen.*</p>
+                                        <p><b>Hier:</b> Die Schalter sind so voreingestellt, dass sie Cookies annehmen: "Nein" in diesem Kontext ist gleichzusetzen mit "nicht ablehnen".</p>
+                                    </div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_1.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>              
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion my-1" id="accordion_dp_3">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_3">
-                        {% if session['dp_berechtiges_interesse_lv1'] == 0 or session['dp_berechtiges_interesse_lv1'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
-                            Nicht gelöst: Misdirection/ Hidden Information Dark Pattern - Cookie-Optionen zu berechtigtem Interesse öffnen
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
-                            Gelöst: Misdirection Dark Pattern/ Hidden Information - Cookie-Optionen zu berechtigtem Interesse öffnen
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_3" class="accordion-collapse collapse" aria-labelledby="heading_dp_3" data-bs-parent="#accordion_dp_3">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_2.jpg') }}" alt="Screenshot aus dem Spiel">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_2_2.jpg') }}" alt="Screenshot aus dem Spiel">
-                                </div>
-                            </div>              
+                <div class="accordion my-1" id="accordion_dp_3">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_3">
+                            {% if session['dp_berechtiges_interesse_lv1'] == 0 or session['dp_berechtiges_interesse_lv1'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
+                                Nicht gelöst: Misdirection/ Hidden Information Dark Pattern - Cookie-Optionen zu berechtigtem Interesse öffnen
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
+                                Gelöst: Misdirection Dark Pattern/ Hidden Information - Cookie-Optionen zu berechtigtem Interesse öffnen
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_3" class="accordion-collapse collapse" aria-labelledby="heading_dp_3" data-bs-parent="#accordion_dp_3">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <p><b>Misdirection:</b> Design lenkt durch auffällige graphische Elemente vom Inhalt ab.*</p>
+                                        <p><b>Hier:</b> Die Schlatfläche, die die Optionen zu Cookies mit "berechtigtem Interesse" ausklappen lässt, ist sehr unscheinbar.
+                                            Gleichzeitig lenkt der auffällige, blaue Knopf zum Akzeptieren der COokies die Aufmerksamkeit auf sich.</p>
+                                    </div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_2.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_2_2.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>              
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion my-1" id="accordion_dp_4">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_4">
-                        {% if  session['dp_cookiemisdirection_lv1'] == 0 or session['dp_cookiemisdirection_lv1'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_4" aria-expanded="true" aria-controls="collapse_dp_4">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie Auswahl bestätigen
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_4" aria-expanded="true" aria-controls="collapse_dp_4">
-                            Gelöst: Misdirection Dark Pattern - Cookie Auswahl bestätigen 
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_4" class="accordion-collapse collapse" aria-labelledby="heading_dp_4" data-bs-parent="#accordion_dp_4">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_3.jpg') }}" alt="Screenshot aus dem Spiel">
-                                </div>
-                            </div>              
+                <div class="accordion my-1" id="accordion_dp_4">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_4">
+                            {% if  session['dp_cookiemisdirection_lv1'] == 0 or session['dp_cookiemisdirection_lv1'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_4" aria-expanded="true" aria-controls="collapse_dp_4">
+                                Nicht gelöst: Misdirection Dark Pattern - Cookie Auswahl bestätigen
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_4" aria-expanded="true" aria-controls="collapse_dp_4">
+                                Gelöst: Misdirection Dark Pattern - Cookie Auswahl bestätigen 
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_4" class="accordion-collapse collapse" aria-labelledby="heading_dp_4" data-bs-parent="#accordion_dp_4">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <p><b>Misdirection:</b> Design lenkt durch auffällige graphische Elemente vom Inhalt ab.*</p>
+                                        <p><b>Hier: </b></p>
+                                    </div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_3.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>              
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion my-1" id="accordion_dp_5">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_5">
-                        {% if  session['dp_nagging_level1'] == 0 or session['dp_nagging_level1'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
-                            Nicht gelöst: Nagging Dark Pattern - Pop-Up das so lange nervt, bis "App installieren" gedrückt wird.
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
-                            Gelöst:  Nagging Dark Pattern - Pop-Up das so lange nervt, bis "App installieren" gedrückt wird.
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_5" class="accordion-collapse collapse" aria-labelledby="heading_dp_5" data-bs-parent="#accordion_dp_5">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_4.jpg') }}" alt="Screenshot aus dem Spiel">
-                                </div>
-                            </div>              
+                <div class="accordion my-1" id="accordion_dp_5">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_5">
+                            {% if  session['dp_nagging_level1'] == 0 or session['dp_nagging_level1'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
+                                Nicht gelöst: Nagging Dark Pattern - Pop-Up das so lange nervt, bis "App installieren" gedrückt wird.
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
+                                Gelöst:  Nagging Dark Pattern - Pop-Up das so lange nervt, bis "App installieren" gedrückt wird.
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_5" class="accordion-collapse collapse" aria-labelledby="heading_dp_5" data-bs-parent="#accordion_dp_5">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Beschreibung</p></div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_4.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>              
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion my-1" id="accordion_dp_6">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_6">
-                        {% if  session['dp_roachmotel1'] == 0 or session['dp_roachmotel1'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_6" aria-expanded="true" aria-controls="collapse_dp_6">
-                            Nicht gelöst: Hidden Information/Roach Motel Dark Pattern - Möglickeit zum Kündigen ist schwer zu finden.
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_6" aria-expanded="true" aria-controls="collapse_dp_6">
-                            Gelöst:  Hidden Information/Roach Motel Dark Pattern - Möglickeit zum Kündigen ist schwer zu finden.
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_6" class="accordion-collapse collapse" aria-labelledby="heading_dp_6" data-bs-parent="#accordion_dp_6">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_5.jpg') }}" alt="Screenshot aus dem Spiel">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_5_2.jpg') }}" alt="Screenshot aus dem Spiel">
-                                </div>
-                            </div>              
+                <div class="accordion my-1" id="accordion_dp_6">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_6">
+                            {% if  session['dp_roachmotel1'] == 0 or session['dp_roachmotel1'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_6" aria-expanded="true" aria-controls="collapse_dp_6">
+                                Nicht gelöst: Hidden Information/Roach Motel Dark Pattern - Möglickeit zum Kündigen ist schwer zu finden.
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_6" aria-expanded="true" aria-controls="collapse_dp_6">
+                                Gelöst:  Hidden Information/Roach Motel Dark Pattern - Möglickeit zum Kündigen ist schwer zu finden.
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_6" class="accordion-collapse collapse" aria-labelledby="heading_dp_6" data-bs-parent="#accordion_dp_6">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Beschreibung</p></div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_5.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_5_2.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>              
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion my-1" id="accordion_dp_7">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_7">
-                        {% if  session['dp_misdirect_kuendigen'] == 0 or session['dp_misdirect_kuendigen'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
-                            Nicht gelöst: Misdirection Dark Pattern - Button zu Kündigen unscheinbar.
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
-                            Gelöst: Misdirection Dark Pattern - Button zu Kündigen unscheinbar.
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_7" class="accordion-collapse collapse" aria-labelledby="heading_dp_7" data-bs-parent="#accordion_dp_7">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_6.jpg') }}" alt="Screenshot aus dem Spiel">
-                                </div>
-                            </div>              
+                <div class="accordion my-1" id="accordion_dp_7">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_7">
+                            {% if  session['dp_misdirect_kuendigen'] == 0 or session['dp_misdirect_kuendigen'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
+                                Nicht gelöst: Misdirection Dark Pattern - Button zu Kündigen unscheinbar.
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
+                                Gelöst: Misdirection Dark Pattern - Button zu Kündigen unscheinbar.
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_7" class="accordion-collapse collapse" aria-labelledby="heading_dp_7" data-bs-parent="#accordion_dp_7">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Beschreibung</p></div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_6.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>              
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion my-1" id="accordion_dp_8">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_8">
-                        {% if  session['dp_trickquestion1'] == 0 or session['dp_trickquestion1'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
-                            Nicht gelöst: Trick Question Dark Pattern - Doppelte Verneinung
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
-                            Gelöst: Trick Question Dark Pattern - Doppelte Verneinung
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_8" class="accordion-collapse collapse" aria-labelledby="heading_dp_8" data-bs-parent="#accordion_dp_8">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_7.jpg') }}" alt="Screenshot aus dem Spiel">
-                                </div>
-                            </div>              
+                <div class="accordion my-1" id="accordion_dp_8">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_8">
+                            {% if  session['dp_trickquestion1'] == 0 or session['dp_trickquestion1'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
+                                Nicht gelöst: Trick Question Dark Pattern - Doppelte Verneinung
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
+                                Gelöst: Trick Question Dark Pattern - Doppelte Verneinung
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_8" class="accordion-collapse collapse" aria-labelledby="heading_dp_8" data-bs-parent="#accordion_dp_8">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Beschreibung</p></div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_7.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>              
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion my-1" id="accordion_dp_9">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_9">
-                        {% if  session['dp_shaming_lv1'] == 0 or session['dp_shaming_lv1'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
-                            Nicht gelöst: Confirmshaming Dark Pattern - Bestätigung durch unangenehme Antwortmöglichkeit
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
-                            Gelöst: Confirmshaming Dark Pattern - Bestätigung durch unangenehme Antwortmöglichkeit
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_9" class="accordion-collapse collapse" aria-labelledby="heading_dp_9" data-bs-parent="#accordion_dp_9">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_8.jpg') }}" alt="Screenshot aus dem Spiel">
-                                </div>
-                            </div>              
+                <div class="accordion my-1" id="accordion_dp_9">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_9">
+                            {% if  session['dp_shaming_lv1'] == 0 or session['dp_shaming_lv1'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
+                                Nicht gelöst: Confirmshaming Dark Pattern - Bestätigung durch unangenehme Antwortmöglichkeit
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
+                                Gelöst: Confirmshaming Dark Pattern - Bestätigung durch unangenehme Antwortmöglichkeit
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_9" class="accordion-collapse collapse" aria-labelledby="heading_dp_9" data-bs-parent="#accordion_dp_9">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Beschreibung</p></div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_8.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>              
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -295,7 +324,7 @@
                                 <div class="col">
                                     <p>Beschreibung</p></div>
                                 <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_9.jpg') }}" alt="Screenshot aus dem Spiel">
+                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_9.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
                                 </div>
                             </div>              
                         </div>
