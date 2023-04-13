@@ -81,7 +81,7 @@ def initialize_session():
         session['dp_misdirect_konto_erstellen'] = None
         session['dp_misdirect_spende'] = None
 
-    return render_template('home/intro.html', level_fortschritt = session['level_fortschritt'])
+    return redirect(url_for('home_intro'))
 
 """ Funktion mit der Sessionwerte geändert werden können """
 @app.route('/change-session', methods=['GET', 'POST'])
