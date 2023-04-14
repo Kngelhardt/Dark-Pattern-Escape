@@ -133,17 +133,16 @@
                 <div class="p-2">
                     <!-- Beide Knöpfe machen das selbe
                         Trick-Question Dark Pattern: "Ablehnen zu widersprecehn ist das selbe wie Akzeptieren"-->
-                    <div class="btn btn-outline-primary pb-3" 
+                    <div class="btn btn-outline-primary" 
                         onclick="// Backend update
                                 set_session_value({'cookie_lv1_show': 0, 'cookie_lv1_fertig': 1, 'data_score': -40, 'dp_open_cookiemanager_lv1': 0 });
                                 //frontend update
                                 progress_add('data_bar','data_text', -40); 
                                 //hide cookiebanner
                                 show_hide_div('cookie_fussleiste_lv1');">
-                        Ablehnen <br>
-                        <span class="small_text">zu wiedersprechen</span> 
+                        <p>Empfohlene <br> Auswahl</p>
                     </div>
-                    <div class="btn btn-primary pb-0"
+                    <div class="btn btn-primary me-3"
                         onclick="// Backend update
                                 set_session_value({'cookie_lv1_show': 0, 'cookie_lv1_fertig': 1, 'data_score': -40, 'dp_open_cookiemanager_lv1': 0 });
                                 //frontend update

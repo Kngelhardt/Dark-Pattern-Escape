@@ -14,11 +14,13 @@ def initialize_session():
     # Initialisiere Session Werte
     # Nur beim ersten aufrufen der Seite ausführen
     if session.get('session_id') is None:
-
         # Initialisiere ID
         session['session_id'] = 1
         # erstelle liste mit allen vergebenen IDs
         id_list = []
+        # checke ob ordner für csv's existiert, wenn nicht erstelle ihn
+        if not os.path.isdir('ergebnisse'):
+             os.makedirs('ergebnisse')
         # check ob datei existiert, wenn ja öffnen zum lesen
         if os.path.isfile('ergebnisse/id_list.csv'):
             with open('ergebnisse/id_list.csv', 'r') as id_csv:
@@ -34,7 +36,7 @@ def initialize_session():
             writer = csv.writer(id_csv)
             writer.writerow([session['session_id']])
 
-        # initiale Werte der Punkte
+        # initialisiere Session Startwerte
         session['data_score'] = 100
         session['geld_score'] = 25
         session['dp_score'] = 0
