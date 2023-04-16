@@ -5,8 +5,9 @@
 {% block body %}
     <div class="container py-5 my-5">
         <h1>Fragebogen zum Spiel</h1>
-        <p> Bitte lese die Fragen Aufmerksam durch und versuche intuitiv darauf zu antworten ohne zu lange darüber nachzudenken.
-            Alle Items müssen angekreuzt werden, wenn du dir unsicher bist, kreuze "Neutral" an.</p>
+        <p> Die folgenden Fragen beziehen sich auf die Bedienbarkeit des Spiels als ganzes- also von Einleitung bis zur Endübersicht- und weniger auf die Bedienbarkeit einzelner Dark Patterns (die ja oft bewusst schlecht gestaltet ist). </p>
+        <p> Bitte lese die Fragen aufmerksam durch und versuche intuitiv darauf zu antworten ohne zu lange darüber nachzudenken.
+            Alle Items müssen angekreuzt werden. Wenn du dir unsicher bist, kreuze "Neutral" an.</p>
         <h3>Bedienbarkeit:</h3>
         <div class="border border-dark-subtle rounded pe-4 py-5">
             <form action="{{ url_for('fragebogen_SUS') }}" method="post">
@@ -87,7 +88,7 @@
                         </div>
                     </li>
                     <li>
-                        <label for="hilfe"><b>Ich glaube, ich würde die Hilfe einer technisch versierten Person benötigen, um die Anwendung benutzen zu können.</b></label>
+                        <label for="hilfe"><b>Ich glaube, ich hätte Hilfe benötigt, um die Anwendung zu können.</b></label>
                         <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
                             <div class="col">
                                 <p>Stimme überhaupt nicht zu</p>
@@ -112,7 +113,7 @@
                         </div>
                     </li>
                     <li>
-                        <label for="funktionen_integriert"><b>Ich fand, die verschiedenen Funktionen in diesie Anwendung waren gut integriert.</b></label>
+                        <label for="funktionen_integriert"><b>Ich fand, die verschiedenen Funktionen in dieser Anwendung waren gut integriert.</b></label>
                         <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
                             <div class="col">
                                 <p>Stimme überhaupt nicht zu</p>
@@ -162,7 +163,7 @@
                         </div>
                     </li>
                     <li>
-                        <label for="umgang_lernen"><b>Ich kann mir vorstellen, dass die meisten Menschen den Umgang mit diesie Anwendung sehr schnell lernen.</b></label>
+                        <label for="umgang_lernen"><b>Ich kann mir vorstellen, dass die meisten Menschen den Umgang mit dieser Anwendung sehr schnell lernen.</b></label>
                         <div class="row align-items-center text-center border border-dark-subtle rounded mb-4">
                             <div class="col">
                                 <p>Stimme überhaupt nicht zu</p>
