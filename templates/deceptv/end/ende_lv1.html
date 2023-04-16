@@ -9,13 +9,13 @@
             {% set dp_count = namespace(value=0) %}
             {% set data_count = namespace(value=0) %}
             {% for loesung in dp_list_lv1 %}
-                <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein-->
-                {% if loesung == 1 %}
+                <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein  (>= 1 anstatt == 1 für Bug-Prevention)-->
+                {% if loesung >= 1 %}
                     {% set dp_count.value = dp_count.value + 1 %}
                 {% endif %}
                 <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken-->
                 {% if loop.index0 < 4  %}
-                    {% if loesung == 1 %}
+                    {% if loesung >= 1 %}
                         {% set data_count.value = data_count.value + 1 %}
                     {% endif %}
                 {% endif %}
@@ -352,6 +352,7 @@
                     </div>
                 </div>
             </div>
+            <p>*Definition aus: Mario Martini, Christian Drews, Paul Seelinger, & Quirin Weinzierl. (2021). Dark Patterns—Phänomenologie und Antworten der Rechtsordnung. Zeitschrift für Recht und Digitalisierung, 47–74, Seite 52.</p>
             <a href="{{ url_for('home_intro') }}" class="btn btn-primary w-25 mt-5 float-end">Level 1 abschließen und zurück zu Übersicht</a>
         </div>
     </div>

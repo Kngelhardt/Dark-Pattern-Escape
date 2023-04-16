@@ -40,6 +40,8 @@ def initialize_session():
         session['data_score'] = 100
         session['geld_score'] = 25
         session['dp_score'] = 0
+        # Zwischenspeicher zwischen den 2 Levels
+        session['dp_score_lv1'] = 0
         # Countdown = 300 sekunden, also 5 minuten (pro level)
         session['countdown'] = 300
         # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
@@ -409,11 +411,9 @@ def level1_beendet():
     if  session['dp_nagging_level1'] is None:
         # Dark Pattern als richtig gelöst setzen
         session['dp_nagging_level1'] = 1
-        # DP-Score erhöhrn
-        session['dp_score'] = session['dp_score'] +5
-    #Nagging-Fenster nicht merh anzeigen
+    #Nagging-Fenster nicht mehr anzeigen
     session['show_nagging'] = False
-    
+ 
     dp_list_lv1 = [ session['dp_open_cookiemanager_lv1'],
                     session['dp_cookie_lv1'],
                     session['dp_berechtiges_interesse_lv1'],
@@ -426,6 +426,20 @@ def level1_beendet():
                     session['dp_roachmotel2'] ]
     print(dp_list_lv1)
     
+    # DP_Score manuell neu setzten, falls Punkte durch Fehler mehrfach vergeben wurden
+    gelöst_counter = 0
+    # für alle Dark Patterns in Level 1
+    for dark_pattern in dp_list_lv1:
+        # Wenn richtig gelöst erhöhe counter 
+        # (Bug: Wenn Spieler*innen nach dem richtigen Lösen zurück drücken und das Pattern erneut lösen,
+        # greift das unique solving nicht und der Wert kann auf mehr als 1 erhöht werden. Daher Check für >= 1)
+        if dark_pattern >= 1:
+            gelöst_counter += 1
+    # Score für Level 1 merken, damit bei Level 2 hinzu addiert werden kann
+    session['dp_score_lv1'] = gelöst_counter *5
+    # Score aktualisieren
+    session['dp_score'] = session['dp_score_lv1']
+
     return render_template('deceptv/end/ende_lv1.html', dp_list_lv1 = dp_list_lv1)
 
 
@@ -656,6 +670,17 @@ def ende_lv2():
                     session['dp_misdirect_login'], 
                     session['dp_misdirect_konto_erstellen'], 
                     session['dp_misdirect_spende'] ]
+    
+    # DP_Score manuell neu setzten, falls Punkte durch Fehler mehrfach vergeben wurden
+    gelöst_counter = 0
+    # für alle Dark Patterns in Level 2
+    for dark_pattern in dp_list_lv2:
+        # Wenn richtig gelöst erhöhe counter
+        # (Bug: Wenn Spieler*innen nach dem richtigen Lösen zurück drücken und das Pattern erneut lösen,
+        # greift das unique solving nicht und der Wert kann auf mehr als 1 erhöht werden. Daher Check für >= 1)
+        if dark_pattern >= 1:
+            gelöst_counter += 1
+    session['dp_score'] = session['dp_score_lv1'] + gelöst_counter *5
     
     # speicher die Lösungen aller Dark Patterns für diese Session in CSV für Evaluierung
     write_dp_ergebnisse_csv()

@@ -10,13 +10,13 @@
             {% set dp_count = namespace(value=0) %}
             {% set data_count = namespace(value=0) %}
             {% for loesung in dp_list_lv2 %}
-                <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein-->
-                {% if loesung == 1 %}
+                <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein (>= 1 anstatt == 1 für Bug-Prevention)-->
+                {% if loesung >= 1 %}
                     {% set dp_count.value = dp_count.value + 1 %}
                 {% endif %}
-                <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken-->
+                <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken -->
                 {% if loop.index0 < 6  %}
-                    {% if loesung == 1 %}
+                    {% if loesung >= 1 %}
                         {% set data_count.value = data_count.value + 1 %}
                     {% endif %}
                 {% endif %}
@@ -74,7 +74,7 @@
                                     <p><b>Trick Question:</b> Verwirrend formulierte Frage (z.B. doppelte Verneinung).*</p>
                                     <p><b>Hier: </b>Negierte Fragestelleung, anstatt nach Zustimmung wird nach Ablehnung gefragt. </p>
                                     <hr>
-                                    <p><b>Bait and Switch: </b> Klick auf Schaltfläche führt zu anderem Ergebnis als als üblicherweise erwartet.</p>
+                                    <p><b>Bait and Switch: </b> Klick auf Schaltfläche führt zu anderem Ergebnis als als üblicherweise erwartet.*</p>
                                     <p><b>Hier: </b>Normalerweise ist die Bedeutung des "Ja"-Knopfes Zustimmung zu der Nutzung von Cookies. 
                                         Auch die Farbgebung ist umgedreht zu dem, was Leute die sich mit manipulativen Cookiebannern auseinandergesetzt haben, normalerweise in diesem Kontext erwarten würden.
                                         Fazit: oft kann es sich lohnen Farben komplett zu ignorieren und nur auf den Inhalt zu achten.
@@ -109,7 +109,7 @@
                                     <p><b>Trick Question:</b> Verwirrend formulierte Frage (z.B. doppelte Verneinung).*</p>
                                     <p><b>Hier: </b>Doppelte Verneinung. </p>
                                     <hr>
-                                    <p><b>Bait and Switch: </b> Klick auf Schaltfläche führt zu anderem Ergebnis als als üblicherweise erwartet.</p>
+                                    <p><b>Bait and Switch: </b> Klick auf Schaltfläche führt zu anderem Ergebnis als als üblicherweise erwartet.*</p>
                                     <p><b>Hier: </b>Normalerweise ist die Bedeutung des "Ja"-Knopfes Zustimmung zu der Nutzung von Cookies. 
                                     </p>
                                     <p></p>
@@ -153,9 +153,10 @@
                                             Dies ist recht weit verbreitet und oft gut versteckt in den Cookie-Optionen
                                         </p>
                                     </div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_12.jpg') }}" alt="Screenshot aus dem Spiel">
-                                    <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_12_2.jpg') }}" alt="Screenshot aus dem Spiel">
+                                    <div class="col">
+                                        <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_12.jpg') }}" alt="Screenshot aus dem Spiel">
+                                        <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_12_2.jpg') }}" alt="Screenshot aus dem Spiel">
+                                    </div>
                                 </div>
                             </div>              
                         </div>
@@ -212,7 +213,7 @@
                                     <p><b>Preselection Dark Pattern: </b>Auswahlmöglichkeiten sind bereits (abänderbar) getroffen, insbesondere durch gesetzte Häkchen.*</p>
                                     <p><b>Hier: </b>Das Häkchen für die Einzelbestellung muss manuell ausgewählt werden. Falls das nicht der Fall war wird am Ende vom Level der Einkauf doppelt abgezogen. </p>
                                     <hr>
-                                    <p><b>Hidden Subsciption:</b> Automatische (oder versteckte) Anmeldung zu Leistungen/Angeboten.*</p>
+                                    <p><b>Hidden Subsciption Dark Pattern:</b> Automatische (oder versteckte) Anmeldung zu Leistungen/Angeboten.*</p>
                                     <p> Wer hier reinfallen würde, würde sich in einem Monat wahrscheinlich wundern.</p>
                                 </div>
                                 <div class="col">
@@ -244,7 +245,8 @@
                                     <p><b>Hier:</b> Der Artikel muss erst aus dem Warenkorb entfernt werden, indem das Kreuz links gedrückt wird.</p>
                                     <hr>
                                     <p><b>Hidden Costs Dark Pattern:</b> Zusatzkosten erscheinen erst im letzten Schritt.*</p>
-                                    <p><b>Hier:</b> Wenn der Arktikel im letzten Schritt noch im Warenkorb ist, werden sich die Versandkosten erhöhen</p>  
+                                    <p><b>Hier:</b> Wenn der Arktikel im letzten Schritt noch im Warenkorb ist, werden sich die Versandkosten erhöhen</p> 
+                                </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_15.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
@@ -270,7 +272,7 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p><b>Hidden Subsciption:</b> Automatische (oder versteckte) Anmeldung zu Leistungen/Angeboten.</p>
+                                    <p><b>Hidden Subsciption:</b> Automatische (oder versteckte) Anmeldung zu Leistungen/Angeboten.*</p>
                                     <p><b>Hier:</b> Der Newsletter muss explizit abgelehnt werden. 
                                         Dafür muss auf das kleine graue Häkchen links neben dem "Weiter"-Knopf gedrückt werden, dadurch erscheint eine Auswahl-Schaltfläche auf der "Ich lehne ab" gedrückt werden muss.</p>
                                 </div>
@@ -354,11 +356,11 @@
                     <h2 class="accordion-header" id="heading_dp_10">
                         {% if session['dp_misdirect_spende'] == 0 or session['dp_misdirect_spende'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
-                            Nicht gelöst: Misdirection/Sneak/Bait and Switch in the Basket Dark Pattern - Spende wird untergejubelt.
+                            Nicht gelöst: Misdirection/ Sneak into Basket /Bait and Switch Dark Pattern - Spende wird untergejubelt.
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
-                            Gelöst: Misdirection/Sneak/Bait and Switch in the Basket Dark Pattern - Spende wird untergejubelt.
+                            Gelöst: Misdirection/ Sneak into Basket /Bait and Switch Dark Pattern - Spende wird untergejubelt.
                         </button>
                         {% endif %}
                     </h2>
@@ -383,6 +385,29 @@
                     </div>
                 </div>
             </div>
+            <div class="accordion my-1" id="accordion_dp_11">
+                <div class="accordion-item ">
+                    <h2 class="accordion-header" id="heading_dp_11">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_11" aria-expanded="true" aria-controls="collapse_dp_11">
+                        Scarcity Dark Pattern: Ware/Dienstleistung (angeblich) nir in knapper Zahl verfügbar.
+                    </button>
+                    </h2>
+                    <div id="collapse_dp_11" class="accordion-collapse collapse" aria-labelledby="heading_dp_11" data-bs-parent="#accordion_dp_11">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p><b>Scarcity Dark Pattern:</b>Ware/Dienstleistung (angeblich) nir in knapper Zahl verfügbar.*</p>
+                                    <p>Es soll Druck aufgebaut werden schnell eine Entscheidung zu treffen, oft wird das auch über ein <b>Countdown Dark Pattern</b> versucht, wo Waren/Dienstleistungen (angeblich) nur für bestimmte Zeit verfügbar sind.*</p>
+                                </div>
+                                <div class="col">
+                                    <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_20.jpg') }}" alt="Screenshot aus dem Spiel">
+                                </div>
+                            </div>              
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <p>*Definition aus: Mario Martini, Christian Drews, Paul Seelinger, & Quirin Weinzierl. (2021). Dark Patterns—Phänomenologie und Antworten der Rechtsordnung. Zeitschrift für Recht und Digitalisierung, 47–74, Seite 52.</p>
             <a href="{{ url_for('home_intro') }}" class="btn btn-success w-25 mt-5 float-end">Spiel abschließen und zurück zu Übersicht</a>
         </div>
     </div>
