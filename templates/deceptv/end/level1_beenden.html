@@ -7,14 +7,6 @@
                 <h1 class="my-5">Willst du dein Abonnement wirklich Kündigen und damit Zugriff auf alle unsere Filme und Serien velieren?</h1>
                 <div class="row">
                     <div class="col">
-                        <!-- "Trick Question" Dark Pattern: Formulierung des knopfes soll Spieler*innen
-                            reinlegen die Option nicht zu Kündigen zu wählen, indem die vormulierung
-                             einen doppelte Verneinung enthält-->
-                        <a class="btn btn-success w-100" onclick="url_delay_set_session('{{ session['dp_trickquestion1'] }}', '/deceptv/', { 'dp_trickquestion1': 0 });">
-                            Ich verzichte darauf DecepTV Serien und Filme nicht mehr zu sehen
-                        </a>    
-                    </div>
-                    <div class="col">
                         <a class="btn btn-danger w-100" 
                             onclick="show_hide_div('confirmshaming'); 
                                     show_hide_div('trick_question'); 
@@ -22,6 +14,14 @@
                                     progress_add('dp_score_bar','dp_score_text', 5); "
                             >Ich will ganz sicher keine DecepTV Serien und Filme mehr sehen
                         </a>
+                    </div>
+                    <div class="col">
+                        <!-- "Trick Question" Dark Pattern: Formulierung des knopfes soll Spieler*innen
+                            reinlegen die Option nicht zu Kündigen zu wählen, indem die vormulierung
+                             einen doppelte Verneinung enthält-->
+                        <a class="btn btn-success w-100" onclick="url_delay_set_session('{{ session['dp_trickquestion1'] }}', '/deceptv/', { 'dp_trickquestion1': 0 });">
+                            Ich verzichte darauf DecepTV Serien und Filme nicht mehr zu sehen
+                        </a>    
                     </div>
                 </div>
             </div>

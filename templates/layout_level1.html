@@ -285,7 +285,7 @@
                         <!-- Misdirection/Trickquestion Dark Pattern: Button zum submit der Checkboxe sieht 
                         nicht aus wie Button sonder wie Text, der auf den Button neben dran hinweist  -->
                         <div class="float-end">
-                            <input type="submit" value="Auswahl bestätigen: " class="unscheinbarer_button me-2" data-bs-dismiss="modal">
+                            <input type="submit" value="Auswahl bestätigen:" class="unscheinbarer_button me-2 text-decoration-underline" data-bs-dismiss="modal">
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                                     onclick="set_session_value({'cookie_lv1_fertig': 1,'cookie_lv1_show': 0,'dp_cookiemisdirection_lv1': 0, 'data_score':  -30 });progress_add('data_bar','data_text', -30); ">
                                     Akzeptieren
@@ -341,7 +341,7 @@
                     document.getElementById('nagging_modal_trigger').click();
                     clearInterval(delay);
                 }
-            },4000);
+            },8000);
         }
         /* versteckt den Breich zu berechtigtem Interesse im Cookiedialog. Kann durch den richtigen Buttonclick sichtbar gemacht werden */
         document.getElementById('berechtigtes_interesse').style.display = "none";

@@ -163,7 +163,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <p><b>Misdirection:</b> Design lenkt durch auffällige graphische Elemente vom Inhalt ab.*</p>
-                                        <p><b>Hier: </b></p>
+                                        <p><b>Hier:</b> Der auffällige, blaue Knopf zum Akzeptieren der COokies die Aufmerksamkeit auf sich, während die Schalfläche "Auswahl bestätigen:"
+                                             fast normaler Text erscheint. Zusätzlich sieht es so aus, asl würde der doppeltunpunkt auf den blauen Knopf verweisen.</p>
                                     </div>
                                     <div class="col">
                                         <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_3.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
@@ -190,7 +191,9 @@
                             <div class="accordion-body">
                                 <div class="row">
                                     <div class="col">
-                                        <p>Beschreibung</p></div>
+                                        <p><b>Nagging Dark Pattern:</b> Wiederholtes (aggressives) Auffordern, eine bestimmte Handlung vorzunehmen.*</p>
+                                        <p><b>Hier:</b> Das Fenster, das immer wieder aufpoppt soll so lange nerven, bis die Spieler*innen die Geduld verlieren und die App installieren.</p>
+                                    </div>
                                     <div class="col">
                                         <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_4.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
                                     </div>
@@ -216,7 +219,12 @@
                             <div class="accordion-body">
                                 <div class="row">
                                     <div class="col">
-                                        <p>Beschreibung</p></div>
+                                        <p><b>Roach Motel Dark Pattern: </b> Anmeldung/abbonieren ist wesentlich einfacher als Kündigung.*
+                                           <b>Hidden Information Dark Pattern:</b> Für die Nutzer*in relevante Informationen sind versteckt oder nur schwer verfügbar.*
+                                        </p>
+                                        <p><b>Hier: </b> Die Informationen und Option zum Kündigen des Abos sind unerwarteterweise im Hilfezentrum unter "Häufige Probleme" versteckt. 
+                                            Währenddessen ist in Menüs wie "Account" oder "Premium" keine Möglichkeit zum Kündigen oder Information dazu zu finden.</p>
+                                    </div>
                                     <div class="col">
                                         <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_5.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
                                         <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_5_2.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
@@ -243,7 +251,11 @@
                             <div class="accordion-body">
                                 <div class="row">
                                     <div class="col">
-                                        <p>Beschreibung</p></div>
+                                        <p><b>Misdirection:</b> Design lenkt durch auffällige graphische Elemente vom Inhalt ab.*</p>
+                                        <p><b>Hier:</b> Sowohl Farbe als auch Positionierung der Schaltflächen wird genutzt um die Aufmerksamkeit von der "Kündigen"-Schaltfläche unten auf der Seite abzulenken. <br>
+                                            Farbe: Volle grüne Farbe des "Abonnement verwalten"-Knopfes und eine unscheinbare graue Farbe der Kündigen-Schaltfläche. <br>
+                                            Position: Auf den ersten Blick scheint die Seite nach dem grünen Knopf aufzuhören. Unterhalb ist relevant Information normalerweise nicht zu erwarten.</p>
+                                    </div>
                                     <div class="col">
                                         <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_6.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
                                     </div>
@@ -269,7 +281,9 @@
                             <div class="accordion-body">
                                 <div class="row">
                                     <div class="col">
-                                        <p>Beschreibung</p></div>
+                                        <p><b>Trick Question:</b> Verwirrend formulierte Frage (z.B. doppelte Verneinung).*</p>
+                                        <p><b>Hier:</b> Doppelte verneinung bei grünem Knopf, "ich <b>verzichte</b> darauf [...] <b>nicht</b> mehr zu sehen". Der rote Knopf ist der richitge zu fortfahren.</p>
+                                    </div>
                                     <div class="col">
                                         <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_7.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
                                     </div>
@@ -295,7 +309,9 @@
                             <div class="accordion-body">
                                 <div class="row">
                                     <div class="col">
-                                        <p>Beschreibung</p></div>
+                                        <p><b>Confirmshaming Dark Pattern: </b> Die Ausgestaltung einer Frage löst Schuldgefühle aus.*</p>
+                                        <p><b>Hier: </b> Es wird vermittelt, das der eigene Umgang mit Geld nicht gut ist. Da Geld wohl den wenigsten komplett egal ist/sein kann, löst das Schuldgefühle aus. <br>
+                                            Ein anderes Beispiel sind Schaltflächen mit Texten wie "Ich hasse Tiere/Kinder", bei einem Spendenaufruf.</p></div>
                                     <div class="col">
                                         <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_8.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
                                     </div>
@@ -304,29 +320,34 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion my-1" id="accordion_dp_10">
-                <div class="accordion-item ">
-                    <h2 class="accordion-header" id="heading_dp_10">
-                        {% if session['dp_roachmotel2'] == 0 or session['dp_roachmotel2'] == None %}
-                        <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
-                            Nicht gelöst: Roach Motel Dark Pattern - Kündigung nur telefonisch
-                        </button>
-                        {% else %}
-                        <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
-                            Gelöst: Roach Motel Dark Pattern - Kündigung nur telefonisch
-                        </button>
-                        {% endif %}
-                    </h2>
-                    <div id="collapse_dp_10" class="accordion-collapse collapse" aria-labelledby="heading_dp_10" data-bs-parent="#accordion_dp_10">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
-                                <div class="col">
-                                    <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_9.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
-                                </div>
-                            </div>              
+                <div class="accordion my-1" id="accordion_dp_10">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="heading_dp_10">
+                            {% if session['dp_roachmotel2'] == 0 or session['dp_roachmotel2'] == None %}
+                            <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
+                                Nicht gelöst: Roach Motel Dark Pattern - Kündigung nur telefonisch
+                            </button>
+                            {% else %}
+                            <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_10" aria-expanded="true" aria-controls="collapse_dp_10">
+                                Gelöst: Roach Motel Dark Pattern - Kündigung nur telefonisch
+                            </button>
+                            {% endif %}
+                        </h2>
+                        <div id="collapse_dp_10" class="accordion-collapse collapse" aria-labelledby="heading_dp_10" data-bs-parent="#accordion_dp_10">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <p><b>Roach Motel: Anmeldung/abbonieren ist wesentlich einfacher als Kündigung.</b></p>
+                                        <p><b>Hier: </b>Ein extremer Fall für ein Roachmotel ist, wenn eine Kündigung nur telefonisch zu bestimmten Zeiten möglich ist. 
+                                            Möglicherweise auch noch mit langen Wartezeiten in einer Hotline. <br>
+                                            Auch eine Kündigung per Brief oder Mail kann Teil dieser Taktik sein.
+                                        </p>
+                                    </div>
+                                    <div class="col">
+                                        <img class="image_endscreen my-2  rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_9.jpg') }}" alt="Screenshot von Dark Pattern aus dem Spiel">
+                                    </div>
+                                </div>              
+                            </div>
                         </div>
                     </div>
                 </div>

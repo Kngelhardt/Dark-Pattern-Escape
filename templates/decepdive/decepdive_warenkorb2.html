@@ -18,7 +18,7 @@
                         <h3>Anmelden</h3>
                         <input type="text" class="form-control-sm" placeholder="Benutzername">
                         <input type="text" class="form-control-sm" placeholder="Passwort"> 
-                        <p class="btn btn-primary">Anmelden</p>
+                        <p class="btn btn-primary mt-3">Anmelden</p>
                         <div class="d-grid gap-2 w-75 my-5 mx-auto">
                             <div class="btn btn-success" 
                                 onclick="url_delay_set_session('{{ session['dp_misdirect_login'] }}', '{{ url_for('decepdive_warenkorb3') }}', {'data_score': -10, 'dp_misdirect_login': 0 });">
@@ -28,11 +28,11 @@
                                 onclick="url_delay_set_session('{{ session['dp_misdirect_login'] }}', '{{ url_for('decepdive_warenkorb3') }}', {'data_score': -10, 'dp_misdirect_login': 0 });">
                                 Facebook
                             </div> <br>
-                            <div class="text-secondary text-decoration-none small_text cursor_pointer"
-                                onclick="url_delay_set_session('{{ session['dp_misdirect_login'] }}', '{{ url_for('decepdive_warenkorb3') }}', {'dp_score': 5, 'dp_misdirect_login': 1 });">
-                                Weiter als Gast
-                            </div>
                         </div>
+                    </div>
+                    <div class="cursor_pointer"
+                         onclick="url_delay_set_session('{{ session['dp_misdirect_login'] }}', '{{ url_for('decepdive_warenkorb3') }}', {'dp_score': 5, 'dp_misdirect_login': 1 });">
+                        <small class="text-secondary">Weiter als Gast</small> 
                     </div>
                 </div>
             </div>

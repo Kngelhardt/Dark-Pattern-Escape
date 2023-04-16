@@ -84,12 +84,12 @@
         </div>
         
         <!-- Hier ist der eigentlich relevante Link, klein geschreiben, ohne farben mit abstand und durch horizontale Liene als Teil eines anderen Inhalts getarnt-->
-        <p class="text-secondary "> <small> Zum Kündigen des Abos drücken sie hier: 
+        <p class="text-secondary "> 
+            <small> Zum Kündigen des Abos drücken sie hier: 
             <span class=" text-secondary cursor_pointer text-decoration-underline"
-                    onclick="url_delay_set_session('{{ session['dp_misdirect_kuendigen'] }}', '/deceptv/premium/mitgliedschaft', {'dp_score': 5, 'dp_misdirect_kuendigen': 1 });
-                            progress_add('dp_score_bar','dp_score_text', 5);">
-                    Kündigen
-             </span></small>
+                onclick="url_delay_set_session('{{ session['dp_misdirect_kuendigen'] }}', '/deceptv/premium/mitgliedschaft', {'dp_score': 5, 'dp_misdirect_kuendigen': 1 }); progress_add('dp_score_bar','dp_score_text', 5);">
+                Kündigen</span>
+            </small>
         </p>
         <hr class="mt-1">
     </div>

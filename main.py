@@ -286,7 +286,12 @@ def deceptv_erkunden():
     initialize_session()
     if session['level_fortschritt'] >= 1:
         return redirect(url_for('home_intro'))
-    return render_template('deceptv/deceptv_erkunden.html')
+    
+    deceptv_images = get_streaming_images()
+    while len(deceptv_images) <= 5*15:
+        deceptv_images = deceptv_images + deceptv_images
+
+    return render_template('deceptv/deceptv_erkunden.html', deceptv_images=deceptv_images)
 
 @app.route('/deceptv/favoriten/')
 def deceptv_favoriten():
@@ -612,7 +617,7 @@ def decepdive_warenkorb5():
         return redirect(url_for('home_intro'))
     return render_template('decepdive/decepdive_warenkorb5.html')
 
-@app.route('/decepdive/ende_lv2')
+@app.route('/ende_lv2')
 def ende_lv2():
     initialize_session()
     if session['level_fortschritt'] < 2:

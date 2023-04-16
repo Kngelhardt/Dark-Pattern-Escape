@@ -59,11 +59,11 @@
                     <h2 class="accordion-header" id="heading_dp_1">
                         {% if session['dp_cookielv2_trickquestion'] == 0 or session['dp_cookielv2_trickquestion'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_1" aria-expanded="true" aria-controls="collapse_dp_1">
-                            Nicht gelöst: Trick Question Dark Pattern - Cookies ablehnen
+                            Nicht gelöst: Trick Question/ Bait and Switch Dark Pattern - Negierte Fragestelleung und Farbgebung
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_1" aria-expanded="true" aria-controls="collapse_dp_1">
-                            Gelöst: Trick Question Dark Pattern - Cookies ablehnen
+                            Gelöst: TTrick Question/ Bait and Switch Dark Pattern - Negierte Fragestelleung und Farbgebung
                         </button>
                         {% endif %}
                     </h2>
@@ -71,7 +71,16 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p>Beschreibung</p></div>
+                                    <p><b>Trick Question:</b> Verwirrend formulierte Frage (z.B. doppelte Verneinung).*</p>
+                                    <p><b>Hier: </b>Negierte Fragestelleung, anstatt nach Zustimmung wird nach Ablehnung gefragt. </p>
+                                    <hr>
+                                    <p><b>Bait and Switch: </b> Klick auf Schaltfläche führt zu anderem Ergebnis als als üblicherweise erwartet.</p>
+                                    <p><b>Hier: </b>Normalerweise ist die Bedeutung des "Ja"-Knopfes Zustimmung zu der Nutzung von Cookies. 
+                                        Auch die Farbgebung ist umgedreht zu dem, was Leute die sich mit manipulativen Cookiebannern auseinandergesetzt haben, normalerweise in diesem Kontext erwarten würden.
+                                        Fazit: oft kann es sich lohnen Farben komplett zu ignorieren und nur auf den Inhalt zu achten.
+                                    </p>
+                                    <p></p>
+                                </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_10.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
@@ -97,7 +106,14 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p>Beschreibung</p></div>
+                                    <p><b>Trick Question:</b> Verwirrend formulierte Frage (z.B. doppelte Verneinung).*</p>
+                                    <p><b>Hier: </b>Doppelte Verneinung. </p>
+                                    <hr>
+                                    <p><b>Bait and Switch: </b> Klick auf Schaltfläche führt zu anderem Ergebnis als als üblicherweise erwartet.</p>
+                                    <p><b>Hier: </b>Normalerweise ist die Bedeutung des "Ja"-Knopfes Zustimmung zu der Nutzung von Cookies. 
+                                    </p>
+                                    <p></p>
+                                </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_11.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
@@ -111,19 +127,32 @@
                     <h2 class="accordion-header" id="heading_dp_3">
                         {% if session['dp_cookielv2_berechtigt'] == 0 or session['dp_cookielv2_berechtigt'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
-                            Nicht gelöst: Trick Question/ Bait and Switch Dark Pattern - Doppelte Verneinung und unerwartete Gestaltung der Antwortknöpfe.
+                            Nicht gelöst: Hidden Information/ Preselection Dark Pattern.
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_3" aria-expanded="true" aria-controls="collapse_dp_3">
-                            Gelöst: Trick Question/ Bait and Switch Dark Pattern - Doppelte Verneinung und unerwartete Gestaltung der Antwortknöpfe.
+                            Gelöst: Hidden Information/ Preselection Dark Pattern.
                         </button>
                         {% endif %}
                     </h2>
                     <div id="collapse_dp_3" class="accordion-collapse collapse" aria-labelledby="heading_dp_3" data-bs-parent="#accordion_dp_3">
                         <div class="accordion-body">
                             <div class="row">
-                                <div class="col">
-                                    <p>Beschreibung</p></div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p><b>Hidden Information: </b>Für die Nutzer*in relevante Informationen sind versteckt oder nur schwer verfügbar.*</p>
+                                        <p><b>Hier:</b> Die relevante Information, dass Daten auf Basis von berechtigtem Interesse gesammelt werden, ist durch drei Tricks versteckt. <br>
+                                            1. Die Position: Die Information ist unterhalb einer Linie, die sie von den scheinbar relevanten Informationen abtrennt.
+                                             Bewusste Steuerung der Aufmerksamkeit ist nötig um sie zu entdecken. <br>
+                                            2. Die Schriftgröße ist sehr viel kleiner. <br>
+                                            3. Misdirection Dark Pattern: Die großen grünen Knöpfe oberhalb lenken die Aufmerksamkeit auf sich und damit weg von der Information</p>
+                                        <hr>
+                                        <p><b>Preselection: </b>Auswahlmöglichkeiten sind bereits (abänderbar) getroffen, insbesondere durch gesetzte Häkchen.*</p>
+                                        <p><b>Hier: </b> Nach dem "Opt-Out"-Prinzip muss der Sammlung der Daten widersprochen werden, indem die Häkchen entfernt werden. <br>
+                                            Für "normale" Cookies ist das innerhalb der EU illegal, wenn allerdings "brechtigtes Interesse" angeführt wird, ist das wiederum legal.
+                                            Dies ist recht weit verbreitet und oft gut versteckt in den Cookie-Optionen
+                                        </p>
+                                    </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_12.jpg') }}" alt="Screenshot aus dem Spiel">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_12_2.jpg') }}" alt="Screenshot aus dem Spiel">
@@ -150,7 +179,11 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p>Beschreibung</p></div>
+                                    <p><b>Price Comparison Prevention Dark Pattern: </b>Preisvergleich erschwert. (z.B. unterschiedliche Maßeinheiten oder Fremdwährungen).*</p>
+                                    <p><b>Hier: </b> Unterschiedliche Maßeinheiten zwingen dazu den Preis selbst auszurechnen. (Meistens wird dieses Dark Pattern sehr viel subtiler eingesetzt) <br>
+                                        Links neben den Produkten gibt es eine ausfahrbahre Tabelle mit einer Übersicht über die Mengeneinheiten.
+                                    </p>
+                                </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_13.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
@@ -164,11 +197,11 @@
                     <h2 class="accordion-header" id="heading_dp_5">
                         {% if  session['dp_preticked_monatl'] == 0 or session['dp_preticked_monatl'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
-                            Nicht gelöst: Preselection Dark Pattern - Monatlich wiederkehrende Bestellung standartmäßig ausgewählt.
+                            Nicht gelöst: Preselection/ Hidden Subsciption Dark Pattern - Monatlich wiederkehrende Bestellung.
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_5" aria-expanded="true" aria-controls="collapse_dp_5">
-                            Gelöst: Preselection Dark Pattern - Monatlich wiederkehrende Bestellung standartmäßig ausgewählt.
+                            Gelöst: Preselection/ Hidden Subsciption Dark Pattern - Monatlich wiederkehrende Bestellung.
                         </button>
                         {% endif %}
                     </h2>
@@ -176,7 +209,12 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p>Beschreibung</p></div>
+                                    <p><b>Preselection Dark Pattern: </b>Auswahlmöglichkeiten sind bereits (abänderbar) getroffen, insbesondere durch gesetzte Häkchen.*</p>
+                                    <p><b>Hier: </b>Das Häkchen für die Einzelbestellung muss manuell ausgewählt werden. Falls das nicht der Fall war wird am Ende vom Level der Einkauf doppelt abgezogen. </p>
+                                    <hr>
+                                    <p><b>Hidden Subsciption:</b> Automatische (oder versteckte) Anmeldung zu Leistungen/Angeboten.*</p>
+                                    <p> Wer hier reinfallen würde, würde sich in einem Monat wahrscheinlich wundern.</p>
+                                </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_14.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
@@ -202,7 +240,11 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p>Beschreibung</p></div>
+                                    <p><b>Sneak into Basket Dark Pattern:</b> Zusätzliches Objekt landet ungewollt im Warenkorb.*</p>
+                                    <p><b>Hier:</b> Der Artikel muss erst aus dem Warenkorb entfernt werden, indem das Kreuz links gedrückt wird.</p>
+                                    <hr>
+                                    <p><b>Hidden Costs Dark Pattern:</b> Zusatzkosten erscheinen erst im letzten Schritt.*</p>
+                                    <p><b>Hier:</b> Wenn der Arktikel im letzten Schritt noch im Warenkorb ist, werden sich die Versandkosten erhöhen</p>  
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_15.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
@@ -216,11 +258,11 @@
                     <h2 class="accordion-header" id="heading_dp_7">
                         {% if  session['dp_hiddennewsletter'] == 0 or session['dp_hiddennewsletter'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
-                            Nicht gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Nicht gelöst: Hidden Subsciption Sub Dark Pattern - Versteckter Newsletter
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_7" aria-expanded="true" aria-controls="collapse_dp_7">
-                            Gelöst: Misdirection Dark Pattern - Cookie-Manger öffnen
+                            Gelöst: Hidden Subsciption Dark Pattern - Versteckter Newsletter
                         </button>
                         {% endif %}
                     </h2>
@@ -228,7 +270,10 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p>Beschreibung</p></div>
+                                    <p><b>Hidden Subsciption:</b> Automatische (oder versteckte) Anmeldung zu Leistungen/Angeboten.</p>
+                                    <p><b>Hier:</b> Der Newsletter muss explizit abgelehnt werden. 
+                                        Dafür muss auf das kleine graue Häkchen links neben dem "Weiter"-Knopf gedrückt werden, dadurch erscheint eine Auswahl-Schaltfläche auf der "Ich lehne ab" gedrückt werden muss.</p>
+                                </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_16.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
@@ -242,11 +287,11 @@
                     <h2 class="accordion-header" id="heading_dp_8">
                         {% if  session['dp_misdirect_login'] == 0 or session['dp_misdirect_login'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
-                            Nicht gelöst: Click Fatique/Misdirection/(Forced Enrollment) Dark Pattern - Seite will Login erzwingen.
+                            Nicht gelöst: Misdirection/ Forced Enrollment Dark Pattern - Seite will Login erzwingen.
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_8" aria-expanded="true" aria-controls="collapse_dp_8">
-                            Gelöst: Click Fatique/Misdirection/(Forced Enrollment) Dark Pattern - Seite will Login erzwingen.
+                            Gelöst: Misdirection/ Forced Enrollment Dark Pattern - Seite will Login erzwingen.
                         </button>
                         {% endif %}
                     </h2>
@@ -254,7 +299,16 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p>Beschreibung</p></div>
+                                    <p><b>Misdirection Dark Pattern:</b> Design lenkt durch auffällige graphische Elemente vom Inhalt ab.*</p>
+                                    <p><b>Hier: </b> Die richtige Option, "Weiter als Gast" ist unscheinbar grau und außerhalb des Bereichs platziert, in dem der restliche Kontent ist. 
+                                        Gleichzeitig lenken die vollen, grünen Knöpfe ihre Aufmerksamkeit auf sich.</p>
+                                    <hr>
+                                    <p><b>Forced Enrollment Dark Pattern:</b> Nutzung eines Services nur bei Abschluss eines Abos/Kundenkontos.*</p>
+                                    <p><b>Hier: </b> Streng genommen ist es in diesem Fall kein <b>forced</b> Enrollment, da dies ein nicht zu umgehendes Dark Pattern darstellt und somit der Logik des Spiels widerspräche.
+                                        Zur Veranschaulichung: Wenn es die Option "Weiter als Gast" nicht hier wäre, gäbe es kein weiterkommen Ohne ein Konto zu erstellen. 
+                                        Die Intention so einer Praxis wird in den meisten Fällen sein, dass sich durch die eingegebenen Informationen Daten besser sammeln und verknüpfen lassen.
+                                        </p>
+                                </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_17.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
@@ -268,11 +322,11 @@
                     <h2 class="accordion-header" id="heading_dp_9">
                         {% if  session['dp_misdirect_konto_erstellen'] == 0 or session['dp_misdirect_konto_erstellen'] == None %}
                         <button class="accordion-button collapsed red_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
-                            Nicht gelöst: Misdirection/Bait and Switch Dark Pattern - Gwohnt plazierter "Weiter" Knopf erstellt ungewollt Konto.
+                            Nicht gelöst: Misdirection/ Bait and Switch Dark Pattern - Gewohnt platzierter "Weiter"-Knopf erstellt ungewollt Konto.
                         </button>
                         {% else %}
                         <button class="accordion-button collapsed green_transparent_background" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_dp_9" aria-expanded="true" aria-controls="collapse_dp_9">
-                            Gelöst: Misdirection/Bait and Switch Dark Pattern - Gwohnt plazierter "Weiter" Knopf erstellt ungewollt Konto.
+                            Gelöst: Misdirection/ Bait and Switch Dark Pattern - Gewohnt platzierter "Weiter"-Knopf erstellt ungewollt Konto.
                         </button>
                         {% endif %}
                     </h2>
@@ -280,7 +334,13 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p>Beschreibung</p></div>
+                                    <p><b>Misdirection:</b> Design lenkt durch auffällige graphische Elemente vom Inhalt ab.*</p>
+                                    <p><b>Hier: </b>Der Prominent platzierte, grüne "Konto erstellen und weiter"-Knopf lenkt vom relevanten, unscheinbar grauen "Weiter"-Knopf ab.</p>
+                                    <hr>
+                                    <p><b>Bait and Switch: </b>Klick auf Schaltfläche führt zu anderem Ergebnis als als üblicherweise erwartet.*</p>
+                                    <p><b>Hier: </b>Die Erwartung ist, dass der grüne Knopf unten rechts normalerweise für ein Fortfahren im momentanen Prozess steht.
+                                        Hier wurde jedoch noch die Funktion ein Konto zu erstellen hinzugefügt.</p>
+                                </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_18.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
@@ -306,7 +366,15 @@
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col">
-                                    <p>Beschreibung</p></div>
+                                    <p><b>Misdirection Dark Pattern:</b> Design lenkt durch auffällige graphische Elemente vom Inhalt ab.*</p>
+                                    <p><b>Hier: </b>Der Prominent platzierte, grüne "Zum Zahlen mit Spende"-Knopf lenkt vom relevanten, unscheinbar grauen "Zum Zahlen ohne Spende"-Knopf ab.
+                                        Zusätzlich ist die Schriftgröße von "mit/ohne Spende" deutlich kleiner, damit sie eventuell übersehen werden.</p>
+                                    <hr>
+                                    <p><b>Bait and Switch Dark Pattern: </b>Klick auf Schaltfläche führt zu anderem Ergebnis als als üblicherweise erwartet.*</p>
+                                    <p><b>Sneak into Basket Dark Pattern: </b>Zusätzliches Objekt landet ungewollt im Warenkorb.*</p>
+                                    <p><b>Hier: </b>Die Erwartung ist, dass der grüne Knopf unten rechts normalerweise für ein Fortfahren im momentanen Prozess steht. 
+                                        Hier wurde jedoch noch die Funktion ein zu Spenden hinzugefügt.</p>
+                                </div>
                                 <div class="col">
                                     <img class="image_endscreen my-2 rounded" src="{{ url_for('static', filename='images/dark_pattern_screenshots/dark_pattern_19.jpg') }}" alt="Screenshot aus dem Spiel">
                                 </div>
