@@ -42,8 +42,8 @@ def initialize_session():
         session['dp_score'] = 0
         # Zwischenspeicher zwischen den 2 Levels
         session['dp_score_lv1'] = 0
-        # Countdown = 300 sekunden, also 5 minuten (pro level)
-        session['countdown'] = 300
+        # Countdown = 480 sekunden in Level 1, 300 sekunden in level 2
+        session['countdown'] = 480
         # level_fortschritt: 0 = 0 Level beendet, 1 = Level 1 beendet, 2  = Level 2 beendet
         session['level_fortschritt'] = 0 
         # Definiert ob in Level 1 das Cookiebanner und Nagging-Dialog gezegt wird
@@ -95,22 +95,18 @@ def set_session_value():
         session_data = request.json
         # get session key
         for session_key in session_data:
-            print('input', session_key, session_data[session_key])
             # True und False werte werden als 1 und 0 
             # geschickt und müssen wieder zu boolean geändert werden
             if isinstance(session[session_key],bool):
                 session[session_key] = bool(session_data[session_key])
                 #debugging
-                print('update bool',session_key, session[session_key])
             # bei int werten soll es auf den momentanten Wert der Session aufaddiert werden
             elif isinstance(session[session_key], int):
                 session[session_key] = session[session_key] + session_data[session_key]
                 #debugging
-                print('update int', session_key, session[session_key])    
             else:
                 session[session_key] = session_data[session_key]
                 # debugging
-                print('update', session_key, session[session_key])   
         return '', 204
     else:
         return '', 204
@@ -179,26 +175,22 @@ def cookie_form_lv1():
             counter_richtig += 1
         if 'CookieTargeting' in request.form:
             counter_richtig += 1
-            print('counter_richtig', counter_richtig)
         # Wenn alle Cookiezustimmungen entfernt wurden
         if counter_richtig == 5:
             # Wenn Dark Pattern noch nicht gelöst, als Pattern als richtig gelöst setzen und Punkte erhöhen
             if session["dp_cookie_lv1"] is None:
                 session['dp_cookie_lv1'] = 1
                 session['dp_score'] = session['dp_score'] + counter_richtig
-                print('in dp: ', session['data_score'] )
             # Wenn es versäumt wurde, dan Cookiedialog richtig zu öffnen (-> -40 "data_score"), gibt es die
             # Chance die Datenpunkte wieder zurückzubekommen, wenn Dialog über die seite "Datenschutz-Manager"
             # geöffnet wurde
             elif session['dp_cookie_lv1'] == 0:
                 session['data_score'] = session['data_score'] + (counter_richtig*4)
-                print('not in dp: ', session['data_score'])
         # Punkte nur abziehen, falls data Score noch bei 100, damit ein erneutes aufrufen des Cookie-Managers
         # nicht bestraft werden kann, sondern nur belohnt
         else:
             if session['data_score'] == 100:
                 session['data_score'] = session['data_score'] - (20 -counter_richtig*4)
-                print('akzeptiert: ', session['data_score'])
             if session["dp_cookie_lv1"] is None:
                 session['dp_cookie_lv1'] = 0
             
@@ -212,7 +204,6 @@ def cookie_form_lv1():
             else: 
                 session['dp_berechtiges_interesse_lv1'] = 0 
                 session['data_score'] = session['data_score'] -20
-                print('akzeptiert berecht: ', session['data_score'])
         # Wenn es versäumt wurde, dan Cookiedialog richtig zu öffnen (-> -40 "data_score"), gibt es eine
         # Chance die Datenpunkte wieder zurückzubekommen, wenn Dialog über die seite "Datenschutz-Manager"
         # geöffnet wurde
@@ -235,7 +226,6 @@ def cookie_form_lv1():
 @app.route('/deceptv/')
 def deceptv():
     initialize_session()
-    print('start: ', session['dp_score'])
     # wenn das Level schon abschlossen ist, soll es nicht noch einmal gespielt werden 
     # daher wird ein redirect zur levelübersicht vollführt
     if session['level_fortschritt'] >= 1:
@@ -423,9 +413,7 @@ def level1_beendet():
                     session['dp_misdirect_kuendigen'],
                     session['dp_trickquestion1'],
                     session['dp_shaming_lv1'],
-                    session['dp_roachmotel2'] ]
-    print(dp_list_lv1)
-    
+                    session['dp_roachmotel2'] ]    
     # DP_Score manuell neu setzten, falls Punkte durch Fehler mehrfach vergeben wurden
     gelöst_counter = 0
     # für alle Dark Patterns in Level 1
@@ -433,8 +421,9 @@ def level1_beendet():
         # Wenn richtig gelöst erhöhe counter 
         # (Bug: Wenn Spieler*innen nach dem richtigen Lösen zurück drücken und das Pattern erneut lösen,
         # greift das unique solving nicht und der Wert kann auf mehr als 1 erhöht werden. Daher Check für >= 1)
-        if dark_pattern >= 1:
-            gelöst_counter += 1
+        if dark_pattern != None:
+            if dark_pattern >= 1:
+                gelöst_counter += 1
     # Score für Level 1 merken, damit bei Level 2 hinzu addiert werden kann
     session['dp_score_lv1'] = gelöst_counter *5
     # Score aktualisieren
@@ -678,9 +667,10 @@ def ende_lv2():
         # Wenn richtig gelöst erhöhe counter
         # (Bug: Wenn Spieler*innen nach dem richtigen Lösen zurück drücken und das Pattern erneut lösen,
         # greift das unique solving nicht und der Wert kann auf mehr als 1 erhöht werden. Daher Check für >= 1)
-        if dark_pattern >= 1:
-            gelöst_counter += 1
-    session['dp_score'] = session['dp_score_lv1'] + gelöst_counter *5
+        if dark_pattern != None:
+            if dark_pattern >= 1:
+                gelöst_counter += 1
+        session['dp_score'] = session['dp_score_lv1'] + gelöst_counter *5
     
     # speicher die Lösungen aller Dark Patterns für diese Session in CSV für Evaluierung
     write_dp_ergebnisse_csv()

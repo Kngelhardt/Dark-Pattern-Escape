@@ -10,14 +10,16 @@
             {% set dp_count = namespace(value=0) %}
             {% set data_count = namespace(value=0) %}
             {% for loesung in dp_list_lv2 %}
-                <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein (>= 1 anstatt == 1 für Bug-Prevention)-->
-                {% if loesung >= 1 %}
-                    {% set dp_count.value = dp_count.value + 1 %}
-                {% endif %}
-                <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken -->
-                {% if loop.index0 < 6  %}
+                {% if loesung != None %}
+                    <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein (>= 1 anstatt == 1 für Bug-Prevention)-->
                     {% if loesung >= 1 %}
-                        {% set data_count.value = data_count.value + 1 %}
+                        {% set dp_count.value = dp_count.value + 1 %}
+                    {% endif %}
+                    <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken -->
+                    {% if loop.index0 < 6  %}
+                        {% if loesung >= 1 %}
+                            {% set data_count.value = data_count.value + 1 %}
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endfor %}
@@ -35,17 +37,13 @@
                     <p>Dein Geld Score beträgt damit: <span class="text-warning fw-bolder text_shadow">{{ session['geld_score']|round(2) }}</span>€</p>
                 {% elif session['dp_preticked_monatl'] == None or  session['dp_preticked_monatl'] == 0 %}
                     <h4>Da du eine monatlich wiederkehrende Bestellung abgeschlossen hast, werden dir die 9€ für die Sonnencreme 2x abgebucht. </h4>
-                    <p> Du hast in diesem Level <span class="text-warning fw-bolder text_shadow">{{ (session['warenkorb']+ session['spende_lv2']+9)|round(2) }}</span>
-                        € verloren.
-                    </p>
-                    <p> Dein Geld Score in disem Level beträgt damit: 
-                        <span class="text-warning fw-bolder text_shadow">{{ ((session['warenkorb']+ session['spende_lv2'])-9)|round(2) }}</span>
-                        € von maximal möglichen <span class="text-warning fw-bolder text_shadow">11.02</span>€
+                    <p> Damit hast du in diesem Level <span class="text-warning fw-bolder text_shadow">{{ (session['warenkorb']+ session['spende_lv2']+9)|round(2) }}</span>
+                        € ausgegeben. <br> Der bestmögliche Wert ist <span class="text-warning fw-bolder text_shadow">13.98</span>€.
                     </p>
                 {% else %}
-                    <p> Dein Geld Score in disem Level beträgt: 
+                    <p> Du hast in diesem Level 
                         <span class="text-warning fw-bolder text_shadow">{{ session['warenkorb']+ session['spende_lv2']|round(2) }}</span>
-                        € von maximal möglichen <span class="text-warning fw-bolder text_shadow">11.02</span>€
+                        € ausgegeben. <br> Der bestmögliche Wert ist <span class="text-warning fw-bolder text_shadow">13.98</span>€.
                     </p>
                 {% endif %}
             </div>

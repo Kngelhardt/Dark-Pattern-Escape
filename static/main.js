@@ -110,13 +110,19 @@ function level_countdown(zeit_state, level_fortschritt){
             if(level_fortschritt == 0){
                 window.location.href = '/ende_lv1';
             }else if(level_fortschritt == 1){
-                window.location.href = '/decepdive/ende_lv2'
+                window.location.href = '/ende_lv2'
             }
         } else {
             // Sekunden runterzählen
             counter = counter -1;
             // die Zeitanzeige inkl. Text in der Fußleiste anktualisieren
-            document.getElementById('zeit_bar').style.width = counter/3 +'%';
+            // Für Level 1 durch 4.8 Teilen (8 Minuten auf 100 projeziert)
+            if(level_fortschritt == 0){
+                document.getElementById('zeit_bar').style.width = counter/4.8 +'%';
+            // Für Level 2 durch 3 Teilen (5 Minuten auf 100 projeziert)
+            } else{
+                document.getElementById('zeit_bar').style.width = counter/3 +'%';
+            }
             document.getElementById('zeit_anzeige').innerText = counter + "s";
             // session['countdown'] wird alle 3 sekunden aktualisiert
             if(counter%3 == 0){
@@ -171,15 +177,6 @@ function ist_erreichbar(){
         }, 4000); 
     }
 }
-/* -------------------------------Nagging Modal öffnen in Level 1 ------------------------------------------- */
-/* function load_nagging(){
-    bis_oeffnung = setInterval(function(){
-        modal = document.getElementById('nagging_modal')
-        console.log('naggingmodal', modal)
-        modal.show()
-    },5000)
-} */
-
 
 /* -------------------------------Warenkorb-Kalkulation für level 2 ----------------------------------------- */
 function calculate_total(){

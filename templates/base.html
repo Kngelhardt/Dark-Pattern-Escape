@@ -40,10 +40,17 @@
                     <!-- Größe der Bar wird an den "Hauptmenü" Button angepasst -->
                     <div id="container_zeit_bar" class="d-2 progress position-relative" style="height: 36px;">
                         <h3 id="zeit_anzeige" class="position-absolute text-dark">{{session['countdown']}}s</h3>
+                        <!-- Zeit für level 1 = 8 min = 480 s. Um richtig darzustellen muss im bereich [0-100] runtergezählt werden, also geteilt durch 4.8 -->
+                        {% if session['level_fortschritt'] == 0 %}
                         <div id="zeit_bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" 
-                            style="width: {{ session['countdown']/3}}%" 
-                            aria-valuenow="{{session['countdown']}}" aria-valuemin="0" aria-valuemax="300">
+                            style="width: {{ session['countdown']/4.8}}%" aria-valuenow="{{session['countdown']}}" aria-valuemin="0" aria-valuemax="480">
                         </div>
+                        <!-- Zeit für level 2 Countdown = 5 min = 300 s. Um richtig darzustellen muss im bereich [0-100] runtergezählt werden, also geteilt durch 3 -->
+                        {% elif session['level_fortschritt'] >= 1 %}
+                        <div id="zeit_bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" 
+                            style="width: {{ session['countdown']/3}}%" aria-valuenow="{{session['countdown']}}" aria-valuemin="0" aria-valuemax="300">
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col">

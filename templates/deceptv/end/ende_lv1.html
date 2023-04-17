@@ -9,14 +9,17 @@
             {% set dp_count = namespace(value=0) %}
             {% set data_count = namespace(value=0) %}
             {% for loesung in dp_list_lv1 %}
-                <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein  (>= 1 anstatt == 1 für Bug-Prevention)-->
-                {% if loesung >= 1 %}
-                    {% set dp_count.value = dp_count.value + 1 %}
-                {% endif %}
-                <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken-->
-                {% if loop.index0 < 4  %}
+                <!-- Fehlersicherung -->
+                {% if loesung != None %}
+                    <!-- Zähle anzahl richtig gelöster Dark Patterns allgemein  (>= 1 anstatt == 1 für Bug-Prevention)-->
                     {% if loesung >= 1 %}
-                        {% set data_count.value = data_count.value + 1 %}
+                        {% set dp_count.value = dp_count.value + 1 %}
+                    {% endif %}
+                    <!-- Zähle anzahl richtig gelöster Dark Patterns die sich auf den Daten Score auswirken-->
+                    {% if loop.index0 < 4  %}
+                        {% if loesung >= 1 %}
+                            {% set data_count.value = data_count.value + 1 %}
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endfor %}
