@@ -422,16 +422,19 @@ def level1_beendet():
     # Wenn richtig gelöst erhöhe counter 
     # (Bug: Wenn Spieler*innen nach dem richtigen Lösen zurück drücken und das Pattern erneut lösen,
     # greift das unique solving nicht und der Wert kann auf mehr als 1 erhöht werden. Daher Check für >= 1)
-        if i <= 3:
-            gelöst_counter_data = gelöst_counter_data + 1
         if dark_pattern != None:
             if dark_pattern >= 1:
+                # erhöhe richtig counter für gelöste patterns um 1
                 gelöst_counter += 1
+                # Wenn es ein Date-Dark-Pattern ist erhöhe gelöst_counter_data um 1
+                if i <= 3:
+                    gelöst_counter_data = gelöst_counter_data + 1
     # Score für Level 1 merken, damit bei Level 2 hinzu addiert werden kann
     session['dp_score_lv1'] = gelöst_counter *5
     # Score aktualisieren
     session['dp_score'] = session['dp_score_lv1']
-    session['data_score'] = 100 - (gelöst_counter_data *10)
+    # Maximal 40 Datenpunkte können verloren werden, mit jedem gelöstem Data-Dark Pattern sind es 10 weniger
+    session['data_score'] = 100 - (40 - gelöst_counter_data *10)
 
 
     return render_template('deceptv/end/ende_lv1.html', dp_list_lv1 = dp_list_lv1)
