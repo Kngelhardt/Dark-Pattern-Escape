@@ -416,11 +416,14 @@ def level1_beendet():
                     session['dp_roachmotel2'] ]    
     # DP_Score manuell neu setzten, falls Punkte durch Fehler mehrfach vergeben wurden
     gelöst_counter = 0
+    gelöst_counter_data = 0
     # für alle Dark Patterns in Level 1
-    for dark_pattern in dp_list_lv1:
-        # Wenn richtig gelöst erhöhe counter 
-        # (Bug: Wenn Spieler*innen nach dem richtigen Lösen zurück drücken und das Pattern erneut lösen,
-        # greift das unique solving nicht und der Wert kann auf mehr als 1 erhöht werden. Daher Check für >= 1)
+    for i, dark_pattern in enumerate(dp_list_lv1):
+    # Wenn richtig gelöst erhöhe counter 
+    # (Bug: Wenn Spieler*innen nach dem richtigen Lösen zurück drücken und das Pattern erneut lösen,
+    # greift das unique solving nicht und der Wert kann auf mehr als 1 erhöht werden. Daher Check für >= 1)
+        if i <= 3:
+            gelöst_counter_data = gelöst_counter_data + 1
         if dark_pattern != None:
             if dark_pattern >= 1:
                 gelöst_counter += 1
@@ -428,6 +431,8 @@ def level1_beendet():
     session['dp_score_lv1'] = gelöst_counter *5
     # Score aktualisieren
     session['dp_score'] = session['dp_score_lv1']
+    session['data_score'] = 100 - (gelöst_counter_data *10)
+
 
     return render_template('deceptv/end/ende_lv1.html', dp_list_lv1 = dp_list_lv1)
 
