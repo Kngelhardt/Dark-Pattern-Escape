@@ -1,3 +1,5 @@
+Archiviert am 26.05.2023, 10:49
+
 Dark Pattern Escape Room – Online-Anwendung zur Steigerung des Bewusstseins für manipulatives Webdesign
 
 Der Begriff „Dark Patterns“ wurde vom UX-Experten Harry Bringnull 2010 in einem Blogpost ins Leben gerufen. Er beschreibt sie als Tricks, die auf Websites und in Apps benutzt werden, um Nutzer dazu zu bringen, Dinge zu tun, die sie nicht tun wollten. https://www.deceptive.design/
