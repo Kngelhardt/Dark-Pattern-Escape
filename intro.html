@@ -1,0 +1,189 @@
+   {% extends 'layout_home.html' %}
+
+    {% block content %}
+    <div class="blackbackground_90vh py-4">
+        <div class="container my-5 whitebackground red_box_shadow rounded py-4 px-4">
+            {% if level_fortschritt == 0 %}
+                <div class="row">
+                    <div class="col-4">
+                        <h2>Deine Aufgaben</h2>
+                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_level1.jpg')}}"
+                             alt="Clipboard mit den zu erledigenden Aufgaben">
+                    </div>
+                    <div class="col">
+                        <h1>Level1 - Streaming Abo beenden</h1>
+                        <h2>Hauptaufgabe</h2>
+                        <p> Kündige das DecepTV Streaming-Abo in unter 8 Minuten. Auf dem Weg versuchen Dark Patterns
+                            dich davon abzuhalten. Für jedes  Dark Pattern, das du beim ersten Versuch
+                            richtig löst, bekommst du  <span class="text-success fw-bolder">5 Dark Pattern Punkte</span>. <br>
+                            Wenn du es nicht schaffst, das Streaming Abo rechtzeitig zu beenden, verlierst du
+                            <span class="text-warning fw-bolder text_shadow"> 10 €</span> von deinem Spielgeld.
+                        </p>
+                        <h3>Nebenaufgabe</h3>
+                        <p> Akzeptiere so wenig Cookies wie möglich. Für jede falsche Auswahl verlierst du 
+                            <span class="text-primary fw-bolder text_shadow">10 Datenpunkte</span>.</p>
+                        <div id="anleitung" class="my-4 px-2 border border-dark-subtle rounded" >
+                            <h2>Anleitung</h2>
+                            <p> Unten in der Fußleiste der Seite, hast du verschiedenen Anzeigen,
+                                diese zeigen dir, wie viel Zeit du noch hast und deine Scores für Daten, Geld und Dark-Pattern-Punkte. 
+                            </p>
+                            <div class="mt-3">
+                                <p>Am Ende des Spiels werden die Scores für Daten, Geld und Dark Patterns zu einem <b>Endscore</b> verrechnet.</p>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <h4>Zeit-Anzeige</h4>
+                                <div class="col-3 ms-2 progress">
+                                    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" 
+                                         style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="col">
+                                    <p> In Level 1 hast du <b>8 Minuten</b> Zeit, um die Aufgaben zu lösen.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h4>Daten-Anzeige</h4>
+                                <div class="col-3 ms-2 progress">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" 
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="col">
+                                    <p> Am Anfang startest du mit <span class="text-primary fw-bolder text_shadow">100 Daten-Punkten</span>.
+                                        Pro Aktion, bei der du Daten verlierst, bekommst du <span class="text-primary fw-bolder text_shadow">10</span>
+                                        Punkte abgezogen
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h4>Geld-Anzeige</h4>
+                                <div class="col-3 ms-2 progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" 
+                                         style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="col">
+                                    <p> Du startest mit <span class="text-warning fw-bolder text_shadow">25</span>€ Spielgeld.
+                                        Wenn du es nicht schaffst, das Streaming-Abo zu beenden, verlierst du 
+                                        <span class="text-warning fw-bolder text_shadow">10</span>€. In Level 2 kannst du hier gut abschneiden,
+                                        wenn du wenig Geld beim Shoppen ausgibst.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h4>Dark Pattern Score Anzeige</h4>
+                                <div class="col-3 ms-2 progress">
+                                    <div class="progress-bar bg-success" role="progressbar" 
+                                         style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="col">
+                                    <p> Pro Dark Pattern, dass du richtig überwindest, bekommst du 
+                                        <span class="text-success fw-bolder">5 Dark Pattern Punkte</span>.
+                                        Jedes Dark Pattern kann nur einmal gelöst werden und zählt danach als richtig oder falsch.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <button class="p-2 btn btn-dark fussleiste_brand disabled">
+                                    <b>Hauptmenü</b>
+                                </button>
+                                <p class="p-2">
+                                    Wenn du nochmal deine Aufgaben und die Bedeutungen der Leisten anschauen willst,
+                                    klicke einfach auf den "Hauptmenü" Knopf unten links.
+                                </p>
+                            </div>
+                        </div>
+                            <a href="{{url_for('deceptv')}}" class="btn btn-success w-25 float-end"> Level1 Starten </a>
+                    </div>
+                </div>
+            {% elif level_fortschritt == 1 %}
+                <div class="row">
+                    <div class="col-4">
+                        <h2>Deine Aufgaben</h2>
+                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_level2.jpg')}}"
+                             alt="Clipboard mit den zu erledigenden Aufgaben">
+                    </div>
+                    <div class="col">
+                        <h1>Level 1 beendet! <br> jetzt geht es weiter mit Level 2 :)</h1>
+                        <h2>Hauptaufgabe</h2>
+                        <p> Kaufe in unter 5 Minuten Sonnencreme mit dem besten Preis pro Menge (Hinweis: Achte auf die Mengeneinheiten).
+                            Das heißt, du musst die Sonnencreme zu deinem Warenkorb hinzufügen und in einem simulierten Bestellverfahren einkaufen.
+                            Auf dem Weg zum Bezahlen wird versucht werden dir mit Dark Patterns
+                            <span class="text-warning fw-bolder text_shadow"> Kosten</span> unterzujubeln oder dir
+                            <span class="text-primary fw-bolder text_shadow"> Daten</span> zu entlocken.
+                            (Natürlich beides nur fiktiv innerhalb des Spiels!).
+                            Für jedes richtig gelöste <span class="text-success fw-bolder"> Dark Pattern</span> bekommst du 
+                            <span class="text-success fw-bolder">5</span> Dark Pattern Punkte.</p>
+                        </p>
+                        <h3>Nebenaufgabe</h3>
+                        <p> Akzeptiere so wenig Cookies wie möglich und gibt deine Daten nicht leichtfertig weiter. 
+                            (Natürlich geht es hier um fiktive Daten.) Für jede falsche Auswahl verlierst du
+                            <span class="text-primary fw-bolder text_shadow">10</span> Datenpunkte.
+                        </p>
+                        <p>Wenn du noch einmal kurz die Anleitung zu den verschiedenen Werten anschauen willst, klicke hier:
+                            <a href="{{ url_for('anleitung') }}" class="btn btn-outline-success">Anleitung</a>
+                        </p>
+                        <div class="d-grid gap-2 w-75 my-5 mx-auto">
+                            <!-- Button disabled, um zu Zeigen, dass das LEvel beendet ist -->
+                            <button class="btn btn-success" type="button" disabled>
+                                Beendet: Level1
+                            </button>
+                            <a href="{{url_for('decepdive')}}" class="btn btn-success">
+                                Starte Level 2
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% elif level_fortschritt == 2 %}
+                <div class="row">
+                    <div class="col-4">
+                        <h2>Deine Aufgaben</h2>
+                        <img class="img-fluid rounded bild-intro" src="{{url_for('static', filename='images/clipboard_abgeschlossen.jpg')}}"
+                             alt="Clipboard mit den zu erledigenden Aufgaben">
+                    </div>
+                    <div class="col mt-1">
+                        <h1>Spiel beendet</h1>
+                        <div class="px-5 py-5 mainbackground maincolor rounded">
+                            <h3 class="">So hast du abgeschnitten:</h3>
+                            <p > <span class="text-success"><b>Dark Patterns:</b> {{ session['dp_score'] }} </span>
+                                von <span class="text-success"> 100 </span> möglichen Dark-Pattern Punkten gesammelt 
+                                {% if session['dp_score'] == 100 %}
+                                    <b class="text-success"> WHOOP BESTMÖGLICHE PUNKTEZAHL !! </b>
+                                {% endif %}
+                                <br>
+                                <span class="text-primary"><b>Daten:</b> {{ session['data_score']  }}</span>
+                                von  <span class="text-primary">100</span> Daten-Punkten behalten
+                                {% if session['data_score'] == 100 %}
+                                    <b class="text-primary"> WHOOP BESTMÖGLICHE PUNKTEZAHL !! </b>
+                                {% endif %} <br>
+                                <span class="text-warning"><b>Geld:</b> {{ session['geld_score'] }}</span>
+                                von maximal möglichen  <span class="text-warning">11.02€</span> behalten
+                                {% if session['geld_score'] == 11.02 %}
+                                    <b class="text-warning"> WHOOP BESTMÖGLICHE PUNKTEZAHL !! </b>
+                                {% endif %}
+                            </p>
+                            <h2>Gesamtscore</h2>
+                            <p>
+                                <span class="text-success fw-bold">
+                                    {{ (session['dp_score']*2 + session['data_score'] + session['geld_score']*9.075)|int() }}*
+                                </span> 
+                                von maximal <span class="text-success fw-bold"> 400</span> Punkten
+                            </p>
+                            <p><small>
+                                *Der Score wird so errechnet: 2 x Dark-Pattern-Score + Daten-Score + 9.075 x Geld-Score. <br>
+                                 (9.075 x 11.02(Maximalwert) = 100: für gleiche Gewichtung wie der Daten-Score mit max. 100 Punkten)
+                            </small></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <h2>Weiterführende Informationen </h2>
+                    <p>
+                        Für weitere Hintergrundinformationen zum Thema klicke auf den Link Weiterführende Informationen. Dort findest du verschiedene Links zu Projekten, die zum Thema Dark Patterns arbeiten.
+                    </p>
+                </div>
+                <div class="d-grid gap-2 w-50 my-5 mx-auto">
+                    <a href="{{ url_for('info')}}" class="btn btn-success" type="button" >Weiterführende Informationen</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}

@@ -99,14 +99,14 @@ def set_session_value():
             # geschickt und müssen wieder zu boolean geändert werden
             if isinstance(session[session_key],bool):
                 session[session_key] = bool(session_data[session_key])
-                #debugging
+
             # bei int werten soll es auf den momentanten Wert der Session aufaddiert werden
             elif isinstance(session[session_key], int):
                 session[session_key] = session[session_key] + session_data[session_key]
-                #debugging
+                
             else:
                 session[session_key] = session_data[session_key]
-                # debugging
+                
         return '', 204
     else:
         return '', 204
@@ -141,6 +141,16 @@ def home_intro():
 def anleitung():
     initialize_session()
     return render_template('home/anleitung.html')
+
+@app.route('/home/weiterfuehrende-informationen/')
+def info():
+    initialize_session()
+    return render_template('home/info.html')
+
+@app.route('/home/about/')
+def about():
+    initialize_session()
+    return render_template('home/about.html')
 
 
 ################################## LEVEL 1: Streaming Abo beenden ##################################
@@ -387,7 +397,7 @@ def level1_beendet():
             session['abo_beendet']= False
         else:
             session['abo_beendet']= True
-        # resert countdown für level 2
+        # reset countdown für level 2
         session['countdown'] = 300
         
     # Wenn cookiebanner nicht gelöst, setzte data_score runter, beende cookie_lv1
@@ -635,7 +645,7 @@ def ende_lv2():
         # Wenn der Countdown abgelaufen und an dem Punkt nichts im Warenkorb ist,wird als Strafe der 
         # 'Geld Score' runtergesetzt
         if session['warenkorb'] == 0:
-            # Ziehe den in Levle 2 maximal möglichen Betrag (wie wenn alle DP's falsch gelöst wurden) ab
+            # Ziehe den in Levle 2 maximal möglichen Betrag (wie, wenn alle DP's falsch gelöst würden) ab
             session['geld_score'] = session['geld_score'] - 16.97
         # Sonst: ziehe den momentanen Warenkorb vom 'Geld Score' ab
         else:
@@ -688,7 +698,10 @@ def ende_lv2():
 
     return render_template('decepdive/ende_lv2.html', dp_list_lv2 = dp_list_lv2)
 
-########################### Datenspeicherung ##################################  
+########################### Datenspeicherung ################################## 
+# Funktion speichert das Abschneiden der Spieler*innen nach dem Abschließen des Spiels
+# Information kann genutzt werden um die Schwierigkeit der Dark Patterns zu evaluieren
+# Es werden keine persönlichen oder technischen informationen über Nutzer*innen gespeichert 
 def write_dp_ergebnisse_csv():
     with open('ergebnisse/dark_pattern_results.csv', mode='a') as csv_file:
         fieldnames = [  'session_id', 
@@ -718,92 +731,13 @@ def write_dp_ergebnisse_csv():
             writer.writeheader()
         writer.writerow({item: session[item] for item in fieldnames})
 
-""" Funktion um CSV zu schreiben
-    inputs: 
-        data_list(liste mit listen): jedes Listenelement besteht aus einem Key(item-ID) und dem dazugehörigen Wert
-        dateiname: name der CSV-Datei in der geschrieben werden soll """
-def write_fragebogen_csv(data_list, dateiname):
-        with open('ergebnisse/'+dateiname , mode='a') as csv_file:
-            #initielisiere Fieldlist
-            fieldnames= []
-            for itemID, itemValue in data_list:
-                fieldnames.append(itemID)
-            writer = csv.DictWriter(csv_file, fieldnames=fieldnames) 
-
-            file_exists = os.path.isfile('ergebnisse/fragebogen_SUS.csv')
-            if not file_exists:
-                writer.writeheader()  
-            writer.writerow({itemID: itemValue for itemID, itemValue in data_list})
-
-################################## Fragebögen ##################################
-@app.route('/fragebogen-bedienbarkeit')
-def fragebogen():
-    return render_template('home/fragebogen.html', status='')
-
-@app.route('/fragebogen-allgemein', methods=['POST'])
-def fragebogen_SUS():
-    if request.method == 'POST':
-        item_list= ['gerne_oft', 'komplex', 'einfach', 'hilfe',
-                    'funktionen_integriert', 'inkonsistenzen', 
-                    'umgang_lernen', 'umstaendlich',
-                    'benutzung_sicher', 'musste_lernen' ]
-        # liste, in der die Daten gespeichert werden, die unique session ID hinzufügen
-        data_list = [ ['session_id', session['session_id']] ]
-        for itemID in item_list:
-            if itemID in request.form:
-                 data_list.append([itemID, request.form[itemID]])
-            else:
-                status= ' Bitte alle Fragen beantworten'
-                return render_template('home/fragebogen.html', status=status )
-
-        write_fragebogen_csv(data_list, 'fragebogen_SUS.csv')
-
-    return render_template('home/fragebogen2.html', )
-
-@app.route('/vp-stunden', methods=['POST'])
-def fragebogen_allgemein():
-    if request.method == 'POST':
-        # liste, in der die Daten gespeichert werden. Die unique session ID an index 0 hinzufügen
-        data_list = [ ['session_id', session['session_id']] ]
-        # für jedes item key und request.form daten als liste in data_list speichern
-        for itemID in  ['interesse_gefoerdert', 'viel_gelernt', 'aufmerksamkeit', 'spass']:
-            if itemID in request.form:
-                 data_list.append([itemID, request.form[itemID]])
-            else:
-                status= ' Bitte alle Fragen beantworten'
-                return render_template('home/fragebogen2.html', status=status )
         
-        # daten in CSV schreiben und speichern
-        write_fragebogen_csv(data_list, 'fragebogen_allgemein.csv')
-    return render_template('home/fragebogen3.html', validation='', show_feedback_form= False)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
 
-@app.route('/fragebogen-abgeschlossen', methods=['POST'])
-def fragebogen_vp():
-    # liste, in der die Daten gespeichert werden
-    data_list = []
-    # für jedes item key und request.form daten als liste in data_list speichern
-    for itemID in  ['name', 'matrikelnr']:
-        if itemID in request.form:
-                data_list.append([itemID, request.form[itemID]])
-        else:
-            return render_template('home/fragebogen2.html', validation='Bitte alle Felder angeben!' )
-        
-    write_fragebogen_csv(data_list, 'VP_Stunden.csv')
-    show_feedback_form = True
 
-    return render_template('home/fragebogen3.html', 
-                           validation='Erfolgreich abgeschickt. Vielen Dank',
-                           name =  request.form['name'],
-                           matrikelnr = request.form['matrikelnr'],
-                           show_feedback_form = show_feedback_form)
 
-@app.route('/fragebogen-abgeschlossen/feedback', methods=['POST'])
-def feedback_form():
-    if 'feedback' in request.form:
-        csv_list = [['feedback', request.form['feedback']]]
-        write_fragebogen_csv(csv_list, 'Feedback.csv')
 
-    return redirect(url_for('home_intro'))
 
 
 
