@@ -29,10 +29,11 @@
         }
         .nav_item_landing{
             color: white;
-        }
-        .nav_item_landing:hover{
             box-shadow: 0 0 5px rgb(255, 0, 0);
             border-radius: 5px;
+        }
+        .nav_item_landing:hover{
+            border: 0.2px solid rgb(230, 0, 0);
             color: white;
         }
         .navbar-brand{
@@ -311,6 +312,7 @@
         
         {% endblock %}
     </div>
+    
     <script src="{{ url_for('static', filename='bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js') }}"></script> 
 </body>
 </html>
